@@ -1,0 +1,116 @@
+Datum 2/9 15.00
+
+Gruppmöte för Mange Bryntheson & Co
+
+Närvarande: Torbjörn, Baller, Magnus, Albin
+
+
+Mål:
+Bestämma om desktop eller android
+Bestämma projekt
+Börja med gui
+Börja med RAD, SDD och user stories
+
+Ideer:
+Någon sort handelsplattform antingen bytes eller uthyrning plattform.
+Scenebuilder har vi man redan testat så gruppen vill prova något nytt kanske android studio.
+Tinder för filmer, använda imdbs api och få upp en film så kan man swipa om man vill lägga till den i watchlisten eller inte samt klicka i om man sett den eller ej. Sedan sortera kategorier som, actor, genre, director, years nått sånt.
+
+
+
+Rapporter
+Inga föregående rapporter detta möte
+
+Diskussionspunkter:
+Schema, dvs när ska vi ses?
+Gruppen är flexibel och kan jobba både online och på campus.
+
+
+Utkomst
+Bestämt att vi ska göra en android app.
+Bestämt att vi ska försöka ha möten främst tisdagar och fredagar då det finns mest tid tillgänglig då
+
+Göra tills imorgon:
+Alla skall komma på en egen idé för att sedan skissa en snabb design och därefter jämföra och välja den gruppen gillar mest
+Lite tidigt att kunna generera RAD och SDD
+Skissa ideer i figma alternativt för hands.
+Skriva en kort user story till sin skiss
+diskutera ideen med lärare/elevassistent och få input.
+Sök kurskod i github för inspiration.
+
+Slut 
+
+Nästa tid för möte är imorgon fredag den 3/9 kl 12 för att diskutera innan det handledarledda mötet mellan 13-17
+Datum 3/9
+
+Närvarande: Torbjörn, Albin, Magnus 
+
+Mål
+Ta beslut om vilken idé
+
+Rapporter
+Samtliga presenterar sina ideér
+
+Diskussionspunkter
+Ta beslut om ide att utveckla
+
+Utkomst
+Beslut om vilken idé som vi ska göra har tagits.
+
+Uppgifter till nästa möte
+
+Slut
+Nästa möte är med handledare 3/9 kl 13:15
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dagordning för handledningsmöte
+
+Öppna mötet
+Visa upp idé med hjälp av en mockup.
+Visa preliminära user stories
+Få feedback
+Frågor
+Bestämma tid för nästa handledningsmöte
+
+
+
+Dela upp user stories. mer specifika	
+Tidigare mötesprotokoll git
+Prio och svårighetsgrad stories, implementerade efter prio
+RAD 
+
+SDD: Design modell koden(UML) samt domänmodell användare sköter appen
+
+
+Till nästa möte:
+Dela upp user stories. mer specifika	
+GUI
+Börja me domänmodellen.
+
+Fredag 13:00
