@@ -114,3 +114,36 @@ GUI
 Börja me domänmodellen.
 
 Fredag 13:00
+
+
+
+
+
+
+
+
+
+Datum 7/9
+Närvarande: Torbjörn, Magnus, Ali, Albin
+
+
+Mål
+-Skriva bättre user stories
+-Börja med RAD och SDD
+
+Rapporter
+Protokoll har lagts in på git. Vi har bestämt idé
+
+Diskussionspunkter
+Pratar om user stories
+
+Utkomst av beslut
+Bättre user stories och RAD har pöbörjats
+
+Uppgifter till nästa möte
+Fortsätta på RAD och SDD 
+Bli klar med domänmodell 
+Bli klar med user stories 
+
+Slut
+Nästa möte är på fredag 10/9
