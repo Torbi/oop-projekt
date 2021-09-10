@@ -147,3 +147,38 @@ Bli klar med user stories
 
 Slut
 Nästa möte är på fredag 10/9
+
+
+
+
+
+
+
+Datum 10/9
+Närvarande: Torbjörn, Magnus, Ali, Albin
+
+
+Mål
+Börja med designmodell
+Dela ut tasks
+
+Rapporter
+RADen skriven till viss del
+
+Diskussionspunkter
+Designmodell
+Tasks
+Vad ska göras till nästa möte?
+Code sprint
+
+Utkomst av beslut
+User story 1-5 har valts till första codesprinten
+
+Uppgifter till nästa möte
+Börja med klass-diagram
+Börja med SDD
+Om klass-diagram finns kan man börja koda
+
+Slut
+Nästa möte tisdag 14/10, tid beroende på när vi har seminarium. Troligt att mötet sker på campus
+
