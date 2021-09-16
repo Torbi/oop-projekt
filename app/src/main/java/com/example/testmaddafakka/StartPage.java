@@ -17,9 +17,10 @@ public class StartPage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_start_page, container, false);
-        Button watchListFragment = (Button) view.findViewById(R.id.watchlist);
+        Button watchlistFragment = (Button) view.findViewById(R.id.watchlist);
+        Button preferencesFragment = (Button) view.findViewById(R.id.preferences);
 
-        watchListFragment.setOnClickListener(new View.OnClickListener() {
+        watchlistFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentTransaction fr = getFragmentManager().beginTransaction();
@@ -27,6 +28,15 @@ public class StartPage extends Fragment {
                 fr.commit();
             }
         });
+        preferencesFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction fr = getFragmentManager().beginTransaction();
+                fr.replace(R.id.fragmentContainer, new Preferences());
+                fr.commit();
+            }
+        });
+
         return view;
     }
 
