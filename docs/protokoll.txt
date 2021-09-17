@@ -198,3 +198,33 @@ Fortsätta med
 
 Slut
 Nästa möte på fredag förmiddag eller torsdag eftermiddag
+
+
+
+
+Datum 17/9
+Närvarande: Torbjörn, Magnus, Ali, Albin
+
+Mål
+Alla är synkade
+
+Rapporter
+Börjat med sekvensdiagram
+
+Diskussionspunkter
+Designmodell
+
+och mönster
+
+Utkomst av beslut
+Fortsätt jobba med designmodellen
+
+Uppgifter till nästa möte
+Fortsätta jobba med designmodell och sekvensdiagram
+och SDD
+Tester
+Kan börja implementera klasser efter klassdiagrammet och user stories
+
+Slut
+Nästa möte tisdag förmiddag 21/9
+
