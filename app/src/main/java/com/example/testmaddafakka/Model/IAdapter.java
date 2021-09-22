@@ -4,5 +4,8 @@ import java.util.List;
 
 public interface IAdapter {
 
-    public List<Movie> getMovies();
+    public List<Movie> get250Movies();
+
+    public List<Movie> getList(String listID);
+
 }

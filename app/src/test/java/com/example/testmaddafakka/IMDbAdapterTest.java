@@ -18,7 +18,7 @@ public class IMDbAdapterTest {
     public void getMovie() {
         IAdapter adapter = new IMDbApiAdapter();
         List<Movie> list;
-        list = adapter.getMovies();
+        list = adapter.get250Movies();
         assertEquals(250, list.size());
     }
 }

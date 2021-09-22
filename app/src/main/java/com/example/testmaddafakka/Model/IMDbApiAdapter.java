@@ -14,6 +14,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 import java.util.List;
 
+
+/**
+ * An adapter that sends requests to imdbs api and get json responses back and
+ * turns them into movie-objects
+ */
+
 public class IMDbApiAdapter implements IAdapter {
 
     private URL url;
@@ -30,17 +36,31 @@ public class IMDbApiAdapter implements IAdapter {
      * @return a list of movies
      */
     @Override
-    public List<Movie> getMovies() {
-        return getTop250Movies();
+
+    public List<Movie> get250Movies() {
+        return getMovies("Top250Movies");
     }
 
-    private List<Movie> getTop250Movies() {
-        HttpURLConnection response = sendRequest("Top250Movies");
+    /**
+     * This would be pretty easy to implement, just call getMovies with the id
+     * just need to check that the format in the request is right
+     * @param listID - an imdb id for a list, starts with ls
+     * @return a list of movies
+     */
+    @Override
+    public List<Movie> getList(String listID) {
+        return null;
+    }
+
+    private List<Movie> getMovies(String request) {
+        HttpURLConnection response = sendRequest(request);
+
         List<Movie> list = new LinkedList<>();
         try {
             String re = readResponse(response);
             JsonArray jsonArray = string2Json(re);
-            for(int i = 0; i < 250; i++ ) {
+
+            for(int i = 0; i < jsonArray.size(); i++ ) {
                 list.add(jsonObject2Movie((JsonObject) jsonArray.get(i)));
             }
         }   catch (Exception e) {
@@ -99,7 +119,9 @@ public class IMDbApiAdapter implements IAdapter {
                                     object.get("id").toString(),
                                     object.get("imDbRating").toString(),
                                     object.get("crew").toString(),
-                                    object.get("image").toString()
+                                    object.get("image").toString(),
+                                    object.get("id").toString()
+
             );
             System.out.println(movie.getTitle() + " title");
             return movie;
