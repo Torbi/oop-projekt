@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -20,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentTransaction.add(R.id.fragmentContainer, startPage);
         fragmentTransaction.commit();
-
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -32,4 +34,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
 }
