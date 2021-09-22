@@ -1,4 +1,4 @@
-package com.example.testmaddafakka;
+package com.example.testmaddafakka.Model;
 
 public class Movie {
 

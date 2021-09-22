@@ -4,7 +4,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import java.util.LinkedList;
+import com.example.testmaddafakka.Model.IAdapter;
+import com.example.testmaddafakka.Model.IMDbApiAdapter;
+import com.example.testmaddafakka.Model.Movie;
+
 import java.util.List;
 
 public class IMDbAdapterTest {
