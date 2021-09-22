@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import org.json.JSONArray;
@@ -26,12 +27,16 @@ public class IMDbApiAdapter implements IAdapter {
     private HttpURLConnection connection;
     private final String key = "/k_ymbjcvxu";
 
+
     public IMDbApiAdapter() {}
 
+    /**
+     * Sends a request to imdbs api and gets a json response that is then translated into
+     * a list of movies
+     * @return a list of movies
+     */
     @Override
     public List<Movie> getMovies() {
-        //sendRequest("Top250Movies");
-
         return getTop250Movies();
     }
 
@@ -40,12 +45,9 @@ public class IMDbApiAdapter implements IAdapter {
         List<Movie> list = new LinkedList<>();
         try {
             String re = readResponse(response);
-            //konverteras ej till jsonobject, stringen är rätt
-            //JSONObject json = new JSONObject(re);
-            //JSONArray jsonArray = new JSONArray(json.getJSONArray("items"));
-            JSONArray jsonArray = string2Json(re);
+            JsonArray jsonArray = string2Json(re);
             for(int i = 0; i < 250; i++ ) {
-                list.add(jsonObject2Movie(jsonArray.getJSONObject(i)));
+                list.add(jsonObject2Movie((JsonObject) jsonArray.get(i)));
             }
         }   catch (Exception e) {
             e.printStackTrace();
@@ -54,9 +56,10 @@ public class IMDbApiAdapter implements IAdapter {
         return list;
     }
 
-    private JSONObject string2Json(String jsonString) {
-
-        return new JsonParser.parse(jsonString).getAsJsonObject();
+    private JsonArray string2Json(String jsonString) {
+        Gson gson = new Gson();
+        JsonObject object = gson.fromJson(jsonString, JsonObject.class);
+        return object.getAsJsonArray("items");
     }
 
     private HttpURLConnection sendRequest(String request)  {
@@ -84,7 +87,7 @@ public class IMDbApiAdapter implements IAdapter {
 
             while((line = reader.readLine()) != null) {
                 sb.append(line).append("\n");
-                System.out.println(line);
+                //System.out.println(line);
             }
             is.close();
             jsonResponse = sb.toString();
@@ -96,12 +99,15 @@ public class IMDbApiAdapter implements IAdapter {
     }
 
 
-    private Movie jsonObject2Movie(JSONObject object) {
+    private Movie jsonObject2Movie(JsonObject object) {
         try {
-            Movie movie = new Movie(object.getString("title"), object.getString("id")
-                                    , object.getString("imDbRating")
-                                    , object.getString("crew")
-                                    , object.getString("image"));
+            Movie movie = new Movie(object.get("title").toString(),
+                                    object.get("id").toString(),
+                                    object.get("imDbRating").toString(),
+                                    object.get("crew").toString(),
+                                    object.get("image").toString()
+            );
+            System.out.println(movie.getTitle() + " title");
             return movie;
         } catch (Exception e) {
             e.printStackTrace();

@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentTransaction.add(R.id.fragmentContainer, startPage);
         fragmentTransaction.commit();
-        //testMovieGetter();
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -36,10 +35,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void testMovieGetter() {
-        IAdapter adapter = new IMDbApiAdapter();
-        LinkedList<Movie> list = (LinkedList<Movie>) adapter.getMovies();
-        Movie movie = list.getFirst();
-        System.out.println(movie.getTitle());
-    }
 }
