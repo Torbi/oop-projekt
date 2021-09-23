@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         StartPage startPage = new StartPage();
         final ImageView backBtn = findViewById(R.id.backArrow);
-
+        //Test github
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
         fragmentTransaction.add(R.id.fragmentContainer, startPage);
