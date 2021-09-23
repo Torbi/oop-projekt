@@ -1,5 +1,16 @@
 <resources>
-    <string name="app_name">TestMADDAFAKKA</string>
+    <string name="app_name">Filmster</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logo">FILMSTER</string>
+    <string name="watchlist">Watchlist</string>
+    <string name="preferences">Preferences</string>
+    <string name="movieTitle">The bourne identity</string>
+    <string name="movieRating">9.5/10</string>
+    <string name="imdbRating">IMDB Rating</string>
+    <string name="movieYear">2008</string>
+    <string name="likeDiscription">2008</string>
+    <string name="dislikeDiscription">2008</string>
+    <string name="seenDiscription">2008</string>
+    <string name="movie">Elite film</string>
 </resources>

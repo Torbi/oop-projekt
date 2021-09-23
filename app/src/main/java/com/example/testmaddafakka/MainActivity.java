@@ -17,21 +17,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         StartPage startPage = new StartPage();
-        final ImageView backBtn = findViewById(R.id.backArrow);
         //Test github
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-
         fragmentTransaction.add(R.id.fragmentContainer, startPage);
         fragmentTransaction.commit();
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction fr = getSupportFragmentManager().beginTransaction();
-                fr.replace(R.id.fragmentContainer, new StartPage());
-                fr.commit();
-
-            }
-        });
 
     }
 
