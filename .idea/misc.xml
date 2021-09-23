@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Albin/StudioProjects/oop-projekt/app/src/main/res/layout/activity_main.xml" value="0.240625" />
+        <entry key="..\:/Users/Albin/StudioProjects/oop-projekt/app/src/main/res/layout/fragment_preferences_view.xml" value="0.353125" />
+        <entry key="..\:/Users/Albin/StudioProjects/oop-projekt/app/src/main/res/layout/fragment_start_page.xml" value="0.240625" />
+        <entry key="..\:/Users/Albin/StudioProjects/oop-projekt/app/src/main/res/layout/fragment_watchlist.xml" value="0.240625" />
         <entry key="..\:/Users/torbj/IdeaProjects/TestMADDAFAKKA/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
         <entry key="..\:/Users/torbj/IdeaProjects/TestMADDAFAKKA/app/src/main/res/drawable/ic_filmster.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/torbj/IdeaProjects/TestMADDAFAKKA/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
