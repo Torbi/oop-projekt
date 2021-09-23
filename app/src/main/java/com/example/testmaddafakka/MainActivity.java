@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.testmaddafakka.View.MainView;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,10 +18,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        StartPage startPage = new StartPage();
+        MainView mainView = new MainView();
         //Test github
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.fragmentContainer, startPage);
+        fragmentTransaction.add(R.id.fragmentContainer, mainView);
         fragmentTransaction.commit();
 
     }
