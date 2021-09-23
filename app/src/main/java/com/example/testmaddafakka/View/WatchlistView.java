@@ -8,10 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.testmaddafakka.Model.Movie;
 import com.example.testmaddafakka.R;
 
+import java.util.List;
 
-public class WatchlistView extends Fragment {
+
+public class WatchlistView extends Fragment implements ViewListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -22,6 +25,6 @@ public class WatchlistView extends Fragment {
     }
 
 
-    public void update(){
+    public void update(List<Movie> list){
     }
 }
