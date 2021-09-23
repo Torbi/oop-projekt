@@ -78,17 +78,6 @@ Nästa möte är med handledare 3/9 kl 13:15
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 Dagordning för handledningsmöte
 
 Öppna mötet
@@ -181,4 +170,61 @@ Om klass-diagram finns kan man börja koda
 
 Slut
 Nästa möte tisdag 14/10, tid beroende på när vi har seminarium. Troligt att mötet sker på campus
+
+
+
+
+
+Datum 14/9
+Närvarande: Torbjörn, Magnus, Ali, Albin
+
+
+Mål
+Alla är synkade
+
+Rapporter
+Inga rapporter från förra mötet
+
+Diskussionspunkter
+Sekvensdiagram
+Tester
+
+Utkomst av beslut
+
+
+Uppgifter till nästa möte
+Kan börja skriva tester och sekvensdiagram
+Fortsätta med 
+
+Slut
+Nästa möte på fredag förmiddag eller torsdag eftermiddag
+
+
+
+
+Datum 17/9
+Närvarande: Torbjörn, Magnus, Ali, Albin
+
+Mål
+Alla är synkade
+
+Rapporter
+Börjat med sekvensdiagram
+
+Diskussionspunkter
+Designmodell
+
+och mönster
+
+Utkomst av beslut
+Fortsätt jobba med designmodellen
+
+Uppgifter till nästa möte
+Fortsätta jobba med designmodell och sekvensdiagram
+och SDD
+Tester
+Kan börja implementera klasser efter klassdiagrammet och user stories
+
+Slut
+Nästa möte tisdag förmiddag 21/9
 
