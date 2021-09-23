@@ -1,4 +1,4 @@
-package com.example.testmaddafakka;
+package com.example.testmaddafakka.View;
 
 import android.os.Bundle;
 
@@ -8,8 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.testmaddafakka.R;
 
-public class Watchlist extends Fragment {
+
+public class WatchlistView extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -19,4 +21,7 @@ public class Watchlist extends Fragment {
         return view;
     }
 
+
+    public void update(){
+    }
 }
