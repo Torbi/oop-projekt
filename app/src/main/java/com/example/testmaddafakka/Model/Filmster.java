@@ -18,4 +18,12 @@ public class Filmster {
         this.moviesList = moviesList;
         this.userList = userList;
     }
+
+    public ArrayList<Movie> getMoviesList() {
+        return moviesList;
+    }
+
+    public ArrayList<User> getUserList() {
+        return userList;
+    }
 }
