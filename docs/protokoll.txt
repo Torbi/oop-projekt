@@ -228,3 +228,38 @@ Kan börja implementera klasser efter klassdiagrammet och user stories
 Slut
 Nästa möte tisdag förmiddag 21/9
 
+
+
+
+
+
+
+Datum 17/9
+Närvarande: Torbjörn, Magnus?, Ali, Albin
+
+Mål
+Synka allt och få en tydlig bild av vad som ska göras
+
+Rapporter
+Har gått igenom api:n och hur den funkar, programmet behöver vara byggt runt det
+
+Diskussionspunkter
+Olika sökmetoder och filtreringsalternativ 
+Designmodell
+
+Utkomst av beslut
+Kolla med Carl alternativt välja nåt och köra på det
+Reviderat designmodellen
+SSD behöver skrivas på och RAD och sekvensdiagram uppdateras,
+
+Uppgifter till nästa möte
+Bli till övervägande del färdig med modellen.
+Ali - Watchlist, User, Preferences och Filmster
+Albin - WatchListView, watchlistController, preferences(view + controller)
+Torbjörn - Listener, model access + fixa adapter
+Magnus - moviestate, movieimage, mainview, filmstercontroller + allt som blir över
+
+Slut
+Nästa möte fredag
+
+
