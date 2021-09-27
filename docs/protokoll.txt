@@ -71,13 +71,6 @@ Nästa möte är med handledare 3/9 kl 13:15
 
 
 
-
-
-
-
-
-
-
 Dagordning för handledningsmöte
 
 Öppna mötet
@@ -263,3 +256,50 @@ Slut
 Nästa möte fredag
 
 
+
+
+Dagordning Handledning 24/9
+Hårdkoda listor med genre, göra egna listor alt ta färdiga listor, eller försöka 
+Scala upp från 128, 176. Eller hämta 500px alt 780px
+
+Peer review inlämning 7/10: RAD, SDD, Kod
+listor service
+
+nästa handledning fredag 13.15
+
+
+
+
+
+
+
+Datum 24/9
+Närvarande: Torbjörn, Magnus, Ali, Albin
+
+Mål
+Bestämma vad som ska göras till nästa möte
+
+
+Rapporter
+Behöver använda threads eller asynctask vid http calls
+
+
+Diskussionspunkter
+Använda färdiga listor eller skapa egna för genres.
+
+Utkomst av beslut
+Använda färdiga listor från IMDb
+
+Uppgifter till nästa möte
+Börja med ssd, lägg in designmodell och sekvensdiagram, beskriv hur koden är uppbyggd
+
+Alla: Java Docs, Tester, skriva nått i ssd, sekvensdiagram., uppdatera klassdiagram
+
+Torbjörn: Fixa bild
+Ali: like, dislike, seen ska lägga till i watchlist listan.
+Albin: Gui preferences
+Magnus: GUI watchlist, 
+
+
+Slut
+Nästa möte onsdag 15.00
