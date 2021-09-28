@@ -5,16 +5,20 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.PopupWindow;
 
 import com.example.testmaddafakka.Model.Movie;
 import com.example.testmaddafakka.R;
 
 import java.util.List;
+import java.util.Objects;
 
 
 public class PreferencesView extends Fragment implements ViewListener {
@@ -30,16 +34,24 @@ public class PreferencesView extends Fragment implements ViewListener {
         Button addGenresBtn = (Button) view.findViewById(R.id.addGenresBtn);
         Button addActorsBtn = (Button) view.findViewById(R.id.addActorsBtn);
         Button addDirectorsBtn = (Button) view.findViewById(R.id.addDirectorsBtn);
-        FrameLayout frameLayout = (FrameLayout) view.findViewById(R.id.fragmentContainerView);
-        frameLayout.setVisibility(View.INVISIBLE);
+
+        DisplayMetrics dm = new DisplayMetrics();
+        Objects.requireNonNull(getActivity()).getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
+
+        View popupView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_genres, null);
+        final PopupWindow popupWindow = new PopupWindow(popupView, (int)(width*0.8), (int)(height*0.6));
 
         addGenresBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransaction fr = getFragmentManager().beginTransaction();
+                /*FragmentTransaction fr = getFragmentManager().beginTransaction();
                 fr.replace(R.id.fragmentContainer, new Genres());
                 fr.addToBackStack(null);
-                fr.commit();
+                fr.commit();*/
+
+                popupWindow.showAtLocation(popupView, 1, 0, 0);
             }
         });
 
@@ -60,7 +72,6 @@ public class PreferencesView extends Fragment implements ViewListener {
                 fr.replace(R.id.fragmentContainerView, new Directors());
                 fr.addToBackStack(null);
                 fr.commit();
-                frameLayout.setVisibility(View.VISIBLE);
             }
         });
 

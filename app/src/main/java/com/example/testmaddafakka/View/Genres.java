@@ -4,11 +4,14 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.testmaddafakka.R;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
