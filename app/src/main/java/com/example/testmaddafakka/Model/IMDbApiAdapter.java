@@ -1,5 +1,14 @@
 package com.example.testmaddafakka.Model;
 
+import android.content.Context;
+import android.os.AsyncTask;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -18,6 +27,7 @@ import java.util.List;
 /**
  * An adapter that sends requests to imdbs api and get json responses back and
  * turns them into movie-objects
+ * This doesnt work because it is on the main thread, all functionality here has been moved to the MainActivity class
  */
 
 public class IMDbApiAdapter implements IAdapter {
@@ -26,9 +36,42 @@ public class IMDbApiAdapter implements IAdapter {
     private final String urlString = "https://imdb-api.com/en/API/";
     private HttpURLConnection connection;
     private final String key = "/k_ymbjcvxu";
+    private String request;
+    private List<Movie> result;
+    private RequestQueue queue;
 
+    public IMDbApiAdapter() {
 
-    public IMDbApiAdapter() {}
+    }
+
+    /*
+    private List<Movie> volleyRequest(String req) {
+        List<Movie> newList = new LinkedList<>();
+        queue = Volley.newRequestQueue();
+        StringRequest request = new StringRequest(Request.Method.GET, urlString + req + key,
+                new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JsonArray array = string2Json(response);
+                for (int i = 0; i < array.size(); i++) {
+                    newList.add(jsonObject2Movie((JsonObject) array.get(i)));
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        queue.add(request);
+        return newList;
+    }
+
+     */
+
+    public List<Movie> getResult() {
+        return result;
+    }
 
     /**
      * Sends a request to imdbs api and gets a json response that is then translated into
@@ -36,7 +79,6 @@ public class IMDbApiAdapter implements IAdapter {
      * @return a list of movies
      */
     @Override
-
     public List<Movie> get250Movies() {
         return getMovies("Top250Movies");
     }
@@ -90,6 +132,8 @@ public class IMDbApiAdapter implements IAdapter {
         return null;
     }
 
+    //make a thread for http calls or make an asynctask for this
+
     private String readResponse(HttpURLConnection response) {
 
         String jsonResponse = "";
@@ -119,15 +163,15 @@ public class IMDbApiAdapter implements IAdapter {
                                     object.get("id").toString(),
                                     object.get("imDbRating").toString(),
                                     object.get("crew").toString(),
-                                    object.get("image").toString(),
-                                    object.get("id").toString()
+                                    object.get("image").toString()
 
             );
-            System.out.println(movie.getTitle() + " title");
+            System.out.println(movie.getImage() + " title");
             return movie;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
+
 }

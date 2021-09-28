@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".View.MainView">
 
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/movieImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:contentDescription="@string/movie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/jason_bourne" />
+
     <Button
         android:id="@+id/watchlist"
         android:layout_width="wrap_content"
@@ -131,19 +143,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_baseline_add_24" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ImageView
-        android:id="@+id/movieImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:contentDescription="@string/movie"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/jason_bourne" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

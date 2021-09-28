@@ -1,30 +1,38 @@
 package com.example.testmaddafakka.Model;
 
-public class Movie {
+import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
+public class Movie implements Serializable {
+
+    @SerializedName("title")
     private String title;
-    private String information;
+    @SerializedName("id")
+    private String id;
+    @SerializedName("IMDbRating")
     private String rating;
+    @SerializedName("Crew")
     private String starring;
+    @SerializedName("image")
     private String image;
-    private String imdbID;
+    @SerializedName("Year")
+    private String year;
 
     /**
      * A movie object that contains information about a movie
      * @param title - The title of the movie
-     * @param information - Information about the movie
+     * @param id - The id a movie has on imdb, starts with "tt"
      * @param rating - The imdb rating of the movie
      * @param starring - The actors in the movie
      * @param image - A string for where the image can be found online
-     * @param imdbID - The id a movie has on imdb, starts with "tt"
      */
-    public Movie(String title, String information, String rating, String starring, String image, String imdbID) {
+    public Movie(String title, String id, String rating, String starring, String image) {
         this.title = title;
-        this.information = information;
+        this.id = id;
         this.rating = rating;
         this.starring = starring;
         this.image = image;
-        this.imdbID = imdbID;
     }
 
     public String getTitle() {
@@ -43,11 +51,4 @@ public class Movie {
         return rating;
     }
 
-    public String getImdbID() {
-        return imdbID;
-    }
-
-    public String getInformation() {
-        return information;
-    }
 }
