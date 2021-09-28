@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 import com.example.testmaddafakka.Model.Movie;
 import com.example.testmaddafakka.R;
@@ -29,6 +30,8 @@ public class PreferencesView extends Fragment implements ViewListener {
         Button addGenresBtn = (Button) view.findViewById(R.id.addGenresBtn);
         Button addActorsBtn = (Button) view.findViewById(R.id.addActorsBtn);
         Button addDirectorsBtn = (Button) view.findViewById(R.id.addDirectorsBtn);
+        FrameLayout frameLayout = (FrameLayout) view.findViewById(R.id.fragmentContainerView);
+        frameLayout.setVisibility(View.INVISIBLE);
 
         addGenresBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,9 +57,10 @@ public class PreferencesView extends Fragment implements ViewListener {
             @Override
             public void onClick(View view) {
                 FragmentTransaction fr = getFragmentManager().beginTransaction();
-                fr.replace(R.id.fragmentContainer, new Directors());
+                fr.replace(R.id.fragmentContainerView, new Directors());
                 fr.addToBackStack(null);
                 fr.commit();
+                frameLayout.setVisibility(View.VISIBLE);
             }
         });
 

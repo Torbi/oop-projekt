@@ -104,4 +104,17 @@
         app:layout_constraintTop_toBottomOf="@+id/addActorsBtn"
         app:layout_constraintVertical_bias="0.0" />
 
+    <FrameLayout
+        android:id="@+id/fragmentContainerView"
+        android:layout_width="249dp"
+        android:layout_height="338dp"
+        android:background="#E1757575"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
