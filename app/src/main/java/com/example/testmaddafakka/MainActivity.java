@@ -32,6 +32,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * All kod som ligger här ska bort härifrån i princip
+ */
 public class MainActivity extends AppCompatActivity {
 
     private List<Movie> movieList;
