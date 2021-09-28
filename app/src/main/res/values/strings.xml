@@ -13,4 +13,7 @@
     <string name="dislikeDiscription">2008</string>
     <string name="seenDiscription">2008</string>
     <string name="movie">Elite film</string>
+    <string name="likedMovies">Liked</string>
+    <string name="missedMovies">Missed</string>
+    <string name="watchedMovies">Watched</string>
 </resources>
