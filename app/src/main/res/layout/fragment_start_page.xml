@@ -8,11 +8,12 @@
 
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/movieImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="280sp"
+        android:layout_height="340sp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:contentDescription="@string/movie"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

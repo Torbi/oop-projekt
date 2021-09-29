@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -32,17 +33,9 @@ import java.util.List;
 
 public class MainView extends Fragment implements ViewListener {
 
-    private View view;
-
-    public static Drawable LoadImageFromWebOperations(String url) {
-        try {
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, "src name");
-            return d;
-        } catch (Exception e) {
-            return null;
-        }
-    }
+    public View view;
+    public Button test;
+    private ImageView movieImage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,18 +45,7 @@ public class MainView extends Fragment implements ViewListener {
         Button watchlistBtn = (Button) view.findViewById(R.id.watchlist);
         Button preferencesBtn = (Button) view.findViewById(R.id.preferences);
 
-        //this is only for cool purposes
-        /*
-
-        IAdapter adapter = IMDbApiAdapter.getIMDBAdapter();
-        List<Movie> movieList = adapter.get250Movies();
-        Movie movie = movieList.get(0);
-        String newPath = movie.getImage();
-        System.out.println(newPath + " pathen");
-
-         */
-        ImageView movieImage = view.findViewById(R.id.movieImage);
-        Picasso.get().load("https://imdb-api.com/images/original/MV5BNTE4YWE4NmEtYWY0ZS00ZDU4LTkxY2EtNTk2MDY1MDk5MTgyXkEyXkFqcGdeQXVyOTkwMTQ5MTI@._V1_Ratio0.6800_AL_.jpg").into(movieImage);
+        this.movieImage = view.findViewById(R.id.movieImage);
 
         watchlistBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,19 +65,18 @@ public class MainView extends Fragment implements ViewListener {
                 fr.commit();
             }
         });
-
         return view;
     }
-
 
     @Override
     public void update(List<Movie> list) {
         ImageLoader imageLoader = SingletonRequestQueue.getInstance(getContext()).getImageLoader();
         String url = list.get(0).getImage();
+        url = url.substring(1,url.length()-1);
+
         NetworkImageView niv = (NetworkImageView) view.findViewById(R.id.movieImage);
         if(url.length() > 0)
             niv.setImageUrl(url, imageLoader);
-        //niv.setDefaultImageResId(R.drawable._default);
-        //niv.setErrorImageResId(R.drawable.error);
     }
+
 }

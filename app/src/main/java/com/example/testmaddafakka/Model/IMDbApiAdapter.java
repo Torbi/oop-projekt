@@ -2,14 +2,21 @@ package com.example.testmaddafakka.Model;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
+import com.android.volley.NetworkError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.testmaddafakka.SingletonRequestQueue;
+import com.example.testmaddafakka.View.Listener;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -27,7 +34,6 @@ import java.util.List;
 /**
  * An adapter that sends requests to imdbs api and get json responses back and
  * turns them into movie-objects
- * This doesnt work because it is on the main thread, all functionality here has been moved to the MainActivity class
  */
 
 public class IMDbApiAdapter implements IAdapter {
@@ -39,35 +45,67 @@ public class IMDbApiAdapter implements IAdapter {
     private String request;
     private List<Movie> result;
     private RequestQueue queue;
+    private List<Movie> movieList;
+    private int numberOfRequests;
+    private Listener listener;
+    private Context context;
 
-    public IMDbApiAdapter() {
-
+    public IMDbApiAdapter(Context context, Listener listener) {
+        this.context = context;
+        this.listener = listener;
     }
 
-    /*
-    private List<Movie> volleyRequest(String req) {
-        List<Movie> newList = new LinkedList<>();
-        queue = Volley.newRequestQueue();
-        StringRequest request = new StringRequest(Request.Method.GET, urlString + req + key,
-                new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                JsonArray array = string2Json(response);
-                for (int i = 0; i < array.size(); i++) {
-                    newList.add(jsonObject2Movie((JsonObject) array.get(i)));
-                }
+    //numberOfRequests is probably not needed
+    private List<Movie> getStringRequest(String stringRequest) {
+        //movieList.clear();
+        numberOfRequests = 0;
+        VolleyLog.DEBUG = true;
+        RequestQueue queue = SingletonRequestQueue.getInstance(context).getRequestQueue();
+
+        //parse response into gsons jsonobject and then turn them into movies
+        JsonObjectRequest request = new JsonObjectRequest(urlString + stringRequest + key, null, response -> {
+            movieList = new LinkedList<>();
+            VolleyLog.wtf(response.toString(), "utf-8");
+            GsonBuilder builder = new GsonBuilder();
+            Gson gson = builder.create();
+            JsonObject jsonObject = gson.fromJson(response.toString(), JsonObject.class);
+            JsonArray array = jsonObject.getAsJsonArray("items");
+            for(int i = 0; i < array.size(); i++) {
+                Movie movie = jsonObject2Movie((JsonObject) array.get(i));
+                System.out.println(movie.getTitle() + " title");
+                movieList.add(movie);
             }
-        }, new Response.ErrorListener() {
+            listener.notifyListeners(movieList);
+            ++numberOfRequests;
+
+        }, errorListener) {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
+            public Priority getPriority() {
+                return Priority.HIGH;
             }
-        });
+        };
+
         queue.add(request);
-        return newList;
+
+        if(numberOfRequests == 1) {
+            return movieList;
+        }
+        return null;
     }
 
-     */
+    //errorListener to use when making a request with Volley
+    Response.ErrorListener errorListener = new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            if(error instanceof NetworkError) {
+                Toast.makeText(context, "No network available", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+            }
+        }
+    };
+
 
     public List<Movie> getResult() {
         return result;
@@ -80,7 +118,8 @@ public class IMDbApiAdapter implements IAdapter {
      */
     @Override
     public List<Movie> get250Movies() {
-        return getMovies("Top250Movies");
+        return getStringRequest("Top250Movies");
+
     }
 
     /**

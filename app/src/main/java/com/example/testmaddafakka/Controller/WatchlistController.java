@@ -16,4 +16,5 @@ public class WatchlistController {
         this.model = model;
         this.view = view;
     }
+
 }

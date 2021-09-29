@@ -10,4 +10,8 @@ public class FilmsterController {
         this.model = model;
         this.view = view;
     }
+
+    private void getMovies() {
+
+    }
 }

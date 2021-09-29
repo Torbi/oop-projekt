@@ -16,18 +16,12 @@ public class IMDbAdapterTest {
 
     @Test
     public void getMovie() {
-        /*
-        IMDbApiAdapter adapterThread = new IMDbApiAdapter("Top250Movies");
-        new Thread(adapterThread).start();
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            //handle
-        }
 
-         */
+        //IMDbApiAdapter adapterThread = new IMDbApiAdapter();
 
-       // List<Movie> list = adapterThread.getResult();
+
+
+
         //assertEquals(250, list.size());
     }
 }

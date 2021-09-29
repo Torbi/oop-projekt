@@ -23,8 +23,6 @@ public class WatchlistView extends Fragment implements ViewListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_watchlist, container, false);
         tabLayout = view.findViewById(R.id.tabLayout);
-
-
         tabLayout.addTab(tabLayout.newTab().setText("Liked"));
         tabLayout.addTab(tabLayout.newTab().setText("Missed"));
         tabLayout.addTab(tabLayout.newTab().setText("Seen"));
