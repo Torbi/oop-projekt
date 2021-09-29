@@ -12,6 +12,15 @@ public class User {
     private Settings Settings;
     private Preferences Preferences;
 
+    /**
+     * A movie object that contains information about a movie
+     * @param name - The name of the user
+     * @param password - the users password
+     * @param watchList - The users watchList (an ArrayList) containing seen, liked or disliked movies
+     * @param Settings - The users account settings
+     * @param preferences - A selection of categories
+     */
+
 
 
 
