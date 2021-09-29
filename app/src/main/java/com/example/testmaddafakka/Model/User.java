@@ -1,17 +1,21 @@
 package com.example.testmaddafakka.Model;
 
+import android.provider.Settings;
+
+import java.util.ArrayList;
+
 public class User {
 
     private String name;
     private String password;
-    private watchList watchList;
-    private Settings Settings ;
+    private ArrayList watchList;
+    private Settings Settings;
     private Preferences Preferences;
 
 
 
 
-    public User (String name, String password, List watchList, Settings Settings, Preferences preferences) {
+    public User (String name, String password, ArrayList watchList, Settings Settings, Preferences preferences) {
         this.name = name;
         this.password = password;
         this.watchList = watchList;
@@ -28,7 +32,7 @@ public class User {
         return password;
     }
 
-    public watchList getWatchList() {
+    public ArrayList getWatchList() {
         return watchList;
     }
 
