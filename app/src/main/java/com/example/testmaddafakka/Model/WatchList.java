@@ -9,6 +9,13 @@ public class WatchList {
     private List DislikedList = new ArrayList();
     private List WatchedList = new ArrayList();
 
+    /**
+     * @param LikedList    - An ArrayList that contains the movies the User has liked
+     * @param DislikedList - An ArrayList that contains the movies the User has disliked
+     * @param WatchedList  - An ArrayList that contains the movies the User has already seen
+
+    */
+
 
     public WatchList (List LikedList, List DislikedList, List WatchedList){
 
