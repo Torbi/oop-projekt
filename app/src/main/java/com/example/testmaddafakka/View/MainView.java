@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -44,7 +45,29 @@ public class MainView extends Fragment implements ViewListener {
         view = inflater.inflate(R.layout.fragment_start_page, container, false);
         Button watchlistBtn = (Button) view.findViewById(R.id.watchlist);
         Button preferencesBtn = (Button) view.findViewById(R.id.preferences);
+        ImageView likeBtn = view.findViewById(R.id.like);
+        ImageView dislikeBtn = view.findViewById(R.id.dislike);
+        ImageView seenBtn = view.findViewById(R.id.seen);
 
+        likeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("Like");
+            }
+        });
+
+        dislikeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("Dislike");
+            }
+        });
+        seenBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("Seen");
+            }
+        });
         this.movieImage = view.findViewById(R.id.movieImage);
 
         watchlistBtn.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +100,15 @@ public class MainView extends Fragment implements ViewListener {
         NetworkImageView niv = (NetworkImageView) view.findViewById(R.id.movieImage);
         if(url.length() > 0)
             niv.setImageUrl(url, imageLoader);
+
+        TextView movieTitle = view.findViewById(R.id.movieTitle);
+        TextView imdbGrade = view.findViewById(R.id.imdbRating);
+        TextView movieYear = view.findViewById(R.id.movieYear);
+
+        movieTitle.setText(list.get(0).getTitle());
+        imdbGrade.setText(list.get(0).getRating());
+        //movieYear.setText(list.get(0).getYear());
+
     }
 
 }

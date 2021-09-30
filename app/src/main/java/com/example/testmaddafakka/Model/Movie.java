@@ -51,4 +51,5 @@ public class Movie implements Serializable {
         return rating;
     }
 
+
 }

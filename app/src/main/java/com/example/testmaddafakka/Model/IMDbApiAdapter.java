@@ -65,14 +65,14 @@ public class IMDbApiAdapter implements IAdapter {
         //parse response into gsons jsonobject and then turn them into movies
         JsonObjectRequest request = new JsonObjectRequest(urlString + stringRequest + key, null, response -> {
             movieList = new LinkedList<>();
-            VolleyLog.wtf(response.toString(), "utf-8");
+            //VolleyLog.wtf(response.toString(), "utf-8");
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
             JsonObject jsonObject = gson.fromJson(response.toString(), JsonObject.class);
             JsonArray array = jsonObject.getAsJsonArray("items");
             for(int i = 0; i < array.size(); i++) {
                 Movie movie = jsonObject2Movie((JsonObject) array.get(i));
-                System.out.println(movie.getTitle() + " title");
+                //System.out.println(movie.getTitle() + " title");
                 movieList.add(movie);
             }
             listener.notifyListeners(movieList);
