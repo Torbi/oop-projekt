@@ -1,5 +1,6 @@
 package com.example.testmaddafakka.View;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,13 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.PopupWindow;
+import android.widget.Spinner;
 
 import com.example.testmaddafakka.Model.Movie;
 import com.example.testmaddafakka.R;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -31,49 +35,35 @@ public class PreferencesView extends Fragment implements ViewListener {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_preferences_view, container, false);
 
-        Button addGenresBtn = (Button) view.findViewById(R.id.addGenresBtn);
-        Button addActorsBtn = (Button) view.findViewById(R.id.addActorsBtn);
-        Button addDirectorsBtn = (Button) view.findViewById(R.id.addDirectorsBtn);
+        Spinner genreSpinner = (Spinner) view.findViewById(R.id.genreSpinner);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> genreAdapter = ArrayAdapter.createFromResource(this.getContext(),
+                R.array.genres_array, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        genreAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        genreSpinner.setAdapter(genreAdapter);
 
-        DisplayMetrics dm = new DisplayMetrics();
-        Objects.requireNonNull(getActivity()).getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
 
-        View popupView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_genres, null);
-        final PopupWindow popupWindow = new PopupWindow(popupView, (int)(width*0.8), (int)(height*0.6));
+        Spinner actorSpinner = (Spinner) view.findViewById(R.id.actorSpinner);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> actorAdapter = ArrayAdapter.createFromResource(this.getContext(),
+                R.array.genres_array, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        actorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        actorSpinner.setAdapter(actorAdapter);
 
-        addGenresBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*FragmentTransaction fr = getFragmentManager().beginTransaction();
-                fr.replace(R.id.fragmentContainer, new Genres());
-                fr.addToBackStack(null);
-                fr.commit();*/
 
-                popupWindow.showAtLocation(popupView, 1, 0, 0);
-            }
-        });
+        Spinner directorSpinner = (Spinner) view.findViewById(R.id.directorSpinner);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> directorAdapter = ArrayAdapter.createFromResource(this.getContext(),
+                R.array.genres_array, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        directorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        directorSpinner.setAdapter(directorAdapter);
 
-        addActorsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction fr = getFragmentManager().beginTransaction();
-                fr.replace(R.id.fragmentContainer, new Actors());
-                fr.addToBackStack(null);
-                fr.commit();
-            }
-        });
-
-        addDirectorsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction fr = getFragmentManager().beginTransaction();
-                fr.replace(R.id.fragmentContainerView, new Directors());
-                fr.addToBackStack(null);
-                fr.commit();
-            }
-        });
 
         return view;
     }
