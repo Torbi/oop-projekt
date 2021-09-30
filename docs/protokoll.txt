@@ -303,3 +303,42 @@ Magnus: GUI watchlist,
 
 Slut
 Nästa möte onsdag 15.00
+
+
+
+
+
+Datum 30/9
+Närvarande: Torbjörn, Magnus, Ali, Albin
+
+Mål
+Synka, kolla vad som är gjort och vad som ska göras till nästa möte
+
+
+Rapporter
+Visar en bild hämtad från API:t nu
+Vi måste nog byta till mvvm
+
+
+Diskussionspunkter
+mvvm istället för mvc, kolla med Carl
+Behövs states? eller ska vi lägga in filmerna direkt i listor
+
+Utkomst av beslut
+Fråga Carl
+Vi byter till mvvm
+Annars ligger View och Controller i samma klass/activity/fragment
+
+Uppgifter till nästa möte
+Alla: Java Docs, Tester, skriva sdd, sekvensdiagram., uppdatera klassdiagram
+
+Torbjörn: Fixa så man kan gå tillbaka mellan viewsen
+Albin: fortsätt med gui preference
+Magnus: fortsätt med gui watchlist
+Ali: Fortsätta med WL
+
+Läs om mvvm: https://developer.android.com/jetpack/guide?gclid=Cj0KCQjwwNWKBhDAARIsAJ8Hkhea5psC4EBzUaIKrzLhc1jXJh3qOeRqDK-EXdvZEqqcFlbjeSGtV_oaApsHEALw_wcB&gclsrc=aw.ds
+
+
+Slut
+Nästa möte fredag eftermiddag
