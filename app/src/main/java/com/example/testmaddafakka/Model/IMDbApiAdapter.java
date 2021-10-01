@@ -38,13 +38,8 @@ import java.util.List;
 
 public class IMDbApiAdapter implements IAdapter {
 
-    private URL url;
     private final String urlString = "https://imdb-api.com/en/API/";
-    private HttpURLConnection connection;
     private final String key = "/k_ymbjcvxu";
-    private String request;
-    private List<Movie> result;
-    private RequestQueue queue;
     private List<Movie> movieList;
     private int numberOfRequests;
     private Listener listener;
@@ -106,20 +101,14 @@ public class IMDbApiAdapter implements IAdapter {
         }
     };
 
-
-    public List<Movie> getResult() {
-        return result;
-    }
-
     /**
      * Sends a request to imdbs api and gets a json response that is then translated into
      * a list of movies
-     * @return a list of movies
+     * @return a list of movies, might not return anything due to async bs
      */
     @Override
     public List<Movie> get250Movies() {
         return getStringRequest("Top250Movies");
-
     }
 
     /**
@@ -133,69 +122,6 @@ public class IMDbApiAdapter implements IAdapter {
         return null;
     }
 
-    private List<Movie> getMovies(String request) {
-        HttpURLConnection response = sendRequest(request);
-
-        List<Movie> list = new LinkedList<>();
-        try {
-            String re = readResponse(response);
-            JsonArray jsonArray = string2Json(re);
-
-            for(int i = 0; i < jsonArray.size(); i++ ) {
-                list.add(jsonObject2Movie((JsonObject) jsonArray.get(i)));
-            }
-        }   catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("error on parse data in jsonparser.java");
-        }
-        return list;
-    }
-
-    private JsonArray string2Json(String jsonString) {
-        Gson gson = new Gson();
-        JsonObject object = gson.fromJson(jsonString, JsonObject.class);
-        return object.getAsJsonArray("items");
-    }
-
-    private HttpURLConnection sendRequest(String request)  {
-        try {
-            url = new URL(urlString + request + key);
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.connect();
-            return connection;
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    //make a thread for http calls or make an asynctask for this
-
-    private String readResponse(HttpURLConnection response) {
-
-        String jsonResponse = "";
-        try {
-            InputStream is = (InputStream) response.getContent();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.ISO_8859_1), 8);
-            StringBuilder sb = new StringBuilder();
-            String line = null;
-
-            while((line = reader.readLine()) != null) {
-                sb.append(line).append("\n");
-                //System.out.println(line);
-            }
-            is.close();
-            jsonResponse = sb.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return jsonResponse;
-    }
-
-
     private Movie jsonObject2Movie(JsonObject object) {
         try {
             Movie movie = new Movie(object.get("title").toString(),
@@ -205,7 +131,6 @@ public class IMDbApiAdapter implements IAdapter {
                                     object.get("image").toString()
 
             );
-            System.out.println(movie.getImage() + " title");
             return movie;
         } catch (Exception e) {
             e.printStackTrace();

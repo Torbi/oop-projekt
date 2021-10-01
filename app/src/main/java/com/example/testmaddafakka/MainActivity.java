@@ -3,8 +3,11 @@ package com.example.testmaddafakka;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
+
 import com.example.testmaddafakka.Controller.ModelAcces;
 import com.example.testmaddafakka.View.MainView;
 

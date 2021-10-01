@@ -11,9 +11,9 @@
         android:id="@+id/movie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="32sp"
+        android:layout_marginLeft="16sp"
         android:layout_marginTop="32sp"
-        android:layout_marginRight="32sp">
+        android:layout_marginRight="16sp">
 
         <ImageView
             android:id="@+id/imageView"
@@ -53,5 +53,17 @@
             android:text="@string/movieRating"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView" />
+
+        <ImageView
+            android:id="@+id/imdbstar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_baseline_star_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/movieRatingSmall"
+            tools:ignore="ImageContrastCheck" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

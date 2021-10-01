@@ -68,6 +68,7 @@ public class PreferencesView extends Fragment implements ViewListener {
         return view;
     }
 
+
     public void update(List<Movie> list){
     }
 
