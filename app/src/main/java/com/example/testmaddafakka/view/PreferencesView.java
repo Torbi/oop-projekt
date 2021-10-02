@@ -1,28 +1,19 @@
-package com.example.testmaddafakka.View;
+package com.example.testmaddafakka.view;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.PopupWindow;
 import android.widget.Spinner;
 
-import com.example.testmaddafakka.Model.Movie;
+import com.example.testmaddafakka.model.Movie;
 import com.example.testmaddafakka.R;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 
 public class PreferencesView extends Fragment implements ViewListener {

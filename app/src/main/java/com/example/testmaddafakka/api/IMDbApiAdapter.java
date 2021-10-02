@@ -1,32 +1,23 @@
-package com.example.testmaddafakka.Model;
+package com.example.testmaddafakka.api;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
 import com.android.volley.NetworkError;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.testmaddafakka.SingletonRequestQueue;
-import com.example.testmaddafakka.View.Listener;
+import com.example.testmaddafakka.model.Movie;
+import com.example.testmaddafakka.repository.FilmsterRepository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -42,17 +33,20 @@ public class IMDbApiAdapter implements IAdapter {
     private final String key = "/k_ymbjcvxu";
     private List<Movie> movieList;
     private int numberOfRequests;
-    private Listener listener;
+    private ApiListener listener;
     private Context context;
 
-    public IMDbApiAdapter(Context context, Listener listener) {
+    public IMDbApiAdapter(Context context, @Nullable ApiListener listener) {
         this.context = context;
         this.listener = listener;
     }
 
+
+
     //numberOfRequests is probably not needed
-    private List<Movie> getStringRequest(String stringRequest) {
+    private void getStringRequest(String stringRequest, final VolleyCallback callback) {
         //movieList.clear();
+        System.out.println("ska skickas ett kall");
         numberOfRequests = 0;
         VolleyLog.DEBUG = true;
         RequestQueue queue = SingletonRequestQueue.getInstance(context).getRequestQueue();
@@ -70,9 +64,11 @@ public class IMDbApiAdapter implements IAdapter {
                 //System.out.println(movie.getTitle() + " title");
                 movieList.add(movie);
             }
-            listener.notifyListeners(movieList);
+            if(listener != null) {
+                listener.notifyListeners(movieList);
+            }
             ++numberOfRequests;
-
+            callback.onSuccess(movieList);
         }, errorListener) {
 
             @Override
@@ -80,13 +76,7 @@ public class IMDbApiAdapter implements IAdapter {
                 return Priority.HIGH;
             }
         };
-
         queue.add(request);
-
-        if(numberOfRequests == 1) {
-            return movieList;
-        }
-        return null;
     }
 
     //errorListener to use when making a request with Volley
@@ -107,8 +97,13 @@ public class IMDbApiAdapter implements IAdapter {
      * @return a list of movies, might not return anything due to async bs
      */
     @Override
-    public List<Movie> get250Movies() {
-        return getStringRequest("Top250Movies");
+    public void get250Movies() {
+        getStringRequest("Top250Movies", new VolleyCallback() {
+            @Override
+            public void onSuccess(List<Movie> movieList) {
+                FilmsterRepository.getInstance(null).setMovies(movieList);
+            }
+        });
     }
 
     /**

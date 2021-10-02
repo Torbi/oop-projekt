@@ -1,9 +1,5 @@
-package com.example.testmaddafakka.View;
+package com.example.testmaddafakka.view;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,24 +8,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 //import com.bumptech.glide.Glide;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-import com.example.testmaddafakka.Model.IAdapter;
-import com.example.testmaddafakka.Model.IMDbApiAdapter;
-import com.example.testmaddafakka.Model.Movie;
+import com.example.testmaddafakka.model.Movie;
 import com.example.testmaddafakka.R;
-import com.example.testmaddafakka.SingletonRequestQueue;
-import com.squareup.picasso.Picasso;
+import com.example.testmaddafakka.api.SingletonRequestQueue;
+import com.example.testmaddafakka.viewmodel.MainViewModel;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 public class MainView extends Fragment implements ViewListener {
@@ -37,12 +28,28 @@ public class MainView extends Fragment implements ViewListener {
     public View view;
     public Button test;
     private ImageView movieImage;
+    private MainViewModel viewModel;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_start_page, container, false);
+
+
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        viewModel.init(requireContext());
+        viewModel.getUsers().observe(getViewLifecycleOwner(), new Observer<List<Movie>>() {
+            @Override
+            public void onChanged(List<Movie> movies) {
+                System.out.println(movies.size() + " så här många movies finns de");
+                update(movies);
+            }
+
+        });
+
+
         Button watchlistBtn = (Button) view.findViewById(R.id.watchlist);
         Button preferencesBtn = (Button) view.findViewById(R.id.preferences);
         ImageView likeBtn = view.findViewById(R.id.like);

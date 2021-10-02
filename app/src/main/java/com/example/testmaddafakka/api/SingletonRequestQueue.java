@@ -1,4 +1,4 @@
-package com.example.testmaddafakka;
+package com.example.testmaddafakka.api;
 
 import android.content.Context;
 import android.graphics.Bitmap;

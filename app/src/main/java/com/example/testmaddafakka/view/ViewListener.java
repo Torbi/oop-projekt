@@ -1,6 +1,6 @@
-package com.example.testmaddafakka.View;
+package com.example.testmaddafakka.view;
 
-import com.example.testmaddafakka.Model.Movie;
+import com.example.testmaddafakka.model.Movie;
 
 import java.util.List;
 

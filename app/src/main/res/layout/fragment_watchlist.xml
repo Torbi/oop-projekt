@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
     android:background="#F3F0FF"
-    tools:context=".View.WatchlistView">
+    tools:context=".view.WatchlistView">
 
     <TextView
         android:id="@+id/textView"

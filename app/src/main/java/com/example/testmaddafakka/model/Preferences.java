@@ -1,10 +1,6 @@
-package com.example.testmaddafakka.Model;
-
-import android.icu.util.ULocale;
+package com.example.testmaddafakka.model;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class Preferences {
 

@@ -1,4 +1,4 @@
-package com.example.testmaddafakka.Model;
+package com.example.testmaddafakka.model;
 
 import android.provider.Settings;
 

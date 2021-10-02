@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    tools:context=".View.MainView">
+    tools:context=".view.MainView">
 
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/movieImage"

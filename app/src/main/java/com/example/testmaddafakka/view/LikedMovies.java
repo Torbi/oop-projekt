@@ -1,4 +1,4 @@
-package com.example.testmaddafakka.View;
+package com.example.testmaddafakka.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,9 +11,9 @@ import androidx.annotation.Nullable;
 
 import com.example.testmaddafakka.R;
 
-public class SeenMovies extends Fragment {
+public class LikedMovies extends Fragment {
 
-    public SeenMovies(){
+    public LikedMovies(){
 
     }
     @Nullable
@@ -21,7 +21,8 @@ public class SeenMovies extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_seen_movies, container, false);
+        View view = inflater.inflate(R.layout.fragment_liked_movies, container, false);
+
 
         return view;
     }
