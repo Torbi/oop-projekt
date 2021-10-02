@@ -18,6 +18,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,29 +31,23 @@ import java.util.List;
 public class IMDbApiAdapter implements IAdapter {
 
     private final String urlString = "https://imdb-api.com/en/API/";
+    //made over a 100 requests on one day so created another account with a new key
     private final String key = "/k_ymbjcvxu";
+    private final String key2 = "/k_e598lu33";
     private List<Movie> movieList;
-    private int numberOfRequests;
-    private ApiListener listener;
     private Context context;
+    private int currentMovie = 0;
 
-    public IMDbApiAdapter(Context context, @Nullable ApiListener listener) {
+    public IMDbApiAdapter(Context context) {
         this.context = context;
-        this.listener = listener;
     }
 
-
-
-    //numberOfRequests is probably not needed
     private void getStringRequest(String stringRequest, final VolleyCallback callback) {
-        //movieList.clear();
-        System.out.println("ska skickas ett kall");
-        numberOfRequests = 0;
         VolleyLog.DEBUG = true;
         RequestQueue queue = SingletonRequestQueue.getInstance(context).getRequestQueue();
 
         //parse response into gsons jsonobject and then turn them into movies
-        JsonObjectRequest request = new JsonObjectRequest(urlString + stringRequest + key, null, response -> {
+        JsonObjectRequest request = new JsonObjectRequest(urlString + stringRequest + key2, null, response -> {
             movieList = new LinkedList<>();
             //VolleyLog.wtf(response.toString(), "utf-8");
             GsonBuilder builder = new GsonBuilder();
@@ -61,13 +56,8 @@ public class IMDbApiAdapter implements IAdapter {
             JsonArray array = jsonObject.getAsJsonArray("items");
             for(int i = 0; i < array.size(); i++) {
                 Movie movie = jsonObject2Movie((JsonObject) array.get(i));
-                //System.out.println(movie.getTitle() + " title");
                 movieList.add(movie);
             }
-            if(listener != null) {
-                listener.notifyListeners(movieList);
-            }
-            ++numberOfRequests;
             callback.onSuccess(movieList);
         }, errorListener) {
 
@@ -94,7 +84,7 @@ public class IMDbApiAdapter implements IAdapter {
     /**
      * Sends a request to imdbs api and gets a json response that is then translated into
      * a list of movies
-     * @return a list of movies, might not return anything due to async bs
+     * A callback method sets the movies in the filmsterRepo on Success
      */
     @Override
     public void get250Movies() {
@@ -123,7 +113,8 @@ public class IMDbApiAdapter implements IAdapter {
                                     object.get("id").toString(),
                                     object.get("imDbRating").toString(),
                                     object.get("crew").toString(),
-                                    object.get("image").toString()
+                                    object.get("image").toString(),
+                                    object.get("year").toString()
 
             );
             return movie;

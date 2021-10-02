@@ -9,35 +9,53 @@ import androidx.lifecycle.ViewModel;
 import com.example.testmaddafakka.model.Movie;
 import com.example.testmaddafakka.repository.FilmsterRepository;
 
-import java.util.List;
 
+/**
+ * The viewModel for the MainView Fragment, the viewModel observes the LiveData objects
+ * And updates itself when they are changed
+ * The mainView updates the MainViewModel on input from the user
+ */
 public class MainViewModel extends ViewModel {
-    private String successMessage = "Login was successful";
 
-    private MutableLiveData<List<Movie>> movies;
+    private MutableLiveData<Movie> movie;
     private FilmsterRepository filmsterRepository;
     private MutableLiveData<Boolean> isUpdating = new MutableLiveData<>();
 
     public void init(Context ctx) {
-        if(movies != null) {
+        if(movie != null) {
             return;
         }
         filmsterRepository = FilmsterRepository.getInstance(ctx);
         filmsterRepository.loadMovies();
     }
 
-    public LiveData<List<Movie>> getUsers() {
-        if (movies == null) {
-            movies = new MutableLiveData<List<Movie>>();
+    /**
+     * The method that the mainView observes for changes
+     * Calls an asynchronous method that loads the movie
+     * @return an immutable liveData Movie object
+     */
+    public LiveData<Movie> getMovie() {
+        if (movie == null) {
+            movie = new MutableLiveData<>();
             loadMovies();
         }
-        return movies;
+        return movie;
     }
 
     private void loadMovies() {
-        // Do an asynchronous operation to fetch users.
-        movies = filmsterRepository.getTop250Movies();
+        // Do an asynchronous operation to fetch a movie
+        movie = filmsterRepository.getCurrentMovie();
     }
 
-
+    public void addLikedMovie(Movie movie) {
+        filmsterRepository.addLikedMovie(movie);
+        nextMovie();
+    }
+    public void addDislikedMovie(Movie movie) {
+        filmsterRepository.addDislikedMovie(movie);
+        nextMovie();
+    }
+    public void nextMovie() {
+        filmsterRepository.nextMovie();
+    }
 }

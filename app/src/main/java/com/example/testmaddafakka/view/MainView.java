@@ -1,5 +1,6 @@
 package com.example.testmaddafakka.view;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 //import com.bumptech.glide.Glide;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.example.testmaddafakka.api.IApiListener;
 import com.example.testmaddafakka.model.Movie;
 import com.example.testmaddafakka.R;
 import com.example.testmaddafakka.api.SingletonRequestQueue;
@@ -23,12 +25,14 @@ import com.example.testmaddafakka.viewmodel.MainViewModel;
 
 import java.util.List;
 
-public class MainView extends Fragment implements ViewListener {
+public class MainView extends Fragment {
 
     public View view;
     public Button test;
     private ImageView movieImage;
     private MainViewModel viewModel;
+    private Movie currentMovie;
+
 
 
     @Override
@@ -40,14 +44,14 @@ public class MainView extends Fragment implements ViewListener {
 
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         viewModel.init(requireContext());
-        viewModel.getUsers().observe(getViewLifecycleOwner(), new Observer<List<Movie>>() {
+        viewModel.getMovie().observe(getViewLifecycleOwner(), new Observer<Movie>() {
             @Override
-            public void onChanged(List<Movie> movies) {
-                System.out.println(movies.size() + " så här många movies finns de");
-                update(movies);
+            public void onChanged(Movie movie) {
+                currentMovie = movie;
+                updateMovieDisplayed(currentMovie);
             }
-
         });
+
 
 
         Button watchlistBtn = (Button) view.findViewById(R.id.watchlist);
@@ -60,6 +64,8 @@ public class MainView extends Fragment implements ViewListener {
             @Override
             public void onClick(View view) {
                 System.out.println("Like");
+                viewModel.addLikedMovie(currentMovie);
+                viewModel.nextMovie();
             }
         });
 
@@ -67,6 +73,9 @@ public class MainView extends Fragment implements ViewListener {
             @Override
             public void onClick(View view) {
                 System.out.println("Dislike");
+                viewModel.addDislikedMovie(currentMovie);
+                viewModel.nextMovie();
+
             }
         });
         seenBtn.setOnClickListener(new View.OnClickListener() {
@@ -98,10 +107,9 @@ public class MainView extends Fragment implements ViewListener {
         return view;
     }
 
-    @Override
-    public void update(List<Movie> list) {
+    private void updateMovieDisplayed(Movie movie) {
         ImageLoader imageLoader = SingletonRequestQueue.getInstance(getContext()).getImageLoader();
-        String url = list.get(0).getImage();
+        String url = movie.getImage();
         url = url.substring(1,url.length()-1);
 
         NetworkImageView niv = (NetworkImageView) view.findViewById(R.id.movieImage);
@@ -109,13 +117,26 @@ public class MainView extends Fragment implements ViewListener {
             niv.setImageUrl(url, imageLoader);
 
         TextView movieTitle = view.findViewById(R.id.movieTitle);
-        TextView imdbGrade = view.findViewById(R.id.imdbRating);
+        TextView imdbGrade = view.findViewById(R.id.movieRating);
         TextView movieYear = view.findViewById(R.id.movieYear);
 
-        movieTitle.setText(list.get(0).getTitle());
-        imdbGrade.setText(list.get(0).getRating());
-        //movieYear.setText(list.get(0).getYear());
+        String title = shorten(movie.getTitle());
+        movieTitle.setText(checkMovieLength(title));
 
+        String grade = shorten(movie.getRating()) + "/10";
+        imdbGrade.setText(grade);
+        movieYear.setText(shorten(movie.getYear()));
+
+    }
+    private String shorten(String text){
+        String temp = text.substring(1, text.length()-1);
+        return temp;
+    }
+    private String checkMovieLength(String title){
+        if(title.length() > 15){
+            return title.substring(0, 16) + "...";
+        }
+        return title;
     }
 
 }

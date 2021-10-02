@@ -16,7 +16,7 @@ import com.example.testmaddafakka.R;
 import java.util.List;
 
 
-public class PreferencesView extends Fragment implements ViewListener {
+public class PreferencesView extends Fragment {
 
     View view;
 
@@ -58,10 +58,4 @@ public class PreferencesView extends Fragment implements ViewListener {
 
         return view;
     }
-
-
-    public void update(List<Movie> list){
-    }
-
-
 }

@@ -5,39 +5,45 @@ import java.util.List;
 
 public class WatchList {
 
-    private List LikedList = new ArrayList();
-    private List DislikedList = new ArrayList();
-    private List WatchedList = new ArrayList();
+    private List<Movie> likedList;
+    private List<Movie> dislikedList;
+    private List<Movie> watchedList;
 
-    /**
-     * @param LikedList    - An ArrayList that contains the movies the User has liked
-     * @param DislikedList - An ArrayList that contains the movies the User has disliked
-     * @param WatchedList  - An ArrayList that contains the movies the User has already seen
+    public WatchList (){
+        this.likedList = new ArrayList<>();
+        this.dislikedList = new ArrayList<>();
+        this.watchedList = new ArrayList<>();
 
-    */
+    }
 
-
-    public WatchList (List LikedList, List DislikedList, List WatchedList){
-
-
-        this.LikedList = LikedList;
-        this.DislikedList = DislikedList;
-        this.WatchedList = WatchedList;
+    public void addLikedMovie(Movie movie) {
+       this.likedList.add(movie);
     }
 
 
-
-
-    public List getLikedList() {
-        return LikedList;
+    public void addDislikedMovie(Movie movie) {
+        this.dislikedList.add(movie);
+        if(likedList.contains(movie)){
+            likedList.remove(movie);
+        }
     }
 
-    public List getDislikedList() {
-        return DislikedList;
+
+    public void addWatchedMovie(Movie movie) {
+        this.watchedList.add(movie);
     }
 
-    public List getWatchedList() {
-        return WatchedList;
+
+    public List<Movie> getLikedList() {
+        return likedList;
+    }
+
+    public List<Movie> getDislikedList() {
+        return dislikedList;
+    }
+
+    public List<Movie> getWatchedList() {
+        return watchedList;
 
     }
 }

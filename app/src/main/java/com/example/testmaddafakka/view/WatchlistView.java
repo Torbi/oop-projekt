@@ -16,7 +16,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.List;
 
 
-public class WatchlistView extends Fragment implements ViewListener {
+public class WatchlistView extends Fragment {
     TabLayout tabLayout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,9 +63,5 @@ public class WatchlistView extends Fragment implements ViewListener {
             default:
                 return null;
         }
-    }
-
-
-    public void update(List<Movie> list){
     }
 }

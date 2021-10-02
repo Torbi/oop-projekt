@@ -8,8 +8,7 @@ public class User {
 
     private String name;
     private String password;
-    private ArrayList watchList;
-    private Settings Settings;
+    private WatchList watchList;
     private Preferences Preferences;
 
     /**
@@ -17,20 +16,28 @@ public class User {
      * @param name - The name of the user
      * @param password - the users password
      * @param watchList - The users watchList (an ArrayList) containing seen, liked or disliked movies
-     * @param Settings - The users account settings
      * @param preferences - A selection of categories
      */
 
-
-
-
-    public User (String name, String password, ArrayList watchList, Settings Settings, Preferences preferences) {
+    public User (String name, String password, WatchList watchList, Preferences preferences) {
         this.name = name;
         this.password = password;
         this.watchList = watchList;
-        this.Settings = Settings;
-        this.Preferences = Preferences;
+        this.Preferences = preferences;
 
+    }
+
+    public void addLikedMovie(Movie movie) {
+        watchList.addLikedMovie(movie);
+    }
+
+
+    public void addDislikedMovie(Movie movie) {
+        watchList.addDislikedMovie(movie);
+    }
+
+    public void addWatchedMovie(Movie movie) {
+        watchList.addWatchedMovie(movie);
     }
 
     public String getName() {
@@ -41,12 +48,8 @@ public class User {
         return password;
     }
 
-    public ArrayList getWatchList() {
+    public WatchList getWatchList() {
         return watchList;
-    }
-
-    public Settings getSettings() {
-        return Settings;
     }
 
     public Preferences getPreferences() {

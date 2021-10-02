@@ -13,9 +13,9 @@ public class ApiListener {
         listeners = new LinkedList<>();
     }
 
-    public void notifyListeners(List<Movie> movies) {
+    public void notifyListeners(Movie movie) {
         for(int i = 0; i < listeners.size(); i++) {
-            listeners.get(i).update(movies);
+            listeners.get(i).update(movie);
         }
     }
 
