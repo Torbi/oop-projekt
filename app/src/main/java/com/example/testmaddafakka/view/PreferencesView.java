@@ -19,6 +19,9 @@ import java.util.List;
 public class PreferencesView extends Fragment {
 
     View view;
+    private Spinner genreSpinner;
+    private Spinner actorSpinner;
+    private Spinner directorSpinner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,36 +29,30 @@ public class PreferencesView extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_preferences_view, container, false);
 
-        Spinner genreSpinner = (Spinner) view.findViewById(R.id.genreSpinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
+        genreSpinner = (Spinner) view.findViewById(R.id.genreSpinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> genreAdapter = ArrayAdapter.createFromResource(this.getContext(),
                 R.array.genres_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-        genreAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        genreSpinner.setAdapter(genreAdapter);
+        setSpinner(genreSpinner, genreAdapter);
 
-
-        Spinner actorSpinner = (Spinner) view.findViewById(R.id.actorSpinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
+        actorSpinner = (Spinner) view.findViewById(R.id.actorSpinner);
         ArrayAdapter<CharSequence> actorAdapter = ArrayAdapter.createFromResource(this.getContext(),
                 R.array.genres_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-        actorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        actorSpinner.setAdapter(actorAdapter);
+        setSpinner(actorSpinner, actorAdapter);
 
-
-        Spinner directorSpinner = (Spinner) view.findViewById(R.id.directorSpinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
+        directorSpinner = (Spinner) view.findViewById(R.id.directorSpinner);
         ArrayAdapter<CharSequence> directorAdapter = ArrayAdapter.createFromResource(this.getContext(),
                 R.array.genres_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-        directorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        directorSpinner.setAdapter(directorAdapter);
+        setSpinner(directorSpinner, directorAdapter);
 
 
         return view;
     }
+    public void setSpinner(Spinner spinner, ArrayAdapter<CharSequence> content){
+        // Specify the layout to use when the list of choices appears
+        content.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(content);
+    }
+
 }

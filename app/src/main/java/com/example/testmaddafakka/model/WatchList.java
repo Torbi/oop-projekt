@@ -44,7 +44,6 @@ public class WatchList {
 
     public List<Movie> getWatchedList() {
         return watchedList;
-
     }
 }
 

@@ -74,6 +74,7 @@ public class FilmsterRepository implements IApiListener {
 
     public void setMovies(List<Movie> movies) {
         this.movies.setValue(movies);
+        filmster.setMoviesList(movies);
     }
 
     @Override
@@ -93,7 +94,18 @@ public class FilmsterRepository implements IApiListener {
     }
 
     public void nextMovie() {
-        listener.notifyListeners(this.movies.getValue().get(current));
+        //listener.notifyListeners(this.movies.getValue().get(current));
+        this.currentMovie.setValue(this.movies.getValue().get(current));
         current++;
     }
+    public List<Movie> getLikedMovies(){
+        return user.getLikedMovies();
+    }
+    public List<Movie> getDislikedMovies(){
+        return user.getDislikedMovies();
+    }
+    public List<Movie> getWatchedMovies(){
+        return user.getWatchedMovies();
+    }
+
 }

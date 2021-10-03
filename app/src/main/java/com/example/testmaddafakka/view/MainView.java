@@ -32,7 +32,8 @@ public class MainView extends Fragment {
     private ImageView movieImage;
     private MainViewModel viewModel;
     private Movie currentMovie;
-
+    private WatchlistView watchlistView;
+    private PreferencesView preferencesView;
 
 
     @Override
@@ -52,7 +53,8 @@ public class MainView extends Fragment {
             }
         });
 
-
+        watchlistView = new WatchlistView();
+        preferencesView = new PreferencesView();
 
         Button watchlistBtn = (Button) view.findViewById(R.id.watchlist);
         Button preferencesBtn = (Button) view.findViewById(R.id.preferences);
@@ -65,6 +67,7 @@ public class MainView extends Fragment {
             public void onClick(View view) {
                 System.out.println("Like");
                 viewModel.addLikedMovie(currentMovie);
+                System.out.println("MAIN VIEW " + currentMovie);
                 viewModel.nextMovie();
             }
         });
@@ -90,7 +93,7 @@ public class MainView extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentTransaction fr = getFragmentManager().beginTransaction();
-                fr.replace(R.id.fragmentContainer, new WatchlistView());
+                fr.replace(R.id.fragmentContainer, watchlistView);
                 fr.addToBackStack(null);
                 fr.commit();
             }
@@ -99,7 +102,7 @@ public class MainView extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentTransaction fr = getFragmentManager().beginTransaction();
-                fr.replace(R.id.fragmentContainer, new PreferencesView());
+                fr.replace(R.id.fragmentContainer, preferencesView);
                 fr.addToBackStack(null);
                 fr.commit();
             }

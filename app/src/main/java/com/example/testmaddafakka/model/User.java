@@ -3,6 +3,7 @@ package com.example.testmaddafakka.model;
 import android.provider.Settings;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class User {
 
@@ -29,9 +30,18 @@ public class User {
 
     public void addLikedMovie(Movie movie) {
         watchList.addLikedMovie(movie);
+        System.out.println("RE");
     }
 
-
+    public List<Movie> getLikedMovies(){
+        return watchList.getLikedList();
+    }
+    public List<Movie> getDislikedMovies(){
+        return watchList.getDislikedList();
+    }
+    public List<Movie> getWatchedMovies(){
+        return watchList.getWatchedList();
+    }
     public void addDislikedMovie(Movie movie) {
         watchList.addDislikedMovie(movie);
     }

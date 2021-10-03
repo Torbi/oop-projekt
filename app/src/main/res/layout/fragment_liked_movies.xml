@@ -15,14 +15,16 @@
         android:layout_marginTop="32sp"
         android:layout_marginRight="16sp">
 
-        <ImageView
-            android:id="@+id/imageView"
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/smallMovieTitle"
             android:layout_width="150sp"
             android:layout_height="150sp"
             android:contentDescription="@string/movieTitle"
             android:src="@drawable/jason_bourne"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/jason_bourne" />
+
 
         <TextView
             android:id="@+id/movieTitleSmall"
@@ -31,17 +33,17 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/movieTitle"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/smallMovieTitle"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/movieYearSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
             android:text="@string/movieYear"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/smallMovieTitle"
             app:layout_constraintTop_toBottomOf="@+id/movieTitleSmall" />
 
         <TextView
@@ -52,7 +54,7 @@
             android:layout_marginBottom="16dp"
             android:text="@string/movieRating"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView" />
+            app:layout_constraintStart_toEndOf="@+id/smallMovieTitle" />
 
         <ImageView
             android:id="@+id/imdbstar"
