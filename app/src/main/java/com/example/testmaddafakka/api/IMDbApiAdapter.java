@@ -48,6 +48,7 @@ public class IMDbApiAdapter implements IAdapter {
         //parse response into gsons jsonobject and then turn them into medias
         JsonObjectRequest request = new JsonObjectRequest(urlString + stringRequest + key2, null, response -> {
             mediaList = new LinkedList<>();
+
             //VolleyLog.wtf(response.toString(), "utf-8");
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();

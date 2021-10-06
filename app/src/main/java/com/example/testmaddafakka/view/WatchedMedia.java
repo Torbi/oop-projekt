@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
@@ -23,11 +25,6 @@ import java.util.List;
 
 public class WatchedMedia extends Fragment{
     private WatchlistViewModel viewModel;
-    private NetworkImageView smallMediaImage;
-    private TextView mediaTitle;
-    private TextView mediaYear;
-    private TextView mediaRating;
-
     public WatchedMedia(){
 
     }
@@ -38,51 +35,24 @@ public class WatchedMedia extends Fragment{
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_seen_movies, container, false);
-        smallMediaImage = view.findViewById(R.id.mediaImageSmall);
-        mediaTitle = view.findViewById(R.id.mediaTitleSmall);
-        mediaYear = view.findViewById(R.id.mediaYearSmall);
-        mediaRating = view.findViewById(R.id.mediaRatingSmall);
 
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvMedia);
 
         viewModel = new ViewModelProvider(this).get(WatchlistViewModel.class);
         viewModel.init(requireContext());
         viewModel.getWatchedMedias().observe(getViewLifecycleOwner(), new Observer<List<IMedia>>() {
             @Override
+
             public void onChanged(List<IMedia> medias) {
-                for(IMedia media : medias){
-                    //new compentn
-                    updateMediaDisplayed(media);
-                }
+                MediaAdapter adapter = new MediaAdapter(medias);
+                recyclerView.setAdapter(adapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+
             }
         });
 
 
         return view;
     }
-    private void updateMediaDisplayed(IMedia media) {
-        ImageLoader imageLoader = SingletonRequestQueue.getInstance(getContext()).getImageLoader();
-        String url = media.getImage();
-        url = url.substring(1,url.length()-1);
 
-        if(url.length() > 0)
-            smallMediaImage.setImageUrl(url, imageLoader);
-
-        String title = shorten(media.getTitle());
-        mediaTitle.setText(checkMovieLength(title));
-
-        String grade = shorten(media.getRating()) + "/10";
-        mediaRating.setText(grade);
-        mediaYear.setText(shorten(media.getYear()));
-
-    }
-    private String shorten(String text){
-        String temp = text.substring(1, text.length()-1);
-        return temp;
-    }
-    private String checkMovieLength(String title){
-        if(title.length() > 15){
-            return title.substring(0, 16) + "...";
-        }
-        return title;
-    }
 }

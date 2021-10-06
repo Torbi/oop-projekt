@@ -1,11 +1,14 @@
 package com.example.testmaddafakka.view;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,14 +22,22 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.example.testmaddafakka.R;
 import com.example.testmaddafakka.api.SingletonRequestQueue;
 import com.example.testmaddafakka.model.IMedia;
+import com.example.testmaddafakka.model.Movie;
 import com.example.testmaddafakka.viewmodel.WatchlistViewModel;
 
 import java.util.List;
 
-public class DislikedMedias extends Fragment {
+public class LikedMovies extends Fragment {
+
+    private NetworkImageView smallMovieImage;
+    private TextView movieTitle;
+    private TextView movieYear;
+    private TextView movieRating;
+
+    private View view;
     private WatchlistViewModel viewModel;
 
-    public DislikedMedias(){
+    public LikedMovies() {
 
     }
 
@@ -35,23 +46,22 @@ public class DislikedMedias extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_missed_movies, container, false);
-
+        view = inflater.inflate(R.layout.fragment_liked_movies, container, false);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvMedia);
 
 
         viewModel = new ViewModelProvider(this).get(WatchlistViewModel.class);
         viewModel.init(requireContext());
-        viewModel.getDislikedMedias().observe(getViewLifecycleOwner(), new Observer<List<IMedia>>() {
+        viewModel.getLikedMedias().observe(getViewLifecycleOwner(), new Observer<List<IMedia>>() {
             @Override
             public void onChanged(List<IMedia> medias) {
                 MediaAdapter adapter = new MediaAdapter(medias);
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-
             }
         });
 
         return view;
     }
+
 }
