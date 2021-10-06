@@ -43,7 +43,7 @@ public class FilmsterRepository implements IApiListener {
         listener = new ApiListener();
         listener.addListener(this);
 
-        imdbAdapter = new IMDbApiAdapter(ctx);
+        imdbAdapter = new IMDbApiAdapter(ctx, listener);
         loadMovies();
     }
 
@@ -72,14 +72,15 @@ public class FilmsterRepository implements IApiListener {
         return this.movies;
     }
 
-    public void setMovies(List<Movie> movies) {
+    private void setMovies(List<Movie> movies) {
         this.movies.setValue(movies);
         filmster.setMoviesList(movies);
     }
 
     @Override
-    public void update(Movie movie) {
-        this.currentMovie.setValue(movie);
+    public void update(List<Movie> movies) {
+        setMovies(movies);
+        //this.currentMovie.setValue(movie);
         //this.movies.setValue(movies);
     }
 

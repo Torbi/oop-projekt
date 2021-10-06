@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface IApiListener {
 
-    public void update(Movie movie);
+    public void update(List<Movie> movie);
 }

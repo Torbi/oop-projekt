@@ -37,9 +37,11 @@ public class IMDbApiAdapter implements IAdapter {
     private List<Movie> movieList;
     private Context context;
     private int currentMovie = 0;
+    private ApiListener listener;
 
-    public IMDbApiAdapter(Context context) {
+    public IMDbApiAdapter(Context context, ApiListener listener) {
         this.context = context;
+        this.listener = listener;
     }
 
     private void getStringRequest(String stringRequest, final VolleyCallback callback) {
@@ -84,14 +86,14 @@ public class IMDbApiAdapter implements IAdapter {
     /**
      * Sends a request to imdbs api and gets a json response that is then translated into
      * a list of movies
-     * A callback method sets the movies in the filmsterRepo on Success
+     * A callback method notifies all listeners about the new movies
      */
     @Override
     public void get250Movies() {
         getStringRequest("Top250Movies", new VolleyCallback() {
             @Override
             public void onSuccess(List<Movie> movieList) {
-                FilmsterRepository.getInstance(null).setMovies(movieList);
+                listener.notifyListeners(movieList);
             }
         });
     }
