@@ -56,6 +56,10 @@ public class MainViewModel extends ViewModel {
         filmsterRepository.addDislikedMedia(media);
         nextMedia();
     }
+    public void addWatchedMedia(IMedia media){
+        filmsterRepository.addWatchedMedia(media);
+        nextMedia();
+    }
     public void nextMedia() {
         filmsterRepository.nextMedia();
     }

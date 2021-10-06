@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 //import com.bumptech.glide.Glide;
@@ -52,7 +51,7 @@ public class MainView extends Fragment {
         Button preferencesBtn = view.findViewById(R.id.preferences);
         ImageView likeBtn = view.findViewById(R.id.like);
         ImageView dislikeBtn = view.findViewById(R.id.dislike);
-        ImageView seenBtn = view.findViewById(R.id.seen);
+        ImageView watchedBtn = view.findViewById(R.id.watched);
 
         likeBtn.setOnClickListener(view -> {
             System.out.println("Like");
@@ -67,7 +66,11 @@ public class MainView extends Fragment {
             viewModel.nextMedia();
 
         });
-        seenBtn.setOnClickListener(view -> System.out.println("Seen"));
+        watchedBtn.setOnClickListener(view -> {
+            System.out.println("Watched");
+            viewModel.addWatchedMedia(currentMedia);
+            viewModel.nextMedia();
+        });
 
         watchlistBtn.setOnClickListener(view -> {
             FragmentTransaction fr = getFragmentManager().beginTransaction();

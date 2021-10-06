@@ -83,6 +83,10 @@ public class FilmsterRepository implements IApiListener {
         filmster.addDislikedMedia(media);
         nextMedia();
     }
+    public void addWatchedMedia(IMedia media){
+        filmster.addWatchedMedia(media);
+        nextMedia();
+    }
 
     public void nextMedia() {
         //listener.notifyListeners(this.movies.getValue().get(current));

@@ -55,5 +55,9 @@ public class Filmster{
         this.user.addDislikedMedia(media);
         nextMedia();
     }
+    public void addWatchedMedia(IMedia media){
+        this.user.addWatchedMedia(media);
+        nextMedia();
+    }
 
 }
