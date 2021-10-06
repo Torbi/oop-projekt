@@ -20,12 +20,13 @@ import com.example.testmaddafakka.repository.FilmsterRepository;
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
 
-    FilmsterRepository repo;git
+    FilmsterRepository repo;
 
 
     @Test
     public void useAppContext() {
         // Context of the app under test.
+        //Default test
 
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
@@ -35,7 +36,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void loadMoviesTest() {
-        // Context of the app under test.
+        // Checking whether we have got 250 movies
 
         repo.loadMovies();
 
@@ -44,7 +45,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void getCurrentMovieTest() {
-        // Context of the app under test.
+        // testing which the current movie is
 
         repo.getCurrentMovie();
 
@@ -55,7 +56,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void addLikedMovieTest() {
-        // Context of the app under test.
+        // Adding 3 random movies and then checking the size of the list, to see if the LikedList works as expected.
 
 
         repo.addLikedMovie(repo.getTop250Movies().getValue().get(3));
@@ -67,7 +68,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void addDislikedMovieTest() {
-        // Context of the app under test.
+        // // Adding 3 random movies and then checking the size of the list, to see if the DisLikedList works as expected.
 
 
         repo.addDislikedMovie(repo.getTop250Movies().getValue().get(3));
