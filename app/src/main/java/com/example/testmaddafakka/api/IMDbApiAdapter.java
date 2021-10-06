@@ -46,7 +46,7 @@ public class IMDbApiAdapter implements IAdapter {
         RequestQueue queue = SingletonRequestQueue.getInstance(context).getRequestQueue();
 
         //parse response into gsons jsonobject and then turn them into medias
-        JsonObjectRequest request = new JsonObjectRequest(urlString + stringRequest + key2, null, response -> {
+        JsonObjectRequest request = new JsonObjectRequest(urlString + stringRequest + key, null, response -> {
             mediaList = new LinkedList<>();
 
             //VolleyLog.wtf(response.toString(), "utf-8");
