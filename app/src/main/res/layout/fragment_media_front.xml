@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.MediaFront">
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/mediaImage"
+        android:layout_width="280sp"
+        android:layout_height="340sp"
+        android:contentDescription="@string/movie"
+        tools:src="@drawable/jason_bourne" />
+
+</FrameLayout>

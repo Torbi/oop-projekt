@@ -30,9 +30,8 @@
         android:background="#1db995"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:ignore="SpeakableTextPresentCheck"/>
 
     <FrameLayout
         android:id="@+id/fragmentContainerView"
