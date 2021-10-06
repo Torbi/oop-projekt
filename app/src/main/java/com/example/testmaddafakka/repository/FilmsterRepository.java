@@ -10,6 +10,7 @@ import com.example.testmaddafakka.api.ApiListener;
 import com.example.testmaddafakka.api.IAdapter;
 import com.example.testmaddafakka.api.IMDbApiAdapter;
 import com.example.testmaddafakka.model.Filmster;
+import com.example.testmaddafakka.model.IMedia;
 import com.example.testmaddafakka.model.Movie;
 import com.example.testmaddafakka.api.IApiListener;
 import com.example.testmaddafakka.model.Preferences;
@@ -26,8 +27,8 @@ public class FilmsterRepository implements IApiListener {
 
     private static FilmsterRepository instance;
     private IAdapter imdbAdapter;
-    private MutableLiveData<List<Movie>> movies;
-    private MutableLiveData<Movie> currentMovie;
+    private MutableLiveData<List<IMedia>> medias;
+    private MutableLiveData<IMedia> currentMedia;
     private ApiListener listener;
     private Filmster filmster;
     private User user;
@@ -36,15 +37,15 @@ public class FilmsterRepository implements IApiListener {
 
     private FilmsterRepository(Context ctx) {
 
-        movies = new MutableLiveData<>();
-        currentMovie = new MutableLiveData<>();
+        medias = new MutableLiveData<>();
+        currentMedia = new MutableLiveData<>();
         user = new User("TestNamn", "TestPass", new WatchList(), new Preferences());
         filmster = new Filmster(user);
         listener = new ApiListener();
         listener.addListener(this);
 
         imdbAdapter = new IMDbApiAdapter(ctx, listener);
-        loadMovies();
+        loadMedias();
     }
 
     public static FilmsterRepository getInstance(@Nullable Context ctx) {
@@ -54,59 +55,49 @@ public class FilmsterRepository implements IApiListener {
         return instance;
     }
 
-    public void loadMovies() {
+    public void loadMedias() {
         imdbAdapter.get250Movies();
     }
 
-    public MutableLiveData<List<Movie>> getTop250Movies() {
-        imdbAdapter.get250Movies();
-        return movies;
+    public MutableLiveData<IMedia> getCurrentMedia() {
+        this.currentMedia.setValue(filmster.getCurrentMedia());
+        return this.currentMedia;
     }
 
-    public MutableLiveData<Movie> getCurrentMovie() {
-        this.currentMovie.setValue(filmster.getCurrentMovie());
-        return this.currentMovie;
-    }
-
-    public MutableLiveData<List<Movie>> getCurrentMovies() {
-        return this.movies;
-    }
-
-    private void setMovies(List<Movie> movies) {
-        this.movies.setValue(movies);
-        filmster.setMoviesList(movies);
+    private void setMedias(List<IMedia> medias) {
+        this.medias.setValue(medias);
+        filmster.setMediaList(medias);
     }
 
     @Override
-    public void update(List<Movie> movies) {
-        setMovies(movies);
-        //this.currentMovie.setValue(movie);
-        //this.movies.setValue(movies);
+    public void update(List<IMedia> medias) {
+        setMedias(medias);
     }
 
-    public void addLikedMovie(Movie movie) {
-        filmster.addLikedMovie(movie);
-        nextMovie();
+    public void addLikedMedia(IMedia media) {
+        filmster.addLikedMedia(media);
+        nextMedia();
     }
 
-    public void addDislikedMovie(Movie movie) {
-        filmster.addDislikedMovie(movie);
-        nextMovie();
+    public void addDislikedMedia(IMedia media) {
+        filmster.addDislikedMedia(media);
+        nextMedia();
     }
 
-    public void nextMovie() {
+    public void nextMedia() {
         //listener.notifyListeners(this.movies.getValue().get(current));
-        this.currentMovie.setValue(this.movies.getValue().get(current));
+        //ERRRRORORORORORROR
+        this.currentMedia.setValue(this.medias.getValue().get(current));
         current++;
     }
-    public List<Movie> getLikedMovies(){
-        return user.getLikedMovies();
+    public List<IMedia> getLikedMedias(){
+        return user.getLikedMedia();
     }
-    public List<Movie> getDislikedMovies(){
-        return user.getDislikedMovies();
+    public List<IMedia> getDislikedMedias(){
+        return user.getDislikedMedia();
     }
-    public List<Movie> getWatchedMovies(){
-        return user.getWatchedMovies();
+    public List<IMedia> getWatchedMedias(){
+        return user.getWatchedMedia();
     }
 
 }

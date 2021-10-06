@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Movie implements Serializable {
+public class Movie implements Serializable, IMedia {
 
     @SerializedName("title")
     private String title;
@@ -44,7 +44,7 @@ public class Movie implements Serializable {
         return title;
     }
 
-    public String getStarring() {
+    public String getMainCharacters() {
         return starring;
     }
 

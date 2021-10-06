@@ -6,59 +6,61 @@ import android.view.View;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import com.example.testmaddafakka.model.IMedia;
 import com.example.testmaddafakka.model.Movie;
 import com.example.testmaddafakka.repository.FilmsterRepository;
 
 import java.util.List;
 
 public class WatchlistViewModel extends ViewModel {
-    private MutableLiveData<Movie> movie;
+    private MutableLiveData<IMedia> media;
     private FilmsterRepository filmsterRepository;
-    private MutableLiveData<List<Movie>> likedMovies;
-    private MutableLiveData<List<Movie>> dislikedMovies;
-    private MutableLiveData<List<Movie>> watchedMovies;
+    private MutableLiveData<List<IMedia>> likedMedias;
+    private MutableLiveData<List<IMedia>> dislikedMedias;
+    private MutableLiveData<List<IMedia>> watchedMedias;
 
     public void init(Context ctx) {
         filmsterRepository = FilmsterRepository.getInstance(ctx);
 
     }
 
-    public LiveData<Movie> getMovie() {
-        if (movie == null) {
-            movie = new MutableLiveData<>();
-            loadMovies();
+    public LiveData<IMedia> getMedia() {
+        if (media == null) {
+            media = new MutableLiveData<>();
+            loadMedias();
         }
-        return movie;
+        return media;
     }
 
-    public LiveData<List<Movie>> getLikedMovies(){
-        if(likedMovies == null){
-            likedMovies = new MutableLiveData<>();
+    public LiveData<List<IMedia>> getLikedMedias(){
+        if(likedMedias == null){
+            likedMedias = new MutableLiveData<>();
         }
-        likedMovies.setValue(filmsterRepository.getLikedMovies());
-        return likedMovies;
+        likedMedias.setValue(filmsterRepository.getLikedMedias());
+        return likedMedias;
     }
 
-    public LiveData<List<Movie>> getDislikedMovies(){
-        if(dislikedMovies == null) {
-            dislikedMovies = new MutableLiveData<>();
+    public LiveData<List<IMedia>> getDislikedMedias(){
+        if(dislikedMedias == null) {
+            dislikedMedias = new MutableLiveData<>();
         }
-        dislikedMovies.setValue(filmsterRepository.getDislikedMovies());
+        dislikedMedias.setValue(filmsterRepository.getDislikedMedias());
 
-        return dislikedMovies;
+        return dislikedMedias;
     }
-    public LiveData<List<Movie>> getWatchedMovies(){
-        if(watchedMovies == null){
-            watchedMovies = new MutableLiveData<>();
+    public LiveData<List<IMedia>> getWatchedMedias(){
+        if(watchedMedias == null){
+            watchedMedias = new MutableLiveData<>();
         }
-        watchedMovies.setValue(filmsterRepository.getWatchedMovies());
-        return watchedMovies;
+        watchedMedias.setValue(filmsterRepository.getWatchedMedias());
+        return watchedMedias;
     }
 
 
-    private void loadMovies() {
+    private void loadMedias() {
         // Do an asynchronous operation to fetch a movie
-        movie = filmsterRepository.getCurrentMovie();
+        media = filmsterRepository.getCurrentMedia();
     }
 
 }

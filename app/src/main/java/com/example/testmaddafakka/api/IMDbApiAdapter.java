@@ -3,29 +3,26 @@ package com.example.testmaddafakka.api;
 import android.content.Context;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-
 import com.android.volley.NetworkError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.testmaddafakka.model.IMedia;
 import com.example.testmaddafakka.model.Movie;
-import com.example.testmaddafakka.repository.FilmsterRepository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 
 /**
  * An adapter that sends requests to imdbs api and get json responses back and
- * turns them into movie-objects
+ * turns them into media-objects
  */
 
 public class IMDbApiAdapter implements IAdapter {
@@ -34,9 +31,9 @@ public class IMDbApiAdapter implements IAdapter {
     //made over a 100 requests on one day so created another account with a new key
     private final String key = "/k_ymbjcvxu";
     private final String key2 = "/k_e598lu33";
-    private List<Movie> movieList;
+    private List<IMedia> mediaList;
     private Context context;
-    private int currentMovie = 0;
+    private int currentMedia = 0;
     private ApiListener listener;
 
     public IMDbApiAdapter(Context context, ApiListener listener) {
@@ -48,19 +45,19 @@ public class IMDbApiAdapter implements IAdapter {
         VolleyLog.DEBUG = true;
         RequestQueue queue = SingletonRequestQueue.getInstance(context).getRequestQueue();
 
-        //parse response into gsons jsonobject and then turn them into movies
+        //parse response into gsons jsonobject and then turn them into medias
         JsonObjectRequest request = new JsonObjectRequest(urlString + stringRequest + key2, null, response -> {
-            movieList = new LinkedList<>();
+            mediaList = new LinkedList<>();
             //VolleyLog.wtf(response.toString(), "utf-8");
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
             JsonObject jsonObject = gson.fromJson(response.toString(), JsonObject.class);
             JsonArray array = jsonObject.getAsJsonArray("items");
             for(int i = 0; i < array.size(); i++) {
-                Movie movie = jsonObject2Movie((JsonObject) array.get(i));
-                movieList.add(movie);
+                IMedia media = jsonObject2Media((JsonObject) array.get(i));
+                mediaList.add(media);
             }
-            callback.onSuccess(movieList);
+            callback.onSuccess(mediaList);
         }, errorListener) {
 
             @Override
@@ -92,8 +89,8 @@ public class IMDbApiAdapter implements IAdapter {
     public void get250Movies() {
         getStringRequest("Top250Movies", new VolleyCallback() {
             @Override
-            public void onSuccess(List<Movie> movieList) {
-                listener.notifyListeners(movieList);
+            public void onSuccess(List<IMedia> mediaList) {
+                listener.notifyListeners(mediaList);
             }
         });
     }
@@ -105,13 +102,13 @@ public class IMDbApiAdapter implements IAdapter {
      * @return a list of movies
      */
     @Override
-    public List<Movie> getList(String listID) {
+    public List<IMedia> getList(String listID) {
         return null;
     }
 
-    private Movie jsonObject2Movie(JsonObject object) {
+    private IMedia jsonObject2Media(JsonObject object) {
         try {
-            Movie movie = new Movie(object.get("title").toString(),
+            IMedia media = new Movie(object.get("title").toString(),
                                     object.get("id").toString(),
                                     object.get("imDbRating").toString(),
                                     object.get("crew").toString(),
@@ -119,7 +116,7 @@ public class IMDbApiAdapter implements IAdapter {
                                     object.get("year").toString()
 
             );
-            return movie;
+            return media;
         } catch (Exception e) {
             e.printStackTrace();
         }

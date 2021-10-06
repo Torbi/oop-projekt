@@ -1,6 +1,5 @@
 package com.example.testmaddafakka.view;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,21 +16,17 @@ import androidx.lifecycle.ViewModelProvider;
 //import com.bumptech.glide.Glide;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-import com.example.testmaddafakka.api.IApiListener;
-import com.example.testmaddafakka.model.Movie;
+import com.example.testmaddafakka.model.IMedia;
 import com.example.testmaddafakka.R;
 import com.example.testmaddafakka.api.SingletonRequestQueue;
 import com.example.testmaddafakka.viewmodel.MainViewModel;
-
-import java.util.List;
 
 public class MainView extends Fragment {
 
     public View view;
     public Button test;
-    private ImageView movieImage;
     private MainViewModel viewModel;
-    private Movie currentMovie;
+    private IMedia currentMedia;
     private WatchlistView watchlistView;
     private PreferencesView preferencesView;
 
@@ -45,90 +40,69 @@ public class MainView extends Fragment {
 
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         viewModel.init(requireContext());
-        viewModel.getMovie().observe(getViewLifecycleOwner(), new Observer<Movie>() {
-            @Override
-            public void onChanged(Movie movie) {
-                currentMovie = movie;
-                updateMovieDisplayed(currentMovie);
-            }
+        viewModel.getMedia().observe(getViewLifecycleOwner(), media -> {
+            currentMedia = media;
+            updateMediaDisplayed(currentMedia);
         });
 
         watchlistView = new WatchlistView();
         preferencesView = new PreferencesView();
 
-        Button watchlistBtn = (Button) view.findViewById(R.id.watchlist);
-        Button preferencesBtn = (Button) view.findViewById(R.id.preferences);
+        Button watchlistBtn = view.findViewById(R.id.watchlist);
+        Button preferencesBtn = view.findViewById(R.id.preferences);
         ImageView likeBtn = view.findViewById(R.id.like);
         ImageView dislikeBtn = view.findViewById(R.id.dislike);
         ImageView seenBtn = view.findViewById(R.id.seen);
 
-        likeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("Like");
-                viewModel.addLikedMovie(currentMovie);
-                System.out.println("MAIN VIEW " + currentMovie);
-                viewModel.nextMovie();
-            }
+        likeBtn.setOnClickListener(view -> {
+            System.out.println("Like");
+            viewModel.addLikedMedia(currentMedia);
+            System.out.println("MAIN VIEW " + currentMedia);
+            viewModel.nextMedia();
         });
 
-        dislikeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("Dislike");
-                viewModel.addDislikedMovie(currentMovie);
-                viewModel.nextMovie();
+        dislikeBtn.setOnClickListener(view -> {
+            System.out.println("Dislike");
+            viewModel.addDislikedMedia(currentMedia);
+            viewModel.nextMedia();
 
-            }
         });
-        seenBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("Seen");
-            }
-        });
-        this.movieImage = view.findViewById(R.id.movieImage);
+        seenBtn.setOnClickListener(view -> System.out.println("Seen"));
 
-        watchlistBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction fr = getFragmentManager().beginTransaction();
-                fr.replace(R.id.fragmentContainer, watchlistView);
-                fr.addToBackStack(null);
-                fr.commit();
-            }
+        watchlistBtn.setOnClickListener(view -> {
+            FragmentTransaction fr = getFragmentManager().beginTransaction();
+            fr.replace(R.id.fragmentContainer, watchlistView);
+            fr.addToBackStack(null);
+            fr.commit();
         });
-        preferencesBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction fr = getFragmentManager().beginTransaction();
-                fr.replace(R.id.fragmentContainer, preferencesView);
-                fr.addToBackStack(null);
-                fr.commit();
-            }
+        preferencesBtn.setOnClickListener(view -> {
+            FragmentTransaction fr = getFragmentManager().beginTransaction();
+            fr.replace(R.id.fragmentContainer, preferencesView);
+            fr.addToBackStack(null);
+            fr.commit();
         });
         return view;
     }
 
-    private void updateMovieDisplayed(Movie movie) {
+    private void updateMediaDisplayed(IMedia media) {
         ImageLoader imageLoader = SingletonRequestQueue.getInstance(getContext()).getImageLoader();
-        String url = movie.getImage();
+        String url = media.getImage();
         url = url.substring(1,url.length()-1);
 
-        NetworkImageView niv = (NetworkImageView) view.findViewById(R.id.movieImage);
+        NetworkImageView niv = view.findViewById(R.id.mediaImage);
         if(url.length() > 0)
             niv.setImageUrl(url, imageLoader);
 
-        TextView movieTitle = view.findViewById(R.id.movieTitle);
-        TextView imdbGrade = view.findViewById(R.id.movieRating);
-        TextView movieYear = view.findViewById(R.id.movieYear);
+        TextView mediaTitle = view.findViewById(R.id.mediaTitle);
+        TextView mediaRating = view.findViewById(R.id.mediaRating);
+        TextView mediaYear = view.findViewById(R.id.mediaYear);
 
-        String title = shorten(movie.getTitle());
-        movieTitle.setText(checkMovieLength(title));
+        String title = shorten(media.getTitle());
+        mediaTitle.setText(checkMovieLength(title));
 
-        String grade = shorten(movie.getRating()) + "/10";
-        imdbGrade.setText(grade);
-        movieYear.setText(shorten(movie.getYear()));
+        String grade = shorten(media.getRating()) + "/10";
+        mediaRating.setText(grade);
+        mediaYear.setText(shorten(media.getYear()));
 
     }
     private String shorten(String text){

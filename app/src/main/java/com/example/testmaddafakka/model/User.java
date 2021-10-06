@@ -1,8 +1,5 @@
 package com.example.testmaddafakka.model;
 
-import android.provider.Settings;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -28,40 +25,34 @@ public class User {
 
     }
 
-    public void addLikedMovie(Movie movie) {
-        watchList.addLikedMovie(movie);
-        System.out.println("RE");
+    public void addLikedMedia(IMedia media) {
+        watchList.addLikedMedia(media);
+    }
+    public void addDislikedMedia(IMedia media) {
+        watchList.addDislikedMedia(media);
     }
 
-    public List<Movie> getLikedMovies(){
+    public void addWatchedMedia(IMedia media) {
+        watchList.addWatchedMedia(media);
+    }
+    public List<IMedia> getLikedMedia(){
         return watchList.getLikedList();
     }
-    public List<Movie> getDislikedMovies(){
+    public List<IMedia> getDislikedMedia(){
         return watchList.getDislikedList();
     }
-    public List<Movie> getWatchedMovies(){
+    public List<IMedia> getWatchedMedia(){
         return watchList.getWatchedList();
     }
-    public void addDislikedMovie(Movie movie) {
-        watchList.addDislikedMovie(movie);
-    }
-
-    public void addWatchedMovie(Movie movie) {
-        watchList.addWatchedMovie(movie);
-    }
-
     public String getName() {
         return name;
     }
-
     public String getPassword() {
         return password;
     }
-
     public WatchList getWatchList() {
         return watchList;
     }
-
     public Preferences getPreferences() {
         return Preferences;
     }

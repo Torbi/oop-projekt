@@ -16,19 +16,19 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.example.testmaddafakka.R;
 import com.example.testmaddafakka.api.SingletonRequestQueue;
-import com.example.testmaddafakka.model.Movie;
+import com.example.testmaddafakka.model.IMedia;
 import com.example.testmaddafakka.viewmodel.WatchlistViewModel;
 
 import java.util.List;
 
-public class SeenMovies extends Fragment{
+public class WatchedMedia extends Fragment{
     private WatchlistViewModel viewModel;
-    private NetworkImageView smallMovieImage;
-    private TextView movieTitle;
-    private TextView movieYear;
-    private TextView movieRating;
+    private NetworkImageView smallMediaImage;
+    private TextView mediaTitle;
+    private TextView mediaYear;
+    private TextView mediaRating;
 
-    public SeenMovies(){
+    public WatchedMedia(){
 
     }
 
@@ -38,20 +38,20 @@ public class SeenMovies extends Fragment{
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_seen_movies, container, false);
-        smallMovieImage = view.findViewById(R.id.smallMovieTitle);
-        movieTitle = view.findViewById(R.id.movieTitleSmall);
-        movieYear = view.findViewById(R.id.movieYearSmall);
-        movieRating = view.findViewById(R.id.movieRatingSmall);
+        smallMediaImage = view.findViewById(R.id.mediaImageSmall);
+        mediaTitle = view.findViewById(R.id.mediaTitleSmall);
+        mediaYear = view.findViewById(R.id.mediaYearSmall);
+        mediaRating = view.findViewById(R.id.mediaRatingSmall);
 
 
         viewModel = new ViewModelProvider(this).get(WatchlistViewModel.class);
         viewModel.init(requireContext());
-        viewModel.getWatchedMovies().observe(getViewLifecycleOwner(), new Observer<List<Movie>>() {
+        viewModel.getWatchedMedias().observe(getViewLifecycleOwner(), new Observer<List<IMedia>>() {
             @Override
-            public void onChanged(List<Movie> movies) {
-                for(Movie movie : movies){
+            public void onChanged(List<IMedia> medias) {
+                for(IMedia media : medias){
                     //new compentn
-                    updateMovieDisplayed(movie);
+                    updateMediaDisplayed(media);
                 }
             }
         });
@@ -59,20 +59,20 @@ public class SeenMovies extends Fragment{
 
         return view;
     }
-    private void updateMovieDisplayed(Movie movie) {
+    private void updateMediaDisplayed(IMedia media) {
         ImageLoader imageLoader = SingletonRequestQueue.getInstance(getContext()).getImageLoader();
-        String url = movie.getImage();
+        String url = media.getImage();
         url = url.substring(1,url.length()-1);
 
         if(url.length() > 0)
-            smallMovieImage.setImageUrl(url, imageLoader);
+            smallMediaImage.setImageUrl(url, imageLoader);
 
-        String title = shorten(movie.getTitle());
-        movieTitle.setText(checkMovieLength(title));
+        String title = shorten(media.getTitle());
+        mediaTitle.setText(checkMovieLength(title));
 
-        String grade = shorten(movie.getRating()) + "/10";
-        movieRating.setText(grade);
-        movieYear.setText(shorten(movie.getYear()));
+        String grade = shorten(media.getRating()) + "/10";
+        mediaRating.setText(grade);
+        mediaYear.setText(shorten(media.getYear()));
 
     }
     private String shorten(String text){

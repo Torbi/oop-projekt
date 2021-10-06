@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MissedMovies">
+    tools:context=".view.DislikedMedias">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/movie"
@@ -15,7 +15,7 @@
         android:layout_marginRight="16sp">
 
         <com.android.volley.toolbox.NetworkImageView
-            android:id="@+id/smallMovieTitle"
+            android:id="@+id/mediaImageSmall"
             android:layout_width="150sp"
             android:layout_height="150sp"
             android:contentDescription="@string/movieTitle"
@@ -26,34 +26,34 @@
 
 
         <TextView
-            android:id="@+id/movieTitleSmall"
+            android:id="@+id/mediaTitleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/movieTitle"
-            app:layout_constraintStart_toEndOf="@+id/smallMovieTitle"
+            app:layout_constraintStart_toEndOf="@+id/mediaImageSmall"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/movieYearSmall"
+            android:id="@+id/mediaYearSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
             android:text="@string/movieYear"
-            app:layout_constraintStart_toEndOf="@+id/smallMovieTitle"
-            app:layout_constraintTop_toBottomOf="@+id/movieTitleSmall" />
+            app:layout_constraintStart_toEndOf="@+id/mediaImageSmall"
+            app:layout_constraintTop_toBottomOf="@+id/mediaTitleSmall" />
 
         <TextView
-            android:id="@+id/movieRatingSmall"
+            android:id="@+id/mediaRatingSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="16dp"
             android:text="@string/movieRating"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/smallMovieTitle" />
+            app:layout_constraintStart_toEndOf="@+id/mediaImageSmall" />
 
         <ImageView
             android:id="@+id/imdbstar"
@@ -63,7 +63,7 @@
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_baseline_star_24"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/movieRatingSmall"
+            app:layout_constraintStart_toEndOf="@+id/mediaRatingSmall"
             tools:ignore="ImageContrastCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
