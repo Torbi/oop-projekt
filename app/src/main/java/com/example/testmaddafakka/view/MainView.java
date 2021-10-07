@@ -3,8 +3,10 @@ package com.example.testmaddafakka.view;
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.testmaddafakka.model.IMedia;
 import com.example.testmaddafakka.R;
+import com.example.testmaddafakka.model.OnSwipeTouchListener;
 import com.example.testmaddafakka.viewmodel.MainViewModel;
 
 public class MainView extends Fragment {
@@ -34,7 +37,7 @@ public class MainView extends Fragment {
     private MediaBack mediaBack;
 
 
-
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -94,8 +97,33 @@ public class MainView extends Fragment {
         });
 
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-        ft.replace(R.id.mediaCard, mediaFront, "FrontFrame").commit();
+        ft.replace(R.id.mediaCard, mediaFront).commit();
 
+
+        mediaCard.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                System.out.println("REERERERERE");
+                mediaFlip(currentMedia);
+                return true;
+            }
+
+            @Override
+            public void onSwipeTop() {
+                viewModel.addWatchedMedia(currentMedia);
+                viewModel.nextMedia();
+            }
+            @Override
+            public void onSwipeRight() {
+                viewModel.addLikedMedia(currentMedia);
+                viewModel.nextMedia();
+            }
+            @Override
+            public void onSwipeLeft() {
+                viewModel.addDislikedMedia(currentMedia);
+                viewModel.nextMedia();
+            }
+        });
 
         return view;
     }
@@ -105,8 +133,9 @@ public class MainView extends Fragment {
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
 
         ft.setCustomAnimations(R.animator.flip_out, R.animator.flip_in);
+
         if (backSide) {
-            ft.replace(R.id.mediaCard, mediaFront, "front");
+            ft.replace(R.id.mediaCard, mediaFront);
             ft.commit();
             backSide = false;
             mediaFront.update(media);
@@ -114,7 +143,7 @@ public class MainView extends Fragment {
             Bundle bundle = new Bundle();
             bundle.putString("data", media.getTitle() + "@" + media.getRating() + "@" + media.getYear());
             mediaBack.setArguments(bundle);
-            ft.replace(R.id.mediaCard, mediaBack, "back");
+            ft.replace(R.id.mediaCard, mediaBack);
             ft.commit();
             backSide = true;
             System.out.println("Borde vara skapat nu");
