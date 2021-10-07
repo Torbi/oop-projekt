@@ -20,6 +20,9 @@
     <string name="genres">Genres</string>
     <string name="actors">Actors</string>
     <string name="directors">Directors</string>
+    <string name="titleBack">TextView</string>
+    <string name="ratingBack">TextView</string>
+    <string name="yearBack">TextView</string>
     <string-array name="genres_array">
         <item>Action</item>
         <item>Drama</item>

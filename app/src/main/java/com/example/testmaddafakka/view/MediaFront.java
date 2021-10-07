@@ -2,6 +2,7 @@ package com.example.testmaddafakka.view;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -29,7 +30,9 @@ public class MediaFront extends Fragment {
 
         return view;
     }
+
     public void update(IMedia media){
+        System.out.println("updata skiten med denna url " + media.getImage());
         ImageLoader imageLoader = SingletonRequestQueue.getInstance(getContext()).getImageLoader();
         String url = media.getImage();
         url = url.substring(1,url.length()-1);

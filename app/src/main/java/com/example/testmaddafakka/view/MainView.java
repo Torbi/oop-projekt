@@ -1,5 +1,8 @@
 package com.example.testmaddafakka.view;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,26 +62,20 @@ public class MainView extends Fragment {
 
         FragmentContainerView mediaCard = view.findViewById(R.id.mediaCard);
         mediaCard.setOnClickListener(view -> {
-            System.out.println("Swap");
-            mediaFlip();
+            mediaFlip(currentMedia);
             updateMediaDisplayed(currentMedia);
-
         });
         likeBtn.setOnClickListener(view -> {
-            System.out.println("Like");
             viewModel.addLikedMedia(currentMedia);
-            System.out.println("MAIN VIEW " + currentMedia);
             viewModel.nextMedia();
         });
 
         dislikeBtn.setOnClickListener(view -> {
-            System.out.println("Dislike");
             viewModel.addDislikedMedia(currentMedia);
             viewModel.nextMedia();
 
         });
         watchedBtn.setOnClickListener(view -> {
-            System.out.println("Watched");
             viewModel.addWatchedMedia(currentMedia);
             viewModel.nextMedia();
         });
@@ -103,7 +100,8 @@ public class MainView extends Fragment {
         return view;
     }
 
-    public void mediaFlip() {
+    public void mediaFlip(IMedia media) {
+
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
 
         ft.setCustomAnimations(R.animator.flip_out, R.animator.flip_in);
@@ -111,10 +109,16 @@ public class MainView extends Fragment {
             ft.replace(R.id.mediaCard, mediaFront, "front");
             ft.commit();
             backSide = false;
+            mediaFront.update(media);
         } else {
+            Bundle bundle = new Bundle();
+            bundle.putString("data", media.getTitle() + "@" + media.getRating() + "@" + media.getYear());
+            mediaBack.setArguments(bundle);
             ft.replace(R.id.mediaCard, mediaBack, "back");
             ft.commit();
             backSide = true;
+            System.out.println("Borde vara skapat nu");
+            //mediaBack.update(media);
         }
 
     }
