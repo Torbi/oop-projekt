@@ -4,15 +4,11 @@ public class Category {
 
     private String listID;
     private String name;
-    private String keyWord;
 
-
-    public Category(String listID, String name, String keyWord) {
+    public Category(String listID, String name) {
         this.listID = listID;
         this.name = name;
-        this.keyWord = keyWord;
     }
-
 
     public String getListID() {
         return listID;
@@ -22,7 +18,4 @@ public class Category {
         return name;
     }
 
-    public String getKeyWord() {
-        return keyWord;
-    }
 }

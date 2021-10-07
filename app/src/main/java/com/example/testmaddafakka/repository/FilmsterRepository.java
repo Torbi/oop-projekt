@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.testmaddafakka.api.ApiListener;
 import com.example.testmaddafakka.api.IAdapter;
 import com.example.testmaddafakka.api.IMDbApiAdapter;
+import com.example.testmaddafakka.model.Category;
 import com.example.testmaddafakka.model.Filmster;
 import com.example.testmaddafakka.model.IMedia;
 import com.example.testmaddafakka.model.Movie;
@@ -33,6 +34,7 @@ public class FilmsterRepository implements IApiListener {
     private Filmster filmster;
     private User user;
     private int current = 0;
+    private Preferences preferences;
 
 
     private FilmsterRepository(Context ctx) {
@@ -104,4 +106,9 @@ public class FilmsterRepository implements IApiListener {
         return user.getWatchedMedia();
     }
 
+
+    public void loadSelectedCategory(String categoryName){
+        Category category = preferences.searchCategory(categoryName);
+        String listID = category.getListID();
+    }
 }
