@@ -12,7 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.example.testmaddafakka.model.ICategory;
+import com.example.testmaddafakka.model.IPreferences;
 import com.example.testmaddafakka.R;
 import com.example.testmaddafakka.viewmodel.PreferencesViewModel;
 
@@ -25,7 +25,7 @@ public class PreferencesView extends Fragment {
     private Spinner actorSpinner;
     private Spinner directorSpinner;
     private PreferencesViewModel viewModel;
-    private List<ICategory> categories;
+    private List<IPreferences> categories;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,6 +40,8 @@ public class PreferencesView extends Fragment {
             updateMediaDisplayed(categories);
         });
 
+
+        // Do something similar to the genreSpinner here
         actorSpinner = (Spinner) view.findViewById(R.id.actorSpinner);
         ArrayAdapter<CharSequence> actorAdapter = ArrayAdapter.createFromResource(this.getContext(),
                 R.array.genres_array, android.R.layout.simple_spinner_item);
@@ -67,9 +69,6 @@ public class PreferencesView extends Fragment {
             }
         });
 
-
-
-
         return view;
     }
     public void setSpinner(Spinner spinner, ArrayAdapter<CharSequence> content){
@@ -79,7 +78,7 @@ public class PreferencesView extends Fragment {
         spinner.setAdapter(content);
     }
 
-    private void updateMediaDisplayed(List<ICategory> categories) {
+    private void updateMediaDisplayed(List<IPreferences> categories) {
         Spinner spinner = view.findViewById(R.id.genreSpinner);
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, android.R.id.text1);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

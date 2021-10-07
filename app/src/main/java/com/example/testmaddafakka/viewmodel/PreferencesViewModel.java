@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.testmaddafakka.model.ICategory;
+import com.example.testmaddafakka.model.IPreferences;
 import com.example.testmaddafakka.repository.FilmsterRepository;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
 public class PreferencesViewModel extends ViewModel {
 
     private FilmsterRepository filmsterRepository;
-    private MutableLiveData<List<ICategory>> categories;
+    private MutableLiveData<List<IPreferences>> categories;
 
     public void init(Context ctx) {
         if(categories != null) {
@@ -28,9 +28,9 @@ public class PreferencesViewModel extends ViewModel {
         filmsterRepository.loadSelectedCategory(category);
     }
 
-    public LiveData<List<ICategory>> getCategories() {
+    public LiveData<List<IPreferences>> getCategories() {
         if (categories == null) {
-            categories = new MutableLiveData<List<ICategory>>();
+            categories = new MutableLiveData<>();
             loadCategories();
         }
         return categories;
