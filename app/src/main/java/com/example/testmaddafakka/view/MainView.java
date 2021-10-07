@@ -36,7 +36,6 @@ public class MainView extends Fragment {
     private MediaFront mediaFront;
     private MediaBack mediaBack;
 
-
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,10 +63,8 @@ public class MainView extends Fragment {
         ImageView watchedBtn = view.findViewById(R.id.watched);
 
         FragmentContainerView mediaCard = view.findViewById(R.id.mediaCard);
-        mediaCard.setOnClickListener(view -> {
-            mediaFlip(currentMedia);
-            updateMediaDisplayed(currentMedia);
-        });
+
+
         likeBtn.setOnClickListener(view -> {
             viewModel.addLikedMedia(currentMedia);
             viewModel.nextMedia();
@@ -99,14 +96,19 @@ public class MainView extends Fragment {
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         ft.replace(R.id.mediaCard, mediaFront).commit();
 
-
         mediaCard.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
+            /*
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 System.out.println("REERERERERE");
-                mediaFlip(currentMedia);
-                return true;
+                //mediaFlip(currentMedia);
+                if(view.performClick()){
+                    mediaFlip(currentMedia);
+                    return true;
+                }
+                return false;
             }
+             */
 
             @Override
             public void onSwipeTop() {
@@ -124,7 +126,6 @@ public class MainView extends Fragment {
                 viewModel.nextMedia();
             }
         });
-
         return view;
     }
 
