@@ -1,7 +1,6 @@
 package com.example.testmaddafakka.repository;
 
 import android.content.Context;
-import android.provider.Settings;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
@@ -9,10 +8,9 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.testmaddafakka.api.ApiListener;
 import com.example.testmaddafakka.api.IAdapter;
 import com.example.testmaddafakka.api.IMDbApiAdapter;
-import com.example.testmaddafakka.model.Category;
 import com.example.testmaddafakka.model.Filmster;
+import com.example.testmaddafakka.model.ICategory;
 import com.example.testmaddafakka.model.IMedia;
-import com.example.testmaddafakka.model.Movie;
 import com.example.testmaddafakka.api.IApiListener;
 import com.example.testmaddafakka.model.Preferences;
 import com.example.testmaddafakka.model.User;
@@ -35,6 +33,7 @@ public class FilmsterRepository implements IApiListener {
     private User user;
     private int current = 0;
     private Preferences preferences;
+    private MutableLiveData<List<ICategory>> categories;
 
 
     private FilmsterRepository(Context ctx) {
@@ -45,6 +44,7 @@ public class FilmsterRepository implements IApiListener {
         filmster = new Filmster(user);
         listener = new ApiListener();
         listener.addListener(this);
+        categories = new MutableLiveData<List<ICategory>>();
 
         imdbAdapter = new IMDbApiAdapter(ctx, listener);
         loadMedias();
@@ -114,4 +114,10 @@ public class FilmsterRepository implements IApiListener {
     public String getSelectedCategory(String categoryName){
         return filmster.CurrentUsersCategory(categoryName);
     }
+
+    public MutableLiveData<List<ICategory>> getCategories() {
+        this.categories.setValue(filmster.getMovieCategories());
+        return this.categories;
+    }
+
 }

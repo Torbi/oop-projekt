@@ -1,6 +1,6 @@
 package com.example.testmaddafakka.model;
 
-public class Category {
+public class Category implements ICategory{
 
     private String listID;
     private String name;
@@ -10,10 +10,9 @@ public class Category {
         this.name = name;
     }
 
-    public String getListID() {
+    public String getID() {
         return listID;
     }
-
     public String getName() {
         return name;
     }

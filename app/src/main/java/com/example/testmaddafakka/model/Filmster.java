@@ -11,6 +11,7 @@ public class Filmster{
     private List<IMedia> mediaList;
     private User user;
     private int currentMediaCounter;
+    private List<ICategory> categoryList;
 
     /**
      * Constructor for filmster, initializes some data and receives a user for the program
@@ -20,6 +21,7 @@ public class Filmster{
         this.user = user;
         this.currentMediaCounter = 0;
         mediaList = new ArrayList<>();
+        categoryList = new ArrayList<>();
 
         //a fake movie is added to give time for imdbapiadapter to get movies from the api
         mediaList.add(new Movie(" Inception ", "12123", " 9.1 ", " Jessica Alba ", " https://imdb-api.com/Images/original/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_Ratio0.6791_AL_.jpg "," 2010 "));
@@ -60,15 +62,22 @@ public class Filmster{
         nextMedia();
     }
 
-    /**
-     *
-     * @param categoryName - The name of the selected category
-     */
 
     public String CurrentUsersCategory(String categoryName){
-        Category category = user.getPreferences().searchCategory(categoryName);
-        String listID = category.getListID();
+        Category category = user.getPreferences().searchMovieCategories(categoryName);
+        String listID = category.getID();
         return listID;
     }
 
+    /**
+     * Collects movie categories
+     * @return A list of categories
+     */
+    public List<ICategory> getMovieCategories() {
+        int listSize = user.getPreferences().getMovieCategories().size();
+        for(int i = 0; i < listSize; i++){
+            categoryList.add(user.getPreferences().getMovieCategories().get(i));
+        }
+        return categoryList;
+    }
 }
