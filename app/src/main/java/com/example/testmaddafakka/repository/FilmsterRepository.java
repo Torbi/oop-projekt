@@ -108,7 +108,10 @@ public class FilmsterRepository implements IApiListener {
 
 
     public void loadSelectedCategory(String categoryName){
-        Category category = preferences.searchCategory(categoryName);
-        String listID = category.getListID();
+        imdbAdapter.getList(getSelectedCategory(categoryName));
+    }
+
+    public String getSelectedCategory(String categoryName){
+        return filmster.CurrentUsersCategory(categoryName);
     }
 }

@@ -60,4 +60,15 @@ public class Filmster{
         nextMedia();
     }
 
+    /**
+     *
+     * @param categoryName - The name of the selected category
+     */
+
+    public String CurrentUsersCategory(String categoryName){
+        Category category = user.getPreferences().searchCategory(categoryName);
+        String listID = category.getListID();
+        return listID;
+    }
+
 }
