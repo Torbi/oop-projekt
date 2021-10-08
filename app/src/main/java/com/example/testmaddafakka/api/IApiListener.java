@@ -1,10 +1,10 @@
 package com.example.testmaddafakka.api;
 
-import com.example.testmaddafakka.model.Movie;
+import com.example.testmaddafakka.model.IMedia;
 
 import java.util.List;
 
 public interface IApiListener {
 
-    public void update(Movie movie);
+    public void update(List<IMedia> movies);
 }

@@ -1,6 +1,6 @@
 package com.example.testmaddafakka.api;
 
-import com.example.testmaddafakka.model.Movie;
+import com.example.testmaddafakka.model.IMedia;
 
 import java.util.List;
 
@@ -11,6 +11,6 @@ public interface IAdapter {
 
     public void get250Movies();
 
-    public List<Movie> getList(String listID);
+    public List<IMedia> getList(String listID);
 
 }

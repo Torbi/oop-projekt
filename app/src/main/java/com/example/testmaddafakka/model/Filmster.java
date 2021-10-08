@@ -1,7 +1,5 @@
 package com.example.testmaddafakka.model;
 
-import com.example.testmaddafakka.api.IApiListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +8,10 @@ import java.util.List;
  */
 public class Filmster{
 
-    private List<Movie> moviesList;
+    private List<IMedia> mediaList;
     private User user;
-    private int currentMovieCounter;
+    private int currentMediaCounter;
+    private List<IPreferences> categoryList;
 
     /**
      * Constructor for filmster, initializes some data and receives a user for the program
@@ -20,51 +19,65 @@ public class Filmster{
      */
     public Filmster(User user) {
         this.user = user;
-        this.currentMovieCounter = 0;
-        moviesList = new ArrayList<>();
+        this.currentMediaCounter = 0;
+        mediaList = new ArrayList<>();
+        categoryList = new ArrayList<>();
 
         //a fake movie is added to give time for imdbapiadapter to get movies from the api
-        moviesList.add(new Movie(" Inception ", "12123", " 9.1 ", " Jessica Alba ", " https://imdb-api.com/Images/original/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_Ratio0.6791_AL_.jpg "," 2010 "));
+        mediaList.add(new Movie(" Inception ", "12123", " 9.1 ", " Jessica Alba ", " https://imdb-api.com/Images/original/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_Ratio0.6791_AL_.jpg "," 2010 "));
     }
 
-    public void setMoviesList(List<Movie> moviesList) {
-        this.moviesList = moviesList;
+    public void setMediaList(List<IMedia> moviesList) {
+        this.mediaList = moviesList;
     }
 
-    public List<Movie> getMoviesList() {
-        return moviesList;
-    }
-
-    public User getUser() {
-        return this.user;
-    }
-
-
-   public Movie getCurrentMovie() {
-       return moviesList.get(currentMovieCounter);
+    public IMedia getCurrentMedia() {
+       return mediaList.get(currentMediaCounter);
    }
 
-   public void nextMovie() {
-      currentMovieCounter++;
+    public void nextMedia() {
+      currentMediaCounter++;
    }
 
 
     /**
-     * Adds a movie to the user liked movie list and calls for the next movie to be displayed
-     * @param movie - The movie to be added to the users liked movies list
+     * Adds a media to the user liked movie list and calls for the next movie to be displayed
+     * @param media - The movie to be added to the users liked movies list
      */
-    public void addLikedMovie(Movie movie) {
-        this.user.addLikedMovie(movie);
-        nextMovie();
+    public void addLikedMedia(IMedia media) {
+        this.user.addLikedMedia(media);
+        nextMedia();
     }
 
     /**
      * Adds a movie to the user disliked movie list and calls for the next movie to be displayed
-     * @param movie - The movie to be added to the users disliked movies list
+     * @param media - The movie to be added to the users disliked movies list
      */
-    public void addDislikedMovie(Movie movie) {
-        this.user.addDislikedMovie(movie);
-        nextMovie();
+    public void addDislikedMedia(IMedia media) {
+        this.user.addDislikedMedia(media);
+        nextMedia();
+    }
+    public void addWatchedMedia(IMedia media){
+        this.user.addWatchedMedia(media);
+        nextMedia();
     }
 
+
+    public String CurrentUsersCategory(String categoryName){
+        Category category = user.getPreferences().searchMovieCategories(categoryName);
+        String listID = category.getID();
+        return listID;
+    }
+
+    /**
+     * Collects movie categories
+     * @return A list of categories
+     */
+    public List<IPreferences> getMovieCategories() {
+        int listSize = user.getPreferences().getMovieCategories().size();
+        for(int i = 0; i < listSize; i++){
+            categoryList.add(user.getPreferences().getMovieCategories().get(i));
+        }
+        return categoryList;
+    }
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.testmaddafakka.model.IMedia;
 import com.example.testmaddafakka.model.Movie;
 import com.example.testmaddafakka.repository.FilmsterRepository;
 
@@ -17,16 +18,16 @@ import com.example.testmaddafakka.repository.FilmsterRepository;
  */
 public class MainViewModel extends ViewModel {
 
-    private MutableLiveData<Movie> movie;
+    private MutableLiveData<IMedia> media;
     private FilmsterRepository filmsterRepository;
     private MutableLiveData<Boolean> isUpdating = new MutableLiveData<>();
 
     public void init(Context ctx) {
-        if(movie != null) {
+        if(media != null) {
             return;
         }
         filmsterRepository = FilmsterRepository.getInstance(ctx);
-        filmsterRepository.loadMovies();
+        filmsterRepository.loadMedias();
     }
 
     /**
@@ -34,28 +35,32 @@ public class MainViewModel extends ViewModel {
      * Calls an asynchronous method that loads the movie
      * @return an immutable liveData Movie object
      */
-    public LiveData<Movie> getMovie() {
-        if (movie == null) {
-            movie = new MutableLiveData<>();
-            loadMovies();
+    public LiveData<IMedia> getMedia() {
+        if (media == null) {
+            media = new MutableLiveData<>();
+            loadMedias();
         }
-        return movie;
+        return media;
     }
 
-    private void loadMovies() {
+    private void loadMedias() {
         // Do an asynchronous operation to fetch a movie
-        movie = filmsterRepository.getCurrentMovie();
+        media = filmsterRepository.getCurrentMedia();
     }
 
-    public void addLikedMovie(Movie movie) {
-        filmsterRepository.addLikedMovie(movie);
-        nextMovie();
+    public void addLikedMedia(IMedia media) {
+        filmsterRepository.addLikedMedia(media);
+        nextMedia();
     }
-    public void addDislikedMovie(Movie movie) {
-        filmsterRepository.addDislikedMovie(movie);
-        nextMovie();
+    public void addDislikedMedia(IMedia media) {
+        filmsterRepository.addDislikedMedia(media);
+        nextMedia();
     }
-    public void nextMovie() {
-        filmsterRepository.nextMovie();
+    public void addWatchedMedia(IMedia media){
+        filmsterRepository.addWatchedMedia(media);
+        nextMedia();
+    }
+    public void nextMedia() {
+        filmsterRepository.nextMedia();
     }
 }

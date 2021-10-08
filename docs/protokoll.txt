@@ -342,3 +342,40 @@ Läs om mvvm: https://developer.android.com/jetpack/guide?gclid=Cj0KCQjwwNWKBhDA
 
 Slut
 Nästa möte fredag eftermiddag
+
+
+Datum 6/10
+Närvarande: Torbjörn, Magnus, Ali, Albin
+
+Mål till 7/10 17:00
+
+Fixa det sista innan peer reviewn imöra.
+
+Fylla på SDD och RAD, Docs, Tester (Alla)
+Clean up modellen minska dependency mellan view model och model (Magnus) 
+User inlogg i modellen. Typ normal users, Admin, loggin logut metod (Ali)
+GUI för user inlogg (Ali)
+Metoder i preferences för att kunna lägga till actors o directors osv.(Albin)
+Categories i preferences (Albin)
+Stack för att visa bilder typ ladda in första 10 så de ej laggar när man klickar in. (TB)
+Interface för movie så de blir mer scalable. (Magnus) Done
+Fixa watchlist recycler view pattern. (TB) Done
+Flippa movie för att få info om filmen starring osv. (Magnus)
+
+
+Rapporter
+GUI för preferences funkar for now, behövs logik
+
+Diskussionspunkter
+peer review inlämning
+
+Utkomst av beslut
+
+
+Uppgifter till nästa möte
+Alla: Java Docs, Tester, skriva sdd och rad, sekvensdiagram., uppdatera klassdiagram
+Göra det som står under mål, så mycket som möjligt till imorrn
+
+Slut
+Nästa möte fredag 13:15
+

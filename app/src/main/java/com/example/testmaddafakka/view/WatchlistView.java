@@ -10,20 +10,18 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.testmaddafakka.model.Movie;
+
+import com.example.testmaddafakka.model.IMedia;
 import com.example.testmaddafakka.R;
 import com.example.testmaddafakka.viewmodel.WatchlistViewModel;
 import com.google.android.material.tabs.TabLayout;
 
 
-import java.util.List;
-
-
 public class WatchlistView extends Fragment {
     TabLayout tabLayout;
-    private LikedMovies likedMovies;
-    private MissedMovies missedMovies;
-    private SeenMovies seenMovies;
+    private LikedMedias likedMedias;
+    private DislikedMedias dislikedMedias;
+    private WatchedMedia watchedMedia;
     private WatchlistViewModel viewModel;
 
 
@@ -37,23 +35,17 @@ public class WatchlistView extends Fragment {
         tabLayout.addTab(tabLayout.newTab().setText("Seen"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        likedMovies = new LikedMovies();
-        missedMovies = new MissedMovies();
-        seenMovies = new SeenMovies();
+        likedMedias = new LikedMedias();
+        dislikedMedias = new DislikedMedias();
+        watchedMedia = new WatchedMedia();
 
         viewModel = new ViewModelProvider(this).get(WatchlistViewModel.class);
         viewModel.init(requireContext());
 
-        viewModel.getMovie().observe(getViewLifecycleOwner(), new Observer<Movie>() {
-            @Override
-            public void onChanged(Movie movie) {
-                //Här  ska de va nått
-                System.out.println("KUKEN");
-            }
-        });
+        viewModel.getMedia().observe(getViewLifecycleOwner(), media -> System.out.println("yeet"));
 
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragmentContainerView, likedMovies).commit();
+        transaction.replace(R.id.fragmentContainerView, likedMedias).commit();
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -77,26 +69,13 @@ public class WatchlistView extends Fragment {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return likedMovies;
+                return likedMedias;
             case 1:
-                return missedMovies;
+                return dislikedMedias;
             case 2:
-                return seenMovies;
+                return watchedMedia;
             default:
                 return null;
         }
-    }
-
-
-    private String shorten(String text) {
-        String temp = text.substring(1, text.length() - 1);
-        return temp;
-    }
-
-    private String checkMovieLength(String title) {
-        if (title.length() > 13) {
-            return title.substring(0, 14) + "...";
-        }
-        return title;
     }
 }

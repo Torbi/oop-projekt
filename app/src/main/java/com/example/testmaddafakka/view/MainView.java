@@ -10,125 +10,173 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-//import com.bumptech.glide.Glide;
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
-import com.example.testmaddafakka.api.IApiListener;
-import com.example.testmaddafakka.model.Movie;
+import com.example.testmaddafakka.model.GestureHelper;
+import com.example.testmaddafakka.model.IMedia;
 import com.example.testmaddafakka.R;
-import com.example.testmaddafakka.api.SingletonRequestQueue;
 import com.example.testmaddafakka.viewmodel.MainViewModel;
-
-import java.util.List;
 
 public class MainView extends Fragment {
 
     public View view;
     public Button test;
-    private ImageView movieImage;
     private MainViewModel viewModel;
-    private Movie currentMovie;
+    private IMedia currentMedia;
     private WatchlistView watchlistView;
     private PreferencesView preferencesView;
+    private boolean backSide = false;
+    private FragmentTransaction ft;
 
+    private MediaFront mediaFront;
+    private MediaBack mediaBack;
+    @SuppressLint("ClickableViewAccessibility")
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_start_page, container, false);
-
+        ft = getChildFragmentManager().beginTransaction();
+        mediaFront = new MediaFront();
+        mediaBack = new MediaBack();
 
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         viewModel.init(requireContext());
-        viewModel.getMovie().observe(getViewLifecycleOwner(), new Observer<Movie>() {
-            @Override
-            public void onChanged(Movie movie) {
-                currentMovie = movie;
-                updateMovieDisplayed(currentMovie);
-            }
+        viewModel.getMedia().observe(getViewLifecycleOwner(), media -> {
+            currentMedia = media;
+            updateMediaDisplayed(currentMedia);
         });
 
         watchlistView = new WatchlistView();
         preferencesView = new PreferencesView();
 
-        Button watchlistBtn = (Button) view.findViewById(R.id.watchlist);
-        Button preferencesBtn = (Button) view.findViewById(R.id.preferences);
+
+        Button watchlistBtn = view.findViewById(R.id.watchlist);
+        Button preferencesBtn = view.findViewById(R.id.preferences);
         ImageView likeBtn = view.findViewById(R.id.like);
         ImageView dislikeBtn = view.findViewById(R.id.dislike);
-        ImageView seenBtn = view.findViewById(R.id.seen);
+        ImageView watchedBtn = view.findViewById(R.id.watched);
 
-        likeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("Like");
-                viewModel.addLikedMovie(currentMovie);
-                System.out.println("MAIN VIEW " + currentMovie);
-                viewModel.nextMovie();
-            }
+        FragmentContainerView mediaCard = view.findViewById(R.id.mediaCard);
+
+
+        likeBtn.setOnClickListener(view -> {
+            viewModel.addLikedMedia(currentMedia);
+            viewModel.nextMedia();
+            setMediaFront(currentMedia);
+
         });
 
-        dislikeBtn.setOnClickListener(new View.OnClickListener() {
+        dislikeBtn.setOnClickListener(view -> {
+            viewModel.addDislikedMedia(currentMedia);
+            viewModel.nextMedia();
+            setMediaFront(currentMedia);
+
+
+        });
+        watchedBtn.setOnClickListener(view -> {
+            viewModel.addWatchedMedia(currentMedia);
+            viewModel.nextMedia();
+            setMediaFront(currentMedia);
+
+        });
+
+        watchlistBtn.setOnClickListener(view -> {
+            FragmentTransaction fr = getFragmentManager().beginTransaction();
+            fr.replace(R.id.fragmentContainer, watchlistView);
+            fr.addToBackStack(null);
+            fr.commit();
+        });
+        preferencesBtn.setOnClickListener(view -> {
+            FragmentTransaction fr = getFragmentManager().beginTransaction();
+            fr.replace(R.id.fragmentContainer, preferencesView);
+            fr.addToBackStack(null);
+            fr.commit();
+        });
+
+        getChildFragmentManager().beginTransaction()
+        .replace(R.id.mediaCard, mediaFront).commit();
+
+        mediaCard.setOnTouchListener(new GestureHelper(getActivity()) {
             @Override
-            public void onClick(View view) {
-                System.out.println("Dislike");
-                viewModel.addDislikedMovie(currentMovie);
-                viewModel.nextMovie();
+            public void onClick() {
+                mediaFlip(currentMedia);
+                System.out.println("FLIP");
+            }
+
+            @Override
+            public void onSwipeTop() {
+                viewModel.addWatchedMedia(currentMedia);
+                viewModel.nextMedia();
+                setMediaFront(currentMedia);
 
             }
-        });
-        seenBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                System.out.println("Seen");
+            public void onSwipeRight() {
+                viewModel.addLikedMedia(currentMedia);
+                viewModel.nextMedia();
+                setMediaFront(currentMedia);
             }
-        });
-        this.movieImage = view.findViewById(R.id.movieImage);
+            @Override
+            public void onSwipeLeft() {
+                viewModel.addDislikedMedia(currentMedia);
+                viewModel.nextMedia();
+                setMediaFront(currentMedia);
 
-        watchlistBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction fr = getFragmentManager().beginTransaction();
-                fr.replace(R.id.fragmentContainer, watchlistView);
-                fr.addToBackStack(null);
-                fr.commit();
-            }
-        });
-        preferencesBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction fr = getFragmentManager().beginTransaction();
-                fr.replace(R.id.fragmentContainer, preferencesView);
-                fr.addToBackStack(null);
-                fr.commit();
             }
         });
         return view;
     }
 
-    private void updateMovieDisplayed(Movie movie) {
-        ImageLoader imageLoader = SingletonRequestQueue.getInstance(getContext()).getImageLoader();
-        String url = movie.getImage();
-        url = url.substring(1,url.length()-1);
+    public void mediaFlip(IMedia media) {
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.animator.flip_out, R.animator.flip_in);
 
-        NetworkImageView niv = (NetworkImageView) view.findViewById(R.id.movieImage);
-        if(url.length() > 0)
-            niv.setImageUrl(url, imageLoader);
+        if (backSide) {
+            setMediaBack(media);
+            backSide = false;
+        } else {
+            setMediaBack(media);
+            backSide = true;
+        }
 
-        TextView movieTitle = view.findViewById(R.id.movieTitle);
-        TextView imdbGrade = view.findViewById(R.id.movieRating);
-        TextView movieYear = view.findViewById(R.id.movieYear);
+    }
+    private void setMediaBack(IMedia media){
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.animator.flip_out, R.animator.flip_in);
 
-        String title = shorten(movie.getTitle());
-        movieTitle.setText(checkMovieLength(title));
+        Bundle bundle = new Bundle();
+        bundle.putString("data", media.getTitle() + "@" + media.getRating() + "@" + media.getYear());
+        mediaBack.setArguments(bundle);
+        ft.replace(R.id.mediaCard, mediaBack);
+        ft.commit();
+    }
 
-        String grade = shorten(movie.getRating()) + "/10";
-        imdbGrade.setText(grade);
-        movieYear.setText(shorten(movie.getYear()));
+    private void setMediaFront(IMedia media){
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.animator.flip_out, R.animator.flip_in);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("movie", media.getImage());
+        mediaFront.setArguments(bundle);
+        ft.replace(R.id.mediaCard, mediaFront, "te");
+        ft.commit();
+    }
+
+    private void updateMediaDisplayed(IMedia media) {
+        TextView mediaTitle = view.findViewById(R.id.mediaTitle);
+        TextView mediaRating = view.findViewById(R.id.mediaRating);
+        TextView mediaYear = view.findViewById(R.id.mediaYear);
+
+        String title = shorten(media.getTitle());
+        mediaTitle.setText(checkMovieLength(title));
+
+        String grade = shorten(media.getRating()) + "/10";
+        mediaRating.setText(grade);
+        mediaYear.setText(shorten(media.getYear()));
+        mediaFront.update(media.getImage());
 
     }
     private String shorten(String text){
@@ -141,5 +189,4 @@ public class MainView extends Fragment {
         }
         return title;
     }
-
 }
