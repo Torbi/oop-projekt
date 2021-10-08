@@ -1,12 +1,8 @@
 package com.example.testmaddafakka.view;
 
-import android.animation.Animator;
-import android.animation.AnimatorInflater;
-import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,9 +14,9 @@ import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.testmaddafakka.model.GestureHelper;
 import com.example.testmaddafakka.model.IMedia;
 import com.example.testmaddafakka.R;
-import com.example.testmaddafakka.model.OnSwipeTouchListener;
 import com.example.testmaddafakka.viewmodel.MainViewModel;
 
 public class MainView extends Fragment {
@@ -35,8 +31,8 @@ public class MainView extends Fragment {
 
     private MediaFront mediaFront;
     private MediaBack mediaBack;
-
     @SuppressLint("ClickableViewAccessibility")
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -96,19 +92,12 @@ public class MainView extends Fragment {
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         ft.replace(R.id.mediaCard, mediaFront).commit();
 
-        mediaCard.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
-            /*
+        mediaCard.setOnTouchListener(new GestureHelper(getActivity()) {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                System.out.println("REERERERERE");
-                //mediaFlip(currentMedia);
-                if(view.performClick()){
-                    mediaFlip(currentMedia);
-                    return true;
-                }
-                return false;
+            public void onClick() {
+                mediaFlip(currentMedia);
+                System.out.println("FLIP");
             }
-             */
 
             @Override
             public void onSwipeTop() {
@@ -136,10 +125,12 @@ public class MainView extends Fragment {
         ft.setCustomAnimations(R.animator.flip_out, R.animator.flip_in);
 
         if (backSide) {
-            ft.replace(R.id.mediaCard, mediaFront);
+            Bundle bundle = new Bundle();
+            bundle.putString("movie", media.getImage());
+            mediaFront.setArguments(bundle);
+            ft.replace(R.id.mediaCard, mediaFront, "te");
             ft.commit();
             backSide = false;
-            mediaFront.update(media);
         } else {
             Bundle bundle = new Bundle();
             bundle.putString("data", media.getTitle() + "@" + media.getRating() + "@" + media.getYear());
@@ -154,9 +145,6 @@ public class MainView extends Fragment {
     }
 
     private void updateMediaDisplayed(IMedia media) {
-
-        mediaFront.update(media);
-
         TextView mediaTitle = view.findViewById(R.id.mediaTitle);
         TextView mediaRating = view.findViewById(R.id.mediaRating);
         TextView mediaYear = view.findViewById(R.id.mediaYear);
@@ -167,6 +155,7 @@ public class MainView extends Fragment {
         String grade = shorten(media.getRating()) + "/10";
         mediaRating.setText(grade);
         mediaYear.setText(shorten(media.getYear()));
+        mediaFront.update(media.getImage());
 
     }
     private String shorten(String text){

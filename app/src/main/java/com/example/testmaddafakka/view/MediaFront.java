@@ -27,14 +27,17 @@ public class MediaFront extends Fragment {
         View view = inflater.inflate(R.layout.fragment_media_front, container, false);
 
         mediaImage = view.findViewById(R.id.mediaImage);
-
+        Bundle bundle = this.getArguments();
+        if(bundle != null) {
+            String data = bundle.getString("movie");
+            update(data);
+        }
         return view;
     }
 
-    public void update(IMedia media){
-        System.out.println("updata skiten med denna url " + media.getImage());
+    public void update(String media){
         ImageLoader imageLoader = SingletonRequestQueue.getInstance(getContext()).getImageLoader();
-        String url = media.getImage();
+        String url = media;
         url = url.substring(1,url.length()-1);
 
         if(url.length() > 0)
