@@ -28,6 +28,7 @@ public class MainView extends Fragment {
     private WatchlistView watchlistView;
     private PreferencesView preferencesView;
     private boolean backSide = false;
+    private FragmentTransaction ft;
 
     private MediaFront mediaFront;
     private MediaBack mediaBack;
@@ -37,7 +38,7 @@ public class MainView extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_start_page, container, false);
-
+        ft = getChildFragmentManager().beginTransaction();
         mediaFront = new MediaFront();
         mediaBack = new MediaBack();
 
@@ -64,16 +65,22 @@ public class MainView extends Fragment {
         likeBtn.setOnClickListener(view -> {
             viewModel.addLikedMedia(currentMedia);
             viewModel.nextMedia();
+            setMediaFront(currentMedia);
+
         });
 
         dislikeBtn.setOnClickListener(view -> {
             viewModel.addDislikedMedia(currentMedia);
             viewModel.nextMedia();
+            setMediaFront(currentMedia);
+
 
         });
         watchedBtn.setOnClickListener(view -> {
             viewModel.addWatchedMedia(currentMedia);
             viewModel.nextMedia();
+            setMediaFront(currentMedia);
+
         });
 
         watchlistBtn.setOnClickListener(view -> {
@@ -89,8 +96,8 @@ public class MainView extends Fragment {
             fr.commit();
         });
 
-        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-        ft.replace(R.id.mediaCard, mediaFront).commit();
+        getChildFragmentManager().beginTransaction()
+        .replace(R.id.mediaCard, mediaFront).commit();
 
         mediaCard.setOnTouchListener(new GestureHelper(getActivity()) {
             @Override
@@ -103,45 +110,59 @@ public class MainView extends Fragment {
             public void onSwipeTop() {
                 viewModel.addWatchedMedia(currentMedia);
                 viewModel.nextMedia();
+                setMediaFront(currentMedia);
+
             }
             @Override
             public void onSwipeRight() {
                 viewModel.addLikedMedia(currentMedia);
                 viewModel.nextMedia();
+                setMediaFront(currentMedia);
             }
             @Override
             public void onSwipeLeft() {
                 viewModel.addDislikedMedia(currentMedia);
                 viewModel.nextMedia();
+                setMediaFront(currentMedia);
+
             }
         });
         return view;
     }
 
     public void mediaFlip(IMedia media) {
-
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-
         ft.setCustomAnimations(R.animator.flip_out, R.animator.flip_in);
 
         if (backSide) {
-            Bundle bundle = new Bundle();
-            bundle.putString("movie", media.getImage());
-            mediaFront.setArguments(bundle);
-            ft.replace(R.id.mediaCard, mediaFront, "te");
-            ft.commit();
+            setMediaBack(media);
             backSide = false;
         } else {
-            Bundle bundle = new Bundle();
-            bundle.putString("data", media.getTitle() + "@" + media.getRating() + "@" + media.getYear());
-            mediaBack.setArguments(bundle);
-            ft.replace(R.id.mediaCard, mediaBack);
-            ft.commit();
+            setMediaBack(media);
             backSide = true;
-            System.out.println("Borde vara skapat nu");
-            //mediaBack.update(media);
         }
 
+    }
+    private void setMediaBack(IMedia media){
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.animator.flip_out, R.animator.flip_in);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("data", media.getTitle() + "@" + media.getRating() + "@" + media.getYear());
+        mediaBack.setArguments(bundle);
+        ft.replace(R.id.mediaCard, mediaBack);
+        ft.commit();
+    }
+
+    private void setMediaFront(IMedia media){
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.animator.flip_out, R.animator.flip_in);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("movie", media.getImage());
+        mediaFront.setArguments(bundle);
+        ft.replace(R.id.mediaCard, mediaFront, "te");
+        ft.commit();
     }
 
     private void updateMediaDisplayed(IMedia media) {
