@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "64617714337",
+    "project_id": "filmster-3ef9e",
+    "storage_bucket": "filmster-3ef9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:64617714337:android:2a2c9c66c5fb5dac1456e0",
+        "android_client_info": {
+          "package_name": "com.example.testmaddafakka"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "64617714337-eh4sn1au8sqa4461hgnutlpb5a1qp7n7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClvcJOh6XBTH9s-BcGlVT5O264AdGkcU0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "64617714337-eh4sn1au8sqa4461hgnutlpb5a1qp7n7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
