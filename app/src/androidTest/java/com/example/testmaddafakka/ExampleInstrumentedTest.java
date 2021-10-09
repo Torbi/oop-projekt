@@ -20,8 +20,8 @@ import com.example.testmaddafakka.repository.FilmsterRepository;
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
 
+/*
     FilmsterRepository repo;
-
 
     @Test
     public void useAppContext() {
@@ -80,5 +80,5 @@ public class ExampleInstrumentedTest {
 
 
 
-
+*/
 }
