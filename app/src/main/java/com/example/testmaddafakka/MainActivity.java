@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_login);
+        setContentView(R.layout.user_loging);
 
         mainView = new MainView();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
