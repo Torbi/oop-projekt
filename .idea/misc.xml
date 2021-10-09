@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Ali Shereef/AndroidStudioProjects/oop-projectt/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Ali Shereef/AndroidStudioProjects/oop-projectt/app/src/main/res/layout/activity_signup.xml" value="0.3255208333333333" />
+        <entry key="..\:/Users/Ali Shereef/AndroidStudioProjects/oop-projectt/app/src/main/res/layout/fragment_liked_movies.xml" value="0.3255208333333333" />
+        <entry key="..\:/Users/Ali Shereef/AndroidStudioProjects/oop-projectt/app/src/main/res/layout/user_login.xml" value="0.3255208333333333" />
         <entry key="..\:/Users/lordt/StudioProjects/oop-projekt/app/src/main/res/layout/activity_main.xml" value="0.21041666666666667" />
         <entry key="..\:/Users/lordt/StudioProjects/oop-projekt/app/src/main/res/layout/flip_out.xml" value="0.31354166666666666" />
         <entry key="..\:/Users/lordt/StudioProjects/oop-projekt/app/src/main/res/layout/fragment_liked_movies.xml" value="0.34646739130434784" />
