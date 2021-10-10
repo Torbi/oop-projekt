@@ -15,7 +15,6 @@
         android:layout_height="match_parent"
         android:background="#F3F0FF"
         bind:context=".MainActivity">
-
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

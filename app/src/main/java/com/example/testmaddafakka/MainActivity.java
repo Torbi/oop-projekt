@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         mainView = new MainView();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.fragmentContainer, mainView);
+        fragmentTransaction.add(R.id.fragmentInlogg, mainView);
         fragmentTransaction.commit();
 
         // Write a message to the database

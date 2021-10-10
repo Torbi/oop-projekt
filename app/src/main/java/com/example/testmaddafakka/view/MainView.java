@@ -84,13 +84,13 @@ public class MainView extends Fragment {
 
         watchlistBtn.setOnClickListener(view -> {
             FragmentTransaction fr = getFragmentManager().beginTransaction();
-            fr.replace(R.id.fragmentContainer, watchlistView);
+            fr.replace(R.id.fragmentInlogg, watchlistView);
             fr.addToBackStack(null);
             fr.commit();
         });
         preferencesBtn.setOnClickListener(view -> {
             FragmentTransaction fr = getFragmentManager().beginTransaction();
-            fr.replace(R.id.fragmentContainer, preferencesView);
+            fr.replace(R.id.fragmentInlogg, preferencesView);
             fr.addToBackStack(null);
             fr.commit();
         });
@@ -134,7 +134,7 @@ public class MainView extends Fragment {
         ft.setCustomAnimations(R.animator.flip_out, R.animator.flip_in);
 
         if (backSide) {
-            setMediaBack(media);
+            setMediaFront(media);
             backSide = false;
         } else {
             setMediaBack(media);
