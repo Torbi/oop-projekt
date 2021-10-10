@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_login);
+        setContentView(R.layout.activity_main);
 
         mainView = new MainView();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
 
-        myRef.setValue("Test");
+        //myRef.setValue("Test");
 
         /*
         Button btn = findViewById(R.id.button);

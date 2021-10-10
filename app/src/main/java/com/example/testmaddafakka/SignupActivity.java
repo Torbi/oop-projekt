@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * Gui for signing in, not finished yet
+ */
 public class SignupActivity extends AppCompatActivity {
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.testmaddafakka.model;
+package com.example.testmaddafakka.view;
 
 import android.content.Context;
 import android.view.GestureDetector;

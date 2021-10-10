@@ -14,7 +14,6 @@ import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.testmaddafakka.model.GestureHelper;
 import com.example.testmaddafakka.model.IMedia;
 import com.example.testmaddafakka.R;
 import com.example.testmaddafakka.viewmodel.MainViewModel;

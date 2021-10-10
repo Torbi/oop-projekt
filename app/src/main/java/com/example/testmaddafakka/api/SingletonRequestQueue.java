@@ -7,6 +7,8 @@ import android.util.LruCache;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+//code taken from volleys guide
+
 
 public class SingletonRequestQueue {
 

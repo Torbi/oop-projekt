@@ -20,7 +20,6 @@ public class MainViewModel extends ViewModel {
 
     private MutableLiveData<IMedia> media;
     private FilmsterRepository filmsterRepository;
-    private MutableLiveData<Boolean> isUpdating = new MutableLiveData<>();
 
     public void init(Context ctx) {
         if(media != null) {

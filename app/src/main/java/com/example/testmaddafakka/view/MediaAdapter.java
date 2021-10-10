@@ -17,6 +17,10 @@ import com.example.testmaddafakka.model.Movie;
 
 import java.util.List;
 
+/**
+ * A helper class to implement a recyclerView Adapter
+ * It binds a type of data to a view
+ */
 public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> {
 
     private List<IMedia> mediaList;
