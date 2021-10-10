@@ -1,10 +1,10 @@
 package com.example.testmaddafakka.model;
 
 /**
- * Interface for preferences for a more scalable app
+ * Interface for categories for a more scalable app
  */
 
-public interface IPreferences {
+public interface ICategory {
     String getID();
     String getName();
 }

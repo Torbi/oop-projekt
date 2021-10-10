@@ -11,7 +11,7 @@ public class Filmster{
     private List<IMedia> mediaList;
     private User user;
     private int currentMediaCounter;
-    private List<IPreferences> categoryList;
+    private List<ICategory> categoryList;
 
     /**
      * Constructor for filmster, initializes some data and receives a user for the program
@@ -64,19 +64,19 @@ public class Filmster{
 
 
     public String CurrentUsersCategory(String categoryName){
-        Category category = user.getPreferences().searchMovieCategories(categoryName);
+        Genre category = user.getPreferences().searchMovieGenres(categoryName);
         String listID = category.getID();
         return listID;
     }
 
     /**
-     * Collects movie categories
+     * Collects categories
      * @return A list of categories
      */
-    public List<IPreferences> getMovieCategories() {
-        int listSize = user.getPreferences().getMovieCategories().size();
+    public List<ICategory> getMovieCategories() {
+        int listSize = user.getPreferences().getMovieGenres().size();
         for(int i = 0; i < listSize; i++){
-            categoryList.add(user.getPreferences().getMovieCategories().get(i));
+            categoryList.add(user.getPreferences().getMovieGenres().get(i));
         }
         return categoryList;
     }

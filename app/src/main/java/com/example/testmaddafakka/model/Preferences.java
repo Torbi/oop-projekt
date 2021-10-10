@@ -5,40 +5,45 @@ import java.util.List;
 
 public class Preferences {
 
-    private List<Category> movieCategories = new ArrayList<>();
+    private List<Genre> movieGenres = new ArrayList<>();
 
     public Preferences(){
-        addMovieCategories();
+        addMovieGenres();
     }
 
-    private void addMovieCategories(){
-        //categories.add(new Category("noID","Genre"));
-        movieCategories.add(new Category("ls051091770","Action"));
-        movieCategories.add(new Category("ls058726648","Comedy"));
-        movieCategories.add(new Category("ls009668711","Drama"));
-        movieCategories.add(new Category("ls009609925","Adventure"));
-        movieCategories.add(new Category("ls009668082","Sci-fi"));
-        movieCategories.add(new Category("ls009668314","Thriller"));
-        movieCategories.add(new Category("ls009389114","Family"));
-        movieCategories.add(new Category("ls049309814","Horror"));
-        movieCategories.add(new Category("ls009668031","Romance"));
-        movieCategories.add(new Category("ls009674465","Sport"));
-        movieCategories.add(new Category("ls009668766","Biography"));
-        movieCategories.add(new Category("ls009669258","Fantasy"));
-        movieCategories.add(new Category("ls079181605","Documentary"));
-        movieCategories.add(new Category("ls009668055","History"));
-        movieCategories.add(new Category("ls049110047","Musical"));
+    private void addMovieGenres(){
+        movieGenres.add(new Genre("noID","Genre"));
+        movieGenres.add(new Genre("ls051091770","Action"));
+        movieGenres.add(new Genre("ls058726648","Comedy"));
+        movieGenres.add(new Genre("ls009668711","Drama"));
+        movieGenres.add(new Genre("ls009609925","Adventure"));
+        movieGenres.add(new Genre("ls009668082","Sci-fi"));
+        movieGenres.add(new Genre("ls009668314","Thriller"));
+        movieGenres.add(new Genre("ls009389114","Family"));
+        movieGenres.add(new Genre("ls049309814","Horror"));
+        movieGenres.add(new Genre("ls009668031","Romance"));
+        movieGenres.add(new Genre("ls009674465","Sport"));
+        movieGenres.add(new Genre("ls009668766","Biography"));
+        movieGenres.add(new Genre("ls009669258","Fantasy"));
+        movieGenres.add(new Genre("ls079181605","Documentary"));
+        movieGenres.add(new Genre("ls009668055","History"));
+        movieGenres.add(new Genre("ls049110047","Musical"));
     }
 
-    public List<Category> getMovieCategories() {
-        return movieCategories;
+    public List<Genre> getMovieGenres() {
+        return movieGenres;
     }
 
-    public Category searchMovieCategories(String category){
-        Category r = new Category("noID", "ERROR");
-        for(int i = 0; i < movieCategories.size(); i++){
-            if(category.equals(movieCategories.get(i).getName())){
-                r = movieCategories.get(i);
+    /**
+     * Iterates through a list of genres to find the genre-object matching with the genre-name
+     * @param genre - The name of a genre
+     * @return The matching genre-object
+     */
+    public Genre searchMovieGenres(String genre){
+        Genre r = new Genre("noID", "ERROR");
+        for(int i = 0; i < movieGenres.size(); i++){
+            if(genre.equals(movieGenres.get(i).getName())){
+                r = movieGenres.get(i);
             }
         }
         return r;

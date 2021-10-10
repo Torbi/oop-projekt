@@ -9,7 +9,7 @@ import com.example.testmaddafakka.api.ApiListener;
 import com.example.testmaddafakka.api.IAdapter;
 import com.example.testmaddafakka.api.IMDbApiAdapter;
 import com.example.testmaddafakka.model.Filmster;
-import com.example.testmaddafakka.model.IPreferences;
+import com.example.testmaddafakka.model.ICategory;
 import com.example.testmaddafakka.model.IMedia;
 import com.example.testmaddafakka.api.IApiListener;
 import com.example.testmaddafakka.model.Preferences;
@@ -32,8 +32,7 @@ public class FilmsterRepository implements IApiListener {
     private Filmster filmster;
     private User user;
     private int current = 0;
-    private Preferences preferences;
-    private MutableLiveData<List<IPreferences>> categories;
+    private MutableLiveData<List<ICategory>> categories;
 
 
     private FilmsterRepository(Context ctx) {
@@ -44,7 +43,7 @@ public class FilmsterRepository implements IApiListener {
         filmster = new Filmster(user);
         listener = new ApiListener();
         listener.addListener(this);
-        categories = new MutableLiveData<List<IPreferences>>();
+        categories = new MutableLiveData<List<ICategory>>();
 
         imdbAdapter = new IMDbApiAdapter(ctx, listener);
         loadMedias();
@@ -115,7 +114,11 @@ public class FilmsterRepository implements IApiListener {
         return filmster.CurrentUsersCategory(categoryName);
     }
 
-    public MutableLiveData<List<IPreferences>> getCategories() {
+    /**
+     * Sets a list with movie genres
+     * @return A list of movie genres
+     */
+    public MutableLiveData<List<ICategory>> getCategories() {
         this.categories.setValue(filmster.getMovieCategories());
         return this.categories;
     }
