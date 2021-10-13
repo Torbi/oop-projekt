@@ -65,21 +65,17 @@ public class MainView extends Fragment {
             viewModel.addLikedMedia(currentMedia);
             viewModel.nextMedia();
             setMediaFront(currentMedia);
-
         });
 
         dislikeBtn.setOnClickListener(view -> {
             viewModel.addDislikedMedia(currentMedia);
             viewModel.nextMedia();
             setMediaFront(currentMedia);
-
-
         });
         watchedBtn.setOnClickListener(view -> {
             viewModel.addWatchedMedia(currentMedia);
             viewModel.nextMedia();
             setMediaFront(currentMedia);
-
         });
 
         watchlistBtn.setOnClickListener(view -> {
@@ -135,10 +131,8 @@ public class MainView extends Fragment {
 
         if (backSide) {
             setMediaFront(media);
-            backSide = false;
         } else {
             setMediaBack(media);
-            backSide = true;
         }
 
     }
@@ -151,6 +145,8 @@ public class MainView extends Fragment {
         mediaBack.setArguments(bundle);
         ft.replace(R.id.mediaCard, mediaBack);
         ft.commit();
+
+        backSide = true;
     }
 
     private void setMediaFront(IMedia media){
@@ -162,6 +158,8 @@ public class MainView extends Fragment {
         mediaFront.setArguments(bundle);
         ft.replace(R.id.mediaCard, mediaFront, "te");
         ft.commit();
+
+        backSide = false;
     }
 
     private void updateMediaDisplayed(IMedia media) {
