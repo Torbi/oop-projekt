@@ -19,9 +19,9 @@ public class UserTest {
     @Before
     public void createUserAndMedia() {
 
-        media =new Movie("Cool Movie", "1", "9.1", "Tom Cruise", "tomcruise.com", "2021");
-        media1 = new Movie("Cool Movie1", "2", "9.1", "Tom Cruise", "tomcruise.com", "2021");
-        media2 = new Movie("Cool Movie2", "3", "9.1", "Tom Cruise", "tomcruise.com", "2021");
+        media =new Movie("Cool Movie", "1", "9.1",  "tomcruise.com", "2021");
+        media1 = new Movie("Cool Movie1", "2", "9.1",  "tomcruise.com", "2021");
+        media2 = new Movie("Cool Movie2", "3", "9.1", "tomcruise.com", "2021");
 
         user = new User("Guest", "qwerty", new WatchList(), new Preferences());
     }

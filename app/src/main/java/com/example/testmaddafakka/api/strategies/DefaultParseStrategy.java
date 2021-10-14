@@ -1,6 +1,5 @@
-package com.example.testmaddafakka.api;
+package com.example.testmaddafakka.api.strategies;
 
-import com.example.testmaddafakka.model.IMedia;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -16,7 +15,7 @@ import java.util.List;
  * Presumes JSONObject contains a JSONArray called items
  * @author Torbjörn
  */
-public class DefaultParseStrategy implements IParseStrategy{
+public class DefaultParseStrategy implements IParseStrategy {
 
     @Override
     public List<JsonObject> parseResponse(JSONObject response) {
