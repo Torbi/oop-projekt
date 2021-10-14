@@ -10,14 +10,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.SearchView;
 import android.widget.Spinner;
 
 import com.example.testmaddafakka.model.ICategory;
 import com.example.testmaddafakka.R;
 import com.example.testmaddafakka.viewmodel.PreferencesViewModel;
 
+import java.sql.SQLOutput;
 import java.util.List;
 
+/**
+ * A view ....
+ *
+ * @author Albin Sundström
+ */
 
 public class PreferencesView extends Fragment {
 
@@ -37,22 +44,48 @@ public class PreferencesView extends Fragment {
         viewModel.init(requireContext());
         viewModel.getCategories().observe(getViewLifecycleOwner(), category -> {
             categories = category;
-            updateMediaDisplayed(categories);
+            updateGenresDisplayed(categories);
         });
 
 
-        // Do something similar to the genreSpinner here
-        // Change it to a searchbar for actors and directors
-        actorSpinner = (Spinner) view.findViewById(R.id.actorSpinner);
-        ArrayAdapter<CharSequence> actorAdapter = ArrayAdapter.createFromResource(this.getContext(),
-                R.array.genres_array, android.R.layout.simple_spinner_item);
-        setSpinner(actorSpinner, actorAdapter);
+        SearchView actorSearchView = view.findViewById(R.id.actorSearch);
+        actorSearchView.setIconifiedByDefault(false);
+        actorSearchView.setInputType(61); // 61 corresponds to InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PERSON_NAME.
+        actorSearchView.setQueryHint("Search");
+        //actorSearchView.setSubmitButtonEnabled(true);
 
-        directorSpinner = (Spinner) view.findViewById(R.id.directorSpinner);
-        ArrayAdapter<CharSequence> directorAdapter = ArrayAdapter.createFromResource(this.getContext(),
-                R.array.genres_array, android.R.layout.simple_spinner_item);
-        setSpinner(directorSpinner, directorAdapter);
+        actorSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String name) {
+                // This method gets query after search button or enter is pressed
+                viewModel.search(name);
+                System.out.println(name + " submit");
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String name) {
+                // This method gets query after every change
+                return false;
+            }
+        });
+
+        SearchView directorSearchView = view.findViewById(R.id.directorSearch);
+        directorSearchView.setIconifiedByDefault(false);
+        directorSearchView.setQueryHint("Search");
+
+        directorSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String name) {
+                viewModel.search(name);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String name) {
+                return false;
+            }
+        });
 
 
         Spinner spinner = view.findViewById(R.id.genreSpinner);
@@ -79,7 +112,7 @@ public class PreferencesView extends Fragment {
         spinner.setAdapter(content);
     }
 
-    private void updateMediaDisplayed(List<ICategory> categories) {
+    private void updateGenresDisplayed(List<ICategory> categories) {
         Spinner spinner = view.findViewById(R.id.genreSpinner);
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, android.R.id.text1);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

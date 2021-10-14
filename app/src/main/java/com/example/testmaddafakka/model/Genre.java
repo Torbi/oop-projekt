@@ -1,6 +1,9 @@
 package com.example.testmaddafakka.model;
 
-
+/**
+ *
+ * @author Albin Sundström
+ */
 public class Genre implements ICategory {
 
 

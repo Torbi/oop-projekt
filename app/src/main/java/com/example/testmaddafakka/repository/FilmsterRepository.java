@@ -123,4 +123,8 @@ public class FilmsterRepository implements IApiListener {
         return this.categories;
     }
 
+    public void search(String name){
+        // api.search or something
+    }
+
 }

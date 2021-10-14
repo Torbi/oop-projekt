@@ -11,6 +11,11 @@ import com.example.testmaddafakka.repository.FilmsterRepository;
 
 import java.util.List;
 
+/**
+ * A viewmodel ....
+ *
+ * @author Albin Sundström
+ */
 public class PreferencesViewModel extends ViewModel {
 
     private FilmsterRepository filmsterRepository;
@@ -40,5 +45,9 @@ public class PreferencesViewModel extends ViewModel {
     private void loadCategories() {
         // Do an asynchronous operation to fetch a category
         categories = filmsterRepository.getCategories();
+    }
+
+    public void search(String name){
+        filmsterRepository.search(name);
     }
 }

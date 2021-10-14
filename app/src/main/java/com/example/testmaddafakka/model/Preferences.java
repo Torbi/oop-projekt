@@ -3,6 +3,12 @@ package com.example.testmaddafakka.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class ....
+ *
+ * @author Albin Sundström
+ */
+
 public class Preferences {
 
     private List<Genre> movieGenres = new ArrayList<>();
@@ -39,7 +45,7 @@ public class Preferences {
      * @param genre - The name of a genre
      * @return The matching genre-object
      */
-    public Genre searchMovieGenres(String genre){
+    public Genre getObject(String genre){
         Genre r = new Genre("noID", "ERROR");
         for(int i = 0; i < movieGenres.size(); i++){
             if(genre.equals(movieGenres.get(i).getName())){
