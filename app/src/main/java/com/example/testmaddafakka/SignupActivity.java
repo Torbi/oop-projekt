@@ -79,7 +79,7 @@ public class SignupActivity extends AppCompatActivity {
 
                             else{
 
-                                Toast.makeText(getApplicationContext(),task.getException().getLocalizedMessage(),Toast.LENGTH_SHORT).show();
+                                s
                             }
 
 
