@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface IAdapter {
 
-    public void get250Movies();
+    void get250Movies();
 
     public void getList(String request);
 

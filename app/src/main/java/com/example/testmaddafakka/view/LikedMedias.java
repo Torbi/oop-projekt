@@ -28,7 +28,6 @@ import java.util.List;
  */
 public class LikedMedias extends Fragment {
 
-    private View view;
     private WatchlistViewModel viewModel;
 
     public LikedMedias() {
@@ -40,19 +39,16 @@ public class LikedMedias extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_liked_movies, container, false);
+        View view = inflater.inflate(R.layout.fragment_liked_movies, container, false);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvMedia);
 
 
         viewModel = new ViewModelProvider(this).get(WatchlistViewModel.class);
         viewModel.init(requireContext());
-        viewModel.getLikedMedias().observe(getViewLifecycleOwner(), new Observer<List<IMedia>>() {
-            @Override
-            public void onChanged(List<IMedia> medias) {
-                MediaAdapter adapter = new MediaAdapter(medias);
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-            }
+        viewModel.getLikedMedias().observe(getViewLifecycleOwner(), medias -> {
+            MediaAdapter adapter = new MediaAdapter(medias);
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         });
 
         return view;

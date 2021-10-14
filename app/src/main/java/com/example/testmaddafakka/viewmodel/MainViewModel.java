@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.testmaddafakka.model.IMedia;
-import com.example.testmaddafakka.model.Movie;
 import com.example.testmaddafakka.repository.FilmsterRepository;
 
 
@@ -29,6 +28,9 @@ public class MainViewModel extends ViewModel {
         filmsterRepository.loadMedias();
     }
 
+    public IMedia getCurrentMedia(){
+        return media.getValue();
+    }
     /**
      * The method that the mainView observes for changes
      * Calls an asynchronous method that loads the movie
@@ -47,19 +49,29 @@ public class MainViewModel extends ViewModel {
         media = filmsterRepository.getCurrentMedia();
     }
 
-    public void addLikedMedia(IMedia media) {
-        filmsterRepository.addLikedMedia(media);
+    public void addLikedMedia() {
+        filmsterRepository.addLikedMedia(getCurrentMedia());
         nextMedia();
     }
-    public void addDislikedMedia(IMedia media) {
-        filmsterRepository.addDislikedMedia(media);
+    public void addDislikedMedia() {
+        filmsterRepository.addDislikedMedia(getCurrentMedia());
         nextMedia();
     }
-    public void addWatchedMedia(IMedia media){
-        filmsterRepository.addWatchedMedia(media);
+    public void addWatchedMedia(){
+        filmsterRepository.addWatchedMedia(getCurrentMedia());
         nextMedia();
     }
     public void nextMedia() {
         filmsterRepository.nextMedia();
     }
+    public String checkMovieLength(String title){
+        if(title.length() > 15){
+            return title.substring(0, 16) + "...";
+        }
+        return title;
+    }
+    public String shorten(String text){
+        return text.substring(1, text.length()-1);
+    }
+
 }

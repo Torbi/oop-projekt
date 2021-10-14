@@ -3,6 +3,7 @@ package com.example.testmaddafakka.repository;
 import android.content.Context;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.testmaddafakka.api.ApiListener;
@@ -28,6 +29,7 @@ public class FilmsterRepository implements IApiListener {
     private IAdapter imdbAdapter;
     private MutableLiveData<List<IMedia>> medias;
     private MutableLiveData<IMedia> currentMedia;
+    private LiveData<IMedia> currentLiveMeida;
     private ApiListener listener;
     private Filmster filmster;
     private User user;
@@ -55,6 +57,17 @@ public class FilmsterRepository implements IApiListener {
         }
         return instance;
     }
+    public void initCategories(Context ctx) {
+        if(categories != null) {
+            return;
+        }
+        getInstance(ctx);
+        loadCategories();
+    }
+    public void loadCategories() {
+        // Do an asynchronous operation to fetch a category
+        categories = getCategories();
+    }
 
     public void loadMedias() {
         imdbAdapter.get250Movies();
@@ -64,7 +77,6 @@ public class FilmsterRepository implements IApiListener {
         this.currentMedia.setValue(filmster.getCurrentMedia());
         return this.currentMedia;
     }
-
     private void setMedias(List<IMedia> medias) {
         this.medias.setValue(medias);
         filmster.setMediaList(medias);
@@ -90,8 +102,6 @@ public class FilmsterRepository implements IApiListener {
     }
 
     public void nextMedia() {
-        //listener.notifyListeners(this.movies.getValue().get(current));
-        //ERRRRORORORORORROR
         this.currentMedia.setValue(this.medias.getValue().get(current));
         current++;
     }
@@ -123,4 +133,11 @@ public class FilmsterRepository implements IApiListener {
         return this.categories;
     }
 
+    public LiveData<List<ICategory>> getCategoriesNEW() {
+        if (this.categories == null) {
+            this.categories = new MutableLiveData<>();
+            loadCategories();
+        }
+        return this.categories;
+    }
 }

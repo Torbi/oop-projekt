@@ -14,15 +14,11 @@ import java.util.List;
 public class PreferencesViewModel extends ViewModel {
 
     private FilmsterRepository filmsterRepository;
-    private MutableLiveData<List<ICategory>> categories;
 
 
     public void init(Context ctx) {
-        if(categories != null) {
-            return;
-        }
         filmsterRepository = FilmsterRepository.getInstance(ctx);
-        loadCategories();
+        filmsterRepository.initCategories(ctx);
     }
 
     public void loadSelectedCategory(String category){
@@ -30,15 +26,8 @@ public class PreferencesViewModel extends ViewModel {
     }
 
     public LiveData<List<ICategory>> getCategories() {
-        if (categories == null) {
-            categories = new MutableLiveData<>();
-            loadCategories();
-        }
-        return categories;
+        return filmsterRepository.getCategories();
     }
 
-    private void loadCategories() {
-        // Do an asynchronous operation to fetch a category
-        categories = filmsterRepository.getCategories();
-    }
+
 }

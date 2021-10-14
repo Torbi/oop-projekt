@@ -18,7 +18,7 @@ import com.google.android.material.tabs.TabLayout;
 
 
 public class WatchlistView extends Fragment {
-    TabLayout tabLayout;
+    private TabLayout tabLayout;
     private LikedMedias likedMedias;
     private DislikedMedias dislikedMedias;
     private WatchedMedia watchedMedia;

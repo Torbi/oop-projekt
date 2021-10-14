@@ -23,9 +23,6 @@ public class WatchList {
 
     public void addDislikedMedia(IMedia media) {
         this.dislikedList.add(media);
-        if(likedList.contains(media)){
-            likedList.remove(media);
-        }
     }
 
 

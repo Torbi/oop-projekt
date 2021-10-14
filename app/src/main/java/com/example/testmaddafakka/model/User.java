@@ -31,10 +31,10 @@ public class User {
     public void addDislikedMedia(IMedia media) {
         watchList.addDislikedMedia(media);
     }
-
     public void addWatchedMedia(IMedia media) {
         watchList.addWatchedMedia(media);
     }
+
     public List<IMedia> getLikedMedia(){
         return watchList.getLikedList();
     }
@@ -44,6 +44,7 @@ public class User {
     public List<IMedia> getWatchedMedia(){
         return watchList.getWatchedList();
     }
+
     public String getName() {
         return name;
     }

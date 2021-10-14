@@ -20,14 +20,11 @@ import com.example.testmaddafakka.viewmodel.MainViewModel;
 
 public class MainView extends Fragment {
 
-    public View view;
-    public Button test;
+    private View view;
     private MainViewModel viewModel;
-    private IMedia currentMedia;
     private WatchlistView watchlistView;
     private PreferencesView preferencesView;
     private boolean backSide = false;
-    private FragmentTransaction ft;
 
     private MediaFront mediaFront;
     private MediaBack mediaBack;
@@ -37,16 +34,12 @@ public class MainView extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_start_page, container, false);
-        ft = getChildFragmentManager().beginTransaction();
         mediaFront = new MediaFront();
         mediaBack = new MediaBack();
 
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         viewModel.init(requireContext());
-        viewModel.getMedia().observe(getViewLifecycleOwner(), media -> {
-            currentMedia = media;
-            updateMediaDisplayed(currentMedia);
-        });
+        viewModel.getMedia().observe(getViewLifecycleOwner(), this::updateMediaDisplayed);
 
         watchlistView = new WatchlistView();
         preferencesView = new PreferencesView();
@@ -60,22 +53,21 @@ public class MainView extends Fragment {
 
         FragmentContainerView mediaCard = view.findViewById(R.id.mediaCard);
 
-
         likeBtn.setOnClickListener(view -> {
-            viewModel.addLikedMedia(currentMedia);
+            viewModel.addLikedMedia();
             viewModel.nextMedia();
-            setMediaFront(currentMedia);
+            setMediaFront();
         });
 
         dislikeBtn.setOnClickListener(view -> {
-            viewModel.addDislikedMedia(currentMedia);
+            viewModel.addDislikedMedia();
             viewModel.nextMedia();
-            setMediaFront(currentMedia);
+            setMediaFront();
         });
         watchedBtn.setOnClickListener(view -> {
-            viewModel.addWatchedMedia(currentMedia);
+            viewModel.addWatchedMedia();
             viewModel.nextMedia();
-            setMediaFront(currentMedia);
+            setMediaFront();
         });
 
         watchlistBtn.setOnClickListener(view -> {
@@ -97,51 +89,52 @@ public class MainView extends Fragment {
         mediaCard.setOnTouchListener(new GestureHelper(getActivity()) {
             @Override
             public void onClick() {
-                mediaFlip(currentMedia);
+                mediaFlip();
                 System.out.println("FLIP");
             }
 
             @Override
             public void onSwipeTop() {
-                viewModel.addWatchedMedia(currentMedia);
+                viewModel.addWatchedMedia();
                 viewModel.nextMedia();
-                setMediaFront(currentMedia);
+                setMediaFront();
 
             }
             @Override
             public void onSwipeRight() {
-                viewModel.addLikedMedia(currentMedia);
+                viewModel.addLikedMedia();
                 viewModel.nextMedia();
-                setMediaFront(currentMedia);
+                setMediaFront();
             }
             @Override
             public void onSwipeLeft() {
-                viewModel.addDislikedMedia(currentMedia);
+                viewModel.addDislikedMedia();
                 viewModel.nextMedia();
-                setMediaFront(currentMedia);
+                setMediaFront();
 
             }
         });
         return view;
     }
 
-    public void mediaFlip(IMedia media) {
+    public void mediaFlip() {
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         ft.setCustomAnimations(R.animator.flip_out, R.animator.flip_in);
 
         if (backSide) {
-            setMediaFront(media);
+            setMediaFront();
         } else {
-            setMediaBack(media);
+            setMediaBack();
         }
 
     }
-    private void setMediaBack(IMedia media){
+    private void setMediaBack(){
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         ft.setCustomAnimations(R.animator.flip_out, R.animator.flip_in);
 
         Bundle bundle = new Bundle();
-        bundle.putString("data", media.getTitle() + "@" + media.getRating() + "@" + media.getYear());
+        bundle.putString("data", viewModel.getCurrentMedia().getTitle() + "@" +
+                viewModel.getCurrentMedia().getRating() + "@" + viewModel.getCurrentMedia().getYear());
         mediaBack.setArguments(bundle);
         ft.replace(R.id.mediaCard, mediaBack);
         ft.commit();
@@ -149,12 +142,12 @@ public class MainView extends Fragment {
         backSide = true;
     }
 
-    private void setMediaFront(IMedia media){
+    private void setMediaFront(){
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         ft.setCustomAnimations(R.animator.flip_out, R.animator.flip_in);
 
         Bundle bundle = new Bundle();
-        bundle.putString("movie", media.getImage());
+        bundle.putString("movie", viewModel.getCurrentMedia().getImage());
         mediaFront.setArguments(bundle);
         ft.replace(R.id.mediaCard, mediaFront, "te");
         ft.commit();
@@ -167,23 +160,13 @@ public class MainView extends Fragment {
         TextView mediaRating = view.findViewById(R.id.mediaRating);
         TextView mediaYear = view.findViewById(R.id.mediaYear);
 
-        String title = shorten(media.getTitle());
-        mediaTitle.setText(checkMovieLength(title));
+        String title = viewModel.shorten(media.getTitle());
+        mediaTitle.setText(viewModel.checkMovieLength(title));
 
-        String grade = shorten(media.getRating()) + "/10";
+        String grade = viewModel.shorten(media.getRating()) + "/10";
         mediaRating.setText(grade);
-        mediaYear.setText(shorten(media.getYear()));
+        mediaYear.setText(viewModel.shorten(media.getYear()));
         mediaFront.update(media.getImage());
 
-    }
-    private String shorten(String text){
-        String temp = text.substring(1, text.length()-1);
-        return temp;
-    }
-    private String checkMovieLength(String title){
-        if(title.length() > 15){
-            return title.substring(0, 16) + "...";
-        }
-        return title;
     }
 }

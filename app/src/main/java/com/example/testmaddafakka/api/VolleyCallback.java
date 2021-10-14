@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface VolleyCallback {
 
-    public void onSuccess(List<IMedia> media);
+    void onSuccess(List<IMedia> media);
 }

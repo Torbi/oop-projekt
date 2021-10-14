@@ -25,7 +25,6 @@ public class PreferencesView extends Fragment {
     private Spinner actorSpinner;
     private Spinner directorSpinner;
     private PreferencesViewModel viewModel;
-    private List<ICategory> categories;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,10 +34,7 @@ public class PreferencesView extends Fragment {
 
         viewModel = new ViewModelProvider(this).get(PreferencesViewModel.class);
         viewModel.init(requireContext());
-        viewModel.getCategories().observe(getViewLifecycleOwner(), category -> {
-            categories = category;
-            updateMediaDisplayed(categories);
-        });
+        viewModel.getCategories().observe(getViewLifecycleOwner(), this::updateMediaDisplayed);
 
 
         // Do something similar to the genreSpinner here
