@@ -379,3 +379,102 @@ Göra det som står under mål, så mycket som möjligt till imorrn
 Slut
 Nästa möte fredag 13:15
 
+
+
+Dagordning handledning 8/10 13:15
+
+
+Frågor?
+Visa förbättringar vi gjort med avseende på feedbacken?
+Ska views, viewmodels, etc va med i designmodellen? eller ska det bara vara modellen?
+Inlogg factory method?
+
+Kommentarer:
+Allt ska vara med i designmodellen, tycker Carl iaf, dvs views o viewmodels ska vara med
+I SDD: ha med den gamla designmodellen o kommentera lite kort
+Testa att använda rule i testerna, för att få context
+Fokusera på OOP
+Databas - textfil och göra de som en service för att lätt kunna byta ut mot databas
+Nästa möte samma tid i sal 3504
+
+
+
+
+Datum 8/10
+Närvarande: Torbjörn, Magnus, Ali, Albin
+
+Mål
+
+Fixa det sista innan peer reviewn på söndag.
+
+Fylla på SDD och RAD, Docs, Tester (Alla)
+User inlogg i modellen. Typ normal users, Admin, loggin logut metod (Ali)
+GUI för user inlogg (Ali)
+Metoder i preferences för att kunna lägga till actors o directors osv.(Albin)
+Categories i preferences (Albin)
+Byt namn på categories till genres, så blir allt lite tydligare, o så kan IPreferences heta ICategory istället (Albin)
+
+
+Rapporter
+Fixa ganska mycket av det vi fick i feedback från Carl
+
+
+Diskussionspunkter
+peer review inlämning
+
+Utkomst av beslut
+Göra det som står under mål
+
+Uppgifter till nästa möte
+Alla: Java Docs, Tester, skriva sdd och rad, sekvensdiagram. uppdatera klassdiagram kontinuerligt
+Göra det som står under mål, så mycket som möjligt till söndag till inlämningen av peer review
+
+Fixa package-uml
+
+Slut
+Nästa möte tisdag 15:00
+
+
+
+
+Dagordning handledning 15/10 13:15
+RAD - persistent data management, Fragments, Activities, Intents, LiveData?
+
+
+Frågor till nästa möte Tisdag 12/9
+Spara listorna i databas sqlite?
+Login sidan borde vara fragment, eller åtminstone inte synas samtidigt som mainActivity
+
+
+
+Datum 12/10
+Närvarande: Torbjörn, Magnus, Ali, Albin
+
+Mål
+Skriva peer Review
+Ge alla tydliga uppgifter och direktiv
+
+Rapporter
+Frågor som kommit upp under veckan
+Peer Review
+
+Diskussionspunkter
+peer review
+Firebase och sqlite, olika responsibilities 
+
+Utkomst av beslut
+Sqlite kan användas för att spara watchlist filmer lokalt
+
+
+Uppgifter till nästa möte
+Alla: Java Docs glöm inte att lägga till authors, Tester, skriva sdd och rad, sekvensdiagram. Peer Review
+Uppdatera klassdiagram kontinuerligt
+
+Göra adaptern mer generell. (Tb)
+Fortsätta med inlogg. (Ali) Skriva tester på Inlogg, styla GUI (i mån av tid).
+Fixa sök på actors, directors (Albin)
+Swipeanimation. (Magnus)
+
+
+Slut
+Nästa möte fredag efter handledningen
