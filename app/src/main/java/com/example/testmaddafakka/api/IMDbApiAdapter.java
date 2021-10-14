@@ -22,23 +22,23 @@ import java.util.List;
 
 /**
  * An adapter that sends requests to imdbs api and get json responses back and
- * turns them into media-objects
+ * turns them into media-objects.
+ * Can have different strategies for building requests and parsing responses
  */
 
 public class IMDbApiAdapter implements IAdapter {
 
-    private final String urlString = "https://imdb-api.com/en/API/";
-    //made over a 100 requests on one day so created another account with a new key
-    private final String key = "/k_ymbjcvxu";
-    private final String key2 = "/k_e598lu33";
-    private List<IMedia> mediaList;
-    private Context context;
-    private int currentMedia = 0;
+    private final Context context;
     private ApiListener listener;
+    private IParseStrategy parseStrategy;
+    private IBuildRequestStrategy buildRequestStrategy;
+
 
     public IMDbApiAdapter(Context context, ApiListener listener) {
         this.context = context;
         this.listener = listener;
+        parseStrategy = new DefaultParseStrategy();
+        buildRequestStrategy = new DefaultBuildRequestStrategy();
     }
 
     private void getStringRequest(String stringRequest, final VolleyCallback callback) {
@@ -46,16 +46,13 @@ public class IMDbApiAdapter implements IAdapter {
         RequestQueue queue = SingletonRequestQueue.getInstance(context).getRequestQueue();
 
         //parse response into gsons jsonobject and then turn them into medias
-        JsonObjectRequest request = new JsonObjectRequest(urlString + stringRequest + key, null, response -> {
-            mediaList = new LinkedList<>();
-
+        JsonObjectRequest request = new JsonObjectRequest(buildRequestStrategy.buildRequest(stringRequest), null, response -> {
+            List<IMedia> mediaList = new LinkedList<>();
             //VolleyLog.wtf(response.toString(), "utf-8");
-            GsonBuilder builder = new GsonBuilder();
-            Gson gson = builder.create();
-            JsonObject jsonObject = gson.fromJson(response.toString(), JsonObject.class);
-            JsonArray array = jsonObject.getAsJsonArray("items");
-            for(int i = 0; i < array.size(); i++) {
-                IMedia media = jsonObject2Media((JsonObject) array.get(i));
+
+            List<JsonObject> jsonObjects = parseStrategy.parseResponse(response);
+            for(int i = 0; i < jsonObjects.size(); i++) {
+                IMedia media = jsonObject2Media(jsonObjects.get(i));
                 mediaList.add(media);
             }
             callback.onSuccess(mediaList);
@@ -81,6 +78,14 @@ public class IMDbApiAdapter implements IAdapter {
         }
     };
 
+    public void setParseStrategy(IParseStrategy strategy) {
+        this.parseStrategy = strategy;
+    }
+
+    public void setBuildRequestStrategy(IBuildRequestStrategy strategy) {
+        this.buildRequestStrategy = strategy;
+    }
+
     /**
      * Sends a request to imdbs api and gets a json response that is then translated into
      * a list of movies
@@ -97,14 +102,19 @@ public class IMDbApiAdapter implements IAdapter {
     }
 
     /**
-     * This would be pretty easy to implement, just call getMovies with the id
-     * just need to check that the format in the request is right
-     * @param listID - an imdb id for a list, starts with ls
+     * Need to make sure the correct strategies are chosen before calling this
+     * with a random request. The request need to be built correctly according
+     * @param request - a correct request to an api
      * @return a list of movies
      */
     @Override
-    public List<IMedia> getList(String listID) {
-        return null;
+    public void getList(String request) {
+        getStringRequest(request, new VolleyCallback() {
+            @Override
+            public void onSuccess(List<IMedia> mediaList) {
+                listener.notifyListeners(mediaList);
+            }
+        });
     }
 
     private IMedia jsonObject2Media(JsonObject object) {
@@ -115,7 +125,6 @@ public class IMDbApiAdapter implements IAdapter {
                                     object.get("crew").toString(),
                                     object.get("image").toString(),
                                     object.get("year").toString()
-
             );
             return media;
         } catch (Exception e) {

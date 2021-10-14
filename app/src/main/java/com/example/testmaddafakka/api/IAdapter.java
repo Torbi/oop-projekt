@@ -11,6 +11,6 @@ public interface IAdapter {
 
     public void get250Movies();
 
-    public List<IMedia> getList(String listID);
+    public void getList(String request);
 
 }
