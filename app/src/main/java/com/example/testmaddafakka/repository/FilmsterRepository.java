@@ -127,4 +127,9 @@ public class FilmsterRepository implements IApiListener {
         // api.search or something
     }
 
+    public List<ICategory> getSearchResults(){
+        // get list from api
+        return null;
+    }
+
 }

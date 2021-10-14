@@ -45,7 +45,7 @@ public class Preferences {
      * @param genre - The name of a genre
      * @return The matching genre-object
      */
-    public Genre getObject(String genre){
+    public Genre getMatchingGenre(String genre){
         Genre r = new Genre("noID", "ERROR");
         for(int i = 0; i < movieGenres.size(); i++){
             if(genre.equals(movieGenres.get(i).getName())){

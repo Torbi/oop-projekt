@@ -23,9 +23,6 @@
     <string name="titleBack">TextView</string>
     <string name="ratingBack">TextView</string>
     <string name="yearBack">TextView</string>
-    <string-array name="genres_array">
-        <item>Action</item>
-        <item>Drama</item>
-        <item>Comedy</item>
-    </string-array>
+    <string name="name">name</string>
+
 </resources>

@@ -20,6 +20,7 @@ public class PreferencesViewModel extends ViewModel {
 
     private FilmsterRepository filmsterRepository;
     private MutableLiveData<List<ICategory>> categories;
+    private MutableLiveData<List<ICategory>> searchResults;
 
 
     public void init(Context ctx) {
@@ -49,5 +50,14 @@ public class PreferencesViewModel extends ViewModel {
 
     public void search(String name){
         filmsterRepository.search(name);
+    }
+
+    public LiveData<List<ICategory>> getSearchResults(){
+        if(searchResults == null){
+            searchResults = new MutableLiveData<>();
+        }
+        searchResults.setValue(filmsterRepository.getSearchResults());
+        return searchResults;
+
     }
 }
