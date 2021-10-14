@@ -27,11 +27,11 @@ public class Movie implements Serializable, IMedia {
      * @param image - A string for where the image can be found online
      * @param year - A string representing the year the movie was made
      */
-    public Movie(String title, String id, String rating, String starring, String image, String year) {
+    public Movie(String title, String id, String rating, String image, String year) {
         this.title = title;
         this.id = id;
         this.rating = rating;
-        this.starring = starring;
+        //this.starring = starring;
         this.image = image;
         this.year = year;
     }
@@ -44,9 +44,7 @@ public class Movie implements Serializable, IMedia {
         return title;
     }
 
-    public String getMainCharacters() {
-        return starring;
-    }
+
 
     public String getImage() {
         return image;

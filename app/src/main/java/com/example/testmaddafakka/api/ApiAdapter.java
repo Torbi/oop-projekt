@@ -6,14 +6,16 @@ import android.widget.Toast;
 import com.android.volley.NetworkError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.testmaddafakka.api.strategies.DefaultBuildRequestStrategy;
+import com.example.testmaddafakka.api.strategies.DefaultParseStrategy;
+import com.example.testmaddafakka.api.strategies.IBuildRequestStrategy;
+import com.example.testmaddafakka.api.strategies.IParseStrategy;
 import com.example.testmaddafakka.model.IMedia;
 import com.example.testmaddafakka.model.Movie;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import java.util.LinkedList;
@@ -24,9 +26,12 @@ import java.util.List;
  * An adapter that sends requests to imdbs api and get json responses back and
  * turns them into media-objects.
  * Can have different strategies for building requests and parsing responses
+ * Has default strategies for handling the default call.
+ * Apparently takes between 7-16 seconds to get a response using the IMDbList call
+ * @author Torbjorn
  */
 
-public class IMDbApiAdapter implements IAdapter {
+public class ApiAdapter implements IAdapter {
 
     private final Context context;
     private ApiListener listener;
@@ -34,9 +39,10 @@ public class IMDbApiAdapter implements IAdapter {
     private IBuildRequestStrategy buildRequestStrategy;
 
 
-    public IMDbApiAdapter(Context context, ApiListener listener) {
+    public ApiAdapter(Context context, ApiListener listener) {
         this.context = context;
         this.listener = listener;
+
         parseStrategy = new DefaultParseStrategy();
         buildRequestStrategy = new DefaultBuildRequestStrategy();
     }
@@ -64,6 +70,25 @@ public class IMDbApiAdapter implements IAdapter {
             }
         };
         queue.add(request);
+
+        //Can take up to 16 seconds to get a list from imdb
+        //using the IMDbList call
+        request.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
     }
 
     //errorListener to use when making a request with Volley
@@ -78,32 +103,20 @@ public class IMDbApiAdapter implements IAdapter {
         }
     };
 
+    @Override
     public void setParseStrategy(IParseStrategy strategy) {
         this.parseStrategy = strategy;
     }
 
+    @Override
     public void setBuildRequestStrategy(IBuildRequestStrategy strategy) {
         this.buildRequestStrategy = strategy;
     }
 
     /**
-     * Sends a request to imdbs api and gets a json response that is then translated into
-     * a list of movies
-     * A callback method notifies all listeners about the new movies
-     */
-    @Override
-    public void get250Movies() {
-        getStringRequest("Top250Movies", new VolleyCallback() {
-            @Override
-            public void onSuccess(List<IMedia> mediaList) {
-                listener.notifyListeners(mediaList);
-            }
-        });
-    }
-
-    /**
      * Need to make sure the correct strategies are chosen before calling this
      * with a random request. The request need to be built correctly according
+     * to IMDb or whatever api you use
      * @param request - a correct request to an api
      * @return a list of movies
      */
@@ -122,7 +135,6 @@ public class IMDbApiAdapter implements IAdapter {
             IMedia media = new Movie(object.get("title").toString(),
                                     object.get("id").toString(),
                                     object.get("imDbRating").toString(),
-                                    object.get("crew").toString(),
                                     object.get("image").toString(),
                                     object.get("year").toString()
             );

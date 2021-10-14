@@ -8,7 +8,11 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.testmaddafakka.api.ApiListener;
 import com.example.testmaddafakka.api.IAdapter;
-import com.example.testmaddafakka.api.IMDbApiAdapter;
+import com.example.testmaddafakka.api.ApiAdapter;
+import com.example.testmaddafakka.api.strategies.DefaultBuildRequestStrategy;
+import com.example.testmaddafakka.api.strategies.DefaultParseStrategy;
+import com.example.testmaddafakka.api.strategies.IMDbListBuildRequestStrategy;
+import com.example.testmaddafakka.api.strategies.IMDbListParseStrategy;
 import com.example.testmaddafakka.model.Filmster;
 import com.example.testmaddafakka.model.ICategory;
 import com.example.testmaddafakka.model.IMedia;
@@ -47,8 +51,9 @@ public class FilmsterRepository implements IApiListener {
         listener.addListener(this);
         categories = new MutableLiveData<List<ICategory>>();
 
-        imdbAdapter = new IMDbApiAdapter(ctx, listener);
-        loadMedias();
+        imdbAdapter = new ApiAdapter(ctx, listener);
+        //loadMedias();
+        loadSelectedCategory("Popular");
     }
 
     public static FilmsterRepository getInstance(@Nullable Context ctx) {
@@ -70,7 +75,7 @@ public class FilmsterRepository implements IApiListener {
     }
 
     public void loadMedias() {
-        imdbAdapter.get250Movies();
+        imdbAdapter.getList("Top250Movies");
     }
 
     public MutableLiveData<IMedia> getCurrentMedia() {
@@ -116,7 +121,18 @@ public class FilmsterRepository implements IApiListener {
     }
 
 
+    /**
+     * Checks which strategy should be used depending on if its the default category or not
+     * @param categoryName - The name of the category
+     */
     public void loadSelectedCategory(String categoryName){
+        if(!categoryName.equals("Popular")) {
+            imdbAdapter.setBuildRequestStrategy(new IMDbListBuildRequestStrategy());
+            imdbAdapter.setParseStrategy(new IMDbListParseStrategy());
+        } else {
+            imdbAdapter.setBuildRequestStrategy(new DefaultBuildRequestStrategy());
+            imdbAdapter.setParseStrategy(new DefaultParseStrategy());
+        }
         imdbAdapter.getList(getSelectedCategory(categoryName));
     }
 

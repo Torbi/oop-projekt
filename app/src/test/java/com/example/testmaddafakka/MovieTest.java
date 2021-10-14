@@ -12,7 +12,7 @@ public class MovieTest {
 
     @Before
     public void createMovie() {
-        movie = new Movie("Inception", "1", "10", "Keith", "imageurl", "1337");
+        movie = new Movie("Inception", "1", "10",  "imageurl", "1337");
     }
 
     @Test
@@ -35,8 +35,4 @@ public class MovieTest {
         assert movie.getYear().equals("1337");
     }
 
-    @Test
-    public void getMainCharTest() {
-        assert movie.getMainCharacters().equals("Keith");
-    }
 }

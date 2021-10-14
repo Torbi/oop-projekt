@@ -8,7 +8,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import com.example.testmaddafakka.api.ApiListener;
 import com.example.testmaddafakka.api.IApiListener;
 import com.example.testmaddafakka.model.IMedia;
-import com.example.testmaddafakka.api.IMDbApiAdapter;
+import com.example.testmaddafakka.api.ApiAdapter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,8 +26,8 @@ public class IMDbApiAdapterTest implements IApiListener {
         ApiListener listener = new ApiListener();
         listener.addListener(this);
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        IMDbApiAdapter adapter = new IMDbApiAdapter(appContext, listener);
-        adapter.get250Movies();
+        ApiAdapter adapter = new ApiAdapter(appContext, listener);
+        adapter.getList("Top250Movies");
         //looks ugly and feels wrong, but it works
         try {
             Thread.sleep(2000);

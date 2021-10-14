@@ -25,7 +25,8 @@ public class MainViewModel extends ViewModel {
             return;
         }
         filmsterRepository = FilmsterRepository.getInstance(ctx);
-        filmsterRepository.loadMedias();
+        //filmsterRepository.loadMedias();
+        filmsterRepository.loadSelectedCategory("Popular");
     }
 
     public IMedia getCurrentMedia(){

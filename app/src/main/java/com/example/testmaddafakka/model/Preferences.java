@@ -12,6 +12,8 @@ public class Preferences {
     }
 
     private void addMovieGenres(){
+        //default category is top250movies
+        movieGenres.add(new Genre("Top250Movies","Popular"));
         movieGenres.add(new Genre("noID","Genre"));
         movieGenres.add(new Genre("ls051091770","Action"));
         movieGenres.add(new Genre("ls058726648","Comedy"));
