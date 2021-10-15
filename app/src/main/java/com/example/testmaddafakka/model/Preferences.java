@@ -15,8 +15,8 @@ public class Preferences {
     private List<ICategory> movieGenres;
 
     public Preferences(){
-        addMovieGenres();
         movieGenres = new ArrayList<>();
+        addMovieGenres();
     }
 
     private void addMovieGenres(){
