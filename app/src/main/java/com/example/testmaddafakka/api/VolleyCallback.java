@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Interface for callbacks when volley requests have been made
+ * @author Torbjörn
  */
 public interface VolleyCallback {
 

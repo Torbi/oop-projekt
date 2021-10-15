@@ -6,6 +6,7 @@ import com.example.testmaddafakka.api.strategies.IParseStrategy;
 /**
  * Methods that can be made to get different results from the api
  * And change the different strategies for the adapter
+ * @author Torbjörn
  */
 public interface IAdapter {
 

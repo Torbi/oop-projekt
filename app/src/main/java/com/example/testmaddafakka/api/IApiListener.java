@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Interface for listening for responses from the adapter
+ * @author Torbjörn
  */
 public interface IApiListener {
 

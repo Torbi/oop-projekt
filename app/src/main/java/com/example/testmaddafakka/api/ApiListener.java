@@ -5,6 +5,10 @@ import com.example.testmaddafakka.model.IMedia;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Listener for objects that want to listen on the apiAdapter
+ * @author Torbjörn
+ */
 public class ApiListener {
 
     private List<IApiListener> listeners;
@@ -21,5 +25,9 @@ public class ApiListener {
 
     public void addListener(IApiListener listener) {
         listeners.add(listener);
+    }
+
+    public void removeListener(IApiListener listener) {
+        listeners.remove(listener);
     }
 }

@@ -10,6 +10,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Strategy for parsing response from the IMDbList call
+ * @author Torbjörn
+ */
 public class IMDbListParseStrategy implements IParseStrategy {
 
     @Override
