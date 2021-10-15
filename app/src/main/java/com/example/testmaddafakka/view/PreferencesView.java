@@ -4,8 +4,8 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +15,10 @@ import android.widget.ArrayAdapter;
 import android.widget.SearchView;
 import android.widget.Spinner;
 
-import com.example.testmaddafakka.model.Actor;
 import com.example.testmaddafakka.model.ICategory;
 import com.example.testmaddafakka.R;
 import com.example.testmaddafakka.viewmodel.PreferencesViewModel;
 
-import java.sql.SQLOutput;
 import java.util.List;
 
 /**
@@ -31,18 +29,21 @@ import java.util.List;
 
 public class PreferencesView extends Fragment {
     private View view;
-    private Spinner actorSpinner;
-    private Spinner directorSpinner;
     private PreferencesViewModel viewModel;
+    private SearchResults searchResults;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_preferences_view, container, false);
-        FragmentContainerView fcv = view.findViewById(R.id.fragmentContainerView2);
+        FragmentContainerView fcv = view.findViewById(R.id.fcvPrefs);
 
         fcv.setVisibility(View.INVISIBLE);
+
+        searchResults = new SearchResults();
+
+
 
         viewModel = new ViewModelProvider(this).get(PreferencesViewModel.class);
         viewModel.init(requireContext());
@@ -56,12 +57,17 @@ public class PreferencesView extends Fragment {
         actorSearchView.setQueryHint("Search");
         //actorSearchView.setSubmitButtonEnabled(true);
 
+
+
         actorSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String name) {
                 // This method gets query after search button or enter is pressed
                 viewModel.search(name);
                 fcv.setVisibility(View.VISIBLE);
+                FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+                transaction.replace(R.id.fcvPrefs, searchResults).commit();
+                fcv.bringToFront();
 
                 System.out.println(name + " submit");
                 return false;

@@ -127,7 +127,7 @@ public class FilmsterRepository implements IApiListener {
         imdbAdapter.getList(getSelectedCategory(categoryName));
     }
 
-    public String getSelectedCategory(String categoryName){
+    private String getSelectedCategory(String categoryName){
         return filmster.CurrentUsersCategory(categoryName);
     }
 
@@ -151,10 +151,15 @@ public class FilmsterRepository implements IApiListener {
 
     public void search(String name){
         // api.search or something
+        //imdbAdapter.setBuildRequestStrategy(new IMDbNameBuildRequestStrategy());
+        //imdbAdapter.setParseStrategy(new DefaultParseStrategy("results"));
+        imdbAdapter.getList(name);
     }
 
     public List<ICategory> getSearchResults(){
         // get list from api
+
+
         return null;
     }
 }
