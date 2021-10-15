@@ -14,6 +14,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -72,14 +74,26 @@ public class SignupActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
 
                             if (task.isSuccessful()){
+                                String uid = mAuth.getCurrentUser().getUid();
 
-                                Intent in=new Intent(SignupActivity.this,DashBoard.class);
+                                // Write a message to the database
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                DatabaseReference myRef = database.getReference("users");
+
+                                DatabaseReference user = myRef.ref(uid);
+
+                                user.child("name").setValue(edtName.getText().toString());
+                                user.child("email").setValue(edtEmail.getText().toString());
+                                user.child("password").setValue(edtPassword.getText().toString());
+
+                                mAuth.signOut();
+                                Intent in=new Intent(SignupActivity.this,LoginActivity2.class);
                                 startActivity(in);
                             }
 
                             else{
 
-                                s
+
                             }
 
 
