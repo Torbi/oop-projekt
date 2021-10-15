@@ -70,24 +70,16 @@ public class MainView extends Fragment {
         });
 
         watchlistBtn.setOnClickListener(view -> {
-            getChildFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentInlogg, preferencesView).addToBackStack(null).commit();
-            /*
             FragmentTransaction fr = getFragmentManager().beginTransaction();
             fr.replace(R.id.fragmentInlogg, watchlistView);
             fr.addToBackStack(null);
             fr.commit();
-             */
         });
         preferencesBtn.setOnClickListener(view -> {
-            getChildFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentInlogg, preferencesView).addToBackStack(null).commit();
-            /*
             FragmentTransaction fr = getFragmentManager().beginTransaction();
             fr.replace(R.id.fragmentInlogg, preferencesView);
             fr.addToBackStack(null);
             fr.commit();
-             */
         });
 
         getChildFragmentManager().beginTransaction()
