@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.testmaddafakka.view.MainView;
 import com.google.firebase.database.DatabaseReference;
@@ -14,16 +16,22 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
     private MainView mainView;
+    private TextView escape;
+    private ImageView escapeLogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        escapeLogo = findViewById(R.id.escapeImage);
+        escape = findViewById(R.id.escape);
+
+        escape.setOnClickListener(view -> setMainView());
+        escapeLogo.setOnClickListener(view -> setMainView());
+
         mainView = new MainView();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.fragmentInlogg, mainView);
-        fragmentTransaction.commit();
+        setMainView();
 
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -43,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
          */
+
+    }
+    private void setMainView(){
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.fragmentInlogg, mainView);
+        fragmentTransaction.commit();
 
     }
 }

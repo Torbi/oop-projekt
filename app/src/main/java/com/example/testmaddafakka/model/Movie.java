@@ -1,5 +1,9 @@
 package com.example.testmaddafakka.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
 public class Movie implements IMedia {
 
     private String title;
@@ -8,7 +12,6 @@ public class Movie implements IMedia {
     private String starring;
     private String image;
     private String year;
-    private MediaState state;
 
     /**
      * A movie object that contains information about a movie
@@ -34,15 +37,12 @@ public class Movie implements IMedia {
         this.starring = starring;
         this.image = image;
         this.year = year;
-        this.state = MediaState.DEFAULT;
     }
 
-    @Override
     public String getYear() {
         return year;
     }
 
-    @Override
     public String getName() {
         return title;
     }
@@ -51,23 +51,13 @@ public class Movie implements IMedia {
         return starring;
     }
 
-    @Override
     public String getImage() {
         return image;
     }
 
-    @Override
     public String getRating() {
         return rating;
     }
 
-    @Override
-    public MediaState getState() {
-        return state;
-    }
 
-    @Override
-    public void setState(MediaState state) {
-        this.state = state;
-    }
 }

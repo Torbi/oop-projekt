@@ -71,7 +71,7 @@
         </ScrollView>
 
         <ImageView
-            android:id="@+id/imageView10"
+            android:id="@+id/escapeImage"
             android:layout_width="68dp"
             android:layout_height="44dp"
             android:layout_marginStart="88dp"
@@ -82,7 +82,7 @@
             app:srcCompat="@drawable/ic_filmster" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/escape"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -91,7 +91,7 @@
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView10" />
+            app:layout_constraintStart_toEndOf="@+id/escapeImage" />
 
         <FrameLayout
             android:id="@+id/fragmentContainer"
