@@ -19,7 +19,6 @@ import com.example.testmaddafakka.R;
 import com.example.testmaddafakka.viewmodel.MainViewModel;
 
 public class MainView extends Fragment {
-
     private View view;
     private MainViewModel viewModel;
     private WatchlistView watchlistView;
@@ -28,8 +27,8 @@ public class MainView extends Fragment {
 
     private MediaFront mediaFront;
     private MediaBack mediaBack;
-    @SuppressLint("ClickableViewAccessibility")
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -90,7 +89,6 @@ public class MainView extends Fragment {
             @Override
             public void onClick() {
                 mediaFlip();
-                System.out.println("FLIP");
             }
 
             @Override
@@ -98,7 +96,6 @@ public class MainView extends Fragment {
                 viewModel.addWatchedMedia();
                 viewModel.nextMedia();
                 setMediaFront();
-
             }
             @Override
             public void onSwipeRight() {
@@ -111,7 +108,6 @@ public class MainView extends Fragment {
                 viewModel.addDislikedMedia();
                 viewModel.nextMedia();
                 setMediaFront();
-
             }
         });
         return view;
@@ -121,13 +117,13 @@ public class MainView extends Fragment {
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         ft.setCustomAnimations(R.animator.flip_out, R.animator.flip_in);
 
-        if (backSide) {
+        if(backSide){
             setMediaFront();
-        } else {
+        }else{
             setMediaBack();
         }
-
     }
+
     private void setMediaBack(){
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         ft.setCustomAnimations(R.animator.flip_out, R.animator.flip_in);
@@ -167,6 +163,5 @@ public class MainView extends Fragment {
         mediaRating.setText(grade);
         mediaYear.setText(viewModel.shorten(media.getYear()));
         mediaFront.update(media.getImage());
-
     }
 }

@@ -13,7 +13,6 @@ import com.example.testmaddafakka.R;
 import com.example.testmaddafakka.model.IMedia;
 
 public class MediaBack extends Fragment {
-
     private TextView mediaTitle;
     private TextView mediaYear;
     private TextView mediaRating;
@@ -37,7 +36,8 @@ public class MediaBack extends Fragment {
 
     private void update(String title, String rating, String year) {
         mediaTitle.setText(title);
-        mediaRating.setText( rating+ "/10");
+        String ratingTemp = rating + "/10"; //Bad to concat in setText
+        mediaRating.setText(ratingTemp);
         mediaYear.setText(year);
     }
 }

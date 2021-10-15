@@ -9,10 +9,10 @@ import com.example.testmaddafakka.api.strategies.IParseStrategy;
  */
 public interface IAdapter {
 
-    public void getList(String request);
+    void getList(String request);
 
-    public void setParseStrategy(IParseStrategy strategy);
+    void setParseStrategy(IParseStrategy strategy);
 
-    public void setBuildRequestStrategy(IBuildRequestStrategy strategy);
+    void setBuildRequestStrategy(IBuildRequestStrategy strategy);
 
 }

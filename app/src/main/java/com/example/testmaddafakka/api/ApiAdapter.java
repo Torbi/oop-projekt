@@ -85,7 +85,7 @@ public class ApiAdapter implements IAdapter {
             }
 
             @Override
-            public void retry(VolleyError error) throws VolleyError {
+            public void retry(VolleyError error) {
 
             }
         });
@@ -122,23 +122,17 @@ public class ApiAdapter implements IAdapter {
      */
     @Override
     public void getList(String request) {
-        getStringRequest(request, new VolleyCallback() {
-            @Override
-            public void onSuccess(List<IMedia> mediaList) {
-                listener.notifyListeners(mediaList);
-            }
-        });
+        getStringRequest(request, mediaList -> listener.notifyListeners(mediaList));
     }
 
     private IMedia jsonObject2Media(JsonObject object) {
         try {
-            IMedia media = new Movie(object.get("title").toString(),
+            return new Movie(object.get("title").toString(),
                                     object.get("id").toString(),
                                     object.get("imDbRating").toString(),
                                     object.get("image").toString(),
                                     object.get("year").toString()
             );
-            return media;
         } catch (Exception e) {
             e.printStackTrace();
         }

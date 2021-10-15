@@ -25,9 +25,6 @@ import java.util.List;
 
 public class WatchedMedia extends Fragment{
     private WatchlistViewModel viewModel;
-    public WatchedMedia(){
-
-    }
 
     @Nullable
     @Override
@@ -40,17 +37,11 @@ public class WatchedMedia extends Fragment{
 
         viewModel = new ViewModelProvider(this).get(WatchlistViewModel.class);
         viewModel.init(requireContext());
-        viewModel.getWatchedMedias().observe(getViewLifecycleOwner(), new Observer<List<IMedia>>() {
-            @Override
-
-            public void onChanged(List<IMedia> medias) {
-                MediaAdapter adapter = new MediaAdapter(medias);
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-
-            }
+        viewModel.getWatchedMedias().observe(getViewLifecycleOwner(), medias -> {
+            MediaAdapter adapter = new MediaAdapter(medias);
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         });
-
 
         return view;
     }

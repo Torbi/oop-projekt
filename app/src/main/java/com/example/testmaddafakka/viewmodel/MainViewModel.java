@@ -16,7 +16,6 @@ import com.example.testmaddafakka.repository.FilmsterRepository;
  * The mainView updates the MainViewModel on input from the user
  */
 public class MainViewModel extends ViewModel {
-
     private MutableLiveData<IMedia> media;
     private FilmsterRepository filmsterRepository;
 
@@ -25,7 +24,6 @@ public class MainViewModel extends ViewModel {
             return;
         }
         filmsterRepository = FilmsterRepository.getInstance(ctx);
-        //filmsterRepository.loadMedias();
         filmsterRepository.loadSelectedCategory("Popular");
     }
 

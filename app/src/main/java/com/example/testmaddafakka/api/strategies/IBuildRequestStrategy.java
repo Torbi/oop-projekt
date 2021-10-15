@@ -8,5 +8,5 @@ package com.example.testmaddafakka.api.strategies;
  */
 public interface IBuildRequestStrategy {
 
-    public String buildRequest(String request);
+    String buildRequest(String request);
 }
