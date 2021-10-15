@@ -9,5 +9,7 @@ public interface IMedia {
     String getName();
     String getYear();
     String getRating();
+    MediaState getState();
+    void setState(MediaState state);
 
 }

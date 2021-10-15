@@ -45,7 +45,8 @@ public class Filmster{
      * @param media - The movie to be added to the users liked movies list
      */
     public void addLikedMedia(IMedia media) {
-        this.user.addLikedMedia(media);
+        media.setState(MediaState.LIKED);
+        this.user.addMedia(media);
         nextMedia();
     }
 
@@ -54,11 +55,13 @@ public class Filmster{
      * @param media - The movie to be added to the users disliked movies list
      */
     public void addDislikedMedia(IMedia media) {
-        this.user.addDislikedMedia(media);
+        media.setState(MediaState.DISLIKED);
+        this.user.addMedia(media);
         nextMedia();
     }
     public void addWatchedMedia(IMedia media){
-        this.user.addWatchedMedia(media);
+        media.setState(MediaState.SEEN);
+        this.user.addMedia(media);
         nextMedia();
     }
 

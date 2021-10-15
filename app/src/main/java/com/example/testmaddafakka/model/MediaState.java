@@ -5,12 +5,8 @@ package com.example.testmaddafakka.model;
  */
 
 public enum MediaState {
+    DEFAULT,
     LIKED,
     DISLIKED,
     SEEN;
-    private final MediaState[] states = values();
-
-    public MediaState[] getStates() {
-        return states;
-    }
 }

@@ -25,14 +25,8 @@ public class User {
 
     }
 
-    public void addLikedMedia(IMedia media) {
-        watchList.addLikedMedia(media);
-    }
-    public void addDislikedMedia(IMedia media) {
-        watchList.addDislikedMedia(media);
-    }
-    public void addWatchedMedia(IMedia media) {
-        watchList.addWatchedMedia(media);
+    public void addMedia(IMedia media) {
+        watchList.addMedia(media);
     }
 
     public List<IMedia> getLikedMedia(){
