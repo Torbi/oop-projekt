@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -24,6 +25,7 @@ public class MainView extends Fragment {
     private WatchlistView watchlistView;
     private PreferencesView preferencesView;
     private boolean backSide = false;
+    private ProgressBar spinner;
 
     private MediaFront mediaFront;
     private MediaBack mediaBack;
@@ -42,6 +44,8 @@ public class MainView extends Fragment {
 
         watchlistView = new WatchlistView();
         preferencesView = new PreferencesView();
+        spinner = (ProgressBar) view.findViewById(R.id.progressBar1);
+        spinner.setVisibility(View.VISIBLE);
 
 
         Button watchlistBtn = view.findViewById(R.id.watchlist);
@@ -56,17 +60,20 @@ public class MainView extends Fragment {
             viewModel.addLikedMedia();
             viewModel.nextMedia();
             setMediaFront();
+            spinner.setVisibility(View.VISIBLE);
         });
 
         dislikeBtn.setOnClickListener(view -> {
             viewModel.addDislikedMedia();
             viewModel.nextMedia();
             setMediaFront();
+            spinner.setVisibility(View.VISIBLE);
         });
         watchedBtn.setOnClickListener(view -> {
             viewModel.addWatchedMedia();
             viewModel.nextMedia();
             setMediaFront();
+            spinner.setVisibility(View.VISIBLE);
         });
 
         watchlistBtn.setOnClickListener(view -> {
@@ -96,18 +103,22 @@ public class MainView extends Fragment {
                 viewModel.addWatchedMedia();
                 viewModel.nextMedia();
                 setMediaFront();
+                spinner.setVisibility(View.VISIBLE);
             }
             @Override
             public void onSwipeRight() {
                 viewModel.addLikedMedia();
                 viewModel.nextMedia();
                 setMediaFront();
+                spinner.setVisibility(View.VISIBLE);
+
             }
             @Override
             public void onSwipeLeft() {
                 viewModel.addDislikedMedia();
                 viewModel.nextMedia();
                 setMediaFront();
+                spinner.setVisibility(View.VISIBLE);
             }
         });
         return view;
@@ -127,6 +138,7 @@ public class MainView extends Fragment {
     private void setMediaBack(){
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         ft.setCustomAnimations(R.animator.flip_out, R.animator.flip_in);
+        spinner.setVisibility(View.GONE);
 
         Bundle bundle = new Bundle();
         bundle.putString("about", "This is a great movie highly recommend fjdpsafijdsa" +
@@ -142,6 +154,7 @@ public class MainView extends Fragment {
     private void setMediaFront(){
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         ft.setCustomAnimations(R.animator.flip_out, R.animator.flip_in);
+        spinner.setVisibility(View.GONE);
 
         Bundle bundle = new Bundle();
         bundle.putString("movie", viewModel.getCurrentMedia().getImage());
