@@ -29,19 +29,19 @@ public class UserTest {
     @Test
     public void addLikedMediaTest() {
         user.addLikedMedia(media);
-        assert user.getLikedMedia().get(0).getTitle().equals("Cool Movie");
+        assert user.getLikedMedia().get(0).getName().equals("Cool Movie");
     }
 
     @Test
     public void addDislikedMediaTest() {
         user.addDislikedMedia(media);
-        assert user.getDislikedMedia().get(0).getTitle().equals("Cool Movie");
+        assert user.getDislikedMedia().get(0).getName().equals("Cool Movie");
     }
 
     @Test
     public void addWatchedMediaTest() {
         user.addWatchedMedia(media);
-        assert user.getWatchedMedia().get(0).getTitle().equals("Cool Movie");
+        assert user.getWatchedMedia().get(0).getName().equals("Cool Movie");
     }
 
     @Test

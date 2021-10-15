@@ -3,6 +3,7 @@ package com.example.testmaddafakka.model;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * A class ....
  *
@@ -11,10 +12,11 @@ import java.util.List;
 
 public class Preferences {
 
-    private List<Genre> movieGenres = new ArrayList<>();
+    private List<ICategory> movieGenres;
 
     public Preferences(){
         addMovieGenres();
+        movieGenres = new ArrayList<>();
     }
 
     private void addMovieGenres(){
@@ -38,18 +40,17 @@ public class Preferences {
         movieGenres.add(new Genre("ls049110047","Musical"));
     }
 
-    public List<Genre> getMovieGenres() {
+    public List<ICategory> getMovieGenres() {
         return movieGenres;
     }
-
     /**
      * Iterates through a list of genres to find the genre-object matching with the genre-name
      * @param genre - The name of a genre
      * @return The matching genre-object
      */
-    public Genre getMatchingGenre(String genre){
-        Genre r = new Genre("noID", "ERROR");
-        for(int i = 0; i < movieGenres.size(); i++){
+    public ICategory getMatchingGenre(String genre){
+        ICategory r = new Genre("noID", "ERROR");
+        for(int i= 0; i < movieGenres.size(); i++){
             if(genre.equals(movieGenres.get(i).getName())){
                 r = movieGenres.get(i);
             }

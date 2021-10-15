@@ -11,8 +11,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.testmaddafakka.api.strategies.DefaultBuildRequestStrategy;
+import com.example.testmaddafakka.api.strategies.DefaultMovieCreatorStrategy;
 import com.example.testmaddafakka.api.strategies.DefaultParseStrategy;
 import com.example.testmaddafakka.api.strategies.IBuildRequestStrategy;
+import com.example.testmaddafakka.api.strategies.IMediaObjectCreateStrategy;
 import com.example.testmaddafakka.api.strategies.IParseStrategy;
 import com.example.testmaddafakka.model.IMedia;
 import com.example.testmaddafakka.model.Movie;
@@ -37,6 +39,7 @@ public class ApiAdapter implements IAdapter {
     private ApiListener listener;
     private IParseStrategy parseStrategy;
     private IBuildRequestStrategy buildRequestStrategy;
+    private IMediaObjectCreateStrategy mediaObjectCreateStrategy;
 
     /**
      * Constructor for the ApiAdapter
@@ -49,11 +52,13 @@ public class ApiAdapter implements IAdapter {
 
         parseStrategy = new DefaultParseStrategy();
         buildRequestStrategy = new DefaultBuildRequestStrategy();
+        mediaObjectCreateStrategy = new DefaultMovieCreatorStrategy();
     }
 
     /**
      * Uses a buildRequestStrategy to create a request to an api
      * Uses a parseStrategy to parse a specific response
+     * Uses a mediaObjectCreateStrategy to create different media objects
      * The result is forwarded to the callback function where a listener updates all objects that are subcribed to it
      * @param stringRequest - A specific string that is built into the request using strategy
      * @param callback - A callback function that gets the result and does something with it
@@ -69,7 +74,7 @@ public class ApiAdapter implements IAdapter {
 
             List<JsonObject> jsonObjects = parseStrategy.parseResponse(response);
             for(int i = 0; i < jsonObjects.size(); i++) {
-                IMedia media = jsonObject2Media(jsonObjects.get(i));
+                IMedia media = mediaObjectCreateStrategy.createMediaObjectFromJson(jsonObjects.get(i));
                 mediaList.add(media);
             }
             callback.onSuccess(mediaList);
@@ -124,6 +129,11 @@ public class ApiAdapter implements IAdapter {
         this.buildRequestStrategy = strategy;
     }
 
+    @Override
+    public void setMediaObjectCreateStrategy(IMediaObjectCreateStrategy strategy) {
+        this.mediaObjectCreateStrategy = strategy;
+    }
+
     /**
      * Need to make sure the correct strategies are chosen before calling this
      * with a random request. The request need to be built correctly according
@@ -133,27 +143,12 @@ public class ApiAdapter implements IAdapter {
      */
     @Override
     public void getList(String request) {
-
         makeJsonRequest(request, new VolleyCallback() {
             @Override
             public void onSuccess(List<IMedia> mediaList) {
                 listener.notifyListeners(mediaList);
             }
         });
-    }
-
-    private IMedia jsonObject2Media(JsonObject object) {
-        try {
-            return new Movie(object.get("title").toString(),
-                                    object.get("id").toString(),
-                                    object.get("imDbRating").toString(),
-                                    object.get("image").toString(),
-                                    object.get("year").toString()
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
 }

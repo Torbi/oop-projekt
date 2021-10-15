@@ -4,19 +4,13 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Movie implements Serializable, IMedia {
+public class Movie implements IMedia {
 
-    @SerializedName("title")
     private String title;
-    @SerializedName("id")
     private String id;
-    @SerializedName("IMDbRating")
     private String rating;
-    @SerializedName("Crew")
     private String starring;
-    @SerializedName("image")
     private String image;
-    @SerializedName("Year")
     private String year;
 
     /**
@@ -31,7 +25,16 @@ public class Movie implements Serializable, IMedia {
         this.title = title;
         this.id = id;
         this.rating = rating;
-        //this.starring = starring;
+        this.starring = "";
+        this.image = image;
+        this.year = year;
+    }
+
+    public Movie(String title, String id, String rating, String starring , String image, String year) {
+        this.title = title;
+        this.id = id;
+        this.rating = rating;
+        this.starring = starring;
         this.image = image;
         this.year = year;
     }
@@ -40,8 +43,12 @@ public class Movie implements Serializable, IMedia {
         return year;
     }
 
-    public String getTitle() {
+    public String getName() {
         return title;
+    }
+
+    public String getStarring() {
+        return starring;
     }
 
     public String getImage() {

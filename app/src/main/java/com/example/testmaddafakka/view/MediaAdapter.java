@@ -87,7 +87,7 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> 
         if(url.length() > 0) {
             smallMovieImage.setImageUrl(url, imageLoader);
         }
-        String title = shorten(media.getTitle());
+        String title = shorten(media.getName());
         movieTitle.setText(checkMovieLength(title));
 
         String grade = shorten(media.getRating()) + "/10";

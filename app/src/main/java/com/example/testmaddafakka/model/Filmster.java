@@ -65,7 +65,7 @@ public class Filmster{
 
     public String CurrentUsersCategory(String categoryName){
 
-        Genre category = user.getPreferences().getMatchingGenre(categoryName);
+        ICategory category = user.getPreferences().getMatchingGenre(categoryName);
 
         //Genre category = user.getPreferences().searchMovieGenres(categoryName);
 

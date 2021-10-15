@@ -8,7 +8,6 @@ import com.example.testmaddafakka.api.ApiAdapter;
 import com.example.testmaddafakka.api.ApiListener;
 import com.example.testmaddafakka.api.IApiListener;
 import com.example.testmaddafakka.api.strategies.IMDbListBuildRequestStrategy;
-import com.example.testmaddafakka.api.strategies.IMDbListParseStrategy;
 import com.example.testmaddafakka.model.IMedia;
 
 import org.junit.Before;
@@ -26,7 +25,6 @@ public class ApiAdapterStrategyTest implements IApiListener {
         listener.addListener(this);
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         ApiAdapter adapter = new ApiAdapter(appContext, listener);
-        adapter.setParseStrategy(new IMDbListParseStrategy());
         adapter.setBuildRequestStrategy(new IMDbListBuildRequestStrategy());
         adapter.getList("ls051091770");
         //looks ugly and feels wrong, but it works

@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Interface different strategies for parsing JSONObject responses
+ * @author Torbjörn
  */
 public interface IParseStrategy {
 

@@ -38,7 +38,7 @@ public class FilmsterTest {
 
     @Test
     public void setMediaListAndGetCurrentMedia() {
-        assert filmster.getCurrentMedia().getTitle().equals("Cool Movie");
+        assert filmster.getCurrentMedia().getName().equals("Cool Movie");
     }
 
     @Test
@@ -46,21 +46,21 @@ public class FilmsterTest {
         filmster.nextMedia();
         filmster.nextMedia();
         filmster.nextMedia();
-        assert  filmster.getCurrentMedia().getTitle().equals("Cool Movie3");
+        assert  filmster.getCurrentMedia().getName().equals("Cool Movie3");
     }
 
     //after adding a media to one of the watchlists, nextMedia should be called
     @Test
     public void addLikedMedia() {
         filmster.addLikedMedia(filmster.getCurrentMedia());
-        assert filmster.getCurrentMedia().getTitle().equals("Cool Movie1");
+        assert filmster.getCurrentMedia().getName().equals("Cool Movie1");
     }
 
     @Test
     public void addDisLikedMedia() {
         filmster.addDislikedMedia(filmster.getCurrentMedia());
         filmster.addDislikedMedia(filmster.getCurrentMedia());
-        assert filmster.getCurrentMedia().getTitle().equals("Cool Movie2");
+        assert filmster.getCurrentMedia().getName().equals("Cool Movie2");
     }
 
     @Test
@@ -68,6 +68,6 @@ public class FilmsterTest {
         filmster.addWatchedMedia(filmster.getCurrentMedia());
         filmster.addWatchedMedia(filmster.getCurrentMedia());
         filmster.addWatchedMedia(filmster.getCurrentMedia());
-        assert filmster.getCurrentMedia().getTitle().equals("Cool Movie3");
+        assert filmster.getCurrentMedia().getName().equals("Cool Movie3");
     }
 }

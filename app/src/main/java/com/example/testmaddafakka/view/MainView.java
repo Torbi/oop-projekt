@@ -129,7 +129,7 @@ public class MainView extends Fragment {
         ft.setCustomAnimations(R.animator.flip_out, R.animator.flip_in);
 
         Bundle bundle = new Bundle();
-        bundle.putString("data", viewModel.getCurrentMedia().getTitle() + "@" +
+        bundle.putString("data", viewModel.getCurrentMedia().getName() + "@" +
                 viewModel.getCurrentMedia().getRating() + "@" + viewModel.getCurrentMedia().getYear());
         mediaBack.setArguments(bundle);
         ft.replace(R.id.mediaCard, mediaBack);
@@ -156,7 +156,7 @@ public class MainView extends Fragment {
         TextView mediaRating = view.findViewById(R.id.mediaRating);
         TextView mediaYear = view.findViewById(R.id.mediaYear);
 
-        String title = viewModel.shorten(media.getTitle());
+        String title = viewModel.shorten(media.getName());
         mediaTitle.setText(viewModel.checkMovieLength(title));
 
         String grade = viewModel.shorten(media.getRating()) + "/10";

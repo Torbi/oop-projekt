@@ -1,6 +1,7 @@
 package com.example.testmaddafakka.api;
 
 import com.example.testmaddafakka.api.strategies.IBuildRequestStrategy;
+import com.example.testmaddafakka.api.strategies.IMediaObjectCreateStrategy;
 import com.example.testmaddafakka.api.strategies.IParseStrategy;
 
 /**
@@ -15,5 +16,7 @@ public interface IAdapter {
     void setParseStrategy(IParseStrategy strategy);
 
     void setBuildRequestStrategy(IBuildRequestStrategy strategy);
+
+    void setMediaObjectCreateStrategy(IMediaObjectCreateStrategy strategy);
 
 }

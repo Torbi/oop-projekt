@@ -6,7 +6,7 @@ package com.example.testmaddafakka.model;
 
 public interface IMedia {
     String getImage();
-    String getTitle();
+    String getName();
     String getYear();
     String getRating();
 
