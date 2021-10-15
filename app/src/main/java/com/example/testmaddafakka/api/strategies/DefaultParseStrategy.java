@@ -17,13 +17,22 @@ import java.util.List;
  */
 public class DefaultParseStrategy implements IParseStrategy {
 
+    private String memberName;
+
+    public DefaultParseStrategy(){
+        memberName = "items";
+    }
+
+    public DefaultParseStrategy(String memberName){
+        this.memberName = memberName;
+    }
     @Override
     public List<JsonObject> parseResponse(JSONObject response) {
 
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         JsonObject jsonObject = gson.fromJson(response.toString(), JsonObject.class);
-        JsonArray array = jsonObject.getAsJsonArray("items");
+        JsonArray array = jsonObject.getAsJsonArray(memberName);
 
         List<JsonObject> jsonObjects = new ArrayList<>();
         for(int i = 0; i < array.size(); i++) {

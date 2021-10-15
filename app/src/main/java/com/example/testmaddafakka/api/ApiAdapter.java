@@ -151,4 +151,22 @@ public class ApiAdapter implements IAdapter {
         });
     }
 
+    public void getSearchResults(String request){
+        //getStringRequest(request);
+    }
+
+    private IMedia jsonObject2Media(JsonObject object) {
+        try {
+            return new Movie(object.get("title").toString(),
+                                    object.get("id").toString(),
+                                    object.get("imDbRating").toString(),
+                                    object.get("image").toString(),
+                                    object.get("year").toString()
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

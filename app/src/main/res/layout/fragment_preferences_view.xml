@@ -10,11 +10,10 @@
     <!-- TODO: Update blank fragment layout -->
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView2"
+        android:id="@+id/fcvPrefs"
         android:name="com.example.testmaddafakka.view.SearchResults"
         android:layout_width="278dp"
         android:layout_height="474dp"
-        android:background="@color/purple_700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
