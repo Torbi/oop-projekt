@@ -3,6 +3,7 @@ package com.example.testmaddafakka.api;
 /**
  * Constant values for calling imdb api
  * Could add different api here and implement new strategies for different apis
+ * @author Torbjörn
  */
 public enum URL {
 

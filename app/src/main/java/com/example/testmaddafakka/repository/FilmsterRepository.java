@@ -123,10 +123,8 @@ public class FilmsterRepository implements IApiListener {
     public void loadSelectedCategory(String categoryName){
         if(!categoryName.equals("Popular")) {
             imdbAdapter.setBuildRequestStrategy(new IMDbListBuildRequestStrategy());
-            imdbAdapter.setParseStrategy(new IMDbListParseStrategy());
         } else {
             imdbAdapter.setBuildRequestStrategy(new DefaultBuildRequestStrategy());
-            imdbAdapter.setParseStrategy(new DefaultParseStrategy());
         }
         imdbAdapter.getList(getSelectedCategory(categoryName));
     }

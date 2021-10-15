@@ -38,7 +38,11 @@ public class ApiAdapter implements IAdapter {
     private IParseStrategy parseStrategy;
     private IBuildRequestStrategy buildRequestStrategy;
 
-
+    /**
+     * Constructor for the ApiAdapter
+     * @param context The application context
+     * @param listener a listener that holds all objects that wants to be updated by the results
+     */
     public ApiAdapter(Context context, ApiListener listener) {
         this.context = context;
         this.listener = listener;
@@ -47,7 +51,14 @@ public class ApiAdapter implements IAdapter {
         buildRequestStrategy = new DefaultBuildRequestStrategy();
     }
 
-    private void getStringRequest(String stringRequest, final VolleyCallback callback) {
+    /**
+     * Uses a buildRequestStrategy to create a request to an api
+     * Uses a parseStrategy to parse a specific response
+     * The result is forwarded to the callback function where a listener updates all objects that are subcribed to it
+     * @param stringRequest - A specific string that is built into the request using strategy
+     * @param callback - A callback function that gets the result and does something with it
+     */
+    private void makeJsonRequest(String stringRequest, final VolleyCallback callback) {
         VolleyLog.DEBUG = true;
         RequestQueue queue = SingletonRequestQueue.getInstance(context).getRequestQueue();
 
@@ -122,7 +133,13 @@ public class ApiAdapter implements IAdapter {
      */
     @Override
     public void getList(String request) {
-        getStringRequest(request, mediaList -> listener.notifyListeners(mediaList));
+
+        makeJsonRequest(request, new VolleyCallback() {
+            @Override
+            public void onSuccess(List<IMedia> mediaList) {
+                listener.notifyListeners(mediaList);
+            }
+        });
     }
 
     private IMedia jsonObject2Media(JsonObject object) {
