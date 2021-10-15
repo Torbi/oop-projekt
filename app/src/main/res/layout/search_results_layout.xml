@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="400px"
+        android:layout_weight="1">
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/personImageSmall"
+            android:layout_width="261px"
+            android:layout_height="400px"
+            android:layout_weight="1"
+            android:contentDescription="@string/movieTitle"
+            android:src="@drawable/jason_bourne"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:src="@drawable/jason_bourne" />
+
+        <TextView
+            android:id="@+id/nameText"
+            android:layout_width="256dp"
+            android:layout_height="27dp"
+            android:text="@string/name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.464"
+            app:layout_constraintStart_toEndOf="@+id/personImageSmall"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.336" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

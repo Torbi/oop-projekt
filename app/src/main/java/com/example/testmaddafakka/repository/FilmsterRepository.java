@@ -149,11 +149,21 @@ public class FilmsterRepository implements IApiListener {
         return this.categories;
     }
 
+
     public LiveData<List<ICategory>> getCategoriesNEW() {
         if (this.categories == null) {
             this.categories = new MutableLiveData<>();
             loadCategories();
         }
         return this.categories;
+    }
+
+    public void search(String name){
+        // api.search or something
+    }
+
+    public List<ICategory> getSearchResults(){
+        // get list from api
+        return null;
     }
 }

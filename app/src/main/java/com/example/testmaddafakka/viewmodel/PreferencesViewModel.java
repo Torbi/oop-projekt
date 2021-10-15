@@ -11,9 +11,18 @@ import com.example.testmaddafakka.repository.FilmsterRepository;
 
 import java.util.List;
 
+/**
+ * A viewmodel ....
+ *
+ * @author Albin Sundström
+ */
 public class PreferencesViewModel extends ViewModel {
 
     private FilmsterRepository filmsterRepository;
+
+    private MutableLiveData<List<ICategory>> categories;
+    private MutableLiveData<List<ICategory>> searchResults;
+
 
 
     public void init(Context ctx) {
@@ -29,5 +38,23 @@ public class PreferencesViewModel extends ViewModel {
         return filmsterRepository.getCategories();
     }
 
+
+    private void loadCategories() {
+        // Do an asynchronous operation to fetch a category
+        categories = filmsterRepository.getCategories();
+    }
+
+    public void search(String name){
+        filmsterRepository.search(name);
+    }
+
+    public LiveData<List<ICategory>> getSearchResults(){
+        if(searchResults == null){
+            searchResults = new MutableLiveData<>();
+        }
+        searchResults.setValue(filmsterRepository.getSearchResults());
+        return searchResults;
+
+    }
 
 }
