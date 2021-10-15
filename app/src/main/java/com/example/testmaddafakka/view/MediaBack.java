@@ -13,31 +13,30 @@ import com.example.testmaddafakka.R;
 import com.example.testmaddafakka.model.IMedia;
 
 public class MediaBack extends Fragment {
-    private TextView mediaTitle;
-    private TextView mediaYear;
-    private TextView mediaRating;
+    private TextView aboutMedia;
+    private TextView aboutTitle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_media_back, container, false);
-        mediaTitle = view.findViewById(R.id.mediaTitleBack);
-        mediaYear = view.findViewById(R.id.mediaYearBack);
-        mediaRating = view.findViewById(R.id.mediaRatingBack);
+        aboutMedia = view.findViewById(R.id.about);
+        aboutTitle = view.findViewById(R.id.aboutTitle);
+
         Bundle bundle = this.getArguments();
         if(bundle != null) {
-            String[] data = bundle.getString("data").split("@");
-            update(data[0], data[1], data[2]);
+            String about = bundle.getString("about");
+            update(about);
         }
 
         return view;
     }
 
-    private void update(String title, String rating, String year) {
-        mediaTitle.setText(title);
-        String ratingTemp = rating + "/10"; //Bad to concat in setText
-        mediaRating.setText(ratingTemp);
-        mediaYear.setText(year);
+    private void update(String about) {
+        String aboutTilte = "About";
+        aboutTitle.setText(aboutTilte);
+        aboutMedia.setText(about);
+
     }
 }

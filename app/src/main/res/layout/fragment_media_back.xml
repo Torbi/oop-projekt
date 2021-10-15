@@ -2,49 +2,39 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_bright"
-    tools:context=".view.MediaBack">
+    android:layout_width="260sp"
+    android:layout_height="340sp"
+    tools:context=".view.MediaBack"
+    android:background="@drawable/layout_border">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="260sp"
+        android:layout_height="340sp">
 
         <TextView
-            android:id="@+id/mediaTitleBack"
-            android:layout_width="112dp"
-            android:layout_height="47dp"
-            android:layout_marginStart="123dp"
-            android:layout_marginTop="84dp"
-            android:layout_marginEnd="123dp"
-            android:text="@string/titleBack"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/mediaRatingBack"
+            android:id="@+id/aboutTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="163dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="190dp"
-            android:text="@string/ratingBack"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mediaTitleBack" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextContrastCheck"
+            tools:text="@string/About" />
 
         <TextView
-            android:id="@+id/mediaYearBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="163dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginEnd="190dp"
-            android:text="@string/yearBack"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/about"
+            android:layout_width="207dp"
+            android:layout_height="166dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/actors"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mediaRatingBack" />
+            app:layout_constraintTop_toBottomOf="@+id/aboutTitle" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>

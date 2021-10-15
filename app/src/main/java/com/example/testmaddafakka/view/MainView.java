@@ -129,8 +129,9 @@ public class MainView extends Fragment {
         ft.setCustomAnimations(R.animator.flip_out, R.animator.flip_in);
 
         Bundle bundle = new Bundle();
-        bundle.putString("data", viewModel.getCurrentMedia().getName() + "@" +
-                viewModel.getCurrentMedia().getRating() + "@" + viewModel.getCurrentMedia().getYear());
+        bundle.putString("about", "This is a great movie highly recommend fjdpsafijdsa" +
+                "fkpdosafkpdosa fkdsoakpfd fsdkofd fdf df df df df df d fd fd fd f" +
+                "fd sfds fds f dsf ds fs ");
         mediaBack.setArguments(bundle);
         ft.replace(R.id.mediaCard, mediaBack);
         ft.commit();

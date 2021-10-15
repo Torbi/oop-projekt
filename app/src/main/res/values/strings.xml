@@ -8,6 +8,7 @@
     <string name="movieTitle">The bourne identity</string>
     <string name="movieRating">9.5/10</string>
     <string name="imdbRating">IMDB Rating</string>
+    <string name="About">About</string>
     <string name="movieYear">2008</string>
     <string name="likeDiscription">2008</string>
     <string name="dislikeDiscription">2008</string>
