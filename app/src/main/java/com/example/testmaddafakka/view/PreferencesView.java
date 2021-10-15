@@ -127,4 +127,6 @@ public class PreferencesView extends Fragment {
         }
         spinnerAdapter.notifyDataSetChanged();
     }
+
+
 }

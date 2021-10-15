@@ -26,6 +26,8 @@ import java.util.List;
 /**
  * A repository that handles all communication between the viewmodels and the api/model data
  * Follows the mvvm architecture
+ *
+ * @author Albin Sundström
  */
 public class FilmsterRepository implements IApiListener {
     private static FilmsterRepository instance;
