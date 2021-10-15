@@ -44,8 +44,6 @@ public class Movie implements Serializable, IMedia {
         return title;
     }
 
-
-
     public String getImage() {
         return image;
     }

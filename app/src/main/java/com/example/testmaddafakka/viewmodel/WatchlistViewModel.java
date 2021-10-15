@@ -22,7 +22,6 @@ public class WatchlistViewModel extends ViewModel {
 
     public void init(Context ctx) {
         filmsterRepository = FilmsterRepository.getInstance(ctx);
-
     }
 
     public LiveData<IMedia> getMedia() {
@@ -49,6 +48,7 @@ public class WatchlistViewModel extends ViewModel {
 
         return dislikedMedias;
     }
+
     public LiveData<List<IMedia>> getWatchedMedias(){
         if(watchedMedias == null){
             watchedMedias = new MutableLiveData<>();
@@ -56,7 +56,6 @@ public class WatchlistViewModel extends ViewModel {
         watchedMedias.setValue(filmsterRepository.getWatchedMedias());
         return watchedMedias;
     }
-
 
     private void loadMedias() {
         // Do an asynchronous operation to fetch a movie

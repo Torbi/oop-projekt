@@ -20,7 +20,6 @@ import java.util.List;
 
 
 public class PreferencesView extends Fragment {
-
     private View view;
     private Spinner actorSpinner;
     private Spinner directorSpinner;

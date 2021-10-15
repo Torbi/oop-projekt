@@ -11,7 +11,6 @@ public class DefaultBuildRequestStrategy implements IBuildRequestStrategy {
 
     @Override
     public String buildRequest(String request) {
-
         return URL.IMDB_URL.getValue() + request + URL.IMDB_KEY.getValue();
     }
 }

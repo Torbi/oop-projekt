@@ -42,14 +42,11 @@ public class DislikedMedias extends Fragment {
 
         viewModel = new ViewModelProvider(this).get(WatchlistViewModel.class);
         viewModel.init(requireContext());
-        viewModel.getDislikedMedias().observe(getViewLifecycleOwner(), new Observer<List<IMedia>>() {
-            @Override
-            public void onChanged(List<IMedia> medias) {
-                MediaAdapter adapter = new MediaAdapter(medias);
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        viewModel.getDislikedMedias().observe(getViewLifecycleOwner(), medias -> {
+            MediaAdapter adapter = new MediaAdapter(medias);
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-            }
         });
 
         return view;

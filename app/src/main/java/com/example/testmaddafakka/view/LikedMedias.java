@@ -30,10 +30,6 @@ public class LikedMedias extends Fragment {
 
     private WatchlistViewModel viewModel;
 
-    public LikedMedias() {
-
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,

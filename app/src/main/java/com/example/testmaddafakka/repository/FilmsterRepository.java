@@ -28,12 +28,10 @@ import java.util.List;
  * Follows the mvvm architecture
  */
 public class FilmsterRepository implements IApiListener {
-
     private static FilmsterRepository instance;
     private IAdapter imdbAdapter;
     private MutableLiveData<List<IMedia>> medias;
     private MutableLiveData<IMedia> currentMedia;
-    private LiveData<IMedia> currentLiveMeida;
     private ApiListener listener;
     private Filmster filmster;
     private User user;
@@ -42,14 +40,13 @@ public class FilmsterRepository implements IApiListener {
 
 
     private FilmsterRepository(Context ctx) {
-
         medias = new MutableLiveData<>();
         currentMedia = new MutableLiveData<>();
         user = new User("TestNamn", "TestPass", new WatchList(), new Preferences());
         filmster = new Filmster(user);
         listener = new ApiListener();
         listener.addListener(this);
-        categories = new MutableLiveData<List<ICategory>>();
+        categories = new MutableLiveData<>();
 
         imdbAdapter = new ApiAdapter(ctx, listener);
         //loadMedias();
@@ -72,10 +69,6 @@ public class FilmsterRepository implements IApiListener {
     public void loadCategories() {
         // Do an asynchronous operation to fetch a category
         categories = getCategories();
-    }
-
-    public void loadMedias() {
-        imdbAdapter.getList("Top250Movies");
     }
 
     public MutableLiveData<IMedia> getCurrentMedia() {
@@ -146,14 +139,6 @@ public class FilmsterRepository implements IApiListener {
      */
     public MutableLiveData<List<ICategory>> getCategories() {
         this.categories.setValue(filmster.getMovieCategories());
-        return this.categories;
-    }
-
-    public LiveData<List<ICategory>> getCategoriesNEW() {
-        if (this.categories == null) {
-            this.categories = new MutableLiveData<>();
-            loadCategories();
-        }
         return this.categories;
     }
 }
