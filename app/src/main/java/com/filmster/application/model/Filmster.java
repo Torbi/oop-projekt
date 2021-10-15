@@ -45,6 +45,9 @@ public class Filmster{
         this.mediaList = moviesList;
         this.currentMediaCounter = 0;
     }
+    public List<IMedia> getMediaList(){
+        return mediaList;
+    }
 
     /**
      * Returns the currently displayed IMedia object

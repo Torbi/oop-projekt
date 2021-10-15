@@ -36,6 +36,7 @@ public class FilmsterRepository implements IApiListener {
     private final User user;
     private int current = 0;
     private final MutableLiveData<List<ICategory>> categories;
+    private MutableLiveData<List<IMedia>> searchResults;
 
     private FilmsterRepository(Context ctx) {
         this.medias = new MutableLiveData<>();
@@ -178,8 +179,13 @@ public class FilmsterRepository implements IApiListener {
         this.imdbAdapter.loadResponse(name);
     }
 
-    public List<ICategory> getSearchResults(){
-        return null;
+
+
+    public MutableLiveData<List<IMedia>> getSearchResults(){
+        // get list from api
+        this.searchResults.setValue(filmster.getMediaList());
+
+        return this.searchResults;
     }
 
     /**

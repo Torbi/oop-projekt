@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -36,6 +37,11 @@ public class SearchResultsView extends Fragment {
 
         viewModel = new ViewModelProvider(this).get(PreferencesViewModel.class);
         viewModel.init(requireContext());
+        viewModel.getSearchResults().observe(getViewLifecycleOwner(), medias ->{
+            SearchResultAdapter searchResultAdapter = new SearchResultAdapter(medias);
+            recyclerView.setAdapter(searchResultAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        });
 
 
         return view;

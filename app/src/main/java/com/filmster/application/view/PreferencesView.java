@@ -17,6 +17,7 @@ import android.widget.Spinner;
 
 import com.filmster.application.R;
 import com.filmster.application.model.ICategory;
+import com.filmster.application.model.IMedia;
 import com.filmster.application.viewmodel.PreferencesViewModel;
 
 import java.util.List;
@@ -81,7 +82,6 @@ public class PreferencesView extends Fragment {
         initSearchViewListener(actorSearchView, fcv);
 
     }
-
     private void initSearchViewListener(SearchView actorSearchView, FragmentContainerView fcv) {
         actorSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -148,6 +148,14 @@ public class PreferencesView extends Fragment {
         }
 
         spinnerAdapter.notifyDataSetChanged();
+    }
+
+    private void updateSearchResultDisplayed(List<IMedia> iMedia) {
+        FragmentContainerView fcv = view.findViewById(R.id.fcvPrefs);
+        fcv.setVisibility(View.VISIBLE);
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.fcvPrefs, searchResults).commit();
+        fcv.bringToFront();
     }
 
 

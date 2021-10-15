@@ -6,7 +6,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+
 import com.filmster.application.model.ICategory;
+import com.filmster.application.model.IMedia;
 import com.filmster.application.repository.FilmsterRepository;
 
 import java.util.List;
@@ -21,15 +23,10 @@ public class PreferencesViewModel extends ViewModel {
     private FilmsterRepository filmsterRepository;
 
     private MutableLiveData<List<ICategory>> categories;
-    private MutableLiveData<List<ICategory>> searchResults;
+    private MutableLiveData<List<IMedia>> searchResults;
 
-    public LiveData<List<ICategory>> getCategories() {
-        if (this.categories == null) {
-            this.categories = new MutableLiveData<>();
-            loadCategories();
-        }
-        return this.categories;
-    }
+
+
     public void init(Context ctx) {
         filmsterRepository = FilmsterRepository.getInstance(ctx);
     }
@@ -37,6 +34,11 @@ public class PreferencesViewModel extends ViewModel {
     public void loadSelectedCategory(String category){
         filmsterRepository.loadSelectedCategory(category);
     }
+
+    public LiveData<List<ICategory>> getCategories() {
+        return filmsterRepository.getCategories();
+    }
+
 
     private void loadCategories() {
         // Do an asynchronous operation to fetch a category
@@ -47,13 +49,12 @@ public class PreferencesViewModel extends ViewModel {
         filmsterRepository.search(name);
     }
 
-    public LiveData<List<ICategory>> getSearchResults(){
+    public LiveData<List<IMedia>> getSearchResults(){
         if(searchResults == null){
             searchResults = new MutableLiveData<>();
         }
-        searchResults.setValue(filmsterRepository.getSearchResults());
+        searchResults.setValue(filmsterRepository.getSearchResults().getValue());
         return searchResults;
-
     }
 
 }
