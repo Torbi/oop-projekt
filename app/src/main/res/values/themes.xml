@@ -19,5 +19,18 @@
         <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
 
-    
+    <style name="AppTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">#f3f3f3</item>
+        <item name="tabPaddingEnd">6dp</item>
+        <item name="tabBackground">@color/white</item>
+        <item name="tabSelectedTextColor">@color/tabSelectedText</item>
+    </style>
+
+    <style name="AppTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/tabTextNotSelected</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+
 </resources>

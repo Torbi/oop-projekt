@@ -8,4 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="backgroundColor">#F3F0FF</color>
+    <color name="tabSelectedBackgroud">#E9ECEF</color>
+    <color name="tabSelectedText">#339AF0</color>
+    <color name="tabBackgroundColor">#339AF0</color>
+    <color name="tabTextNotSelected">#868E96</color>
 </resources>
