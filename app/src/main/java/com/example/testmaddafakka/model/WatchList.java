@@ -1,9 +1,14 @@
 package com.example.testmaddafakka.model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * A watchlist containing all media objects the user has interacted with
+ * Can also sort the list by rating and by year, both ascending and descending
+ */
 public class WatchList {
 
     private List<IMedia> watchList;
@@ -12,8 +17,11 @@ public class WatchList {
         this.watchList = new ArrayList<>();
     }
 
+    /**
+     * Adds a media object to the watchlist,
+     * @param media
+     */
     public void addMedia(IMedia media) {
-        System.out.println("added media");
         watchList.add(media);
     }
 
@@ -38,6 +46,21 @@ public class WatchList {
                 .collect(Collectors.toList());
     }
 
+    public void sortByRating() {
+        sort(new SortByRating());
+    }
+
+    public void sortByYearAscending() {
+        sort(new SortByYearAscending());
+    }
+
+    public void sortByYearDescending() {
+        sort(new SortByYearDescending());
+    }
+
+    private void sort(Comparator<IMedia> method) {
+        this.watchList.sort(method);
+    }
 }
 
 

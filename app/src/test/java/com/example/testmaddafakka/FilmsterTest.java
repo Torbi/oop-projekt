@@ -19,11 +19,11 @@ public class FilmsterTest {
 
     @Before
     public void beforeTests() {
-        IMedia media = new Movie("Cool Movie", "1", "9.1",  "tomcruise.com", "2021");
-        IMedia media1 = new Movie("Cool Movie1", "2", "9.1",  "tomcruise.com", "2021");
-        IMedia media2 = new Movie("Cool Movie2", "3", "9.1",  "tomcruise.com", "2021");
-        IMedia media3 = new Movie("Cool Movie3", "4", "9.1",  "tomcruise.com", "2021");
-        IMedia media4 = new Movie("Cool Movie4", "5", "9.1",  "tomcruise.com", "2021");
+        IMedia media = new Movie("Cool Movie", "1", 9.0,  "tomcruise.com", 2021);
+        IMedia media1 = new Movie("Cool Movie1", "2", 9.1,  "tomcruise.com", 2021);
+        IMedia media2 = new Movie("Cool Movie2", "3", 9.1,  "tomcruise.com", 2021);
+        IMedia media3 = new Movie("Cool Movie3", "4", 9.1,  "tomcruise.com", 2021);
+        IMedia media4 = new Movie("Cool Movie4", "5", 9.1,  "tomcruise.com", 2021);
         List<IMedia> mediaList = new ArrayList<>();
         mediaList.add(media);
         mediaList.add(media1);

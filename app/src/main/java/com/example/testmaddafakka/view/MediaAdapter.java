@@ -77,7 +77,6 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> 
         //updateMovieDisplayed(movie);
         ImageLoader imageLoader = SingletonRequestQueue.getInstance(context).getImageLoader();
         String url = media.getImage();
-        url = url.substring(1,url.length()-1);
 
         NetworkImageView smallMovieImage = holder.smallMediaImage;
         TextView movieTitle = holder.mediaTitle;
@@ -87,12 +86,12 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> 
         if(url.length() > 0) {
             smallMovieImage.setImageUrl(url, imageLoader);
         }
-        String title = shorten(media.getName());
-        movieTitle.setText(checkMovieLength(title));
+        String title = media.getName();
+        movieTitle.setText(title);
 
-        String grade = shorten(media.getRating()) + "/10";
+        String grade = media.getRating().toString() + "/10";
         movieRating.setText(grade);
-        movieYear.setText(shorten(media.getYear()));
+        movieYear.setText(Integer.toString(media.getYear()));
     }
 
     // Returns the total count of items in the list
@@ -101,15 +100,4 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> 
         return mediaList.size();
     }
 
-    private String shorten(String text) {
-        String temp = text.substring(1, text.length() - 1);
-        return temp;
-    }
-
-    private String checkMovieLength(String title) {
-        if (title.length() > 13) {
-            return title.substring(0, 14) + "...";
-        }
-        return title;
-    }
 }

@@ -1,25 +1,29 @@
 package com.example.testmaddafakka.model;
 
+/**
+ * A movie contains a name, id , rating, may contain a crew/starring, an image, a year it was made and
+ * a state on if its watched, liked or disliked.
+ */
 public class Movie implements IMedia {
 
-    private String title;
+    private String name;
     private String id;
-    private String rating;
+    private Double rating;
     private String starring;
     private String image;
-    private String year;
+    private int year;
     private MediaState state;
 
     /**
      * A movie object that contains information about a movie
-     * @param title - The title of the movie
+     * @param name - The title of the movie
      * @param id - The id a movie has on imdb, starts with "tt"
      * @param rating - The imdb rating of the movie
      * @param image - A string for where the image can be found online
      * @param year - A string representing the year the movie was made
      */
-    public Movie(String title, String id, String rating, String image, String year) {
-        this.title = title;
+    public Movie(String name, String id, Double rating, String image, int year) {
+        this.name = checkMovieLength(name);
         this.id = id;
         this.rating = rating;
         this.starring = "";
@@ -27,8 +31,8 @@ public class Movie implements IMedia {
         this.year = year;
     }
 
-    public Movie(String title, String id, String rating, String starring , String image, String year) {
-        this.title = title;
+    public Movie(String name, String id, Double rating, String starring , String image, int year) {
+        this.name = checkMovieLength(name);
         this.id = id;
         this.rating = rating;
         this.starring = starring;
@@ -37,14 +41,21 @@ public class Movie implements IMedia {
         this.state = MediaState.DEFAULT;
     }
 
+    private String checkMovieLength(String title){
+        if(title.length() > 15){
+            return title.substring(0, 16) + "...";
+        }
+        return title;
+    }
+
     @Override
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
     @Override
     public String getName() {
-        return title;
+        return name;
     }
 
     public String getStarring() {
@@ -57,7 +68,7 @@ public class Movie implements IMedia {
     }
 
     @Override
-    public String getRating() {
+    public Double getRating() {
         return rating;
     }
 

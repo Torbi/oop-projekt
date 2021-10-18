@@ -83,6 +83,7 @@ public class FilmsterRepository implements IApiListener {
     @Override
     public void update(List<IMedia> medias) {
         setMedias(medias);
+        current = 0;
     }
 
     public void addLikedMedia(IMedia media) {
@@ -99,9 +100,17 @@ public class FilmsterRepository implements IApiListener {
         nextMedia();
     }
 
+    /**
+     * Updates the current media to be displayed to the next
+     * If out of objects to display start at the beginning
+     * of medias and display them.
+     */
     public void nextMedia() {
         this.currentMedia.setValue(this.medias.getValue().get(current));
         current++;
+        if(current == this.medias.getValue().size()) {
+            current = 0;
+        }
     }
     public List<IMedia> getLikedMedias(){
         return user.getLikedMedia();

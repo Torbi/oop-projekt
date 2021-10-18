@@ -23,12 +23,13 @@ public class Filmster{
         mediaList = new ArrayList<>();
         categoryList = new ArrayList<>();
 
-        //a fake movie is added to give time for imdbapiadapter to get movies from the api
-        mediaList.add(new Movie(" Inception ", "12123", " 9.1 ", " https://imdb-api.com/Images/original/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_Ratio0.6791_AL_.jpg "," 2010 "));
+        //a fake movie is added to give time for imdbapiadapter to get real movies from the api
+        mediaList.add(new Movie("Inception", "12123", 9.1, "https://imdb-api.com/Images/original/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_Ratio0.6791_AL_.jpg",2020));
     }
 
     public void setMediaList(List<IMedia> moviesList) {
         this.mediaList = moviesList;
+        this.currentMediaCounter = 0;
     }
 
     public IMedia getCurrentMedia() {
@@ -41,8 +42,9 @@ public class Filmster{
 
 
     /**
-     * Adds a media to the user liked movie list and calls for the next movie to be displayed
-     * @param media - The movie to be added to the users liked movies list
+     * Sets the state of the current media object to liked and then adds it the the watchlist,
+     * then calls for the next media to be displayed
+     * @param media - The media to be added to the users watchlist
      */
     public void addLikedMedia(IMedia media) {
         media.setState(MediaState.LIKED);
@@ -51,14 +53,21 @@ public class Filmster{
     }
 
     /**
-     * Adds a movie to the user disliked movie list and calls for the next movie to be displayed
-     * @param media - The movie to be added to the users disliked movies list
+     * Sets the state of the current media object to disliked and then adds it the the watchlist,
+     * then calls for the next media to be displayed
+     * @param media - The media to be added to the users watchlist
      */
     public void addDislikedMedia(IMedia media) {
         media.setState(MediaState.DISLIKED);
         this.user.addMedia(media);
         nextMedia();
     }
+
+    /**
+     * Sets the state of the current media object to seen and then adds it the the watchlist,
+     * then calls for the next media to be displayed
+     * @param media - The media to be added to the users watchlist
+     */
     public void addWatchedMedia(IMedia media){
         media.setState(MediaState.SEEN);
         this.user.addMedia(media);

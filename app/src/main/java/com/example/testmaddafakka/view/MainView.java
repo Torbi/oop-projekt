@@ -170,12 +170,12 @@ public class MainView extends Fragment {
         TextView mediaRating = view.findViewById(R.id.mediaRating);
         TextView mediaYear = view.findViewById(R.id.mediaYear);
 
-        String title = viewModel.shorten(media.getName());
-        mediaTitle.setText(viewModel.checkMovieLength(title));
+        String title = media.getName();
+        mediaTitle.setText(title);
 
-        String grade = viewModel.shorten(media.getRating()) + "/10";
+        String grade = media.getRating().toString() + "/10";
         mediaRating.setText(grade);
-        mediaYear.setText(viewModel.shorten(media.getYear()));
+        mediaYear.setText(Integer.toString(media.getYear()));
         mediaFront.update(media.getImage());
     }
 }

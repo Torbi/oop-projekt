@@ -4,10 +4,10 @@ import com.example.testmaddafakka.model.IMedia;
 import com.google.gson.JsonObject;
 
 /**
- * Interface for different strategies for creating media objects from json
+ * Interface for MediaFactory for creating media objects from json
  * @author Torbjörn
  */
-public interface IMediaObjectCreateStrategy {
+public interface IMediaFactory {
 
     public IMedia createMediaObjectFromJson(JsonObject object);
 }

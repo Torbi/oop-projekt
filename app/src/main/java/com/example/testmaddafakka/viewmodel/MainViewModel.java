@@ -63,14 +63,5 @@ public class MainViewModel extends ViewModel {
     public void nextMedia() {
         filmsterRepository.nextMedia();
     }
-    public String checkMovieLength(String title){
-        if(title.length() > 15){
-            return title.substring(0, 16) + "...";
-        }
-        return title;
-    }
-    public String shorten(String text){
-        return text.substring(1, text.length()-1);
-    }
 
 }

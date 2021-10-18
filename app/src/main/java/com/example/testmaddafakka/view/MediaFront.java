@@ -37,11 +37,8 @@ public class MediaFront extends Fragment {
 
     public void update(String media){
         ImageLoader imageLoader = SingletonRequestQueue.getInstance(getContext()).getImageLoader();
-        String url = media;
-        url = url.substring(1,url.length()-1);
-
-        if(url.length() > 0)
-            mediaImage.setImageUrl(url, imageLoader);
-
+        if(media.length() > 0) {
+            mediaImage.setImageUrl(media, imageLoader);
+        }
     }
 }

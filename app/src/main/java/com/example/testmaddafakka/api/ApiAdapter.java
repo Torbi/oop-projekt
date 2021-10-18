@@ -11,10 +11,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.testmaddafakka.api.strategies.DefaultBuildRequestStrategy;
-import com.example.testmaddafakka.api.strategies.DefaultMovieCreatorStrategy;
+import com.example.testmaddafakka.api.strategies.MovieFactory;
 import com.example.testmaddafakka.api.strategies.DefaultParseStrategy;
 import com.example.testmaddafakka.api.strategies.IBuildRequestStrategy;
-import com.example.testmaddafakka.api.strategies.IMediaObjectCreateStrategy;
+import com.example.testmaddafakka.api.strategies.IMediaFactory;
 import com.example.testmaddafakka.api.strategies.IParseStrategy;
 import com.example.testmaddafakka.model.IMedia;
 import com.example.testmaddafakka.model.Movie;
@@ -39,7 +39,7 @@ public class ApiAdapter implements IAdapter {
     private ApiListener listener;
     private IParseStrategy parseStrategy;
     private IBuildRequestStrategy buildRequestStrategy;
-    private IMediaObjectCreateStrategy mediaObjectCreateStrategy;
+    private IMediaFactory mediaFactory;
 
     /**
      * Constructor for the ApiAdapter
@@ -52,7 +52,7 @@ public class ApiAdapter implements IAdapter {
 
         parseStrategy = new DefaultParseStrategy();
         buildRequestStrategy = new DefaultBuildRequestStrategy();
-        mediaObjectCreateStrategy = new DefaultMovieCreatorStrategy();
+        mediaFactory = new MovieFactory();
     }
 
     /**
@@ -70,11 +70,11 @@ public class ApiAdapter implements IAdapter {
         //parse response into gsons jsonobject and then turn them into medias
         JsonObjectRequest request = new JsonObjectRequest(buildRequestStrategy.buildRequest(stringRequest), null, response -> {
             List<IMedia> mediaList = new LinkedList<>();
-            //VolleyLog.wtf(response.toString(), "utf-8");
+            VolleyLog.wtf(response.toString(), "utf-8");
 
             List<JsonObject> jsonObjects = parseStrategy.parseResponse(response);
             for(int i = 0; i < jsonObjects.size(); i++) {
-                IMedia media = mediaObjectCreateStrategy.createMediaObjectFromJson(jsonObjects.get(i));
+                IMedia media = mediaFactory.createMediaObjectFromJson(jsonObjects.get(i));
                 mediaList.add(media);
             }
             callback.onSuccess(mediaList);
@@ -130,8 +130,8 @@ public class ApiAdapter implements IAdapter {
     }
 
     @Override
-    public void setMediaObjectCreateStrategy(IMediaObjectCreateStrategy strategy) {
-        this.mediaObjectCreateStrategy = strategy;
+    public void setMediaFactory(IMediaFactory factory) {
+        this.mediaFactory = factory;
     }
 
     /**
@@ -153,20 +153,6 @@ public class ApiAdapter implements IAdapter {
 
     public void getSearchResults(String request){
         //getStringRequest(request);
-    }
-
-    private IMedia jsonObject2Media(JsonObject object) {
-        try {
-            return new Movie(object.get("title").toString(),
-                                    object.get("id").toString(),
-                                    object.get("imDbRating").toString(),
-                                    object.get("image").toString(),
-                                    object.get("year").toString()
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
 }

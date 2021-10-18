@@ -38,7 +38,6 @@ public class PreferencesViewModel extends ViewModel {
         return filmsterRepository.getCategories();
     }
 
-
     private void loadCategories() {
         // Do an asynchronous operation to fetch a category
         categories = filmsterRepository.getCategories();

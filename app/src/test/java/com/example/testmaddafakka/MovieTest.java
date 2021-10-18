@@ -12,17 +12,17 @@ public class MovieTest {
 
     @Before
     public void createMovie() {
-        movie = new Movie("Inception", "1", "10",  "imageurl", "1337");
+        movie = new Movie("Inception", "1", 10.0,  "imageurl", 1337);
     }
 
     @Test
     public void getTitle() {
-        assert movie.getTitle().equals("Inception");
+        assert movie.getName().equals("Inception");
     }
 
     @Test
     public void getRating() {
-        assert movie.getRating().equals("10");
+        assert movie.getRating() == 10;
     }
 
     @Test
@@ -32,7 +32,7 @@ public class MovieTest {
 
     @Test
     public void getYear() {
-        assert movie.getYear().equals("1337");
+        assert movie.getYear() == 1337;
     }
 
 }
