@@ -26,12 +26,11 @@ public class SearchResultsView extends Fragment {
     private View view;
     private PreferencesViewModel viewModel;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_search_results, container, false);
+        View view = inflater.inflate(R.layout.fragment_search_results, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler);
 

@@ -38,7 +38,8 @@ public class ApiAdapter implements IApiAdapter {
 
     /**
      * Constructor for the ApiAdapter
-     * @param context The application context
+     *
+     * @param context  The application context
      * @param listener a listener that holds all objects that wants to be updated by the results
      */
     public ApiAdapter(Context context, ApiListener listener) {
@@ -55,8 +56,9 @@ public class ApiAdapter implements IApiAdapter {
      * Uses a parseStrategy to parse a specific response
      * Uses a mediaObjectCreateStrategy to create different media objects
      * The result is forwarded to the callback function where a listener updates all objects that are subcribed to it
+     *
      * @param stringRequest - A specific string that is built into the request using strategy
-     * @param callback - A callback function that gets the result and does something with it
+     * @param callback      - A callback function that gets the result and does something with it
      */
     private void makeJsonRequest(String stringRequest, final VolleyCallback callback) {
         VolleyLog.DEBUG = true;
@@ -66,7 +68,7 @@ public class ApiAdapter implements IApiAdapter {
         JsonObjectRequest request = new JsonObjectRequest(buildRequestStrategy.buildRequest(stringRequest), null, response -> {
             List<IMedia> mediaList = new LinkedList<>();
             List<JsonObject> jsonObjects = parseStrategy.parseResponse(response);
-            for(int i = 0; i < jsonObjects.size(); i++) {
+            for (int i = 0; i < jsonObjects.size(); i++) {
                 IMedia media = mediaFactory.createMediaObjectFromJson(jsonObjects.get(i));
                 mediaList.add(media);
             }
@@ -104,7 +106,7 @@ public class ApiAdapter implements IApiAdapter {
     Response.ErrorListener errorListener = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
-            if(error instanceof NetworkError) {
+            if (error instanceof NetworkError) {
                 Toast.makeText(context, "No network available", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
@@ -131,6 +133,7 @@ public class ApiAdapter implements IApiAdapter {
      * Need to make sure the correct strategies are chosen before calling this
      * with a random request. The request need to be built correctly according
      * to IMDb or whatever api you use
+     *
      * @param request - a correct request to an api
      * @return a list of movies
      */
@@ -138,9 +141,4 @@ public class ApiAdapter implements IApiAdapter {
     public void loadResponse(String request) {
         makeJsonRequest(request, listener::notifyListeners);
     }
-
-    public void getSearchResults(String request){
-        //getStringRequest(request);
-    }
-
 }

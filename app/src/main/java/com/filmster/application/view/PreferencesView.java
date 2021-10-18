@@ -41,6 +41,9 @@ public class PreferencesView extends Fragment {
 
         searchResults = new SearchResultsView();
 
+        FragmentContainerView fcv = view.findViewById(R.id.fcvPrefs);
+        fcv.setVisibility(View.INVISIBLE);
+
         initAndListen2ViewModel();
         initActorSearchView();
         initDirectorSearchView();
@@ -67,6 +70,8 @@ public class PreferencesView extends Fragment {
             }
         });
     }
+
+
 
 
     private void initActorSearchView() {
@@ -128,13 +133,6 @@ public class PreferencesView extends Fragment {
             }
         });
 
-    }
-
-    public void setSpinner(Spinner spinner, ArrayAdapter<CharSequence> content){
-        // Specify the layout to use when the list of choices appears
-        content.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner.setAdapter(content);
     }
 
     private void populateSpinner(List<ICategory> categories) {

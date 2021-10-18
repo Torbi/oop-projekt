@@ -12,6 +12,7 @@ public class Filmster{
     private User user;
     private int currentMediaCounter;
     private List<ICategory> categoryList;
+    private List<IMedia> resultList;
 
     /**
      * Constructor for filmster, initializes some data and receives a user for the program
@@ -39,6 +40,14 @@ public class Filmster{
       currentMediaCounter++;
    }
 
+   // Might not be necessary
+   public void setResultList(List<IMedia> results){
+        this.resultList = results;
+   }
+
+    public List<IMedia> getResultList() {
+        return resultList;
+    }
 
     /**
      * Adds a media to the user liked movie list and calls for the next movie to be displayed

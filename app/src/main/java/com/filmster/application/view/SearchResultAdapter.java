@@ -15,6 +15,7 @@ import com.filmster.application.R;
 import com.filmster.application.api.SingletonRequestQueue;
 import com.filmster.application.model.IMedia;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.ViewHolder> {
@@ -36,6 +37,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
     }
 
     public SearchResultAdapter(List<IMedia> resultList){
+        this.resultList = new ArrayList<>();
         this.resultList = resultList;
     }
 
@@ -65,20 +67,26 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         String url = media.getImage();
         url = url.substring(1,url.length()-1);
 
-        NetworkImageView smallMovieImage = holder.smallResultImage;
-        TextView movieTitle = holder.name;
+        NetworkImageView smallImage = holder.smallResultImage;
+        TextView personName = holder.name;
 
         if(url.length() > 0) {
-            smallMovieImage.setImageUrl(url, imageLoader);
+            smallImage.setImageUrl(url, imageLoader);
         }
         String title = shorten(media.getName());
-        movieTitle.setText(checkStringLength(title));
+        personName.setText(checkStringLength(title));
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        int r;
+        if(resultList == null){
+            r = 0;
+        } else{
+            r = resultList.size();
+        }
+        return r;
     }
 
     private String shorten(String text) {
