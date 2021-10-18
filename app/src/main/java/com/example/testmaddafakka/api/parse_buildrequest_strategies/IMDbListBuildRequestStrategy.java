@@ -1,8 +1,7 @@
-package com.example.testmaddafakka.api.strategies;
+package com.example.testmaddafakka.api.parse_buildrequest_strategies;
 
 
 import com.example.testmaddafakka.api.URL;
-import com.example.testmaddafakka.api.strategies.IBuildRequestStrategy;
 
 /**
  *Uses the IMDbList option to get a list from IMDb

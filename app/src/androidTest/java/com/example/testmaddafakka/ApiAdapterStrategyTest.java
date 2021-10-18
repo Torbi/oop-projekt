@@ -7,7 +7,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import com.example.testmaddafakka.api.ApiAdapter;
 import com.example.testmaddafakka.api.ApiListener;
 import com.example.testmaddafakka.api.IApiListener;
-import com.example.testmaddafakka.api.strategies.IMDbListBuildRequestStrategy;
+import com.example.testmaddafakka.api.parse_buildrequest_strategies.IMDbListBuildRequestStrategy;
 import com.example.testmaddafakka.model.IMedia;
 
 import org.junit.Before;

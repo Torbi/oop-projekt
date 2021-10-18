@@ -1,15 +1,14 @@
 package com.example.testmaddafakka.api;
 
-import com.example.testmaddafakka.api.strategies.IBuildRequestStrategy;
-import com.example.testmaddafakka.api.strategies.IMediaFactory;
-import com.example.testmaddafakka.api.strategies.IParseStrategy;
+import com.example.testmaddafakka.api.parse_buildrequest_strategies.IBuildRequestStrategy;
+import com.example.testmaddafakka.api.parse_buildrequest_strategies.IParseStrategy;
 
 /**
  * Methods that can be made to get different results from the api
  * And change the different strategies for the adapter
  * @author Torbjörn
  */
-public interface IAdapter {
+public interface IApiAdapter {
 
     /**
      * The method to call for making a request to an api
@@ -17,7 +16,7 @@ public interface IAdapter {
      * result using ApiListener
      * @param request - A correct request
      */
-    void getList(String request);
+    void loadResponse(String request);
 
     /**
      * A strategy to parse different responses from the api

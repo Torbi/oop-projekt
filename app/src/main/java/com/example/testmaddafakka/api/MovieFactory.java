@@ -1,4 +1,4 @@
-package com.example.testmaddafakka.api.strategies;
+package com.example.testmaddafakka.api;
 
 import com.example.testmaddafakka.model.IMedia;
 import com.example.testmaddafakka.model.Movie;
@@ -12,6 +12,7 @@ import com.google.gson.JsonObject;
 public class MovieFactory implements IMediaFactory {
     @Override
     public IMedia createMediaObjectFromJson(JsonObject object) {
+        //need to have try/catch in case the JsonObject doesn't contain the element you try to get
         try {
             return new Movie(shorten(object.get("title").toString()),
                     shorten(object.get("id").toString()),

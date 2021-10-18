@@ -1,5 +1,9 @@
 package com.example.testmaddafakka.model;
 
+import com.example.testmaddafakka.model.sortingstrategies.SortByRatingStrategy;
+import com.example.testmaddafakka.model.sortingstrategies.SortByYearAscendingStrategy;
+import com.example.testmaddafakka.model.sortingstrategies.SortByYearDescendingStrategy;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -12,6 +16,7 @@ import java.util.stream.Collectors;
 public class WatchList {
 
     private List<IMedia> watchList;
+    private Comparator<IMedia> sortingStrategy;
 
     public WatchList (){
         this.watchList = new ArrayList<>();
@@ -25,6 +30,10 @@ public class WatchList {
         watchList.add(media);
     }
 
+    /**
+     * Returns all medias that are liked
+     * @return - A list of IMedia objects
+     */
     public List<IMedia> getLikedList() {
         return watchList
             .stream()
@@ -32,6 +41,10 @@ public class WatchList {
             .collect(Collectors.toList());
     }
 
+    /**
+     * Returns all medias that are disliked
+     * @return - A list of IMedia objects
+     */
     public List<IMedia> getDislikedList() {
         return watchList
                 .stream()
@@ -39,6 +52,10 @@ public class WatchList {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Returns all medias that are seen
+     * @return - A list of IMedia objects
+     */
     public List<IMedia> getWatchedList() {
         return watchList
                 .stream()
@@ -46,21 +63,24 @@ public class WatchList {
                 .collect(Collectors.toList());
     }
 
-    public void sortByRating() {
-        sort(new SortByRating());
+    /**
+     * Sets the strategy used for sorting the watchlist
+     * @param sortingStrategy - A Comparator that uses IMedias attribute to sort them in some way
+     */
+    public void setSortingStrategy(Comparator<IMedia> sortingStrategy) {
+        this.sortingStrategy = sortingStrategy;
     }
 
-    public void sortByYearAscending() {
-        sort(new SortByYearAscending());
+    /**
+     * Uses the wanted sorting strategy to sort the watchlist
+     * If no strategy has been chosen, the watchlist will not be sorted
+     */
+    public void sort() {
+        if(this.sortingStrategy != null) {
+            this.watchList.sort(sortingStrategy);
+        }
     }
 
-    public void sortByYearDescending() {
-        sort(new SortByYearDescending());
-    }
-
-    private void sort(Comparator<IMedia> method) {
-        this.watchList.sort(method);
-    }
 }
 
 

@@ -6,6 +6,9 @@ import com.example.testmaddafakka.model.IMedia;
 import com.example.testmaddafakka.model.MediaState;
 import com.example.testmaddafakka.model.Movie;
 import com.example.testmaddafakka.model.WatchList;
+import com.example.testmaddafakka.model.sortingstrategies.SortByRatingStrategy;
+import com.example.testmaddafakka.model.sortingstrategies.SortByYearAscendingStrategy;
+import com.example.testmaddafakka.model.sortingstrategies.SortByYearDescendingStrategy;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -59,24 +62,25 @@ public class WatchlistTest {
 
     @Test
     public void sortByRatingTest() {
-        watchList.sortByRating();
+        watchList.setSortingStrategy(new SortByRatingStrategy());
+        watchList.sort();
         List<IMedia> likedlist = watchList.getLikedList();
         assertTrue(((likedlist.get(0).getRating()) > (likedlist.get(1).getRating())));
     }
 
     @Test
     public void sortByYearAscendingTest() {
-        watchList.sortByYearAscending();
+        watchList.setSortingStrategy(new SortByYearAscendingStrategy());
+        watchList.sort();
         List<IMedia> likedlist = watchList.getLikedList();
         assertTrue(((likedlist.get(0).getYear()) < (likedlist.get(1).getYear())));
     }
 
     @Test
     public void sortByYearDescendingTest() {
-        watchList.sortByYearDescending();
+        watchList.setSortingStrategy(new SortByYearDescendingStrategy());
+        watchList.sort();
         List<IMedia> likedlist = watchList.getLikedList();
-        System.out.println((likedlist.get(0).getYear()) + " nr 1");
-        System.out.println((likedlist.get(1).getYear()) + " nr 2");
         assertTrue(((likedlist.get(0).getYear()) > (likedlist.get(1).getYear())));
     }
 

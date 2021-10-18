@@ -1,4 +1,4 @@
-package com.example.testmaddafakka.api.strategies;
+package com.example.testmaddafakka.api;
 
 import com.example.testmaddafakka.model.IMedia;
 import com.google.gson.JsonObject;

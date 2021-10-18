@@ -1,4 +1,4 @@
-package com.example.testmaddafakka.api.strategies;
+package com.example.testmaddafakka.api.parse_buildrequest_strategies;
 
 import com.google.gson.JsonObject;
 

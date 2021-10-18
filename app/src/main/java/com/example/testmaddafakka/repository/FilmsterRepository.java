@@ -7,10 +7,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.testmaddafakka.api.ApiListener;
-import com.example.testmaddafakka.api.IAdapter;
+import com.example.testmaddafakka.api.IApiAdapter;
 import com.example.testmaddafakka.api.ApiAdapter;
-import com.example.testmaddafakka.api.strategies.DefaultBuildRequestStrategy;
-import com.example.testmaddafakka.api.strategies.IMDbListBuildRequestStrategy;
+import com.example.testmaddafakka.api.parse_buildrequest_strategies.DefaultBuildRequestStrategy;
+import com.example.testmaddafakka.api.parse_buildrequest_strategies.IMDbListBuildRequestStrategy;
 import com.example.testmaddafakka.model.Filmster;
 import com.example.testmaddafakka.model.ICategory;
 import com.example.testmaddafakka.model.IMedia;
@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class FilmsterRepository implements IApiListener {
     private static FilmsterRepository instance;
-    private IAdapter imdbAdapter;
+    private IApiAdapter imdbAdapter;
     private MutableLiveData<List<IMedia>> medias;
     private MutableLiveData<IMedia> currentMedia;
     private ApiListener listener;
@@ -49,7 +49,6 @@ public class FilmsterRepository implements IApiListener {
         categories = new MutableLiveData<>();
 
         imdbAdapter = new ApiAdapter(ctx, listener);
-        //loadMedias();
         loadSelectedCategory("Popular");
     }
 
@@ -133,7 +132,7 @@ public class FilmsterRepository implements IApiListener {
         } else {
             imdbAdapter.setBuildRequestStrategy(new DefaultBuildRequestStrategy());
         }
-        imdbAdapter.getList(getSelectedCategory(categoryName));
+        imdbAdapter.loadResponse(getSelectedCategory(categoryName));
     }
 
     private String getSelectedCategory(String categoryName){
@@ -162,7 +161,7 @@ public class FilmsterRepository implements IApiListener {
         // api.search or something
         //imdbAdapter.setBuildRequestStrategy(new IMDbNameBuildRequestStrategy());
         //imdbAdapter.setParseStrategy(new DefaultParseStrategy("results"));
-        imdbAdapter.getList(name);
+        imdbAdapter.loadResponse(name);
     }
 
     public List<ICategory> getSearchResults(){

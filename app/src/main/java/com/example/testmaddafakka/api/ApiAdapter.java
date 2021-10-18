@@ -10,14 +10,11 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.testmaddafakka.api.strategies.DefaultBuildRequestStrategy;
-import com.example.testmaddafakka.api.strategies.MovieFactory;
-import com.example.testmaddafakka.api.strategies.DefaultParseStrategy;
-import com.example.testmaddafakka.api.strategies.IBuildRequestStrategy;
-import com.example.testmaddafakka.api.strategies.IMediaFactory;
-import com.example.testmaddafakka.api.strategies.IParseStrategy;
+import com.example.testmaddafakka.api.parse_buildrequest_strategies.DefaultBuildRequestStrategy;
+import com.example.testmaddafakka.api.parse_buildrequest_strategies.DefaultParseStrategy;
+import com.example.testmaddafakka.api.parse_buildrequest_strategies.IBuildRequestStrategy;
+import com.example.testmaddafakka.api.parse_buildrequest_strategies.IParseStrategy;
 import com.example.testmaddafakka.model.IMedia;
-import com.example.testmaddafakka.model.Movie;
 import com.google.gson.JsonObject;
 
 import java.util.LinkedList;
@@ -33,7 +30,7 @@ import java.util.List;
  * @author Torbjorn
  */
 
-public class ApiAdapter implements IAdapter {
+public class ApiAdapter implements IApiAdapter {
 
     private final Context context;
     private ApiListener listener;
@@ -142,7 +139,7 @@ public class ApiAdapter implements IAdapter {
      * @return a list of movies
      */
     @Override
-    public void getList(String request) {
+    public void loadResponse(String request) {
         makeJsonRequest(request, new VolleyCallback() {
             @Override
             public void onSuccess(List<IMedia> mediaList) {
