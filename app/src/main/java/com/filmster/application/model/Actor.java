@@ -4,11 +4,13 @@ public class Actor implements IMedia {
     private String listID;
     private String name;
     private String image;
+    private String birthYear;
 
-    public Actor(String listID, String name, String image) {
+    public Actor(String listID, String name, String image, String birthYear) {
         this.listID = listID;
         this.name = name;
         this.image = image;
+        this.birthYear = birthYear;
     }
 
     public String getID() {

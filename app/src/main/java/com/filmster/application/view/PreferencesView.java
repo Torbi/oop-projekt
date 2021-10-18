@@ -148,13 +148,5 @@ public class PreferencesView extends Fragment {
         spinnerAdapter.notifyDataSetChanged();
     }
 
-    private void updateSearchResultDisplayed(List<IMedia> iMedia) {
-        FragmentContainerView fcv = view.findViewById(R.id.fcvPrefs);
-        fcv.setVisibility(View.VISIBLE);
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.fcvPrefs, searchResults).commit();
-        fcv.bringToFront();
-    }
-
 
 }

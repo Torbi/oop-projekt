@@ -18,6 +18,4 @@ public interface IAdapter {
     void setBuildRequestStrategy(IBuildRequestStrategy strategy);
 
     void setMediaObjectCreateStrategy(IMediaObjectCreateStrategy strategy);
-
-    void getSearchResult(String request);
 }

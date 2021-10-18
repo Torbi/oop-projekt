@@ -37,7 +37,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
     }
 
     public SearchResultAdapter(List<IMedia> resultList){
-        this.resultList = new ArrayList<>();
+        System.out.println("först");
         this.resultList = resultList;
     }
 
@@ -48,7 +48,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View contactView = inflater.inflate(R.layout.search_results_layout, parent, false);
-
+        System.out.println("ONcreate kdsabdhas");
         // Return a new holder instance
         ViewHolder viewHolder = new ViewHolder(contactView);
         return viewHolder;
@@ -80,13 +80,8 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 
     @Override
     public int getItemCount() {
-        int r;
-        if(resultList == null){
-            r = 0;
-        } else{
-            r = resultList.size();
-        }
-        return r;
+        System.out.println("inte önndd");
+        return resultList.size();
     }
 
     private String shorten(String text) {

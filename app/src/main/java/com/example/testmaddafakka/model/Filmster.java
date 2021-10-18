@@ -23,6 +23,7 @@ public class Filmster{
         this.currentMediaCounter = 0;
         mediaList = new ArrayList<>();
         categoryList = new ArrayList<>();
+        resultList = new ArrayList<>();
 
         //a fake movie is added to give time for imdbapiadapter to get movies from the api
         mediaList.add(new Movie(" Inception ", "12123", " 9.1 ", " https://imdb-api.com/Images/original/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_Ratio0.6791_AL_.jpg "," 2010 "));
@@ -40,7 +41,6 @@ public class Filmster{
       currentMediaCounter++;
    }
 
-   // Might not be necessary
    public void setResultList(List<IMedia> results){
         this.resultList = results;
    }

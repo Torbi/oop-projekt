@@ -56,5 +56,4 @@ public class PreferencesViewModel extends ViewModel {
         searchResults.setValue(filmsterRepository.getSearchResults().getValue());
         return searchResults;
     }
-
 }
