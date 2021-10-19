@@ -42,6 +42,7 @@ public class DefaultParseStrategy implements IParseStrategy {
         Gson gson = builder.create();
         JsonObject jsonObject = gson.fromJson(response.toString(), JsonObject.class);
         JsonArray array = jsonObject.getAsJsonArray(memberName);
+        System.out.println(memberName);
 
         List<JsonObject> jsonObjects = new ArrayList<>();
         for(int i = 0; i < array.size(); i++) {
