@@ -2,12 +2,17 @@ package com.filmster.application.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.selection.ItemDetailsLookup;
+import androidx.recyclerview.selection.ItemKeyProvider;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.selection.SelectionTracker;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
@@ -18,12 +23,19 @@ import com.filmster.application.model.IMedia;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author Albin Sundström
+ */
+
 public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.ViewHolder> {
 
     private List<IMedia> resultList;
     private Context context;
+    private static ClickListener clickListener;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private NetworkImageView smallResultImage;
         private TextView name;
@@ -31,14 +43,25 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         public ViewHolder(View itemView){
             super(itemView);
 
+            itemView.setOnClickListener(this);
+
             smallResultImage = itemView.findViewById(R.id.personImageSmall);
             name = itemView.findViewById(R.id.nameText);
         }
+
+        @Override
+        public void onClick(View view) {
+            clickListener.onItemClick(getAdapterPosition(), view);
+        }
+    }
+
+    public void setOnItemClickListener(ClickListener clickListener){
+        SearchResultAdapter.clickListener = clickListener;
     }
 
     public SearchResultAdapter(List<IMedia> resultList){
-        System.out.println("först");
         this.resultList = resultList;
+        //setHasStableIds(true);
     }
 
     @NonNull
@@ -47,13 +70,12 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         this.context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View contactView = inflater.inflate(R.layout.search_results_layout, parent, false);
-        System.out.println("ONcreate kdsabdhas");
+        View view = inflater.inflate(R.layout.search_results_layout, parent, false);
+
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(contactView);
+        ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
-
 
 
     @Override
@@ -75,13 +97,16 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         }
         String title = shorten(media.getName());
         personName.setText(checkStringLength(title));
-
     }
 
     @Override
     public int getItemCount() {
-        System.out.println("inte önndd");
         return resultList.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return (long) position;
     }
 
     private String shorten(String text) {
@@ -94,5 +119,9 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
             return name.substring(0, 14) + "...";
         }
         return name;
+    }
+
+    public interface ClickListener {
+        void onItemClick(int pos, View view);
     }
 }

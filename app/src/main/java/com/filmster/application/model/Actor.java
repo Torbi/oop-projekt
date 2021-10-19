@@ -6,13 +6,14 @@ public class Actor implements IMedia {
     private String image;
     private String birthYear;
 
-    public Actor(String listID, String name, String image, String birthYear) {
+    public Actor(String listID, String name, String image) {
         this.listID = listID;
         this.name = name;
         this.image = image;
-        this.birthYear = birthYear;
+        //this.birthYear = birthYear;
     }
 
+    @Override
     public String getID() {
         return listID;
     }

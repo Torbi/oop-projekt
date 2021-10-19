@@ -12,8 +12,17 @@
         android:id="@+id/result"
         android:layout_width="match_parent"
         android:layout_height="400px"
-        android:layout_weight="1"
-        android:background="@color/purple_200">
+        android:layout_weight="1">
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="411dp"
+            android:layout_height="8dp"
+            android:layout_marginTop="144dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/personImageSmall"
@@ -39,5 +48,7 @@
             android:text="@string/name"
             app:layout_constraintStart_toEndOf="@+id/personImageSmall"
             app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </LinearLayout>

@@ -49,6 +49,10 @@ public class Filmster{
         return resultList;
     }
 
+    public String getChosenID(int pos){
+        return resultList.get(pos).getID();
+    }
+
     /**
      * Adds a media to the user liked movie list and calls for the next movie to be displayed
      * @param media - The movie to be added to the users liked movies list

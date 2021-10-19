@@ -1,5 +1,7 @@
 package com.filmster.application.model;
 
+import android.widget.ArrayAdapter;
+
 import com.filmster.application.model.sortingstrategies.DefaultSortingStrategy;
 import com.filmster.application.model.sortingstrategies.ISortMethod;
 import com.filmster.application.model.sortingstrategies.SortByRatingStrategy;
@@ -20,6 +22,7 @@ public class Filmster{
     private int currentMediaCounter;
     private final List<ICategory> categoryList;
     private List<ISortMethod> sortMethods;
+    private List<IMedia> resultList;
 
     /**
      * Constructor for filmster, initializes some data and receives a user for the program
@@ -30,6 +33,7 @@ public class Filmster{
         this.currentMediaCounter = 0;
         this.mediaList = new ArrayList<>();
         this.categoryList = new ArrayList<>();
+        this.resultList = new ArrayList<>();
 
         //a fake movie is added to give time for imdbapiadapter to get real movies from the api
         this.mediaList.add(new Movie("Inception", "tt1375666", 9.9, "https://imdb-api.com/Images/original/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_Ratio0.6791_AL_.jpg",2010));
@@ -63,6 +67,10 @@ public class Filmster{
     public void nextMedia() {
       currentMediaCounter++;
    }
+
+    public String getChosenID(int pos){
+        return resultList.get(pos).getID();
+    }
 
 
     /**

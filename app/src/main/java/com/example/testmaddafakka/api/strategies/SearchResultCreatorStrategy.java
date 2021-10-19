@@ -10,10 +10,9 @@ public class SearchResultCreatorStrategy implements IMediaObjectCreateStrategy{
     @Override
     public IMedia createMediaObjectFromJson(JsonObject object) {
         try {
-            return new Actor(object.get("name").toString(),
-                    object.get("id").toString(),
-                    object.get("image").toString(),
-                    object.get("birthYear").toString()
+            return new Actor(object.get("id").toString(),
+                    object.get("title").toString(),
+                    object.get("image").toString()
             );
         } catch (Exception e) {
             e.printStackTrace();

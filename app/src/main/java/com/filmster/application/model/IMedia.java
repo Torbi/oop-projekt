@@ -36,6 +36,8 @@ public interface IMedia {
      */
     MediaState getState();
 
+    String getID();
+
     /**
      * Sets the MediaState of a media object
      * @param state - An enum MediaState, SEEN, LIKED or DISLIKED

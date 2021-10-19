@@ -179,7 +179,9 @@ public class FilmsterRepository implements IApiListener {
         this.imdbAdapter.loadResponse(name);
     }
 
-
+    public void loadChosenID(int pos){
+        String id = filmster.getChosenID(pos);
+    }
 
     public MutableLiveData<List<IMedia>> getSearchResults(){
         // get list from api

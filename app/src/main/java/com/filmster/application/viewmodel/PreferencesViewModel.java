@@ -49,6 +49,10 @@ public class PreferencesViewModel extends ViewModel {
         filmsterRepository.search(name);
     }
 
+    public void ChosenID(int pos){
+        filmsterRepository.loadChosenID(pos);
+    }
+
     public LiveData<List<IMedia>> getSearchResults(){
         if(searchResults == null){
             searchResults = new MutableLiveData<>();

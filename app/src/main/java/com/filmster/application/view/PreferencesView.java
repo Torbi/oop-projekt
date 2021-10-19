@@ -1,5 +1,6 @@
 package com.filmster.application.view;
 
+import android.app.appsearch.SearchResults;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -92,7 +93,14 @@ public class PreferencesView extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String name) {
                 // This method gets query after search button or enter is pressed
+
                 viewModel.search(name);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                searchResults = new SearchResultsView();
                 fcv.setVisibility(View.VISIBLE);
                 FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
                 transaction.replace(R.id.fcvPrefs, searchResults).commit();
