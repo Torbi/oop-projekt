@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="260sp"
     android:layout_height="340sp"
-    tools:context=".view.MediaBack"
+    tools:context=".view.MediaCardBackView"
     android:background="@drawable/layout_border">
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -19,14 +19,14 @@ import com.example.testmaddafakka.viewmodel.WatchlistViewModel;
  * Handler of responsibility class a super to Disliked, liked and watched media to
  * remove duplicate code.
  */
-public class WatchlistMedias extends Fragment {
+public abstract class WatchlistTabView extends Fragment {
 
     public WatchlistViewModel viewModel;
     public RecyclerView recyclerView;
 
     private final int fragment;
 
-    public WatchlistMedias(int fragment){
+    public WatchlistTabView(int fragment){
         this.fragment = fragment;
     }
 
@@ -45,12 +45,6 @@ public class WatchlistMedias extends Fragment {
 
         return view;
     }
-    public void observe(){
-        viewModel.getLikedMedias().observe(getViewLifecycleOwner(), medias -> {
-            MediaAdapter adapter = new MediaAdapter(medias);
-            recyclerView.setAdapter(adapter);
-            recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        });
 
-    }
+    public abstract void observe();
 }

@@ -27,16 +27,16 @@ public class MainView extends Fragment {
     private boolean backSide = false;
     private ProgressBar spinner;
 
-    private MediaFront mediaFront;
-    private MediaBack mediaBack;
+    private MediaCardFrontView mediaFront;
+    private MediaCardBackView mediaBack;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_start_page, container, false);
-        mediaFront = new MediaFront();
-        mediaBack = new MediaBack();
+        mediaFront = new MediaCardFrontView();
+        mediaBack = new MediaCardBackView();
 
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         viewModel.init(requireContext());

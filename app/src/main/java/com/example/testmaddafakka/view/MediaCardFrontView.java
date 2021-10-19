@@ -16,7 +16,7 @@ import com.example.testmaddafakka.api.SingletonRequestQueue;
 import com.example.testmaddafakka.model.IMedia;
 
 
-public class MediaFront extends Fragment {
+public class MediaCardFrontView extends Fragment {
 
     private NetworkImageView mediaImage;
 

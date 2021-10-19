@@ -4,15 +4,12 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
-import com.example.testmaddafakka.model.IMedia;
 import com.example.testmaddafakka.R;
 import com.example.testmaddafakka.viewmodel.WatchlistViewModel;
 import com.google.android.material.tabs.TabLayout;
@@ -20,9 +17,9 @@ import com.google.android.material.tabs.TabLayout;
 
 public class WatchlistView extends Fragment {
     private TabLayout tabLayout;
-    private LikedMedias likedMedias;
-    private DislikedMedias dislikedMedias;
-    private WatchedMedia watchedMedia;
+    private WatchlistTabView likedMedias;
+    private WatchlistTabView dislikedMedias;
+    private WatchlistTabView watchedMedia;
     private WatchlistViewModel viewModel;
 
 
@@ -36,9 +33,9 @@ public class WatchlistView extends Fragment {
         tabLayout.addTab(tabLayout.newTab().setText("Seen"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        likedMedias = new LikedMedias();
-        dislikedMedias = new DislikedMedias();
-        watchedMedia = new WatchedMedia();
+        likedMedias = new LikedTabView();
+        dislikedMedias = new DislikedTabView();
+        watchedMedia = new WatchedTabView();
 
         viewModel = new ViewModelProvider(this).get(WatchlistViewModel.class);
         viewModel.init(requireContext());

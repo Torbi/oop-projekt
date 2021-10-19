@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.example.testmaddafakka.R;
 import com.example.testmaddafakka.model.IMedia;
 
-public class MediaBack extends Fragment {
+public class MediaCardBackView extends Fragment {
     private TextView aboutMedia;
     private TextView aboutTitle;
 

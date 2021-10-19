@@ -30,7 +30,7 @@ import java.util.List;
 public class PreferencesView extends Fragment {
     private View view;
     private PreferencesViewModel viewModel;
-    private SearchResults searchResults;
+    private SearchResultsView searchResults;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,7 +41,7 @@ public class PreferencesView extends Fragment {
 
         fcv.setVisibility(View.INVISIBLE);
 
-        searchResults = new SearchResults();
+        searchResults = new SearchResultsView();
 
 
 

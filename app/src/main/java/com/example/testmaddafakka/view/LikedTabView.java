@@ -7,9 +7,9 @@ import com.example.testmaddafakka.R;
 /**
  * Liked Medias a part of the watchlist responsable to show all liked movies
  */
-public class LikedMedias extends WatchlistMedias {
+public class LikedTabView extends WatchlistTabView {
 
-    public LikedMedias(){
+    public LikedTabView(){
         super(R.layout.fragment_liked_movies);
     }
 

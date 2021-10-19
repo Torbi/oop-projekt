@@ -19,10 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SearchResults extends Fragment {
+public class SearchResultsView extends Fragment {
 
 
-    public SearchResults() {
+    public SearchResultsView() {
         // Required empty public constructor
     }
 
