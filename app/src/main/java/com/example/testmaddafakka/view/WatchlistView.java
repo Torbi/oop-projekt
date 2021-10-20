@@ -29,10 +29,7 @@ public class WatchlistView extends Fragment {
         view = inflater.inflate(R.layout.fragment_watchlist, container, false);
 
         initTabLayout();
-
-        likedMedias = new LikedTabView();
-        dislikedMedias = new DislikedTabView();
-        watchedMedia = new WatchedTabView();
+        initViews();
 
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentContainerView, likedMedias).commit();
@@ -40,6 +37,12 @@ public class WatchlistView extends Fragment {
         initTabListener();
 
         return view;
+    }
+
+    private void initViews() {
+        likedMedias = new LikedTabView();
+        dislikedMedias = new DislikedTabView();
+        watchedMedia = new WatchedTabView();
     }
 
     private void initTabListener() {

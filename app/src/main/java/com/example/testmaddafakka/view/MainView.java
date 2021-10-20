@@ -35,20 +35,10 @@ public class MainView extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_start_page, container, false);
-        mediaFront = new MediaCardFrontView();
-        mediaBack = new MediaCardBackView();
 
+        initViews();
         initAndListen2ViewModel();
-
-        watchlistView = new WatchlistView();
-        preferencesView = new PreferencesView();
-
-        initSpinner();
-        initlikeBtn();
-        initDislikedBtn();
-        initWatchedBtn();
-        initWatchlistBtn();
-        initPreferencesBtn();
+        initComponents();
 
         getChildFragmentManager().beginTransaction()
         .replace(R.id.mediaCard, mediaFront).commit();
@@ -56,6 +46,22 @@ public class MainView extends Fragment {
         initMediaCard();
 
         return view;
+    }
+
+    private void initViews() {
+        mediaFront = new MediaCardFrontView();
+        mediaBack = new MediaCardBackView();
+        watchlistView = new WatchlistView();
+        preferencesView = new PreferencesView();
+    }
+
+    private void initComponents() {
+        initSpinner();
+        initlikeBtn();
+        initDislikedBtn();
+        initWatchedBtn();
+        initWatchlistBtn();
+        initPreferencesBtn();
     }
 
     private void initSpinner() {
@@ -169,16 +175,21 @@ public class MainView extends Fragment {
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         ft.setCustomAnimations(R.animator.flip_out, R.animator.flip_in);
         spinner.setVisibility(View.GONE);
-
-        Bundle bundle = new Bundle();
-        bundle.putString("about", "This is a great movie highly recommend fjdpsafijdsa" +
-                "fkpdosafkpdosa fkdsoakpfd fsdkofd fdf df df df df df d fd fd fd f" +
-                "fd sfds fds f dsf ds fs ");
-        mediaBack.setArguments(bundle);
+        initBundle(viewModel.getCurrentMedia());
         ft.replace(R.id.mediaCard, mediaBack);
         ft.commit();
 
         backSide = true;
+    }
+
+    private void initBundle(IMedia media) {
+        Bundle bundle = new Bundle();
+        //check if media has an about or something similar, if not hardcode something
+        bundle.putString("about", "A great movie to watch." + '\n' + "This movie can be found on the following networks: Netflix, HBO and The PirateBay");
+        bundle.putString("year", Integer.toString(media.getYear()));
+        bundle.putString("rating", Double.toString(media.getRating()));
+        bundle.putString("name", media.getName());
+        mediaBack.setArguments(bundle);
     }
 
     private void setMediaFront(){
