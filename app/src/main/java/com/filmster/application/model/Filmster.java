@@ -87,8 +87,10 @@ public class Filmster{
      */
     public List<ICategory> getMovieCategories() {
         int listSize = user.getPreferences().getMovieGenres().size();
-        for(int i = 0; i < listSize; i++){
-            categoryList.add(user.getPreferences().getMovieGenres().get(i));
+        if(categoryList.isEmpty()){
+            for(int i = 0; i < listSize; i++){
+                categoryList.add(user.getPreferences().getMovieGenres().get(i));
+            }
         }
         return categoryList;
     }

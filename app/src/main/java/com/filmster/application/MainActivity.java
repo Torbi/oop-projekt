@@ -19,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MainActivity extends AppCompatActivity {
 
 
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
     private MainView mainView;
@@ -50,12 +50,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.fragmentInlogg, mainView);
         fragmentTransaction.commit();
-
-
-
         mainView = new MainView();
-
-
     }
 }
 

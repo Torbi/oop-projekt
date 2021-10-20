@@ -127,6 +127,7 @@ public class PreferencesView extends Fragment {
 
             }
         });
+
     }
 
     public void setSpinner(Spinner spinner, ArrayAdapter<CharSequence> content){
@@ -145,6 +146,7 @@ public class PreferencesView extends Fragment {
         for(int i = 0; i < categories.size(); i++){
             spinnerAdapter.add(categories.get(i).getName());
         }
+
         spinnerAdapter.notifyDataSetChanged();
     }
 

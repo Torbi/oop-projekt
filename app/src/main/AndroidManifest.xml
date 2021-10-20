@@ -17,10 +17,10 @@
             android:name="com.filmster.application.SignupActivity"
             android:exported="true" />
         <activity
-            android:name="com.filmster.application.MainActivity"
+            android:name="com.filmster.application.LoginActivity2"
             android:exported="true" />
         <activity
-            android:name="com.filmster.application.LoginActivity2"
+            android:name="com.filmster.application.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
