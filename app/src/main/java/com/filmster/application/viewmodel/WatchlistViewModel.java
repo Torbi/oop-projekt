@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.filmster.application.model.IMedia;
+import com.filmster.application.model.sortingstrategies.ISortMethod;
 import com.filmster.application.repository.FilmsterRepository;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class WatchlistViewModel extends ViewModel {
     private MutableLiveData<List<IMedia>> likedMedias;
     private MutableLiveData<List<IMedia>> dislikedMedias;
     private MutableLiveData<List<IMedia>> watchedMedias;
+    private MutableLiveData<List<ISortMethod>> sortMethods;
 
     public void init(Context ctx) {
         filmsterRepository = FilmsterRepository.getInstance(ctx);
@@ -58,6 +60,18 @@ public class WatchlistViewModel extends ViewModel {
     private void loadMedias() {
         // Do an asynchronous operation to fetch a movie
         media = filmsterRepository.getCurrentMedia();
+    }
+
+    public LiveData<List<ISortMethod>> getSortingMethods() {
+        if(sortMethods == null) {
+            sortMethods = new MutableLiveData<>();
+        }
+        sortMethods.setValue(filmsterRepository.getSortMethods());
+        return sortMethods;
+    }
+
+    public void sortWatchlist(ISortMethod sortMethod) {
+        filmsterRepository.sortWatchlist(sortMethod);
     }
 
 }

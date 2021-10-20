@@ -43,7 +43,7 @@ public class PreferencesView extends Fragment {
         initAndListen2ViewModel();
         initActorSearchView();
         initDirectorSearchView();
-        initSpinner();
+        initSpinnerListener();
 
         return view;
     }
@@ -108,11 +108,11 @@ public class PreferencesView extends Fragment {
     private void initAndListen2ViewModel() {
         viewModel = new ViewModelProvider(this).get(PreferencesViewModel.class);
         viewModel.init(requireContext());
-        viewModel.getCategories().observe(getViewLifecycleOwner(), this::updateMediaDisplayed);
+        viewModel.getCategories().observe(getViewLifecycleOwner(), this::populateSpinner);
 
     }
 
-    private void initSpinner() {
+    private void initSpinnerListener() {
         Spinner spinner = view.findViewById(R.id.genreSpinner);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -137,7 +137,7 @@ public class PreferencesView extends Fragment {
         spinner.setAdapter(content);
     }
 
-    private void updateMediaDisplayed(List<ICategory> categories) {
+    private void populateSpinner(List<ICategory> categories) {
         Spinner spinner = view.findViewById(R.id.genreSpinner);
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, android.R.id.text1);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

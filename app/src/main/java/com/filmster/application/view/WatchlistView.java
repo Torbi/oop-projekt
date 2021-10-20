@@ -4,14 +4,22 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 
 import com.filmster.application.R;
+import com.filmster.application.model.sortingstrategies.ISortMethod;
+import com.filmster.application.viewmodel.WatchlistViewModel;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.List;
 
 
 public class WatchlistView extends Fragment {
@@ -20,6 +28,7 @@ public class WatchlistView extends Fragment {
     private WatchlistTabView dislikedMedias;
     private WatchlistTabView watchedMedia;
     private View view;
+    private WatchlistViewModel viewModel;
 
 
     @Override
@@ -27,6 +36,7 @@ public class WatchlistView extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_watchlist, container, false);
 
+        initAndListen2ViewModel();
         initTabLayout();
         initViews();
 
@@ -34,7 +44,7 @@ public class WatchlistView extends Fragment {
         transaction.replace(R.id.fragmentContainerView, likedMedias).commit();
 
         initTabListener();
-
+        initSpinnerListener();
         return view;
     }
 
@@ -42,6 +52,42 @@ public class WatchlistView extends Fragment {
         likedMedias = new LikedTabView();
         dislikedMedias = new DislikedTabView();
         watchedMedia = new WatchedTabView();
+    }
+
+    private void initAndListen2ViewModel() {
+        viewModel = new ViewModelProvider(this).get(WatchlistViewModel.class);
+        viewModel.init(requireContext());
+        viewModel.getSortingMethods().observe(getViewLifecycleOwner(), this::populateSpinner);
+    }
+
+    private void initSpinnerListener() {
+        Spinner spinner = view.findViewById(R.id.watchlistSortSpinner);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ISortMethod sortMethod = (ISortMethod) spinner.getSelectedItem();
+                viewModel.sortWatchlist(sortMethod);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    private void populateSpinner(List<ISortMethod> sortMethods) {
+        System.out.println("den populatas");
+        Spinner spinner = view.findViewById(R.id.watchlistSortSpinner);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, android.R.id.text1);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerAdapter);
+
+        for(int i = 0; i < sortMethods.size(); i++){
+            spinnerAdapter.add(sortMethods.get(i).getName());
+        }
+
+        spinnerAdapter.notifyDataSetChanged();
     }
 
     private void initTabListener() {

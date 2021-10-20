@@ -17,6 +17,7 @@ import com.filmster.application.model.IMedia;
 import com.filmster.application.model.Preferences;
 import com.filmster.application.model.User;
 import com.filmster.application.model.WatchList;
+import com.filmster.application.model.sortingstrategies.ISortMethod;
 
 import java.util.List;
 
@@ -144,5 +145,13 @@ public class FilmsterRepository implements IApiListener {
 
 
         return null;
+    }
+
+    public void sortWatchlist(ISortMethod sortMethod) {
+        this.filmster.sortWatchlist(sortMethod);
+    }
+
+    public List<ISortMethod> getSortMethods() {
+       return this.filmster.getSortMethods();
     }
 }

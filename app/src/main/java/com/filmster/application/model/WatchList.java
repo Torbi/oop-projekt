@@ -1,5 +1,7 @@
 package com.filmster.application.model;
 
+import com.filmster.application.model.sortingstrategies.ISortMethod;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -11,10 +13,12 @@ import java.util.stream.Collectors;
  */
 public class WatchList {
     private final List<IMedia> watchList;
-    private Comparator<IMedia> sortingStrategy;
+    private ISortMethod currentSortingStrategy;
+    private List<String> sortingMethods;
 
     public WatchList (){
         this.watchList = new ArrayList<>();
+
     }
 
     /**
@@ -62,8 +66,8 @@ public class WatchList {
      * Sets the strategy used for sorting the watchlist
      * @param sortingStrategy - A Comparator that uses IMedias attribute to sort them in some way
      */
-    public void setSortingStrategy(Comparator<IMedia> sortingStrategy) {
-        this.sortingStrategy = sortingStrategy;
+    public void setSortingStrategy(ISortMethod sortingStrategy) {
+        this.currentSortingStrategy = sortingStrategy;
     }
 
     /**
@@ -71,8 +75,8 @@ public class WatchList {
      * If no strategy has been chosen, the watchlist will not be sorted
      */
     public void sort() {
-        if(this.sortingStrategy != null) {
-            this.watchList.sort(sortingStrategy);
+        if(this.currentSortingStrategy != null) {
+            this.watchList.sort(currentSortingStrategy);
         }
     }
 
