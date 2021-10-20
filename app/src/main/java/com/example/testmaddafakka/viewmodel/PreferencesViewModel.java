@@ -23,19 +23,19 @@ public class PreferencesViewModel extends ViewModel {
     private MutableLiveData<List<ICategory>> categories;
     private MutableLiveData<List<ICategory>> searchResults;
 
-
-
+    public LiveData<List<ICategory>> getCategories() {
+        if (this.categories == null) {
+            this.categories = new MutableLiveData<>();
+            loadCategories();
+        }
+        return this.categories;
+    }
     public void init(Context ctx) {
         filmsterRepository = FilmsterRepository.getInstance(ctx);
-        filmsterRepository.initCategories(ctx);
     }
 
     public void loadSelectedCategory(String category){
         filmsterRepository.loadSelectedCategory(category);
-    }
-
-    public LiveData<List<ICategory>> getCategories() {
-        return filmsterRepository.getCategories();
     }
 
     private void loadCategories() {

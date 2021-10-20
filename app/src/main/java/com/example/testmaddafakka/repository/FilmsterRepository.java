@@ -58,6 +58,7 @@ public class FilmsterRepository implements IApiListener {
         }
         return instance;
     }
+    /*
     public void initCategories(Context ctx) {
         if(categories != null) {
             return;
@@ -65,11 +66,13 @@ public class FilmsterRepository implements IApiListener {
         getInstance(ctx);
         loadCategories();
     }
+
+
     public void loadCategories() {
         // Do an asynchronous operation to fetch a category
         categories = getCategories();
     }
-
+*/
     public MutableLiveData<IMedia> getCurrentMedia() {
         this.currentMedia.setValue(filmster.getCurrentMedia());
         return this.currentMedia;
@@ -145,15 +148,6 @@ public class FilmsterRepository implements IApiListener {
      */
     public MutableLiveData<List<ICategory>> getCategories() {
         this.categories.setValue(filmster.getMovieCategories());
-        return this.categories;
-    }
-
-
-    public LiveData<List<ICategory>> getCategoriesNEW() {
-        if (this.categories == null) {
-            this.categories = new MutableLiveData<>();
-            loadCategories();
-        }
         return this.categories;
     }
 

@@ -106,7 +106,6 @@ public class PreferencesView extends Fragment {
     }
 
     private void initAndListen2ViewModel() {
-
         viewModel = new ViewModelProvider(this).get(PreferencesViewModel.class);
         viewModel.init(requireContext());
         viewModel.getCategories().observe(getViewLifecycleOwner(), this::updateMediaDisplayed);
