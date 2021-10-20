@@ -4,16 +4,21 @@
     xmlns:bind="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
-            type="com.filmster.application.viewmodel.MainViewModel"/>
+
+            type="com.filmster.application.viewmodel.MainViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:background="@color/backgroundColor"
         bind:context="com.filmster.application.MainActivity"
+
         bind:viewBindingIgnore="true">
 
         <ImageView
@@ -43,7 +48,6 @@
             android:id="@+id/fragmentInlogg"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="32dp"
             android:layout_marginBottom="72dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

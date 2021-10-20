@@ -1,18 +1,37 @@
 package com.filmster.application;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.testmaddafakka.R;
 import com.filmster.application.view.MainView;
+
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();;
+
+
     private MainView mainView;
     private TextView escape;
     private ImageView escapeLogo;
@@ -21,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         escapeLogo = findViewById(R.id.escapeImage);
         escape = findViewById(R.id.escape);
@@ -40,6 +60,11 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.fragmentInlogg, mainView);
         fragmentTransaction.commit();
+
+
+
+        mainView = new MainView();
+
 
     }
 }

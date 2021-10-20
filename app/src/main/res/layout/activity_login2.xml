@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+  <data>
+    <variable
+        name="viewModel"
+        type="com.example.testmaddafakka.viewmodel.MainViewModel"/>
+  </data>
+
+  g<androidx.constraintlayout.widget.ConstraintLayout
+      bind:viewBindingIgnore="true"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="#F3F0FF"
+      bind:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="68dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@string/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_filmster" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="18dp"
+        android:text="@string/logo"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView10" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:foregroundGravity="center_vertical|center|center_horizontal"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+      <EditText
+          android:id="@+id/edt_loginEmail"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_gravity="center_vertical"
+          android:ems="10"
+          android:hint="Email"
+          android:inputType="textEmailAddress" />
+
+      <EditText
+          android:id="@+id/edt_loginPassword"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:ems="10"
+          android:hint="Password"
+          android:inputType="textPassword" />
+
+      <Button
+          android:id="@+id/loginBtn"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Login" />
+
+      <Button
+          android:id="@+id/signUp"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Create An Account" />
+    </LinearLayout>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
