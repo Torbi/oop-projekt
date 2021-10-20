@@ -106,7 +106,6 @@ public class FilmsterRepository implements IApiListener {
         return this.user.getWatchedMedia();
     }
 
-
     /**
      * Checks which strategy should be used depending on if its the default category or not
      * @param categoryName - The name of the category
