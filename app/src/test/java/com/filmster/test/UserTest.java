@@ -1,11 +1,11 @@
 package com.filmster.test;
 
-import com.filmster.test.model.IMedia;
-import com.filmster.test.model.MediaState;
-import com.filmster.test.model.Movie;
-import com.filmster.test.model.Preferences;
-import com.filmster.test.model.User;
-import com.filmster.test.model.WatchList;
+import com.filmster.application.model.IMedia;
+import com.filmster.application.model.MediaState;
+import com.filmster.application.model.Movie;
+import com.filmster.application.model.Preferences;
+import com.filmster.application.model.User;
+import com.filmster.application.model.WatchList;
 
 import org.junit.Before;
 import org.junit.Test;

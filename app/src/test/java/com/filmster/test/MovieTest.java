@@ -1,6 +1,6 @@
 package com.filmster.test;
 
-import com.filmster.test.model.Movie;
+import com.filmster.application.model.Movie;
 
 import org.junit.Before;
 import org.junit.Test;

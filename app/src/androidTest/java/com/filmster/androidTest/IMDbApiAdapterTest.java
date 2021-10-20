@@ -5,10 +5,10 @@ import android.content.Context;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import com.filmster.test.api.ApiListener;
-import com.filmster.test.api.IApiListener;
-import com.filmster.test.model.IMedia;
-import com.filmster.test.api.ApiAdapter;
+import com.filmster.application.api.ApiListener;
+import com.filmster.application.api.IApiListener;
+import com.filmster.application.model.IMedia;
+import com.filmster.application.api.ApiAdapter;
 
 import org.junit.Before;
 import org.junit.Test;

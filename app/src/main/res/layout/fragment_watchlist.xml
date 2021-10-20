@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
     android:background="#F3F0FF"
-    tools:context="com.filmster.test.view.WatchlistView">
+    tools:context="com.filmster.application.view.WatchlistView">
 
     <TextView
         android:id="@+id/textView"

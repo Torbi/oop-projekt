@@ -4,11 +4,11 @@ import android.content.Context;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import com.filmster.test.api.ApiAdapter;
-import com.filmster.test.api.ApiListener;
-import com.filmster.test.api.IApiListener;
-import com.filmster.test.api.parse_buildrequest_strategies.IMDbListBuildRequestStrategy;
-import com.filmster.test.model.IMedia;
+import com.filmster.application.api.ApiAdapter;
+import com.filmster.application.api.ApiListener;
+import com.filmster.application.api.IApiListener;
+import com.filmster.application.api.parse_buildrequest_strategies.IMDbListBuildRequestStrategy;
+import com.filmster.application.model.IMedia;
 
 import org.junit.Before;
 import org.junit.Test;

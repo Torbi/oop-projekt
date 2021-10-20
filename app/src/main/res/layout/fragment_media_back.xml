@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="260sp"
     android:layout_height="340sp"
-    tools:context="com.filmster.test.view.MediaCardBackView"
+    tools:context="com.filmster.application.view.MediaCardBackView"
     android:background="@drawable/layout_border">
 
     <androidx.constraintlayout.widget.ConstraintLayout

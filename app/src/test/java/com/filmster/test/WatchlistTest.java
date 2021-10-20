@@ -1,12 +1,12 @@
 package com.filmster.test;
 
-import com.filmster.test.model.IMedia;
-import com.filmster.test.model.MediaState;
-import com.filmster.test.model.Movie;
-import com.filmster.test.model.WatchList;
-import com.filmster.test.model.sortingstrategies.SortByRatingStrategy;
-import com.filmster.test.model.sortingstrategies.SortByYearAscendingStrategy;
-import com.filmster.test.model.sortingstrategies.SortByYearDescendingStrategy;
+import com.filmster.application.model.IMedia;
+import com.filmster.application.model.MediaState;
+import com.filmster.application.model.Movie;
+import com.filmster.application.model.WatchList;
+import com.filmster.application.model.sortingstrategies.SortByRatingStrategy;
+import com.filmster.application.model.sortingstrategies.SortByYearAscendingStrategy;
+import com.filmster.application.model.sortingstrategies.SortByYearDescendingStrategy;
 
 import static org.junit.Assert.*;
 import org.junit.Before;

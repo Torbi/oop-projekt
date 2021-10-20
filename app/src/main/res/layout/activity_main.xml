@@ -6,14 +6,14 @@
     <data>
         <variable
             name="viewModel"
-            type="com.filmster.test.viewmodel.MainViewModel"/>
+            type="com.filmster.application.viewmodel.MainViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/backgroundColor"
-        bind:context="com.filmster.test.MainActivity"
+        bind:context="com.filmster.application.MainActivity"
         bind:viewBindingIgnore="true">
 
         <ImageView

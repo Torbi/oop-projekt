@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    tools:context="com.filmster.test.view.PreferencesView">
+    tools:context="com.filmster.application.view.PreferencesView">
 
     <!-- TODO: Update blank fragment layout -->
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fcvPrefs"
-        android:name="com.filmster.test.view.SearchResultsView"
+        android:name="com.filmster.application.view.SearchResultsView"
         android:layout_width="278dp"
         android:layout_height="474dp"
         app:layout_constraintBottom_toBottomOf="parent"

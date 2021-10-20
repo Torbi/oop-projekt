@@ -6,8 +6,8 @@ import static org.junit.Assert.assertNull;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.filmster.test.model.IMedia;
-import com.filmster.test.repository.FilmsterRepository;
+import com.filmster.application.model.IMedia;
+import com.filmster.application.repository.FilmsterRepository;
 
 import org.junit.runner.RunWith;
 

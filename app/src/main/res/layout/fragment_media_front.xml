@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.filmster.test.view.MediaCardFrontView">
+    tools:context="com.filmster.application.view.MediaCardFrontView">
 
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/mediaImage"
