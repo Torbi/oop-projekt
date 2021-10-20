@@ -24,7 +24,7 @@ public class Filmster{
         categoryList = new ArrayList<>();
 
         //a fake movie is added to give time for imdbapiadapter to get real movies from the api
-        mediaList.add(new Movie("Inception", "12123", 9.1, "https://imdb-api.com/Images/original/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_Ratio0.6791_AL_.jpg",2020));
+        mediaList.add(new Movie("Inception", "tt1375666", 9.9, "https://imdb-api.com/Images/original/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_Ratio0.6791_AL_.jpg",2010));
     }
 
     public void setMediaList(List<IMedia> moviesList) {
