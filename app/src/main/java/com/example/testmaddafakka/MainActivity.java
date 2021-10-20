@@ -37,21 +37,6 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
 
-        //myRef.setValue("Test");
-
-        /*
-        Button btn = findViewById(R.id.button);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent in = new Intent(MainActivity.this,SignupActivity.class);
-                startActivity(in);
-            }
-        });
-
-         */
-
     }
     private void setMainView(){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

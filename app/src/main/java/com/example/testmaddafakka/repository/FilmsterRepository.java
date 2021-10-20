@@ -58,21 +58,6 @@ public class FilmsterRepository implements IApiListener {
         }
         return instance;
     }
-    /*
-    public void initCategories(Context ctx) {
-        if(categories != null) {
-            return;
-        }
-        getInstance(ctx);
-        loadCategories();
-    }
-
-
-    public void loadCategories() {
-        // Do an asynchronous operation to fetch a category
-        categories = getCategories();
-    }
-*/
     public MutableLiveData<IMedia> getCurrentMedia() {
         this.currentMedia.setValue(filmster.getCurrentMedia());
         return this.currentMedia;
