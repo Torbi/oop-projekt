@@ -1,0 +1,6 @@
+   PID STATUS   INFO
+ 14740 IDLE     7.0.2
+  5996 IDLE     7.0.2
+ 12600 STOPPED  (after being idle for 8 minutes and not recently used and to reclaim system memory)
+
+Only Daemons for the current Gradle version are displayed. See https://docs.gradle.org/7.0.2/userguide/gradle_daemon.html#sec:status

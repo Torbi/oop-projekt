@@ -3,6 +3,7 @@ package com.example.testmaddafakka.api;
 /**
  * Constant values for calling imdb api
  * Could add different api here and implement new strategies for different apis
+ * The key can make 5000 calls/day until approximately 23/10 - 2021, then it can make 100 calls/day
  * @author Torbjörn
  */
 public enum URL {

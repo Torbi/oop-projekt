@@ -38,59 +38,90 @@ public class MainView extends Fragment {
         mediaFront = new MediaCardFrontView();
         mediaBack = new MediaCardBackView();
 
-        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        viewModel.init(requireContext());
-        viewModel.getMedia().observe(getViewLifecycleOwner(), this::updateMediaDisplayed);
+        initAndListen2ViewModel();
 
         watchlistView = new WatchlistView();
         preferencesView = new PreferencesView();
+
+        initSpinner();
+        initlikeBtn();
+        initDislikedBtn();
+        initWatchedBtn();
+        initWatchlistBtn();
+        initPreferencesBtn();
+
+        getChildFragmentManager().beginTransaction()
+        .replace(R.id.mediaCard, mediaFront).commit();
+
+        initMediaCard();
+
+        return view;
+    }
+
+    private void initSpinner() {
         spinner = (ProgressBar) view.findViewById(R.id.progressBar1);
         spinner.setVisibility(View.VISIBLE);
+    }
 
+    private void initAndListen2ViewModel() {
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        viewModel.init(requireContext());
+        viewModel.getMedia().observe(getViewLifecycleOwner(), this::updateMediaDisplayed);
+    }
 
-        Button watchlistBtn = view.findViewById(R.id.watchlist);
-        Button preferencesBtn = view.findViewById(R.id.preferences);
+    private void initlikeBtn() {
         ImageView likeBtn = view.findViewById(R.id.like);
-        ImageView dislikeBtn = view.findViewById(R.id.dislike);
-        ImageView watchedBtn = view.findViewById(R.id.watched);
-
-        FragmentContainerView mediaCard = view.findViewById(R.id.mediaCard);
-
         likeBtn.setOnClickListener(view -> {
             viewModel.addLikedMedia();
             viewModel.nextMedia();
             setMediaFront();
             spinner.setVisibility(View.VISIBLE);
         });
+    }
 
-        dislikeBtn.setOnClickListener(view -> {
+    private void initDislikedBtn() {
+        ImageView dislikedBtn = view.findViewById(R.id.dislike);
+        dislikedBtn.setOnClickListener(view -> {
             viewModel.addDislikedMedia();
             viewModel.nextMedia();
             setMediaFront();
             spinner.setVisibility(View.VISIBLE);
         });
+    }
+
+    private void initWatchedBtn() {
+        ImageView watchedBtn = view.findViewById(R.id.watched);
         watchedBtn.setOnClickListener(view -> {
             viewModel.addWatchedMedia();
             viewModel.nextMedia();
             setMediaFront();
             spinner.setVisibility(View.VISIBLE);
         });
+    }
 
+    private void initWatchlistBtn() {
+        Button watchlistBtn = view.findViewById(R.id.watchlist);
         watchlistBtn.setOnClickListener(view -> {
             FragmentTransaction fr = getFragmentManager().beginTransaction();
             fr.replace(R.id.fragmentInlogg, watchlistView);
             fr.addToBackStack(null);
             fr.commit();
         });
+    }
+
+    private void initPreferencesBtn() {
+        Button preferencesBtn = view.findViewById(R.id.preferences);
         preferencesBtn.setOnClickListener(view -> {
             FragmentTransaction fr = getFragmentManager().beginTransaction();
             fr.replace(R.id.fragmentInlogg, preferencesView);
             fr.addToBackStack(null);
             fr.commit();
         });
+    }
 
-        getChildFragmentManager().beginTransaction()
-        .replace(R.id.mediaCard, mediaFront).commit();
+    @SuppressLint("ClickableViewAccessibility")
+    private void initMediaCard() {
+        FragmentContainerView mediaCard = view.findViewById(R.id.mediaCard);
 
         mediaCard.setOnTouchListener(new GestureHelper(getActivity()) {
             @Override
@@ -121,10 +152,9 @@ public class MainView extends Fragment {
                 spinner.setVisibility(View.VISIBLE);
             }
         });
-        return view;
     }
 
-    public void mediaFlip() {
+    private void mediaFlip() {
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         ft.setCustomAnimations(R.animator.flip_out, R.animator.flip_in);
 
@@ -165,6 +195,7 @@ public class MainView extends Fragment {
         backSide = false;
     }
 
+    @SuppressLint("SetTextI18n")
     private void updateMediaDisplayed(IMedia media) {
         TextView mediaTitle = view.findViewById(R.id.mediaTitle);
         TextView mediaRating = view.findViewById(R.id.mediaRating);

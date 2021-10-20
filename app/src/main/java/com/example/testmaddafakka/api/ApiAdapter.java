@@ -64,10 +64,11 @@ public class ApiAdapter implements IApiAdapter {
         VolleyLog.DEBUG = true;
         RequestQueue queue = SingletonRequestQueue.getInstance(context).getRequestQueue();
 
-        //parse response into gsons jsonobject and then turn them into medias
+
         JsonObjectRequest request = new JsonObjectRequest(buildRequestStrategy.buildRequest(stringRequest), null, response -> {
             List<IMedia> mediaList = new LinkedList<>();
-            VolleyLog.wtf(response.toString(), "utf-8");
+            //Used for debugging purposes to print the response
+            //VolleyLog.wtf(response.toString(), "utf-8");
 
             List<JsonObject> jsonObjects = parseStrategy.parseResponse(response);
             for(int i = 0; i < jsonObjects.size(); i++) {

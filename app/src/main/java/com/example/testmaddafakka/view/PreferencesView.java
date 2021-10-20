@@ -37,28 +37,52 @@ public class PreferencesView extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_preferences_view, container, false);
-        FragmentContainerView fcv = view.findViewById(R.id.fcvPrefs);
-
-        fcv.setVisibility(View.INVISIBLE);
 
         searchResults = new SearchResultsView();
 
+        initAndListen2ViewModel();
+        initActorSearchView();
+        initDirectorSearchView();
+        initSpinner();
+
+        return view;
+    }
+
+    private void initDirectorSearchView() {
+        SearchView directorSearchView = view.findViewById(R.id.directorSearch);
+        directorSearchView.setIconifiedByDefault(false);
+        directorSearchView.setQueryHint("Search");
+
+        directorSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String name) {
+                viewModel.search(name);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String name) {
+                return false;
+            }
+        });
+    }
 
 
-        viewModel = new ViewModelProvider(this).get(PreferencesViewModel.class);
-        viewModel.init(requireContext());
-        viewModel.getCategories().observe(getViewLifecycleOwner(), this::updateMediaDisplayed);
+    private void initActorSearchView() {
+        FragmentContainerView fcv = view.findViewById(R.id.fcvPrefs);
 
-
-
+        fcv.setVisibility(View.INVISIBLE);
         SearchView actorSearchView = view.findViewById(R.id.actorSearch);
         actorSearchView.setIconifiedByDefault(false);
         actorSearchView.setInputType(61); // 61 corresponds to InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PERSON_NAME.
         actorSearchView.setQueryHint("Search");
         //actorSearchView.setSubmitButtonEnabled(true);
 
+        initSearchViewListener(actorSearchView, fcv);
 
+    }
 
+    private void initSearchViewListener(SearchView actorSearchView, FragmentContainerView fcv) {
         actorSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String name) {
@@ -79,25 +103,17 @@ public class PreferencesView extends Fragment {
                 return false;
             }
         });
+    }
 
-        SearchView directorSearchView = view.findViewById(R.id.directorSearch);
-        directorSearchView.setIconifiedByDefault(false);
-        directorSearchView.setQueryHint("Search");
+    private void initAndListen2ViewModel() {
 
-        directorSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String name) {
-                viewModel.search(name);
-                return false;
-            }
+        viewModel = new ViewModelProvider(this).get(PreferencesViewModel.class);
+        viewModel.init(requireContext());
+        viewModel.getCategories().observe(getViewLifecycleOwner(), this::updateMediaDisplayed);
 
-            @Override
-            public boolean onQueryTextChange(String name) {
-                return false;
-            }
-        });
+    }
 
-
+    private void initSpinner() {
         Spinner spinner = view.findViewById(R.id.genreSpinner);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -112,9 +128,8 @@ public class PreferencesView extends Fragment {
 
             }
         });
-
-        return view;
     }
+
     public void setSpinner(Spinner spinner, ArrayAdapter<CharSequence> content){
         // Specify the layout to use when the list of choices appears
         content.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

@@ -20,30 +20,29 @@ public class WatchlistView extends Fragment {
     private WatchlistTabView likedMedias;
     private WatchlistTabView dislikedMedias;
     private WatchlistTabView watchedMedia;
-    private WatchlistViewModel viewModel;
+    private View view;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_watchlist, container, false);
-        tabLayout = view.findViewById(R.id.tabLayout);
-        tabLayout.addTab(tabLayout.newTab().setText("Liked"));
-        tabLayout.addTab(tabLayout.newTab().setText("Missed"));
-        tabLayout.addTab(tabLayout.newTab().setText("Seen"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        view = inflater.inflate(R.layout.fragment_watchlist, container, false);
+
+        initTabLayout();
 
         likedMedias = new LikedTabView();
         dislikedMedias = new DislikedTabView();
         watchedMedia = new WatchedTabView();
 
-        viewModel = new ViewModelProvider(this).get(WatchlistViewModel.class);
-        viewModel.init(requireContext());
-
-        viewModel.getMedia().observe(getViewLifecycleOwner(), media -> System.out.println("yeet"));
-
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentContainerView, likedMedias).commit();
+
+        initTabListener();
+
+        return view;
+    }
+
+    private void initTabListener() {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -62,9 +61,17 @@ public class WatchlistView extends Fragment {
 
             }
         });
-        return view;
     }
-    public Fragment getItem(int position) {
+
+    private void initTabLayout() {
+        tabLayout = view.findViewById(R.id.tabLayout);
+        tabLayout.addTab(tabLayout.newTab().setText("Liked"));
+        tabLayout.addTab(tabLayout.newTab().setText("Missed"));
+        tabLayout.addTab(tabLayout.newTab().setText("Seen"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+    }
+
+    private Fragment getItem(int position) {
         switch (position) {
             case 0:
                 return likedMedias;

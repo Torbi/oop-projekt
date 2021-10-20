@@ -8,11 +8,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
-//code taken from volleys guide
-
 /**
  * Singleton for volleys requestqueue
  * Also instantiates the imageloader which can save images in the cache
+ * Code taken from volleys guide
  * @author Torbjörn
  */
 public class SingletonRequestQueue {
