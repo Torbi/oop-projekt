@@ -10,7 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.testmaddafakka.R;
+import com.filmster.application.R;
+
 
 /**
  * The backside of the card that displays the mediaobject

@@ -2,7 +2,8 @@ package com.filmster.application.view;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.testmaddafakka.R;
+
+import com.filmster.application.R;
 
 /**
  * Liked Medias a part of the watchlist responsable to show all liked movies

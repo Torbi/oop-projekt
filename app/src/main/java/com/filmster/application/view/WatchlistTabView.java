@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.testmaddafakka.R;
+import com.filmster.application.R;
 import com.filmster.application.viewmodel.WatchlistViewModel;
 
 /**

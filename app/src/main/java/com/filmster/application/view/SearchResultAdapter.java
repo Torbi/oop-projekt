@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.toolbox.NetworkImageView;
-import com.example.testmaddafakka.R;
+import com.filmster.application.R;
 import com.filmster.application.model.ICategory;
 
 import java.util.List;

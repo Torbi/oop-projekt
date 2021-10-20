@@ -27,7 +27,7 @@ public class IMDbApiAdapterTest implements IApiListener {
         listener.addListener(this);
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         ApiAdapter adapter = new ApiAdapter(appContext, listener);
-        adapter.getList("Top250Movies");
+        adapter.loadResponse("Top250Movies");
         //looks ugly and feels wrong, but it works
         try {
             Thread.sleep(2000);

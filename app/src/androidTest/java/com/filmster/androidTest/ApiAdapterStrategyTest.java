@@ -26,7 +26,7 @@ public class ApiAdapterStrategyTest implements IApiListener {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         ApiAdapter adapter = new ApiAdapter(appContext, listener);
         adapter.setBuildRequestStrategy(new IMDbListBuildRequestStrategy());
-        adapter.getList("ls051091770");
+        adapter.loadResponse("ls051091770");
         //looks ugly and feels wrong, but it works
         try {
             Thread.sleep(17000);

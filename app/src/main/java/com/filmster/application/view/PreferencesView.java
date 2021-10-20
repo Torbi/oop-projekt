@@ -15,8 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.SearchView;
 import android.widget.Spinner;
 
+import com.filmster.application.R;
 import com.filmster.application.model.ICategory;
-import com.example.testmaddafakka.R;
 import com.filmster.application.viewmodel.PreferencesViewModel;
 
 import java.util.List;

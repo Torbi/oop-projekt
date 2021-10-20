@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-import com.example.testmaddafakka.R;
+import com.filmster.application.R;
 import com.filmster.application.api.SingletonRequestQueue;
 import com.filmster.application.model.IMedia;
 

@@ -17,8 +17,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 
+import com.filmster.application.R;
 import com.filmster.application.model.IMedia;
-import com.example.testmaddafakka.R;
+
 import com.filmster.application.viewmodel.MainViewModel;
 
 public class MainView extends Fragment {

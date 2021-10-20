@@ -2,7 +2,8 @@ package com.filmster.application.view;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.testmaddafakka.R;
+import com.filmster.application.R;
+
 
 public class WatchedTabView extends WatchlistTabView {
 
