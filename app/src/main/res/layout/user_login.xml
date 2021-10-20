@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.testmaddafakka.viewmodel.MainViewModel"/>
+            type="com.filmster.test.viewmodel.MainViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F3F0FF"
-        bind:context=".MainActivity">
+        bind:context="com.filmster.test.MainActivity">
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
