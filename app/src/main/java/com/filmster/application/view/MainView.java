@@ -1,4 +1,3 @@
-
 package com.filmster.application.view;
 
 import android.annotation.SuppressLint;
@@ -239,4 +238,3 @@ public class MainView extends Fragment {
         mediaFront.update(media.getImage());
     }
 }
-

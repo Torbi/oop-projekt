@@ -122,7 +122,35 @@ public class PreferencesView extends Fragment {
         viewModel = new ViewModelProvider(this).get(PreferencesViewModel.class);
         viewModel.init(requireContext());
         viewModel.getCategories().observe(getViewLifecycleOwner(), this::populateSpinner);
+        SearchView directorSearchView = view.findViewById(R.id.directorSearch);
+        directorSearchView.setIconifiedByDefault(false);
+        directorSearchView.setQueryHint("Search");
 
+        directorSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String name) {
+                viewModel.search(name);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                searchResults = new SearchResultsView();
+                FragmentContainerView fcv = view.findViewById(R.id.fcvPrefs);
+                fcv.setVisibility(View.VISIBLE);
+                FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+                transaction.replace(R.id.fcvPrefs, searchResults).commit();
+                fcv.bringToFront();
+
+                System.out.println(name + " submit");
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String name) {
+                return false;
+            }
+        });
     }
 
     private void initSpinnerListener() {

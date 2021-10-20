@@ -8,10 +8,10 @@ package com.filmster.application.model;
 public class Movie implements IMedia {
     private final String name;
     private final String id;
-    private final Double rating;
-    private final String starring;
-    private final String image;
-    private final int year;
+    private Double rating;
+    private String starring;
+    private String image;
+    private int year;
     private MediaState state;
 
     /**
@@ -50,6 +50,11 @@ public class Movie implements IMedia {
         this.state = MediaState.DEFAULT;
     }
 
+    public Movie(String name, String id) {
+        this.name = checkMovieLength(name);
+        this.id = id;
+    }
+
     private String checkMovieLength(String title){
         if(title.length() > 15){
             return title.substring(0, 16) + "...";
@@ -84,6 +89,11 @@ public class Movie implements IMedia {
     @Override
     public MediaState getState() {
         return state;
+    }
+
+    @Override
+    public String getID() {
+        return id;
     }
 
     @Override

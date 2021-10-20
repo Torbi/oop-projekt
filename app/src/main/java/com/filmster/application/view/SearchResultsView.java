@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 import com.filmster.application.R;
@@ -49,8 +50,14 @@ public class SearchResultsView extends Fragment {
             searchResultAdapter.setOnItemClickListener(new SearchResultAdapter.ClickListener() {
                 @Override
                 public void onItemClick(int pos, View view) {
-                    System.out.println(pos + " position click"); // pos is position of clicked view in recyclerview
                     viewModel.ChosenID(pos);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    recyclerView.setVisibility(View.INVISIBLE);
+
                 }
             });
         });
