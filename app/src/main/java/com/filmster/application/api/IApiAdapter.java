@@ -9,7 +9,6 @@ import com.filmster.application.api.parse_buildrequest_strategies.IParseStrategy
  * @author Torbjörn
  */
 public interface IApiAdapter {
-
     /**
      * The method to call for making a request to an api
      * To get a result, the class that makes the call needs to listen to the

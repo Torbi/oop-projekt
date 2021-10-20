@@ -10,7 +10,6 @@ import com.filmster.application.api.URL;
  *@author Torbjörn
  */
 public class IMDbListBuildRequestStrategy implements IBuildRequestStrategy {
-
     /**
      * Build a request to get a IMDbList.
      * @param request - a valid list id from imdb, starts with ls

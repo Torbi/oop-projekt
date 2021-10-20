@@ -9,9 +9,9 @@ import java.util.List;
 public class Filmster{
 
     private List<IMedia> mediaList;
-    private User user;
+    private final User user;
     private int currentMediaCounter;
-    private List<ICategory> categoryList;
+    private final List<ICategory> categoryList;
 
     /**
      * Constructor for filmster, initializes some data and receives a user for the program
@@ -20,11 +20,12 @@ public class Filmster{
     public Filmster(User user) {
         this.user = user;
         this.currentMediaCounter = 0;
-        mediaList = new ArrayList<>();
-        categoryList = new ArrayList<>();
+        this.mediaList = new ArrayList<>();
+        this.categoryList = new ArrayList<>();
 
         //a fake movie is added to give time for imdbapiadapter to get real movies from the api
-        mediaList.add(new Movie("Inception", "tt1375666", 9.9, "https://imdb-api.com/Images/original/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_Ratio0.6791_AL_.jpg",2010));
+        this.mediaList.add(new Movie("Inception", "tt1375666", 9.9, "https://imdb-api.com/Images/original/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_Ratio0.6791_AL_.jpg",2010));
+        //this.mediaList.add(new Movie("Inception", "12123", 9.1, "https://imdb-api.com/Images/original/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_Ratio0.6791_AL_.jpg",2020));
     }
 
     public void setMediaList(List<IMedia> moviesList) {
@@ -74,13 +75,9 @@ public class Filmster{
         nextMedia();
     }
 
-
-    public String CurrentUsersCategory(String categoryName){
-
+    public String currentUsersCategory(String categoryName){
         ICategory category = user.getPreferences().getMatchingGenre(categoryName);
-
         //Genre category = user.getPreferences().searchMovieGenres(categoryName);
-
         return category.getID();
     }
 

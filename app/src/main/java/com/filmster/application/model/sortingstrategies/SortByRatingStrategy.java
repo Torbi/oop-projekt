@@ -10,7 +10,7 @@ import java.util.Comparator;
  */
 public class SortByRatingStrategy implements Comparator<IMedia> {
     @Override
-    public int compare(IMedia iMedia, IMedia t1) {
-        return (int)((t1.getRating()) - (iMedia.getRating()));
+    public int compare(IMedia media1, IMedia media2) {
+        return (int)((media2.getRating()) - (media1.getRating()));
     }
 }

@@ -11,6 +11,5 @@ import java.util.List;
  * @author Torbjörn
  */
 public interface IParseStrategy {
-
     List<JsonObject> parseResponse (JSONObject response);
 }

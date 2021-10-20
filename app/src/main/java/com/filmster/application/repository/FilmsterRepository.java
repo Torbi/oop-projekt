@@ -28,26 +28,24 @@ import java.util.List;
  */
 public class FilmsterRepository implements IApiListener {
     private static FilmsterRepository instance;
-    private IApiAdapter imdbAdapter;
-    private MutableLiveData<List<IMedia>> medias;
-    private MutableLiveData<IMedia> currentMedia;
-    private ApiListener listener;
-    private Filmster filmster;
-    private User user;
+    private final IApiAdapter imdbAdapter;
+    private final MutableLiveData<List<IMedia>> medias;
+    private final MutableLiveData<IMedia> currentMedia;
+    private final Filmster filmster;
+    private final User user;
     private int current = 0;
-    private MutableLiveData<List<ICategory>> categories;
-
+    private final MutableLiveData<List<ICategory>> categories;
 
     private FilmsterRepository(Context ctx) {
-        medias = new MutableLiveData<>();
-        currentMedia = new MutableLiveData<>();
-        user = new User("TestNamn", "TestPass", new WatchList(), new Preferences());
-        filmster = new Filmster(user);
-        listener = new ApiListener();
+        this.medias = new MutableLiveData<>();
+        this.currentMedia = new MutableLiveData<>();
+        this.user = new User("TestNamn", "TestPass", new WatchList(), new Preferences());
+        this.filmster = new Filmster(user);
+        ApiListener listener = new ApiListener();
         listener.addListener(this);
-        categories = new MutableLiveData<>();
+        this.categories = new MutableLiveData<>();
 
-        imdbAdapter = new ApiAdapter(ctx, listener);
+        this.imdbAdapter = new ApiAdapter(ctx, listener);
         loadSelectedCategory("Popular");
     }
 
@@ -58,12 +56,12 @@ public class FilmsterRepository implements IApiListener {
         return instance;
     }
     public MutableLiveData<IMedia> getCurrentMedia() {
-        this.currentMedia.setValue(filmster.getCurrentMedia());
+        this.currentMedia.setValue(this.filmster.getCurrentMedia());
         return this.currentMedia;
     }
     private void setMedias(List<IMedia> medias) {
         this.medias.setValue(medias);
-        filmster.setMediaList(medias);
+        this.filmster.setMediaList(medias);
     }
 
     @Override
@@ -73,16 +71,16 @@ public class FilmsterRepository implements IApiListener {
     }
 
     public void addLikedMedia(IMedia media) {
-        filmster.addLikedMedia(media);
+        this.filmster.addLikedMedia(media);
         nextMedia();
     }
 
     public void addDislikedMedia(IMedia media) {
-        filmster.addDislikedMedia(media);
+        this.filmster.addDislikedMedia(media);
         nextMedia();
     }
     public void addWatchedMedia(IMedia media){
-        filmster.addWatchedMedia(media);
+        this.filmster.addWatchedMedia(media);
         nextMedia();
     }
 
@@ -92,20 +90,20 @@ public class FilmsterRepository implements IApiListener {
      * of medias and display them.
      */
     public void nextMedia() {
-        this.currentMedia.setValue(this.medias.getValue().get(current));
-        current++;
-        if(current == this.medias.getValue().size()) {
-            current = 0;
+        this.currentMedia.setValue(this.medias.getValue().get(this.current));
+        this.current++;
+        if(this.current == this.medias.getValue().size()) {
+            this.current = 0;
         }
     }
     public List<IMedia> getLikedMedias(){
-        return user.getLikedMedia();
+        return this.user.getLikedMedia();
     }
     public List<IMedia> getDislikedMedias(){
-        return user.getDislikedMedia();
+        return this.user.getDislikedMedia();
     }
     public List<IMedia> getWatchedMedias(){
-        return user.getWatchedMedia();
+        return this.user.getWatchedMedia();
     }
 
 
@@ -115,15 +113,15 @@ public class FilmsterRepository implements IApiListener {
      */
     public void loadSelectedCategory(String categoryName){
         if(!categoryName.equals("Popular")) {
-            imdbAdapter.setBuildRequestStrategy(new IMDbListBuildRequestStrategy());
+            this.imdbAdapter.setBuildRequestStrategy(new IMDbListBuildRequestStrategy());
         } else {
-            imdbAdapter.setBuildRequestStrategy(new DefaultBuildRequestStrategy());
+            this.imdbAdapter.setBuildRequestStrategy(new DefaultBuildRequestStrategy());
         }
-        imdbAdapter.loadResponse(getSelectedCategory(categoryName));
+        this.imdbAdapter.loadResponse(getSelectedCategory(categoryName));
     }
 
     private String getSelectedCategory(String categoryName){
-        return filmster.CurrentUsersCategory(categoryName);
+        return this.filmster.currentUsersCategory(categoryName);
     }
 
     /**
@@ -131,7 +129,7 @@ public class FilmsterRepository implements IApiListener {
      * @return A list of movie genres
      */
     public MutableLiveData<List<ICategory>> getCategories() {
-        this.categories.setValue(filmster.getMovieCategories());
+        this.categories.setValue(this.filmster.getMovieCategories());
         return this.categories;
     }
 
@@ -139,7 +137,7 @@ public class FilmsterRepository implements IApiListener {
         // api.search or something
         //imdbAdapter.setBuildRequestStrategy(new IMDbNameBuildRequestStrategy());
         //imdbAdapter.setParseStrategy(new DefaultParseStrategy("results"));
-        imdbAdapter.loadResponse(name);
+        this.imdbAdapter.loadResponse(name);
     }
 
     public List<ICategory> getSearchResults(){

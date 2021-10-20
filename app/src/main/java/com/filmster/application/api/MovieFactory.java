@@ -10,6 +10,7 @@ import com.google.gson.JsonObject;
  * @author Torbjörn
  */
 public class MovieFactory implements IMediaFactory {
+
     @Override
     public IMedia createMediaObjectFromJson(JsonObject object) {
         //need to have try/catch in case the JsonObject doesn't contain the element you try to get

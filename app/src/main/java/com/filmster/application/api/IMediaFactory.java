@@ -8,6 +8,5 @@ import com.google.gson.JsonObject;
  * @author Torbjörn
  */
 public interface IMediaFactory {
-
-    public IMedia createMediaObjectFromJson(JsonObject object);
+    IMedia createMediaObjectFromJson(JsonObject object);
 }

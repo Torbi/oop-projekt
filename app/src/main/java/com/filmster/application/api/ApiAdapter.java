@@ -31,9 +31,8 @@ import java.util.List;
  */
 
 public class ApiAdapter implements IApiAdapter {
-
     private final Context context;
-    private ApiListener listener;
+    private final ApiListener listener;
     private IParseStrategy parseStrategy;
     private IBuildRequestStrategy buildRequestStrategy;
     private IMediaFactory mediaFactory;
@@ -67,9 +66,6 @@ public class ApiAdapter implements IApiAdapter {
 
         JsonObjectRequest request = new JsonObjectRequest(buildRequestStrategy.buildRequest(stringRequest), null, response -> {
             List<IMedia> mediaList = new LinkedList<>();
-            //Used for debugging purposes to print the response
-            //VolleyLog.wtf(response.toString(), "utf-8");
-
             List<JsonObject> jsonObjects = parseStrategy.parseResponse(response);
             for(int i = 0; i < jsonObjects.size(); i++) {
                 IMedia media = mediaFactory.createMediaObjectFromJson(jsonObjects.get(i));
@@ -141,12 +137,7 @@ public class ApiAdapter implements IApiAdapter {
      */
     @Override
     public void loadResponse(String request) {
-        makeJsonRequest(request, new VolleyCallback() {
-            @Override
-            public void onSuccess(List<IMedia> mediaList) {
-                listener.notifyListeners(mediaList);
-            }
-        });
+        makeJsonRequest(request, listener::notifyListeners);
     }
 
     public void getSearchResults(String request){

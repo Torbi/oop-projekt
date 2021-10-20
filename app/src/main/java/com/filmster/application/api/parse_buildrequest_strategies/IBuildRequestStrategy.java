@@ -7,6 +7,5 @@ package com.filmster.application.api.parse_buildrequest_strategies;
  * @author Torbjörn
  */
 public interface IBuildRequestStrategy {
-
     String buildRequest(String request);
 }

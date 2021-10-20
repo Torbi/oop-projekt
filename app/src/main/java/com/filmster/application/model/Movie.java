@@ -5,13 +5,12 @@ package com.filmster.application.model;
  * a state on if its watched, liked or disliked.
  */
 public class Movie implements IMedia {
-
-    private String name;
-    private String id;
-    private Double rating;
-    private String starring;
-    private String image;
-    private int year;
+    private final String name;
+    private final String id;
+    private final Double rating;
+    private final String starring;
+    private final String image;
+    private final int year;
     private MediaState state;
 
     /**

@@ -15,17 +15,16 @@ import com.android.volley.toolbox.Volley;
  * @author Torbjörn
  */
 public class SingletonRequestQueue {
+    private static SingletonRequestQueue instance;
+    private static Context context;
+    private RequestQueue requestQueue;
+    private final ImageLoader imageLoader;
 
-    private static SingletonRequestQueue mInstance;
-    private static Context mContext;
-    private RequestQueue mRequestQueue;
-    private ImageLoader imageLoader;
+    private SingletonRequestQueue(Context ctx) {
+        context = ctx;
+        requestQueue = getRequestQueue();
 
-    private SingletonRequestQueue(Context context) {
-        mContext = context;
-        mRequestQueue = getRequestQueue();
-
-        imageLoader = new ImageLoader(mRequestQueue,
+        imageLoader = new ImageLoader(requestQueue,
                 new ImageLoader.ImageCache() {
                     private final LruCache<String, Bitmap>
                             cache = new LruCache<String, Bitmap>(20);
@@ -43,17 +42,17 @@ public class SingletonRequestQueue {
     }
 
     public static synchronized SingletonRequestQueue getInstance(Context context) {
-        if (mInstance == null) {
-            mInstance = new SingletonRequestQueue(context);
+        if (instance == null) {
+            instance = new SingletonRequestQueue(context);
         }
-        return mInstance;
+        return instance;
     }
 
     public RequestQueue getRequestQueue() {
-        if (mRequestQueue == null) {
-            mRequestQueue = Volley.newRequestQueue(mContext);
+        if (requestQueue == null) {
+            requestQueue = Volley.newRequestQueue(context);
         }
-        return mRequestQueue;
+        return requestQueue;
     }
 
     public ImageLoader getImageLoader() {

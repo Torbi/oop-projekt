@@ -11,11 +11,9 @@ import java.util.List;
  */
 
 public class Preferences {
-
-    private List<ICategory> movieGenres = new ArrayList<>();
+    private final List<ICategory> movieGenres = new ArrayList<>();
 
     public Preferences(){
-
         addMovieGenres();
     }
 

@@ -10,7 +10,7 @@ import java.util.Comparator;
  */
 public class SortByYearAscendingStrategy implements Comparator<IMedia> {
     @Override
-    public int compare(IMedia iMedia, IMedia t1) {
-        return (int)((iMedia.getYear()) - (t1.getYear()));
+    public int compare(IMedia media1, IMedia media2) {
+        return ((media1.getYear()) - (media2.getYear()));
     }
 }

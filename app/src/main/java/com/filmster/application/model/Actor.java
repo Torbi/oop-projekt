@@ -1,6 +1,7 @@
 package com.filmster.application.model;
 
 public class Actor implements ICategory {
+
     private String listID;
     private String name;
 

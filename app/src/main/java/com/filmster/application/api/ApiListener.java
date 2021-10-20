@@ -10,8 +10,7 @@ import java.util.List;
  * @author Torbjörn
  */
 public class ApiListener {
-
-    private List<IApiListener> listeners;
+    private final List<IApiListener> listeners;
 
     public ApiListener() {
         listeners = new LinkedList<>();

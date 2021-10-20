@@ -16,8 +16,7 @@ import java.util.List;
  * @author Torbjörn
  */
 public class DefaultParseStrategy implements IParseStrategy {
-
-    private String memberName;
+    private final String memberName;
 
     public DefaultParseStrategy(){
         memberName = "items";
@@ -26,6 +25,7 @@ public class DefaultParseStrategy implements IParseStrategy {
     public DefaultParseStrategy(String memberName){
         this.memberName = memberName;
     }
+
     @Override
     public List<JsonObject> parseResponse(JSONObject response) {
 

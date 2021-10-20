@@ -9,6 +9,5 @@ import java.util.List;
  * @author Torbjörn
  */
 public interface IApiListener {
-
     void update(List<IMedia> movies);
 }

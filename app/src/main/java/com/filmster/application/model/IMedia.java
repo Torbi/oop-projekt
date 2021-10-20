@@ -6,7 +6,6 @@ package com.filmster.application.model;
  */
 
 public interface IMedia {
-
     /**
      * Return the url to the objects image
      * @return - A string with a url to an image

@@ -10,8 +10,7 @@ import java.util.stream.Collectors;
  * Can also sort the list by rating and by year, both ascending and descending
  */
 public class WatchList {
-
-    private List<IMedia> watchList;
+    private final List<IMedia> watchList;
     private Comparator<IMedia> sortingStrategy;
 
     public WatchList (){

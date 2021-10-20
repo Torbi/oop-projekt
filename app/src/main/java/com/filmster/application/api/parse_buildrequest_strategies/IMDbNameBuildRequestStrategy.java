@@ -9,7 +9,6 @@ import com.filmster.application.api.URL;
  */
 
 public class IMDbNameBuildRequestStrategy implements IBuildRequestStrategy{
-
     /**
      * Build a request to get a list of actors/directors.
      * @param request - a name of an actor or director

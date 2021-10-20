@@ -3,11 +3,10 @@ package com.filmster.application.model;
 import java.util.List;
 
 public class User {
-
-    private String name;
-    private String password;
-    private WatchList watchList;
-    private Preferences Preferences;
+    private final String name;
+    private final String password;
+    private final WatchList watchList;
+    private final Preferences Preferences;
 
     /**
      * A movie object that contains information about a movie
@@ -22,7 +21,6 @@ public class User {
         this.password = password;
         this.watchList = watchList;
         this.Preferences = preferences;
-
     }
 
     public void addMedia(IMedia media) {
