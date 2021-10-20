@@ -13,6 +13,8 @@ public class Filmster{
     private int currentMediaCounter;
     private List<IPreferences> categoryList;
 
+
+
     /**
      * Constructor for filmster, initializes some data and receives a user for the program
      * @param user A user

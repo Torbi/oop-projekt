@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.testmaddafakka.model.WatchList;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -80,11 +81,12 @@ public class SignupActivity extends AppCompatActivity {
                                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                                 DatabaseReference myRef = database.getReference("users");
 
-                                DatabaseReference user = myRef.ref(uid);
+                                DatabaseReference user = myRef.child(uid);
 
                                 user.child("name").setValue(edtName.getText().toString());
                                 user.child("email").setValue(edtEmail.getText().toString());
                                 user.child("password").setValue(edtPassword.getText().toString());
+
 
                                 mAuth.signOut();
                                 Intent in=new Intent(SignupActivity.this,LoginActivity2.class);
@@ -92,6 +94,8 @@ public class SignupActivity extends AppCompatActivity {
                             }
 
                             else{
+
+                                Toast.makeText(getApplicationContext(),task.getException().getLocalizedMessage(),Toast.LENGTH_SHORT).show();
 
 
                             }

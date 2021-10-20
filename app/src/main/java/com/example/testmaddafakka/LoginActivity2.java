@@ -27,6 +27,7 @@ public class LoginActivity2 extends AppCompatActivity {
     EditText passwordField;
     FirebaseAuth mAuth;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,10 +69,16 @@ public class LoginActivity2 extends AppCompatActivity {
                                 Intent in = new Intent(LoginActivity2.this,MainActivity.class);
                                 startActivity(in);
                             }
+
+
+
+
                             else {
                                 Toast.makeText(getApplicationContext(),task.getException().getLocalizedMessage(),Toast.LENGTH_SHORT).show();
 
                             }
+
+
                         }
                     });
                 }

@@ -1,5 +1,7 @@
 package com.example.testmaddafakka.model;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,6 +11,8 @@ public class WatchList {
     private List<IMedia> likedList;
     private List<IMedia> dislikedList;
     private List<IMedia> watchedList;
+
+
 
     public WatchList (){
         this.likedList = new ArrayList<>();
@@ -21,7 +25,11 @@ public class WatchList {
     }
 
 
+
+
     public void addDislikedMedia(IMedia media) {
+
+
         this.dislikedList.add(media);
         if(likedList.contains(media)){
             likedList.remove(media);
@@ -37,6 +45,7 @@ public class WatchList {
     public List<IMedia> getLikedList() {
         return likedList;
     }
+
 
     public List<IMedia> getDislikedList() {
         return dislikedList;

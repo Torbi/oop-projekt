@@ -15,6 +15,9 @@ import com.example.testmaddafakka.api.IApiListener;
 import com.example.testmaddafakka.model.Preferences;
 import com.example.testmaddafakka.model.User;
 import com.example.testmaddafakka.model.WatchList;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -34,6 +37,8 @@ public class FilmsterRepository implements IApiListener {
     private int current = 0;
     private Preferences preferences;
     private MutableLiveData<List<IPreferences>> categories;
+
+    FirebaseAuth mauth= FirebaseAuth.getInstance();
 
 
     private FilmsterRepository(Context ctx) {
@@ -78,6 +83,9 @@ public class FilmsterRepository implements IApiListener {
 
     public void addLikedMedia(IMedia media) {
         filmster.addLikedMedia(media);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Medias");
+
         nextMedia();
     }
 
