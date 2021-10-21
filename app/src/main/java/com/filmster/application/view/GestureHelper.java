@@ -95,5 +95,4 @@ public class GestureHelper implements View.OnTouchListener {
             return result;
         }
     }
-
 }
