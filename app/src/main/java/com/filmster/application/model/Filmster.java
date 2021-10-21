@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * Filmster keeps track of all movies, users and currentMovies displayed on the screen
+ * @author Torbjörn
  */
 public class Filmster{
 
@@ -82,11 +83,17 @@ public class Filmster{
         nextMedia();
     }
 
+    /**
+     * Returns the current Users chosen Category
+     * @param categoryName - The name of the category chosen
+     * @return - The id of the category chosen
+     */
     public String currentUsersCategory(String categoryName){
         ICategory category = user.getPreferences().getMatchingGenre(categoryName);
-        //Genre category = user.getPreferences().searchMovieGenres(categoryName);
         return category.getID();
     }
+
+
 
     /**
      * Collects categories
@@ -102,11 +109,19 @@ public class Filmster{
         return categoryList;
     }
 
+    /**
+     * Gets the current users watchlist and gives it a sorting strategy and orders it to sort itself
+     * @param sortMethod - An ISortMethod
+     */
     public void sortWatchlist(ISortMethod sortMethod) {
         this.user.getWatchList().setSortingStrategy(sortMethod);
         this.user.getWatchList().sort();
     }
 
+    /**
+     * Returns all available sorting methods
+     * @return - A List of ISortMethods
+     */
     public List<ISortMethod> getSortMethods() {
         return this.sortMethods;
     }
