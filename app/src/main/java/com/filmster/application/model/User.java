@@ -27,12 +27,24 @@ public class User {
         watchList.addMedia(media);
     }
 
+    /**
+     * Getter for all the liked medias in the users watchlist.
+     * @return list of all liked IMedias.
+     */
     public List<IMedia> getLikedMedia(){
         return watchList.getLikedList();
     }
+    /**
+     * Getter for all the disliked medias in the users watchlist.
+     * @return list of all disliked IMedias.
+     */
     public List<IMedia> getDislikedMedia(){
         return watchList.getDislikedList();
     }
+    /**
+     * Getter for all the watched medias in the users watchlist.
+     * @return list of all watched IMedias.
+     */
     public List<IMedia> getWatchedMedia(){
         return watchList.getWatchedList();
     }

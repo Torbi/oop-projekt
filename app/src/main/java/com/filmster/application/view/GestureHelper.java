@@ -5,6 +5,9 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+/**
+ * StackOverFlow onTouchListener wrapper for the mediaCard in MainView.
+ */
 public class GestureHelper implements View.OnTouchListener {
 
     private final GestureDetector mGestureDetector;

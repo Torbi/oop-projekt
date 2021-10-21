@@ -21,7 +21,10 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
 
-
+/**
+ * The WatchlistView is a fragment and is the UI for the users watchlist.
+ * It has 3 tabs liked, disliked, and watched medias.
+ */
 public class WatchlistView extends Fragment {
     private TabLayout tabLayout;
     private WatchlistTabView likedMedias;
@@ -29,7 +32,6 @@ public class WatchlistView extends Fragment {
     private WatchlistTabView watchedMedia;
     private View view;
     private WatchlistViewModel viewModel;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

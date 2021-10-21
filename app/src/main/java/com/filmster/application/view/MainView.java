@@ -22,6 +22,13 @@ import com.filmster.application.model.IMedia;
 
 import com.filmster.application.viewmodel.MainViewModel;
 
+/**
+ * This is the start_page view and displays the movies has
+ * It has a button to preferences and watchlist.
+ * And a like, dislike and watched button.
+ * It also sets a onTouchListener to the MediaCard framgnet to handle swipes and clicks.
+ */
+
 public class MainView extends Fragment {
     private View view;
     private MainViewModel viewModel;
@@ -40,7 +47,9 @@ public class MainView extends Fragment {
         view = inflater.inflate(R.layout.fragment_start_page, container, false);
 
         initViews();
-        initAndListen2ViewModel();
+        initViewModel();
+        viewModel.getMedia().observe(getViewLifecycleOwner(), this::updateMediaDisplayed);
+
         initComponents();
 
         getChildFragmentManager().beginTransaction()
@@ -51,34 +60,40 @@ public class MainView extends Fragment {
         return view;
     }
 
+    /**
+     * Initializes all the view uses in this fragment.
+     */
     private void initViews() {
         mediaFront = new MediaCardFrontView();
         mediaBack = new MediaCardBackView();
         watchlistView = new WatchlistView();
         preferencesView = new PreferencesView();
+
     }
 
+    /**
+     * Initializes all the actionListeners and components
+     */
     private void initComponents() {
         initSpinner();
-        initlikeBtn();
+        initLikeBtn();
         initDislikedBtn();
         initWatchedBtn();
         initWatchlistBtn();
         initPreferencesBtn();
+
     }
 
     private void initSpinner() {
         spinner = (ProgressBar) view.findViewById(R.id.progressBar1);
         spinner.setVisibility(View.VISIBLE);
     }
-
-    private void initAndListen2ViewModel() {
+    private void initViewModel(){
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         viewModel.init(requireContext());
-        viewModel.getMedia().observe(getViewLifecycleOwner(), this::updateMediaDisplayed);
     }
 
-    private void initlikeBtn() {
+    private void initLikeBtn() {
         ImageView likeBtn = view.findViewById(R.id.like);
         likeBtn.setOnClickListener(view -> {
             viewModel.addLikedMedia();
@@ -203,7 +218,7 @@ public class MainView extends Fragment {
         Bundle bundle = new Bundle();
         bundle.putString("movie", viewModel.getCurrentMedia().getImage());
         mediaFront.setArguments(bundle);
-        ft.replace(R.id.mediaCard, mediaFront, "te");
+        ft.replace(R.id.mediaCard, mediaFront, "front");
         ft.commit();
 
         backSide = false;

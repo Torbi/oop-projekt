@@ -14,6 +14,7 @@ import com.filmster.application.repository.FilmsterRepository;
  * The viewModel for the MainView Fragment, the viewModel observes the LiveData objects
  * And updates itself when they are changed
  * The mainView updates the MainViewModel on input from the user
+ *
  */
 public class MainViewModel extends ViewModel {
     private MutableLiveData<IMedia> media;
@@ -48,14 +49,28 @@ public class MainViewModel extends ViewModel {
         media = filmsterRepository.getCurrentMedia();
     }
 
+    /**
+     * uses filmsterRepositorys addLikedMedia
+     * to set mediaState to LIKED and add it to the watchlist and go to next media
+     */
     public void addLikedMedia() {
         filmsterRepository.addLikedMedia(getCurrentMedia());
         nextMedia();
     }
+
+    /**
+     * uses filmsterRepositorys addDislikedMedia
+     * to set mediaState to DISLIKED and add it to the watchlist and go to next media
+     */
     public void addDislikedMedia() {
         filmsterRepository.addDislikedMedia(getCurrentMedia());
         nextMedia();
     }
+
+    /**
+     * uses filmsterRepositorys addWatchedMedia
+     * to set mediaState to WATCHED and add it to the watchlist and go to next media
+     */
     public void addWatchedMedia(){
         filmsterRepository.addWatchedMedia(getCurrentMedia());
         nextMedia();
