@@ -13,6 +13,10 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.filmster.application.R;
 import com.filmster.application.api.SingletonRequestQueue;
 
+/**
+ * This is the front of the media card on the start page.
+ * It only contains a NetworkImage and has a update method to set that image.
+ */
 
 public class MediaCardFrontView extends Fragment {
 

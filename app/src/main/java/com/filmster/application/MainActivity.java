@@ -1,6 +1,5 @@
 package com.filmster.application;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -16,24 +15,22 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * This is the activity for the app, it sets the appActivity view to activity_main
+ * it also sets the "main" fragment of the app to mainView.
+ */
 public class MainActivity extends AppCompatActivity {
 
-
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
-
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private MainView mainView;
-    private TextView escape;
-    private ImageView escapeLogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        escapeLogo = findViewById(R.id.escapeImage);
-        escape = findViewById(R.id.escape);
+        ImageView escapeLogo = findViewById(R.id.escapeImage);
+        TextView escape = findViewById(R.id.escape);
 
         escape.setOnClickListener(view -> setMainView());
         escapeLogo.setOnClickListener(view -> setMainView());
@@ -46,11 +43,14 @@ public class MainActivity extends AppCompatActivity {
         DatabaseReference myRef = database.getReference("message");
 
     }
+
+    /**
+     * Sets the activitys fragment to mainview.
+     */
     private void setMainView(){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.fragmentInlogg, mainView);
         fragmentTransaction.commit();
-        mainView = new MainView();
     }
 }
 

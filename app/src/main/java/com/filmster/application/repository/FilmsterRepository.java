@@ -41,11 +41,12 @@ public class FilmsterRepository implements IApiListener {
         this.currentMedia = new MutableLiveData<>();
         this.user = new User("TestNamn", "TestPass", new WatchList(), new Preferences());
         this.filmster = new Filmster(user);
-        ApiListener listener = new ApiListener();
-        listener.addListener(this);
         this.categories = new MutableLiveData<>();
 
+        ApiListener listener = new ApiListener();
+        listener.addListener(this);
         this.imdbAdapter = new ApiAdapter(ctx, listener);
+
         loadSelectedCategory("Popular");
     }
 
@@ -70,15 +71,26 @@ public class FilmsterRepository implements IApiListener {
         current = 0;
     }
 
+    /**
+     * runs filmster addLikedMedia to set mediaState to LIKED and sets next media.
+     * @param media media to like
+     */
     public void addLikedMedia(IMedia media) {
         this.filmster.addLikedMedia(media);
         nextMedia();
     }
-
+    /**
+     * runs filmster addDisliked to set mediaState to DISLIKED and sets next media.
+     * @param media media to disliked
+     */
     public void addDislikedMedia(IMedia media) {
         this.filmster.addDislikedMedia(media);
         nextMedia();
     }
+    /**
+     * runs filmster addWatchedMedia to set mediaState to WATCHED and sets next media.
+     * @param media media to watched
+     */
     public void addWatchedMedia(IMedia media){
         this.filmster.addWatchedMedia(media);
         nextMedia();
@@ -96,12 +108,25 @@ public class FilmsterRepository implements IApiListener {
             this.current = 0;
         }
     }
+
+    /**
+     * getter for all the liked medias of an user.
+     * @return A list of all liked medias
+     */
     public List<IMedia> getLikedMedias(){
         return this.user.getLikedMedia();
     }
+    /**
+     * getter for all the disliked medias of an user.
+     * @return A list of all disliked medias
+     */
     public List<IMedia> getDislikedMedias(){
         return this.user.getDislikedMedia();
     }
+    /**
+     * getter for all the watched medias of an user.
+     * @return A list of all watched medias
+     */
     public List<IMedia> getWatchedMedias(){
         return this.user.getWatchedMedia();
     }
@@ -133,16 +158,10 @@ public class FilmsterRepository implements IApiListener {
     }
 
     public void search(String name){
-        // api.search or something
-        //imdbAdapter.setBuildRequestStrategy(new IMDbNameBuildRequestStrategy());
-        //imdbAdapter.setParseStrategy(new DefaultParseStrategy("results"));
         this.imdbAdapter.loadResponse(name);
     }
 
     public List<ICategory> getSearchResults(){
-        // get list from api
-
-
         return null;
     }
 }

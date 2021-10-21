@@ -12,12 +12,13 @@ import android.widget.TextView;
 
 import com.filmster.application.R;
 
-
 /**
  * The backside of the card that displays the mediaobject
  * Gets its arguments from bundle because the fragment keeps getting destroyed
  */
+
 public class MediaCardBackView extends Fragment {
+
     private TextView aboutText;
     private TextView aboutTitle;
     private TextView aboutYear;

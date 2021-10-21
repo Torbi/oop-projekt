@@ -1,12 +1,12 @@
 package com.filmster.application.model;
 
 /**
- * This is a enum for the watchlist
+ * MediaState is the current state of a media in the watchlist.
  */
 
 public enum MediaState {
     DEFAULT,
     LIKED,
     DISLIKED,
-    SEEN;
+    SEEN
 }

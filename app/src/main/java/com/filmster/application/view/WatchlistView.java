@@ -13,6 +13,10 @@ import android.view.ViewGroup;
 import com.filmster.application.R;
 import com.google.android.material.tabs.TabLayout;
 
+/**
+ * The WatchlistView is a fragment and is the UI for the users watchlist.
+ * It has 3 tabs liked, disliked, and watched medias.
+ */
 
 public class WatchlistView extends Fragment {
     private TabLayout tabLayout;
@@ -20,7 +24,6 @@ public class WatchlistView extends Fragment {
     private WatchlistTabView dislikedMedias;
     private WatchlistTabView watchedMedia;
     private View view;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -11,6 +11,12 @@ import com.filmster.application.repository.FilmsterRepository;
 
 import java.util.List;
 
+/**
+ * This is a viewModel for the watchlist classes. It has a getMedia method which
+ * returns LiveData<IMedia> which the watchlist classes observes to easily update the views.
+ * Also provies the subclasses with the liked disliked and watched medias from the
+ * FilmsterRepository
+ */
 public class WatchlistViewModel extends ViewModel {
     private MutableLiveData<IMedia> media;
     private FilmsterRepository filmsterRepository;
@@ -18,10 +24,17 @@ public class WatchlistViewModel extends ViewModel {
     private MutableLiveData<List<IMedia>> dislikedMedias;
     private MutableLiveData<List<IMedia>> watchedMedias;
 
+    /**
+     *
+     * @param ctx must have context
+     */
     public void init(Context ctx) {
         filmsterRepository = FilmsterRepository.getInstance(ctx);
     }
-
+    /**
+     *
+     * @return immutable list of IMeaia
+     */
     public LiveData<IMedia> getMedia() {
         if (media == null) {
             media = new MutableLiveData<>();
@@ -29,7 +42,15 @@ public class WatchlistViewModel extends ViewModel {
         }
         return media;
     }
-
+    private void loadMedias() {
+        // Do an asynchronous operation to fetch a movie
+        media = filmsterRepository.getCurrentMedia();
+    }
+    /**
+     * getLikedMedias check if there are any liked medias if not it creates a new list.
+     * Otherwise it get likedMedias from filmsterRepository and returns it.
+     * @return the users liked medias
+     */
     public LiveData<List<IMedia>> getLikedMedias(){
         if(likedMedias == null){
             likedMedias = new MutableLiveData<>();
@@ -37,7 +58,11 @@ public class WatchlistViewModel extends ViewModel {
         likedMedias.setValue(filmsterRepository.getLikedMedias());
         return likedMedias;
     }
-
+    /**
+     * getDislikedMedias check if there are any disliked medias if not it creates a new list.
+     * Otherwise it get dislikedMedias from filmsterRepository and returns it.
+     * @return the users disliked medias
+     */
     public LiveData<List<IMedia>> getDislikedMedias(){
         if(dislikedMedias == null) {
             dislikedMedias = new MutableLiveData<>();
@@ -47,6 +72,11 @@ public class WatchlistViewModel extends ViewModel {
         return dislikedMedias;
     }
 
+    /**
+     * getWatchedMedias check if there are any watched medias if not it creates a new list.
+     * Otherwise it get watchedMedias from filmsterRepository and returns it.
+     * @return the users watched medias
+     */
     public LiveData<List<IMedia>> getWatchedMedias(){
         if(watchedMedias == null){
             watchedMedias = new MutableLiveData<>();
@@ -54,10 +84,4 @@ public class WatchlistViewModel extends ViewModel {
         watchedMedias.setValue(filmsterRepository.getWatchedMedias());
         return watchedMedias;
     }
-
-    private void loadMedias() {
-        // Do an asynchronous operation to fetch a movie
-        media = filmsterRepository.getCurrentMedia();
-    }
-
 }
