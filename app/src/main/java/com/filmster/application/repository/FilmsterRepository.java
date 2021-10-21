@@ -25,7 +25,7 @@ import java.util.List;
  * A repository that handles all communication between the viewmodels and the api/model data
  * Follows the mvvm architecture
  *
- * @author Albin Sundström
+ * @author Albin Sundström, Torbjörn
  */
 public class FilmsterRepository implements IApiListener {
     private static FilmsterRepository instance;
@@ -51,6 +51,12 @@ public class FilmsterRepository implements IApiListener {
         loadSelectedCategory("Popular");
     }
 
+    /**
+     * Returns the instance of FilmsterRepository, if no exists, creates a new one
+     * Follows the Singleton Pattern
+     * @param ctx - The application context
+     * @return - A FilmsterRepository instance
+     */
     public static FilmsterRepository getInstance(@Nullable Context ctx) {
         if (instance == null) {
             instance = new FilmsterRepository(ctx);
@@ -66,6 +72,10 @@ public class FilmsterRepository implements IApiListener {
         this.filmster.setMediaList(medias);
     }
 
+    /**
+     * The method which ApiListener calls to update the repository
+     * @param medias - A list of IMedia objects fetched from an api
+     */
     @Override
     public void update(List<IMedia> medias) {
         setMedias(medias);
@@ -166,10 +176,18 @@ public class FilmsterRepository implements IApiListener {
         return null;
     }
 
-    public void sortWatchlist(ISortMethod sortMethod) {
+    /**
+     * Forwards a request to sort the users watchlist
+     * @param sortMethod - A String representing a sorting method
+     */
+    public void sortWatchlist(String sortMethod) {
         this.filmster.sortWatchlist(sortMethod);
     }
 
+    /**
+     * Returns all the current available sorting methods
+     * @return - A list of sorting methods of type ISortMethod
+     */
     public List<ISortMethod> getSortMethods() {
        return this.filmster.getSortMethods();
     }

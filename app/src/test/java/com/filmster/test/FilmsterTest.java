@@ -6,6 +6,7 @@ import com.filmster.application.model.Movie;
 import com.filmster.application.model.Preferences;
 import com.filmster.application.model.User;
 import com.filmster.application.model.WatchList;
+import com.filmster.application.model.sortingstrategies.ISortMethod;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -69,5 +70,11 @@ public class FilmsterTest {
         filmster.addWatchedMedia(filmster.getCurrentMedia());
         filmster.addWatchedMedia(filmster.getCurrentMedia());
         assert filmster.getCurrentMedia().getName().equals("Cool Movie3");
+    }
+
+    @Test
+    public void initSortMethods() {
+        List<ISortMethod> sortMethods = filmster.getSortMethods();
+        assert sortMethods.size() == 4;
     }
 }

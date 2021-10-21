@@ -11,7 +11,7 @@ public class SortByRatingStrategy implements ISortMethod {
     private String name;
 
     public SortByRatingStrategy() {
-        name = "Sort By Rating";
+        name = "Sort by Rating";
     }
 
     @Override

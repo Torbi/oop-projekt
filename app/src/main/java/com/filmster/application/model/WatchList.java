@@ -1,6 +1,7 @@
 package com.filmster.application.model;
 
 import com.filmster.application.model.sortingstrategies.ISortMethod;
+import com.filmster.application.model.sortingstrategies.SortByYearAscendingStrategy;
 
 import java.util.ArrayList;
 import java.util.Comparator;

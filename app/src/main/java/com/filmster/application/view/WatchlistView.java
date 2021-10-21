@@ -67,7 +67,7 @@ public class WatchlistView extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                ISortMethod sortMethod = (ISortMethod) spinner.getSelectedItem();
+                String sortMethod = spinner.getSelectedItem().toString();
                 viewModel.sortWatchlist(sortMethod);
             }
 
@@ -79,7 +79,6 @@ public class WatchlistView extends Fragment {
     }
 
     private void populateSpinner(List<ISortMethod> sortMethods) {
-        System.out.println("den populatas");
         Spinner spinner = view.findViewById(R.id.watchlistSortSpinner);
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, android.R.id.text1);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

@@ -113,14 +113,21 @@ public class Filmster{
      * Gets the current users watchlist and gives it a sorting strategy and orders it to sort itself
      * @param sortMethod - An ISortMethod
      */
-    public void sortWatchlist(ISortMethod sortMethod) {
-        this.user.getWatchList().setSortingStrategy(sortMethod);
+    public void sortWatchlist(String sortMethod) {
+        ISortMethod method = new DefaultSortingStrategy();
+        for(int i = 0; i < this.sortMethods.size(); i++) {
+            if(sortMethod.equals(this.sortMethods.get(i).getName())) {
+                method = this.sortMethods.get(i);
+                break;
+            }
+        }
+        this.user.getWatchList().setSortingStrategy(method);
         this.user.getWatchList().sort();
     }
 
     /**
      * Returns all available sorting methods
-     * @return - A List of ISortMethods
+     * @return - A list of available sorting methods
      */
     public List<ISortMethod> getSortMethods() {
         return this.sortMethods;

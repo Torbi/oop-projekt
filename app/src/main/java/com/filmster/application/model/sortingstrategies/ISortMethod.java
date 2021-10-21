@@ -10,5 +10,9 @@ import java.util.Comparator;
  */
 public interface ISortMethod extends Comparator<IMedia>{
 
+    /**
+     * Returns the name of the Sorting Method
+     * @return - A String representing the name of the method
+     */
     String getName();
 }

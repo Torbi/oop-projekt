@@ -33,6 +33,7 @@ public class WatchlistViewModel extends ViewModel {
     public void init(Context ctx) {
         filmsterRepository = FilmsterRepository.getInstance(ctx);
     }
+
     /**
      *
      * @return immutable list of IMeaia
@@ -44,10 +45,12 @@ public class WatchlistViewModel extends ViewModel {
         }
         return media;
     }
+
     private void loadMedias() {
         // Do an asynchronous operation to fetch a movie
         media = filmsterRepository.getCurrentMedia();
     }
+
     /**
      * getLikedMedias check if there are any liked medias if not it creates a new list.
      * Otherwise it get likedMedias from filmsterRepository and returns it.
@@ -60,6 +63,7 @@ public class WatchlistViewModel extends ViewModel {
         likedMedias.setValue(filmsterRepository.getLikedMedias());
         return likedMedias;
     }
+
     /**
      * getDislikedMedias check if there are any disliked medias if not it creates a new list.
      * Otherwise it get dislikedMedias from filmsterRepository and returns it.
@@ -79,7 +83,7 @@ public class WatchlistViewModel extends ViewModel {
      * Otherwise it get watchedMedias from filmsterRepository and returns it.
      * @return the users watched medias
      */
-    public LiveData<List<IMedia>> getWatchedMedias(){
+    public LiveData<List<IMedia>> getWatchedMedias() {
         if(watchedMedias == null){
             watchedMedias = new MutableLiveData<>();
         }
@@ -87,6 +91,10 @@ public class WatchlistViewModel extends ViewModel {
         return watchedMedias;
     }
 
+    /**
+     * Exposes a list of all sorting methods to the view
+     * @return A LiveData list of ISortMethods for the view to present
+     */
     public LiveData<List<ISortMethod>> getSortingMethods() {
         if(sortMethods == null) {
             sortMethods = new MutableLiveData<>();
@@ -95,7 +103,11 @@ public class WatchlistViewModel extends ViewModel {
         return sortMethods;
     }
 
-    public void sortWatchlist(ISortMethod sortMethod) {
+    /**
+     * Receives a String as input from user, forwards it to let the model handle it
+     * @param sortMethod A String representing a sortMethod
+     */
+    public void sortWatchlist(String sortMethod) {
         filmsterRepository.sortWatchlist(sortMethod);
     }
 

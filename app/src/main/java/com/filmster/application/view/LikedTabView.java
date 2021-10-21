@@ -20,6 +20,8 @@ public class LikedTabView extends WatchlistTabView {
     @Override
     public void observe(){
         viewModel.getLikedMedias().observe(getViewLifecycleOwner(), medias -> {
+            for(int i = 0; i < medias.size(); i++) {
+            }
             MediaAdapter adapter = new MediaAdapter(medias);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
