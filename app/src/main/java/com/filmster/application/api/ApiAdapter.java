@@ -64,7 +64,6 @@ public class ApiAdapter implements IApiAdapter {
         VolleyLog.DEBUG = true;
         RequestQueue queue = SingletonRequestQueue.getInstance(context).getRequestQueue();
 
-
         JsonObjectRequest request = new JsonObjectRequest(buildRequestStrategy.buildRequest(stringRequest), null, response -> {
             List<IMedia> mediaList = new LinkedList<>();
             List<JsonObject> jsonObjects = parseStrategy.parseResponse(response);

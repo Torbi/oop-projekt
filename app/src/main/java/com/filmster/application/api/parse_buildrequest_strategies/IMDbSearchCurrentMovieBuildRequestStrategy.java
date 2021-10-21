@@ -19,6 +19,6 @@ public class IMDbSearchCurrentMovieBuildRequestStrategy implements IBuildRequest
      */
     @Override
     public String buildRequest(String request) {
-        return URL.IMDB_URL.getValue() + "Title" + URL.IMDB_KEY.getValue() + "/" + request;
+        return URL.IMDB_URL.getValue() + "Title" + URL.IMDB_KEY.getValue() + "/" + request.replace("\"", "");
     }
 }

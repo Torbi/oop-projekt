@@ -1,6 +1,7 @@
 package com.example.testmaddafakka.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,6 +26,7 @@ public class Filmster{
         mediaList = new ArrayList<>();
         categoryList = new ArrayList<>();
         resultList = new ArrayList<>();
+        castMovies = new ArrayList<>();
 
         //a fake movie is added to give time for imdbapiadapter to get movies from the api
         mediaList.add(new Movie(" Inception ", "12123", " 9.1 ", " https://imdb-api.com/Images/original/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_Ratio0.6791_AL_.jpg "," 2010 "));
@@ -35,11 +37,7 @@ public class Filmster{
     }
 
     public IMedia getCurrentMedia() {
-        if(castMovies != null){
-            return castMovies.get(currentMediaCounter);
-        }else{
-            return mediaList.get(currentMediaCounter);
-        }
+        return mediaList.get(currentMediaCounter);
    }
 
     public void nextMedia() {
@@ -60,6 +58,9 @@ public class Filmster{
 
     public void setCastMovieList(List<IMedia> moviesList) {
         this.castMovies = moviesList;
+    }
+    public List<IMedia> getCastMovies(){
+        return castMovies;
     }
 
     /**
