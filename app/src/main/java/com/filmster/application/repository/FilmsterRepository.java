@@ -215,14 +215,12 @@ public class FilmsterRepository implements IApiListener {
     }
 
     public void loadChosenID(int pos){
-        String id = filmster.getChosenID(pos);
+        loadSearchedNameMedias(filmster.getChosenID(pos));
     }
 
     private void setCastMovies(List<IMedia> medias) {
         this.castMovies.setValue(medias);
         filmster.setCastMovieList(medias);
-        for(IMedia media: medias) {
-        }
         loadCurrentSearchedNameMedia(filmster.getCastMovies().get(current).getID()); // If movie is "in-production" it return nulls, so must check that
     }
 
@@ -239,6 +237,7 @@ public class FilmsterRepository implements IApiListener {
         imdbAdapter.setMediaFactory(new CastMovieFactory());
         isSearchResults = false;
         isCastMovies = true;
+        isSingleMovie = true;
         imdbAdapter.loadResponse(id);
     }
 
@@ -248,6 +247,7 @@ public class FilmsterRepository implements IApiListener {
         imdbAdapter.setMediaFactory(new MovieFactory());
         isSearchResults = false;
         isCastMovies = false;
+        isSingleMovie = true;
         imdbAdapter.loadResponse(id);
     }
 
