@@ -55,6 +55,7 @@ public class PreferencesViewModel extends ViewModel {
 
     public LiveData<List<IMedia>> getSearchResults(){
         System.out.println("getSearchResults i viewmodel");
+        System.out.println(filmsterRepository.getSearchResults().getValue().size());
         if(searchResults == null){
             searchResults = new MutableLiveData<>();
         }

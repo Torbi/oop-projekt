@@ -61,7 +61,6 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 
     public SearchResultAdapter(List<IMedia> resultList){
         this.resultList = resultList;
-        //setHasStableIds(true);
     }
 
     @NonNull
@@ -84,7 +83,6 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         IMedia media = this.resultList.get(position);
 
         // Set item views based on your views and data model
-        //updateMovieDisplayed(movie);
         ImageLoader imageLoader = SingletonRequestQueue.getInstance(context).getImageLoader();
         String url = media.getImage();
         url = url.substring(1,url.length()-1);

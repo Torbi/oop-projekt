@@ -27,7 +27,6 @@ public class SearchResultsView extends Fragment {
 
     private View view;
     private PreferencesViewModel viewModel;
-    private ConstraintLayout constraintLayout;
     private SearchResultAdapter searchResultAdapter;
 
 
@@ -43,7 +42,7 @@ public class SearchResultsView extends Fragment {
         viewModel = new ViewModelProvider(this).get(PreferencesViewModel.class);
         viewModel.init(requireContext());
         viewModel.getSearchResults().observe(getViewLifecycleOwner(), medias ->{
-            System.out.println("DSBJHKDBVJHKASdja asd");
+            System.out.println("SEARCH RESULTS VIEW");
             searchResultAdapter = new SearchResultAdapter(medias);
             recyclerView.setAdapter(searchResultAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));

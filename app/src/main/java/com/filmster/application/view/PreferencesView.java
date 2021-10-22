@@ -42,9 +42,6 @@ public class PreferencesView extends Fragment {
 
         searchResults = new SearchResultsView();
 
-        FragmentContainerView fcv = view.findViewById(R.id.fcvPrefs);
-        fcv.setVisibility(View.INVISIBLE);
-
         initAndListen2ViewModel();
         initActorSearchView();
         initDirectorSearchView();
@@ -77,7 +74,6 @@ public class PreferencesView extends Fragment {
 
     private void initActorSearchView() {
         FragmentContainerView fcv = view.findViewById(R.id.fcvPrefs);
-
         fcv.setVisibility(View.INVISIBLE);
         SearchView actorSearchView = view.findViewById(R.id.actorSearch);
         actorSearchView.setIconifiedByDefault(false);
@@ -100,7 +96,7 @@ public class PreferencesView extends Fragment {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                searchResults = new SearchResultsView();
+                //searchResults = new SearchResultsView();
                 fcv.setVisibility(View.VISIBLE);
                 FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
                 transaction.replace(R.id.fcvPrefs, searchResults).commit();
@@ -135,7 +131,7 @@ public class PreferencesView extends Fragment {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                searchResults = new SearchResultsView();
+                //searchResults = new SearchResultsView();
                 FragmentContainerView fcv = view.findViewById(R.id.fcvPrefs);
                 fcv.setVisibility(View.VISIBLE);
                 FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
