@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.filmster.application.api.CastMovieFactory;
 import com.filmster.application.api.IApiListener;
 import com.filmster.application.api.MovieFactory;
+import com.filmster.application.api.SearchResultFactory;
 import com.filmster.application.api.parse_buildrequest_strategies.DefaultParseStrategy;
 import com.filmster.application.api.parse_buildrequest_strategies.IMDbNameBuildRequestStrategy;
 import com.filmster.application.api.parse_buildrequest_strategies.IMDbSearchCurrentMovieBuildRequestStrategy;
@@ -211,7 +212,13 @@ public class FilmsterRepository implements IApiListener {
     }
 
     public void search(String name){
-        this.imdbAdapter.loadResponse(name);
+        imdbAdapter.setBuildRequestStrategy(new IMDbSearchNameBuildRequestStrategy());
+        imdbAdapter.setParseStrategy(new DefaultParseStrategy("results"));
+        imdbAdapter.setMediaFactory(new SearchResultFactory());
+        isSearchResults = true;
+        isCastMovies = false;
+        isSingleMovie = false;
+        imdbAdapter.loadResponse(name);
     }
 
     public void loadChosenID(int pos){
