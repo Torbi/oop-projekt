@@ -52,13 +52,13 @@ public class FilmsterRepository implements IApiListener {
         this.medias = new MutableLiveData<>();
         this.currentMedia = new MutableLiveData<>();
         this.castMovies = new MutableLiveData<>();
+        this.searchResults = new MutableLiveData<>();
         this.user = new User("TestNamn", "TestPass", new WatchList(), new Preferences());
         this.filmster = new Filmster(user);
         this.categories = new MutableLiveData<>();
         isSearchResults = false;
         isCastMovies = false;
         isSingleMovie = false;
-
         ApiListener listener = new ApiListener();
         listener.addListener(this);
         this.imdbAdapter = new ApiAdapter(ctx, listener);

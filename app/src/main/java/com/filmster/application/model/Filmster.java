@@ -82,6 +82,11 @@ public class Filmster{
         return castMovies;
     }
 
+    public void setCastMovieList(List<IMedia> moviesList) {
+        this.castMovies = moviesList;
+    }
+
+
     /**
      * Sets the state of the current media object to liked and then adds it the the watchlist,
      * then calls for the next media to be displayed
