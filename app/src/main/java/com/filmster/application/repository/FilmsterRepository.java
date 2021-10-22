@@ -5,7 +5,13 @@ import android.content.Context;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 
+import com.filmster.application.api.CastMovieFactory;
 import com.filmster.application.api.IApiListener;
+import com.filmster.application.api.MovieFactory;
+import com.filmster.application.api.parse_buildrequest_strategies.DefaultParseStrategy;
+import com.filmster.application.api.parse_buildrequest_strategies.IMDbNameBuildRequestStrategy;
+import com.filmster.application.api.parse_buildrequest_strategies.IMDbSearchCurrentMovieBuildRequestStrategy;
+import com.filmster.application.api.parse_buildrequest_strategies.MovieParseStrategy;
 import com.filmster.application.model.ICategory;
 import com.filmster.application.api.ApiListener;
 import com.filmster.application.api.IApiAdapter;
@@ -37,6 +43,9 @@ public class FilmsterRepository implements IApiListener {
     private int current = 0;
     private final MutableLiveData<List<ICategory>> categories;
     private MutableLiveData<List<IMedia>> searchResults;
+    private boolean isSearchResults;
+    private boolean isCastMovies;
+    private boolean isSingleMovie;
 
     private FilmsterRepository(Context ctx) {
         this.medias = new MutableLiveData<>();
@@ -44,6 +53,9 @@ public class FilmsterRepository implements IApiListener {
         this.user = new User("TestNamn", "TestPass", new WatchList(), new Preferences());
         this.filmster = new Filmster(user);
         this.categories = new MutableLiveData<>();
+        isSearchResults = false;
+        isCastMovies = false;
+        isSingleMovie = false;
 
         ApiListener listener = new ApiListener();
         listener.addListener(this);
@@ -79,14 +91,27 @@ public class FilmsterRepository implements IApiListener {
         this.filmster.setMediaList(medias);
     }
 
+    private void setSearchResults(List<IMedia> results){
+        this.searchResults.setValue(results);
+        filmster.setResultList(results);
+    }
+
     /**
      * The method which ApiListener calls to update the repository
      * @param medias - A list of IMedia objects fetched from an api
      */
     @Override
     public void update(List<IMedia> medias) {
-        setMedias(medias);
-        current = 0;
+        if(!isSearchResults){
+            if(!isCastMovies){
+                setMedias(medias);
+                System.out.println(medias.get(0).getName());
+            }else{
+                setCastMovies(medias);
+            }
+        }else{
+            setSearchResults(medias);
+        }
     }
 
     /**
@@ -119,12 +144,20 @@ public class FilmsterRepository implements IApiListener {
      * If out of objects to display start at the beginning
      * of medias and display them.
      */
+
+
     public void nextMedia() {
-        this.currentMedia.setValue(this.medias.getValue().get(this.current));
-        this.current++;
-        if(this.current == this.medias.getValue().size()) {
-            this.current = 0;
+        if(!isSingleMovie){
+            this.currentMedia.setValue(this.medias.getValue().get(this.current));
+            this.current++;
+            if(this.current == this.medias.getValue().size()) {
+                this.current = 0;
+            }
+        }else {
+            loadCurrentSearchedNameMedia(filmster.getCastMovies().get(current).getID()); // If movie is "in-production" it return nulls, so must check that
+            this.currentMedia.setValue(this.medias.getValue().get(0));
         }
+        current++;
     }
 
     /**
@@ -188,6 +221,24 @@ public class FilmsterRepository implements IApiListener {
         this.searchResults.setValue(filmster.getMediaList());
 
         return this.searchResults;
+    }
+
+    private void loadSearchedNameMedias(String id){
+        imdbAdapter.setBuildRequestStrategy(new IMDbNameBuildRequestStrategy());
+        imdbAdapter.setParseStrategy(new DefaultParseStrategy("castMovies"));
+        imdbAdapter.setMediaFactory(new CastMovieFactory());
+        isSearchResults = false;
+        isCastMovies = true;
+        imdbAdapter.loadResponse(id);
+    }
+
+    private void loadCurrentSearchedNameMedia(String id){
+        imdbAdapter.setBuildRequestStrategy(new IMDbSearchCurrentMovieBuildRequestStrategy());
+        imdbAdapter.setParseStrategy(new MovieParseStrategy());
+        imdbAdapter.setMediaFactory(new MovieFactory());
+        isSearchResults = false;
+        isCastMovies = false;
+        imdbAdapter.loadResponse(id);
     }
 
     /**
