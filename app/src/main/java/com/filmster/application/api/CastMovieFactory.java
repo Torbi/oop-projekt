@@ -1,11 +1,10 @@
-package com.filmster.application.api.parse_buildrequest_strategies;
-
+package com.filmster.application.api;
 
 import com.filmster.application.model.IMedia;
 import com.filmster.application.model.Movie;
 import com.google.gson.JsonObject;
 
-public class CastMovieCreatorStrategy{
+public class CastMovieFactory implements IMediaFactory{
     public IMedia createMediaObjectFromJson(JsonObject object) {
         try {
             return new Movie(object.get("title").toString(),
