@@ -66,6 +66,7 @@ public class ApiAdapter implements IApiAdapter {
 
         JsonObjectRequest request = new JsonObjectRequest(buildRequestStrategy.buildRequest(stringRequest), null, response -> {
             List<IMedia> mediaList = new LinkedList<>();
+
             List<JsonObject> jsonObjects = parseStrategy.parseResponse(response);
             for (int i = 0; i < jsonObjects.size(); i++) {
                 IMedia media = mediaFactory.createMediaObjectFromJson(jsonObjects.get(i));

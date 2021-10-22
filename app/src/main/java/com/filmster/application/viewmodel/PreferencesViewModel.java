@@ -54,6 +54,7 @@ public class PreferencesViewModel extends ViewModel {
     }
 
     public LiveData<List<IMedia>> getSearchResults(){
+        System.out.println("getSearchResults i viewmodel");
         if(searchResults == null){
             searchResults = new MutableLiveData<>();
         }

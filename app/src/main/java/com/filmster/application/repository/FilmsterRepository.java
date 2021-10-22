@@ -12,6 +12,7 @@ import com.filmster.application.api.SearchResultFactory;
 import com.filmster.application.api.parse_buildrequest_strategies.DefaultParseStrategy;
 import com.filmster.application.api.parse_buildrequest_strategies.IMDbNameBuildRequestStrategy;
 import com.filmster.application.api.parse_buildrequest_strategies.IMDbSearchCurrentMovieBuildRequestStrategy;
+import com.filmster.application.api.parse_buildrequest_strategies.IMDbSearchNameBuildRequestStrategy;
 import com.filmster.application.api.parse_buildrequest_strategies.MovieParseStrategy;
 import com.filmster.application.model.ICategory;
 import com.filmster.application.api.ApiListener;
@@ -96,6 +97,7 @@ public class FilmsterRepository implements IApiListener {
 
     private void setSearchResults(List<IMedia> results){
         this.searchResults.setValue(results);
+        System.out.println(results.size() + " searchresults size");
         filmster.setResultList(results);
     }
 
@@ -113,6 +115,7 @@ public class FilmsterRepository implements IApiListener {
                 setCastMovies(medias);
             }
         }else{
+            System.out.println("SÄTTER SEARCHRESULTS");
             setSearchResults(medias);
         }
     }
@@ -234,6 +237,7 @@ public class FilmsterRepository implements IApiListener {
     public MutableLiveData<List<IMedia>> getSearchResults(){
         // get list from api
         this.searchResults.setValue(filmster.getMediaList());
+        System.out.println(filmster.getMediaList().size() + " filmster medialist size");
 
         return this.searchResults;
     }

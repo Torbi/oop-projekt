@@ -8,13 +8,18 @@ public class SearchResultFactory implements IMediaFactory{
     @Override
     public IMedia createMediaObjectFromJson(JsonObject object) {
         try {
-            return new Actor(object.get("name").toString(),
-                    object.get("id").toString(),
-                    object.get("image").toString()
+            return new Actor(shorten(object.get("name").toString()),
+                    shorten(object.get("id").toString()),
+                    shorten(object.get("image").toString())
             );
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
+
+    private String shorten(String text){
+        return text.substring(1, text.length()-1);
+    }
+
 }

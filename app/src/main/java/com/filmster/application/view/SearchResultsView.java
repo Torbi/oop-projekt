@@ -43,6 +43,7 @@ public class SearchResultsView extends Fragment {
         viewModel = new ViewModelProvider(this).get(PreferencesViewModel.class);
         viewModel.init(requireContext());
         viewModel.getSearchResults().observe(getViewLifecycleOwner(), medias ->{
+            System.out.println("DSBJHKDBVJHKASdja asd");
             searchResultAdapter = new SearchResultAdapter(medias);
             recyclerView.setAdapter(searchResultAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -61,11 +62,6 @@ public class SearchResultsView extends Fragment {
                 }
             });
         });
-
-
-
-
-
 
         return view;
     }
