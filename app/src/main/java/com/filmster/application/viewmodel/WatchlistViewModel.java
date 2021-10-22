@@ -13,10 +13,9 @@ import com.filmster.application.repository.FilmsterRepository;
 import java.util.List;
 
 /**
- * This is a viewModel for the watchlist classes. It has a getMedia method which
- * returns LiveData<IMedia> which the watchlist classes observes to easily update the views.
- * Also provies the subclasses with the liked disliked and watched medias from the
- * FilmsterRepository
+ * ViewModel for the watchlist part of the application, exposes relevant data to the view
+ * with the help of livedata objects
+ * @author Torbjörn
  */
 public class WatchlistViewModel extends ViewModel {
     private MutableLiveData<IMedia> media;
@@ -27,16 +26,16 @@ public class WatchlistViewModel extends ViewModel {
     private MutableLiveData<List<ISortMethod>> sortMethods;
 
     /**
-     *
-     * @param ctx must have context
+     * Initialises some data
+     * @param ctx - The application context
      */
     public void init(Context ctx) {
         filmsterRepository = FilmsterRepository.getInstance(ctx);
     }
 
     /**
-     *
-     * @return immutable list of IMeaia
+     * Exposes IMedia objects to the view wrapped in LiveData objects
+     * @return immutable list of IMedia
      */
     public LiveData<IMedia> getMedia() {
         if (media == null) {
@@ -47,7 +46,6 @@ public class WatchlistViewModel extends ViewModel {
     }
 
     private void loadMedias() {
-        // Do an asynchronous operation to fetch a movie
         media = filmsterRepository.getCurrentMedia();
     }
 

@@ -66,6 +66,15 @@ public class GestureHelper implements View.OnTouchListener {
             return true;
         }
 
+        /**
+         * Denna får nån kommentera(MAGNUS)
+         * Uses METH to figure out whats happening??
+         * @param e1
+         * @param e2
+         * @param velocityX
+         * @param velocityY
+         * @return
+         */
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             boolean result = false;

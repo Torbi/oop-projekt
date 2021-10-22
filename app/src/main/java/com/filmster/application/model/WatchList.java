@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 /**
  * A watchlist containing all media objects the user has interacted with
  * Can also sort the list by rating and by year, both ascending and descending
+ * @author Torbjörn
  */
 public class WatchList {
     private final List<IMedia> watchList;

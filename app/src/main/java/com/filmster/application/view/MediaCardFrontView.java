@@ -37,6 +37,10 @@ public class MediaCardFrontView extends Fragment {
         return view;
     }
 
+    /**
+     * Updates the image on the front of the card with the help of volleys ImageLoader
+     * @param media A string with the url to the image
+     */
     public void update(String media){
         ImageLoader imageLoader = SingletonRequestQueue.getInstance(getContext()).getImageLoader();
         if(media.length() > 0) {

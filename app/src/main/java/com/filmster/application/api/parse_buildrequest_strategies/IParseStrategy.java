@@ -11,5 +11,11 @@ import java.util.List;
  * @author Torbjörn
  */
 public interface IParseStrategy {
+    /**
+     * Parses a JSONObject into a list of gsons JsonObject
+     * Because they are easier to work with and less prone to error
+     * @param response - A JSONObject
+     * @return - A list of JsonObject
+     */
     List<JsonObject> parseResponse (JSONObject response);
 }

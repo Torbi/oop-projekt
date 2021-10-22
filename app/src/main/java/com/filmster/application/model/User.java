@@ -15,7 +15,6 @@ public class User {
      * @param watchList - The users watchList (an ArrayList) containing seen, liked or disliked movies
      * @param preferences - A selection of categories
      */
-
     public User (String name, String password, WatchList watchList, Preferences preferences) {
         this.name = name;
         this.password = password;
@@ -34,6 +33,7 @@ public class User {
     public List<IMedia> getLikedMedia(){
         return watchList.getLikedList();
     }
+
     /**
      * Getter for all the disliked medias in the users watchlist.
      * @return list of all disliked IMedias.
@@ -41,6 +41,7 @@ public class User {
     public List<IMedia> getDislikedMedia(){
         return watchList.getDislikedList();
     }
+
     /**
      * Getter for all the watched medias in the users watchlist.
      * @return list of all watched IMedias.

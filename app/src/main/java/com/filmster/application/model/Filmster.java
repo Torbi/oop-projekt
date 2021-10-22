@@ -36,15 +36,27 @@ public class Filmster{
         initSortMethods();
     }
 
+    /**
+     * Setter for MediaList
+     * When new IMedia objects are received, resets the counter
+     * @param moviesList A List of IMedia objects
+     */
     public void setMediaList(List<IMedia> moviesList) {
         this.mediaList = moviesList;
         this.currentMediaCounter = 0;
     }
 
+    /**
+     * Returns the currently displayed IMedia object
+     * @return
+     */
     public IMedia getCurrentMedia() {
        return mediaList.get(currentMediaCounter);
    }
 
+    /**
+     * Increases the currentMediaCounter by 1 to signal which IMedia is next in line to be currentMedia
+     */
     public void nextMedia() {
       currentMediaCounter++;
    }
@@ -93,8 +105,6 @@ public class Filmster{
         return category.getID();
     }
 
-
-
     /**
      * Collects categories
      * @return A list of categories
@@ -133,6 +143,9 @@ public class Filmster{
         return this.sortMethods;
     }
 
+    /**
+     * All available sorting methods are initiated here, later given to the view to present
+     */
     private void initSortMethods() {
         this.sortMethods = new ArrayList<>();
         this.sortMethods.add(new DefaultSortingStrategy());

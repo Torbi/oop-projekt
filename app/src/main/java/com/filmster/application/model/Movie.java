@@ -3,6 +3,7 @@ package com.filmster.application.model;
 /**
  * A movie contains a name, id , rating, may contain a crew/starring, an image, a year it was made and
  * a state on if its watched, liked or disliked.
+ * @author Torbjörn
  */
 public class Movie implements IMedia {
     private final String name;
@@ -30,6 +31,15 @@ public class Movie implements IMedia {
         this.year = year;
     }
 
+    /**
+     * Overloaded constructor incase a movie is created with starring
+     * @param name - The title of the movie
+     * @param id - The id a movie has on imdb, starts with "tt"
+     * @param rating - The imdb rating of the movie
+     * @param starring - The actors in the movie
+     * @param image - A string for where the image can be found online
+     * @param year - A string representing the year the movie was made
+     */
     public Movie(String name, String id, Double rating, String starring , String image, int year) {
         this.name = checkMovieLength(name);
         this.id = id;

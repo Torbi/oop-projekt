@@ -41,6 +41,12 @@ public class SingletonRequestQueue {
                 });
     }
 
+    /**
+     * Returns an instance of SingletionRequestQueue, if no exists, creates one
+     * The method is synchronized to only let one thread at a time access it
+     * @param context - The application context
+     * @return - A SingletonRequestQueue
+     */
     public static synchronized SingletonRequestQueue getInstance(Context context) {
         if (instance == null) {
             instance = new SingletonRequestQueue(context);
@@ -48,6 +54,10 @@ public class SingletonRequestQueue {
         return instance;
     }
 
+    /**
+     * Getter for volleys RequestQueue
+     * @return A RequestQueue
+     */
     public RequestQueue getRequestQueue() {
         if (requestQueue == null) {
             requestQueue = Volley.newRequestQueue(context);
@@ -55,6 +65,10 @@ public class SingletonRequestQueue {
         return requestQueue;
     }
 
+    /**
+     * Getter for volleys ImageLoader
+     * @return - An ImageLoader
+     */
     public ImageLoader getImageLoader() {
         return imageLoader;
     }

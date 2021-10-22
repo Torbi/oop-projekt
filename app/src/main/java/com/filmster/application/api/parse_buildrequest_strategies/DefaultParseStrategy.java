@@ -12,16 +12,25 @@ import java.util.List;
 
 /**
  * Default strategy for parsing JSONObject responses
- * Presumes JSONObject contains a JSONArray called items
+ * Standard responses contain an array called items
+ * NonStandard responses can have arrays with other names
+ * but still be parsed the same
  * @author Torbjörn
  */
 public class DefaultParseStrategy implements IParseStrategy {
     private final String memberName;
 
+    /**
+     * Used for creating DefaultParseStrategies for standard responses with array items
+     */
     public DefaultParseStrategy(){
         memberName = "items";
     }
 
+    /**
+     * Used for creating DefaultParseStrategies for nonstandard responses with different array names
+     * @param memberName - The name of the JsonArray in the response
+     */
     public DefaultParseStrategy(String memberName){
         this.memberName = memberName;
     }

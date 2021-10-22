@@ -9,5 +9,9 @@ import java.util.List;
  * @author Torbjörn
  */
 public interface VolleyCallback {
+    /**
+     * Callback function for ApiAdapter
+     * @param media - A List of IMediaObjects
+     */
     void onSuccess(List<IMedia> media);
 }

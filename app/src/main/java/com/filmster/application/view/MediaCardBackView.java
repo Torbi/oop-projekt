@@ -14,7 +14,8 @@ import com.filmster.application.R;
 
 /**
  * The backside of the card that displays the mediaobject
- * Gets its arguments from bundle because the fragment keeps getting destroyed
+ * Gets its data from bundle because the fragment keeps getting destroyed
+ * when it's hidden
  */
 
 public class MediaCardBackView extends Fragment {
@@ -30,7 +31,6 @@ public class MediaCardBackView extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_media_back, container, false);
         initTextViews(view);
-
         getBundleArgs();
 
         return view;

@@ -8,5 +8,11 @@ import com.google.gson.JsonObject;
  * @author Torbjörn
  */
 public interface IMediaFactory {
+
+    /**
+     * Creates IMedia objects from JsonObjects
+     * @param object - A JsonObject
+     * @return - An IMedia Object
+     */
     IMedia createMediaObjectFromJson(JsonObject object);
 }

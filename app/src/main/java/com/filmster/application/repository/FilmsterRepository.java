@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * A repository that handles all communication between the viewmodels and the api/model data
  * Follows the mvvm architecture
- *
+ * Is a Singleton
  * @author Albin Sundström, Torbjörn
  */
 public class FilmsterRepository implements IApiListener {
@@ -63,10 +63,16 @@ public class FilmsterRepository implements IApiListener {
         }
         return instance;
     }
+
+    /**
+     * Returns the current Media in the form of MutableLiveData
+     * @return A MutableLiveData<IMedia> object
+     */
     public MutableLiveData<IMedia> getCurrentMedia() {
         this.currentMedia.setValue(this.filmster.getCurrentMedia());
         return this.currentMedia;
     }
+
     private void setMedias(List<IMedia> medias) {
         this.medias.setValue(medias);
         this.filmster.setMediaList(medias);

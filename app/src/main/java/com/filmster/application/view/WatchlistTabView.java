@@ -15,7 +15,7 @@ import com.filmster.application.R;
 import com.filmster.application.viewmodel.WatchlistViewModel;
 
 /**
- * Abstract super class to Disliked, liked and watched media to remove duplicate code.
+ * Abstract super class to Disliked, liked and Watched media
  */
 public abstract class WatchlistTabView extends Fragment {
 
@@ -44,5 +44,8 @@ public abstract class WatchlistTabView extends Fragment {
         return view;
     }
 
+    /**
+     * Observes the viewmodel for updates
+     */
     public abstract void observe();
 }

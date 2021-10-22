@@ -29,7 +29,6 @@ import java.util.List;
  * Apparently takes between 7-16 seconds to get a response using the IMDbList call
  * @author Torbjorn
  */
-
 public class ApiAdapter implements IApiAdapter {
     private final Context context;
     private final ApiListener listener;

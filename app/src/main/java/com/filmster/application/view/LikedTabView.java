@@ -13,9 +13,10 @@ public class LikedTabView extends WatchlistTabView {
     public LikedTabView(){
         super(R.layout.fragment_liked_movies);
     }
+
     /**
      * Observes the likedMedias when it updates,
-     * a new adapter is created with the liked media and adds it to the recyclerView
+     * a new adapter is created with the liked media and added to the recyclerView
      */
     @Override
     public void observe(){

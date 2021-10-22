@@ -9,5 +9,10 @@ import java.util.List;
  * @author Torbjörn
  */
 public interface IApiListener {
+
+    /**
+     * Updates the object with a list of IMedia Objects
+     * @param movies - A list of IMedia objects
+     */
     void update(List<IMedia> movies);
 }
