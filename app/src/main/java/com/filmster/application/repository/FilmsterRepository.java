@@ -43,6 +43,7 @@ public class FilmsterRepository implements IApiListener {
     private int current = 0;
     private final MutableLiveData<List<ICategory>> categories;
     private MutableLiveData<List<IMedia>> searchResults;
+    private MutableLiveData<List<IMedia>> castMovies;
     private boolean isSearchResults;
     private boolean isCastMovies;
     private boolean isSingleMovie;
@@ -50,6 +51,7 @@ public class FilmsterRepository implements IApiListener {
     private FilmsterRepository(Context ctx) {
         this.medias = new MutableLiveData<>();
         this.currentMedia = new MutableLiveData<>();
+        this.castMovies = new MutableLiveData<>();
         this.user = new User("TestNamn", "TestPass", new WatchList(), new Preferences());
         this.filmster = new Filmster(user);
         this.categories = new MutableLiveData<>();
@@ -214,6 +216,14 @@ public class FilmsterRepository implements IApiListener {
 
     public void loadChosenID(int pos){
         String id = filmster.getChosenID(pos);
+    }
+
+    private void setCastMovies(List<IMedia> medias) {
+        this.castMovies.setValue(medias);
+        filmster.setCastMovieList(medias);
+        for(IMedia media: medias) {
+        }
+        loadCurrentSearchedNameMedia(filmster.getCastMovies().get(current).getID()); // If movie is "in-production" it return nulls, so must check that
     }
 
     public MutableLiveData<List<IMedia>> getSearchResults(){

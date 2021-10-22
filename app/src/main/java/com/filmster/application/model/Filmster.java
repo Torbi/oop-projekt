@@ -23,6 +23,7 @@ public class Filmster{
     private final List<ICategory> categoryList;
     private List<ISortMethod> sortMethods;
     private List<IMedia> resultList;
+    private List<IMedia> castMovies;
 
     /**
      * Constructor for filmster, initializes some data and receives a user for the program
@@ -34,6 +35,7 @@ public class Filmster{
         this.mediaList = new ArrayList<>();
         this.categoryList = new ArrayList<>();
         this.resultList = new ArrayList<>();
+        this.castMovies = new ArrayList<>();
 
         //a fake movie is added to give time for imdbapiadapter to get real movies from the api
         this.mediaList.add(new Movie("Inception", "tt1375666", 9.9, "https://imdb-api.com/Images/original/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_Ratio0.6791_AL_.jpg",2010));
@@ -72,6 +74,13 @@ public class Filmster{
         return resultList.get(pos).getID();
     }
 
+    public void setResultList(List<IMedia> results){
+        this.resultList = results;
+    }
+
+    public List<IMedia> getCastMovies(){
+        return castMovies;
+    }
 
     /**
      * Sets the state of the current media object to liked and then adds it the the watchlist,
