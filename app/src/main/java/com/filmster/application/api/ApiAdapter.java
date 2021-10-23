@@ -66,11 +66,8 @@ public class ApiAdapter implements IApiAdapter {
 
         JsonObjectRequest request = new JsonObjectRequest(buildRequestStrategy.buildRequest(stringRequest), null, response -> {
             List<IMedia> mediaList = new LinkedList<>();
-            VolleyLog.wtf(response.toString(), "utf-8");
 
             List<JsonObject> jsonObjects = parseStrategy.parseResponse(response);
-            System.out.println(jsonObjects.size() + " JSONOBJECTS");
-            System.out.println(mediaFactory);
             for (int i = 0; i < jsonObjects.size(); i++) {
                 IMedia media = mediaFactory.createMediaObjectFromJson(jsonObjects.get(i));
                 mediaList.add(media);

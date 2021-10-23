@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * Filmster keeps track of all movies, users and currentMovies displayed on the screen
- * @author Torbjörn
+ * @author Torbjörn, Albin Sundström
  */
 public class Filmster{
 
@@ -29,6 +29,7 @@ public class Filmster{
      * Constructor for filmster, initializes some data and receives a user for the program
      * @param user A user
      */
+
     public Filmster(User user) {
         this.user = user;
         this.currentMediaCounter = 0;
@@ -57,7 +58,7 @@ public class Filmster{
 
     /**
      * Returns the currently displayed IMedia object
-     * @return
+     * @return - The currently displayed IMedia object
      */
     public IMedia getCurrentMedia() {
        return mediaList.get(currentMediaCounter);
@@ -70,26 +71,46 @@ public class Filmster{
       currentMediaCounter++;
    }
 
+    /**
+     * Returns the id of a chosen object
+     * @param pos - The position of a chosen object
+     * @return - The id of the object at position
+     */
     public String getChosenID(int pos){
         return resultList.get(pos).getID();
     }
 
+    /**
+     * Setter for resultList
+     * @param results - A list of IMedia objects
+     */
     public void setResultList(List<IMedia> results){
         this.resultList = results;
     }
 
+    /**
+     * Getter for resultList
+     * @return - A list of IMedia objects
+     */
     public List<IMedia> getResultList(){
         return resultList;
     }
 
+    /**
+     * Getter for castMovies
+     * @return - A list of IMedia objects
+     */
     public List<IMedia> getCastMovies(){
         return castMovies;
     }
 
+    /**
+     * Setter for castMovies
+     * @param moviesList - A list of IMedia objects
+     */
     public void setCastMovieList(List<IMedia> moviesList) {
         this.castMovies = moviesList;
     }
-
 
     /**
      * Sets the state of the current media object to liked and then adds it the the watchlist,

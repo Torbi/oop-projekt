@@ -14,14 +14,14 @@ import com.filmster.application.repository.FilmsterRepository;
 import java.util.List;
 
 /**
- * A viewmodel ....
- *
+ * Viewmodel for preferences, exposes relevant data to the view
+ * with the help of livedata objects
  * @author Albin Sundström
  */
+
 public class PreferencesViewModel extends ViewModel {
 
     private FilmsterRepository filmsterRepository;
-
     private MutableLiveData<List<ICategory>> categories;
     private MutableLiveData<List<IMedia>> searchResults;
 
@@ -53,12 +53,16 @@ public class PreferencesViewModel extends ViewModel {
         filmsterRepository.loadChosenID(pos);
     }
 
+    /**
+     * getSearchResults checks if there are any search results and if not creates a new list
+     * Otherwise it get searchResults from filmsterRepository and returns it.
+     * @return - The results from a search done by the user
+     */
     public LiveData<List<IMedia>> getSearchResults(){
         if(searchResults == null){
             searchResults = new MutableLiveData<>();
         }
         searchResults.setValue(filmsterRepository.getSearchResults().getValue());
-        System.out.println(searchResults.getValue().size() + " prefs vm searchresults");
         return searchResults;
     }
 }

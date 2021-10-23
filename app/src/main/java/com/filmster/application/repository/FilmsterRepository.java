@@ -90,11 +90,23 @@ public class FilmsterRepository implements IApiListener {
         return this.currentMedia;
     }
 
+    /**
+     * Setter for medias
+     * Sets MutableLiveData<List<IMedia>> medias in FilmsterRepository and
+     * sets mediaList in Filmster aswell.
+     * @param medias - A list of IMedia objects fetched from an api
+     */
     private void setMedias(List<IMedia> medias) {
         this.medias.setValue(medias);
         this.filmster.setMediaList(medias);
     }
 
+    /**
+     * Setter for searchResults
+     * Sets MutableLiveData<List<IMedia>> searchResults in FilmsterRepository and
+     * sets resultList in Filmster aswell.
+     * @param results - A list of searchResults from an api
+     */
     private void setSearchResults(List<IMedia> results){
         this.searchResults.setValue(results);
         filmster.setResultList(results);
@@ -146,9 +158,8 @@ public class FilmsterRepository implements IApiListener {
      * Updates the current media to be displayed to the next
      * If out of objects to display start at the beginning
      * of medias and display them.
+     * If it is a single mediaobject: fetch media from an api and display
      */
-
-
     public void nextMedia() {
         if(!isSingleMedia){
             this.currentMedia.setValue(this.medias.getValue().get(this.current));
@@ -157,7 +168,7 @@ public class FilmsterRepository implements IApiListener {
                 this.current = 0;
             }
         }else {
-            loadCurrentSearchedNameMedia(filmster.getCastMovies().get(current).getID()); // If movie is "in-production" it return nulls, so must check that
+            loadCurrentSearchedNameMedia(filmster.getCastMovies().get(current).getID());
             this.currentMedia.setValue(this.medias.getValue().get(0));
         }
         current++;
@@ -211,6 +222,11 @@ public class FilmsterRepository implements IApiListener {
         return this.categories;
     }
 
+    /**
+     * Sets the strategies needed as well as booleans
+     * Then sends request to apiAdapter
+     * @param name - The name of a searched person
+     */
     public void search(String name){
         imdbAdapter.setBuildRequestStrategy(new IMDbSearchNameBuildRequestStrategy());
         imdbAdapter.setParseStrategy(new DefaultParseStrategy("results"));
@@ -221,10 +237,20 @@ public class FilmsterRepository implements IApiListener {
         imdbAdapter.loadResponse(name);
     }
 
+    /**
+     * Gets the id of chosen object
+     * @param pos - The position of a chosen object
+     */
     public void loadChosenID(int pos){
         loadSearchedNameMedias(filmster.getChosenID(pos));
     }
 
+    /**
+     * Sets the list castMovies in FilmsterRepository and
+     * also sets castMovies in Filmster.
+     * Then loads loads the current movie in castMovies
+     * @param medias - A list of IMedia objects fetched from an api
+     */
     private void setCastMovies(List<IMedia> medias) {
         this.castMovies.setValue(medias);
         filmster.setCastMovieList(medias);
@@ -232,8 +258,11 @@ public class FilmsterRepository implements IApiListener {
         loadCurrentSearchedNameMedia(filmster.getCastMovies().get(current).getID()); // If movie is "in-production" it return nulls, so must check that
     }
 
+    /**
+     * Returns search results in the form of MutableLiveData
+     * @return - A MutableLiveData<List<IMedia>> object containing search results
+     */
     public MutableLiveData<List<IMedia>> getSearchResults(){
-        // get list from api
         this.searchResults.setValue(filmster.getResultList());
         return this.searchResults;
     }

@@ -2,17 +2,12 @@ package com.filmster.application.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.selection.ItemDetailsLookup;
-import androidx.recyclerview.selection.ItemKeyProvider;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.selection.SelectionTracker;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
@@ -20,11 +15,11 @@ import com.filmster.application.R;
 import com.filmster.application.api.SingletonRequestQueue;
 import com.filmster.application.model.IMedia;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * A helper class to implement a recyclerView Adapter
+ * It binds a type of data to a view
  * @author Albin Sundström
  */
 
@@ -32,7 +27,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 
     private List<IMedia> resultList;
     private Context context;
-    private static ClickListener clickListener;
+    private static IClickListener clickListener;
 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -55,13 +50,12 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         }
     }
 
-    public void setOnItemClickListener(ClickListener clickListener){
+    public void setOnItemClickListener(IClickListener clickListener){
         SearchResultAdapter.clickListener = clickListener;
     }
 
     public SearchResultAdapter(List<IMedia> resultList){
         this.resultList = resultList;
-        System.out.println(resultList.size() + " RESULTLIST SEARCHRESULTADAPTER");
     }
 
     @NonNull
@@ -85,7 +79,6 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 
         // Set item views based on your views and data model
         ImageLoader imageLoader = SingletonRequestQueue.getInstance(context).getImageLoader();
-        System.out.println(media); // null
         String url = media.getImage();
 
         NetworkImageView smallImage = holder.smallResultImage;
@@ -110,7 +103,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 
 
 
-    public interface ClickListener {
+    public interface IClickListener {
         void onItemClick(int pos, View view);
     }
 }

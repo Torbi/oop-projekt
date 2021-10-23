@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Strategy for parsing JSONObject responses
+ * Used for parsing a single JSONObject
  * @author Albin Sundström
  */
 

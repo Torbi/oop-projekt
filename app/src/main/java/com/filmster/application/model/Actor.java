@@ -1,16 +1,25 @@
 package com.filmster.application.model;
 
+/**
+ * An actor contains a name, an id and an image
+ * @author Albin Sundström
+ */
 public class Actor implements IMedia {
     private String listID;
     private String name;
     private String image;
-    private String birthYear;
+
+    /**
+     * An actor object that contains information about an actor
+     * @param listID - The id an actor has on IMDb, starts with nm
+     * @param name - The name of an actor
+     * @param image - A string for where the image can be found online
+     */
 
     public Actor(String listID, String name, String image) {
         this.listID = listID;
         this.name = name;
         this.image = image;
-        //this.birthYear = birthYear;
     }
 
     @Override

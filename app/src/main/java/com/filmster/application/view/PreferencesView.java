@@ -24,8 +24,7 @@ import com.filmster.application.viewmodel.PreferencesViewModel;
 import java.util.List;
 
 /**
- * A view ....
- *
+ * The PreferencesView is a fragment and is the UI for the preferences page
  * @author Albin Sundström
  */
 
@@ -39,8 +38,6 @@ public class PreferencesView extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_preferences_view, container, false);
-
-        //searchResults = new SearchResultsView();
 
         initAndListen2ViewModel();
         initActorSearchView();
@@ -71,7 +68,6 @@ public class PreferencesView extends Fragment {
                 transaction.replace(R.id.fcvPrefs, searchResults).commit();
                 fcv.bringToFront();
 
-                System.out.println(name + " submit");
                 return false;
             }
 
@@ -113,7 +109,6 @@ public class PreferencesView extends Fragment {
                 transaction.replace(R.id.fcvPrefs, searchResults).commit();
                 fcv.bringToFront();
 
-                System.out.println(name + " submit");
                 return false;
             }
 

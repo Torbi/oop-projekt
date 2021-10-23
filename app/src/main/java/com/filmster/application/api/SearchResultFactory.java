@@ -4,9 +4,18 @@ import com.filmster.application.model.Actor;
 import com.filmster.application.model.IMedia;
 import com.google.gson.JsonObject;
 
-//id name image
+/**
+ * The strategy for creating mediaobjects of type actor
+ * Creates actors
+ * @author Albin Sundström
+ */
 public class SearchResultFactory implements IMediaFactory{
-
+    /**
+     * Creates an IMedia object from JsonObject, if the JsonObject doesn't contain
+     * the proper JSonElements, it can fail
+     * @param object - A JsonObject
+     * @return - An IMedia Object
+     */
     @Override
     public IMedia createMediaObjectFromJson(JsonObject object) {
         try {

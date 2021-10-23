@@ -28,7 +28,6 @@ public class MovieFactory implements IMediaFactory {
                     Integer.parseInt(shorten(object.get("year").toString()))
             );
         } catch (Exception e) {
-            System.out.println("KOMMER HIT");
             e.printStackTrace();
         }
         return null;
