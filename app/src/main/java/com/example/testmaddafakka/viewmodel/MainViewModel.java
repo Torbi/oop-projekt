@@ -28,6 +28,7 @@ public class MainViewModel extends ViewModel {
         }
         filmsterRepository = FilmsterRepository.getInstance(ctx);
         filmsterRepository.loadMedias();
+      //  filmsterRepository.setDataFromFirebase();
     }
 
     /**

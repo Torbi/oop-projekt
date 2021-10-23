@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.testmaddafakka.model.SignupFirebaseHandler;
 import com.example.testmaddafakka.model.WatchList;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -70,41 +71,10 @@ public class SignupActivity extends AppCompatActivity {
 
                 if (!(edtName.getText().toString().isEmpty() && edtEmail.getText().toString().isEmpty() && edtPassword.getText().toString().isEmpty())) {
 
-                    mAuth.createUserWithEmailAndPassword(edtEmail.getText().toString(),edtPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
+                    SignupFirebaseHandler.signup(edtName.getText().toString(),edtEmail.getText().toString(),edtPassword.getText().toString());
 
-                            if (task.isSuccessful()){
-                                String uid = mAuth.getCurrentUser().getUid();
-
-                                // Write a message to the database
-                                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                DatabaseReference myRef = database.getReference("users");
-
-                                DatabaseReference user = myRef.child(uid);
-
-                                user.child("name").setValue(edtName.getText().toString());
-                                user.child("email").setValue(edtEmail.getText().toString());
-                                user.child("password").setValue(edtPassword.getText().toString());
-
-
-                                mAuth.signOut();
-                                Intent in=new Intent(SignupActivity.this,LoginActivity2.class);
-                                startActivity(in);
-                            }
-
-                            else{
-
-                                Toast.makeText(getApplicationContext(),task.getException().getLocalizedMessage(),Toast.LENGTH_SHORT).show();
-
-
-                            }
-
-
-                        }
-                    });
-
-
+                    Intent in=new Intent(SignupActivity.this,LoginActivity2.class);
+                    startActivity(in);
 
                 }
 

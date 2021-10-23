@@ -1,7 +1,9 @@
 package com.example.testmaddafakka.repository;
 
 import android.content.Context;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 
@@ -12,12 +14,17 @@ import com.example.testmaddafakka.model.Filmster;
 import com.example.testmaddafakka.model.IPreferences;
 import com.example.testmaddafakka.model.IMedia;
 import com.example.testmaddafakka.api.IApiListener;
+import com.example.testmaddafakka.model.MovieStatusItem;
 import com.example.testmaddafakka.model.Preferences;
 import com.example.testmaddafakka.model.User;
 import com.example.testmaddafakka.model.WatchList;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -39,6 +46,7 @@ public class FilmsterRepository implements IApiListener {
     private MutableLiveData<List<IPreferences>> categories;
 
     FirebaseAuth mauth= FirebaseAuth.getInstance();
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
 
 
     private FilmsterRepository(Context ctx) {
@@ -53,6 +61,7 @@ public class FilmsterRepository implements IApiListener {
 
         imdbAdapter = new IMDbApiAdapter(ctx, listener);
         loadMedias();
+        setDataFromFirebase();
     }
 
     public static FilmsterRepository getInstance(@Nullable Context ctx) {
@@ -83,18 +92,27 @@ public class FilmsterRepository implements IApiListener {
 
     public void addLikedMedia(IMedia media) {
         filmster.addLikedMedia(media);
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Medias");
+        DatabaseReference myRef = database.getReference("moviesandusers");
+        MovieStatusItem item = new MovieStatusItem(media.getId(),mauth.getCurrentUser().getUid(),"Liked");
+        myRef.push().setValue(item);
 
         nextMedia();
     }
 
     public void addDislikedMedia(IMedia media) {
         filmster.addDislikedMedia(media);
+
+
+        DatabaseReference myRef = database.getReference("moviesandusers");
+        MovieStatusItem item = new MovieStatusItem(media.getId(),mauth.getCurrentUser().getUid(),"Disliked");
+        myRef.push().setValue(item);
         nextMedia();
     }
     public void addWatchedMedia(IMedia media){
         filmster.addWatchedMedia(media);
+        DatabaseReference myRef = database.getReference("moviesandusers");
+        MovieStatusItem item = new MovieStatusItem(media.getId(),mauth.getCurrentUser().getUid(),"Watched");
+        myRef.push().setValue(item);
         nextMedia();
     }
 
@@ -126,6 +144,36 @@ public class FilmsterRepository implements IApiListener {
     public MutableLiveData<List<IPreferences>> getCategories() {
         this.categories.setValue(filmster.getMovieCategories());
         return this.categories;
+    }
+
+    public void setDataFromFirebase(){
+        database = FirebaseDatabase.getInstance();
+        Query query = database.getReference("moviesandusers").orderByChild("userId").equalTo(mauth.getCurrentUser().getUid());
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot ds : snapshot.getChildren()){
+                        MovieStatusItem msi = new MovieStatusItem(ds.child("movieId").getValue(String.class),ds.child("userId").getValue(String.class),ds.child("status").getValue(String.class));
+
+                        if(msi.getStatus().equals("Liked")){
+                            Log.i("Roro",msi.getMovieId());
+                        }else if(msi.getStatus().equals("Disliked")){
+                            Log.i("Roro",msi.getMovieId());
+                        }else{
+                            Log.i("Roro",msi.getMovieId());
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
 }

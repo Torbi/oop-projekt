@@ -57,4 +57,8 @@ public class Movie implements Serializable, IMedia {
     }
 
 
+    @Override
+    public String getId() {
+        return id;
+    }
 }

@@ -1,6 +1,5 @@
 package com.example.testmaddafakka;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,12 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.example.testmaddafakka.model.LoginFirebaseHandler;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity2 extends AppCompatActivity {
@@ -39,6 +35,7 @@ public class LoginActivity2 extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        final LoginActivity2 ac2 = this;
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,32 +59,22 @@ public class LoginActivity2 extends AppCompatActivity {
 
                 if (!(emailField.getText().toString().isEmpty() && passwordField.getText().toString().isEmpty())) {
 
-                    mAuth.signInWithEmailAndPassword(emailField.getText().toString(),passwordField.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()){
-                                Intent in = new Intent(LoginActivity2.this,MainActivity.class);
-                                startActivity(in);
-                            }
+                            LoginFirebaseHandler.login(emailField.getText().toString(),passwordField.getText().toString(),ac2);
 
-
-
-
-                            else {
-                                Toast.makeText(getApplicationContext(),task.getException().getLocalizedMessage(),Toast.LENGTH_SHORT).show();
-
-                            }
 
 
                         }
-                    });
+
                 }
-            }
+
         });
 
     }
 
-
+    public void openMainActivity(){
+        Intent in = new Intent(LoginActivity2.this, MainActivity.class);
+        startActivity(in);
+    }
 
 
 
