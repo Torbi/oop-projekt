@@ -48,7 +48,7 @@ public class FilmsterRepository implements IApiListener {
     private MutableLiveData<List<IMedia>> castMovies;
     private boolean isSearchResults;
     private boolean isCastMovies;
-    private boolean isSingleMovie;
+    private boolean isSingleMedia;
 
     private FilmsterRepository(Context ctx) {
         this.medias = new MutableLiveData<>();
@@ -60,7 +60,7 @@ public class FilmsterRepository implements IApiListener {
         this.categories = new MutableLiveData<>();
         isSearchResults = false;
         isCastMovies = false;
-        isSingleMovie = false;
+        isSingleMedia = false;
         ApiListener listener = new ApiListener();
         listener.addListener(this);
         this.imdbAdapter = new ApiAdapter(ctx, listener);
@@ -153,7 +153,7 @@ public class FilmsterRepository implements IApiListener {
 
 
     public void nextMedia() {
-        if(!isSingleMovie){
+        if(!isSingleMedia){
             this.currentMedia.setValue(this.medias.getValue().get(this.current));
             this.current++;
             if(this.current == this.medias.getValue().size()) {
@@ -220,7 +220,7 @@ public class FilmsterRepository implements IApiListener {
         imdbAdapter.setMediaFactory(new SearchResultFactory());
         isSearchResults = true;
         isCastMovies = false;
-        isSingleMovie = false;
+        isSingleMedia = false;
         imdbAdapter.loadResponse(name);
     }
 
@@ -236,9 +236,8 @@ public class FilmsterRepository implements IApiListener {
 
     public MutableLiveData<List<IMedia>> getSearchResults(){
         // get list from api
-        this.searchResults.setValue(filmster.getMediaList());
-        System.out.println(filmster.getMediaList().size() + " filmster medialist size");
-
+        this.searchResults.setValue(filmster.getResultList());
+        System.out.println(filmster.getResultList().size() + " filmster medialist size");
         return this.searchResults;
     }
 
@@ -248,7 +247,7 @@ public class FilmsterRepository implements IApiListener {
         imdbAdapter.setMediaFactory(new CastMovieFactory());
         isSearchResults = false;
         isCastMovies = true;
-        isSingleMovie = true;
+        isSingleMedia = true;
         imdbAdapter.loadResponse(id);
     }
 
@@ -258,7 +257,7 @@ public class FilmsterRepository implements IApiListener {
         imdbAdapter.setMediaFactory(new MovieFactory());
         isSearchResults = false;
         isCastMovies = false;
-        isSingleMovie = true;
+        isSingleMedia = true;
         imdbAdapter.loadResponse(id);
     }
 

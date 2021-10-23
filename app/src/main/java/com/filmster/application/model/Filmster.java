@@ -77,6 +77,9 @@ public class Filmster{
     public void setResultList(List<IMedia> results){
         this.resultList = results;
     }
+    public List<IMedia> getResultList(){
+        return resultList;
+    }
 
     public List<IMedia> getCastMovies(){
         return castMovies;

@@ -42,10 +42,80 @@ public class PreferencesView extends Fragment {
 
         searchResults = new SearchResultsView();
 
-        initAndListen2ViewModel();
+        viewModel = new ViewModelProvider(this).get(PreferencesViewModel.class);
+        viewModel.init(requireContext());
+        viewModel.getCategories().observe(getViewLifecycleOwner(), this::populateSpinner);
+
+        FragmentContainerView fcv = view.findViewById(R.id.fcvPrefs);
+        fcv.setVisibility(View.INVISIBLE);
+        SearchView actorSearchView = view.findViewById(R.id.actorSearch);
+        actorSearchView.setIconifiedByDefault(false);
+        actorSearchView.setInputType(61); // 61 corresponds to InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PERSON_NAME.
+        actorSearchView.setQueryHint("Search");
+
+        actorSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String name) {
+                // This method gets query after search button or enter is pressed
+
+                viewModel.search(name);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                //searchResults = new SearchResultsView();
+                fcv.setVisibility(View.VISIBLE);
+                FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+                transaction.replace(R.id.fcvPrefs, searchResults).commit();
+                fcv.bringToFront();
+
+                System.out.println(name + " submit");
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String name) {
+                // This method gets query after every change
+                return false;
+            }
+        });
+
+
+        SearchView directorSearchView = view.findViewById(R.id.directorSearch);
+        directorSearchView.setIconifiedByDefault(false);
+        directorSearchView.setQueryHint("Search");
+
+        directorSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String name) {
+                viewModel.search(name);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                //searchResults = new SearchResultsView();
+                FragmentContainerView fcv = view.findViewById(R.id.fcvPrefs);
+                fcv.setVisibility(View.VISIBLE);
+                FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+                transaction.replace(R.id.fcvPrefs, searchResults).commit();
+                fcv.bringToFront();
+
+                System.out.println(name + " submit");
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String name) {
+                return false;
+            }
+        });
+
+        /*initAndListen2ViewModel();
         initActorSearchView();
         initDirectorSearchView();
-        initSpinnerListener();
+        initSpinnerListener();*/
 
         return view;
     }
@@ -59,6 +129,19 @@ public class PreferencesView extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String name) {
                 viewModel.search(name);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                //searchResults = new SearchResultsView();
+                FragmentContainerView fcv = view.findViewById(R.id.fcvPrefs);
+                fcv.setVisibility(View.VISIBLE);
+                FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+                transaction.replace(R.id.fcvPrefs, searchResults).commit();
+                fcv.bringToFront();
+
+                System.out.println(name + " submit");
                 return false;
             }
 
@@ -118,35 +201,6 @@ public class PreferencesView extends Fragment {
         viewModel = new ViewModelProvider(this).get(PreferencesViewModel.class);
         viewModel.init(requireContext());
         viewModel.getCategories().observe(getViewLifecycleOwner(), this::populateSpinner);
-        SearchView directorSearchView = view.findViewById(R.id.directorSearch);
-        directorSearchView.setIconifiedByDefault(false);
-        directorSearchView.setQueryHint("Search");
-
-        directorSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String name) {
-                viewModel.search(name);
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                //searchResults = new SearchResultsView();
-                FragmentContainerView fcv = view.findViewById(R.id.fcvPrefs);
-                fcv.setVisibility(View.VISIBLE);
-                FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-                transaction.replace(R.id.fcvPrefs, searchResults).commit();
-                fcv.bringToFront();
-
-                System.out.println(name + " submit");
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String name) {
-                return false;
-            }
-        });
     }
 
     private void initSpinnerListener() {
