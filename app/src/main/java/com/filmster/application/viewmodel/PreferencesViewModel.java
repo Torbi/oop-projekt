@@ -54,12 +54,11 @@ public class PreferencesViewModel extends ViewModel {
     }
 
     public LiveData<List<IMedia>> getSearchResults(){
-        System.out.println("getSearchResults i viewmodel");
-        System.out.println(filmsterRepository.getSearchResults().getValue().size());
         if(searchResults == null){
             searchResults = new MutableLiveData<>();
         }
         searchResults.setValue(filmsterRepository.getSearchResults().getValue());
+        System.out.println(searchResults.getValue().size() + " prefs vm searchresults");
         return searchResults;
     }
 }

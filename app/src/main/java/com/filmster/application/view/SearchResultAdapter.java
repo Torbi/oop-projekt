@@ -61,6 +61,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 
     public SearchResultAdapter(List<IMedia> resultList){
         this.resultList = resultList;
+        System.out.println(resultList.size() + " RESULTLIST SEARCHRESULTADAPTER");
     }
 
     @NonNull
@@ -84,8 +85,8 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 
         // Set item views based on your views and data model
         ImageLoader imageLoader = SingletonRequestQueue.getInstance(context).getImageLoader();
+        System.out.println(media); // null
         String url = media.getImage();
-        url = url.substring(1,url.length()-1);
 
         NetworkImageView smallImage = holder.smallResultImage;
         TextView personName = holder.name;
@@ -93,8 +94,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         if(url.length() > 0) {
             smallImage.setImageUrl(url, imageLoader);
         }
-        String title = shorten(media.getName());
-        personName.setText(checkStringLength(title));
+        personName.setText(media.getName());
     }
 
     @Override
@@ -107,17 +107,8 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         return (long) position;
     }
 
-    private String shorten(String text) {
-        String temp = text.substring(1, text.length() - 1);
-        return temp;
-    }
 
-    private String checkStringLength(String name) {
-        if (name.length() > 13) {
-            return name.substring(0, 14) + "...";
-        }
-        return name;
-    }
+
 
     public interface ClickListener {
         void onItemClick(int pos, View view);

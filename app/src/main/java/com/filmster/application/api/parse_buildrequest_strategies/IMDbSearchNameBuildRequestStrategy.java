@@ -17,7 +17,8 @@ public class IMDbSearchNameBuildRequestStrategy implements IBuildRequestStrategy
      */
     @Override
     public String buildRequest(String request) {
-        return URL.IMDB_URL.getValue() + "SearchName" + URL.IMDB_KEY.getValue() + "/" + request;
+        String[] strings = request.trim().split(" ");
+        return URL.IMDB_URL.getValue() + "SearchName" + URL.IMDB_KEY.getValue() + "/" + strings[0]+strings[1];
     }
 
 
