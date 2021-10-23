@@ -30,4 +30,6 @@ public class PreferencesTest {
         ICategory category = preferences.getMatchingGenre(genre);
         assert category.getName().equals(genre);
     }
+
+
 }

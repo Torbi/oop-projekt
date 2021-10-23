@@ -1,9 +1,10 @@
 package com.filmster.test;
 
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import androidx.test.annotation.Beta;
+
 
 import com.filmster.application.model.Actor;
 
@@ -11,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ActorTest {
+
     private Actor actor;
 
     @Before
@@ -31,3 +33,4 @@ public class ActorTest {
         assertEquals("Bruce", actor.getName());
     }
 }
+
