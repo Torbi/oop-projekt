@@ -7,10 +7,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-/**
+
+ /**
  * This class communicates with Firebase Realtime database.
  */
-
 public class SignupFirebaseHandler {
 
     public static void signup(String name, String email, String password){

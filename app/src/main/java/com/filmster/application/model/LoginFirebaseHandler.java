@@ -1,6 +1,5 @@
 package com.filmster.application.model;
 
-import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.filmster.application.LoginActivity2;
@@ -16,6 +15,7 @@ public class LoginFirebaseHandler {
      * @param email - The email of the user
      * @param password - The users password
      */
+
     public static void login(String email, String password, LoginActivity2 activity2){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
@@ -26,7 +26,6 @@ public class LoginFirebaseHandler {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    Log.i("Roro","funkar");
                     activity2.openMainActivity();
                 }
             }
