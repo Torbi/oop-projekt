@@ -1,10 +1,12 @@
 package com.filmster.application.repository;
 
 import android.content.Context;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
-
+import com.filmster.application.model.MovieStatusItem;
 import com.filmster.application.api.CastMovieFactory;
 import com.filmster.application.api.IApiListener;
 import com.filmster.application.api.MovieFactory;
@@ -26,6 +28,12 @@ import com.filmster.application.model.Preferences;
 import com.filmster.application.model.User;
 import com.filmster.application.model.WatchList;
 import com.filmster.application.model.sortingstrategies.ISortMethod;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -50,6 +58,9 @@ public class FilmsterRepository implements IApiListener {
     private boolean isCastMovies;
     private boolean isSingleMedia;
 
+    FirebaseAuth mauth= FirebaseAuth.getInstance();
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+
     private FilmsterRepository(Context ctx) {
         this.medias = new MutableLiveData<>();
         this.currentMedia = new MutableLiveData<>();
@@ -66,6 +77,8 @@ public class FilmsterRepository implements IApiListener {
         this.imdbAdapter = new ApiAdapter(ctx, listener);
 
         loadSelectedCategory("Popular");
+        setDataFromFirebase();
+
     }
 
     /**
@@ -301,5 +314,36 @@ public class FilmsterRepository implements IApiListener {
      */
     public List<ISortMethod> getSortMethods() {
        return this.filmster.getSortMethods();
+    }
+
+
+    public void setDataFromFirebase(){
+        database = FirebaseDatabase.getInstance();
+        Query query = database.getReference("moviesandusers").orderByChild("userId").equalTo(mauth.getCurrentUser().getUid());
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot ds : snapshot.getChildren()){
+                        MovieStatusItem msi = new MovieStatusItem(ds.child("movieId").getValue(String.class),ds.child("userId").getValue(String.class),ds.child("status").getValue(String.class));
+
+                        if(msi.getStatus().equals("Liked")){
+                            Log.i("test",msi.getMovieId());
+                        }else if(msi.getStatus().equals("Disliked")){
+                            Log.i("test",msi.getMovieId());
+                        }else{
+                            Log.i("test",msi.getMovieId());
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 }

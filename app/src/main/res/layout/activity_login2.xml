@@ -56,7 +56,7 @@
           android:layout_height="match_parent"
           android:layout_gravity="center_vertical"
           android:ems="10"
-          android:hint="Email"
+          android:hint="@string/Email"
           android:inputType="textEmailAddress" />
 
       <EditText
@@ -64,20 +64,20 @@
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:ems="10"
-          android:hint="Password"
+          android:hint="@string/Password"
           android:inputType="textPassword" />
 
       <Button
           android:id="@+id/loginBtn"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="Login" />
+          android:text="@string/Login" />
 
       <Button
           android:id="@+id/signUp"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="Create An Account" />
+          android:text="@string/Create" />
     </LinearLayout>
 
   </androidx.constraintlayout.widget.ConstraintLayout>
