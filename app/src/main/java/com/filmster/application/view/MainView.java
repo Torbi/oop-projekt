@@ -96,7 +96,6 @@ public class MainView extends Fragment {
         ImageView likeBtn = view.findViewById(R.id.like);
         likeBtn.setOnClickListener(view -> {
             viewModel.addLikedMedia();
-            viewModel.nextMedia();
             setMediaFront();
             spinner.setVisibility(View.VISIBLE);
         });
@@ -106,7 +105,6 @@ public class MainView extends Fragment {
         ImageView dislikedBtn = view.findViewById(R.id.dislike);
         dislikedBtn.setOnClickListener(view -> {
             viewModel.addDislikedMedia();
-            viewModel.nextMedia();
             setMediaFront();
             spinner.setVisibility(View.VISIBLE);
         });
@@ -116,7 +114,6 @@ public class MainView extends Fragment {
         ImageView watchedBtn = view.findViewById(R.id.watched);
         watchedBtn.setOnClickListener(view -> {
             viewModel.addWatchedMedia();
-            viewModel.nextMedia();
             setMediaFront();
             spinner.setVisibility(View.VISIBLE);
         });
@@ -155,14 +152,12 @@ public class MainView extends Fragment {
             @Override
             public void onSwipeTop() {
                 viewModel.addWatchedMedia();
-                viewModel.nextMedia();
                 setMediaFront();
                 spinner.setVisibility(View.VISIBLE);
             }
             @Override
             public void onSwipeRight() {
                 viewModel.addLikedMedia();
-                viewModel.nextMedia();
                 setMediaFront();
                 spinner.setVisibility(View.VISIBLE);
 
@@ -170,7 +165,6 @@ public class MainView extends Fragment {
             @Override
             public void onSwipeLeft() {
                 viewModel.addDislikedMedia();
-                viewModel.nextMedia();
                 setMediaFront();
                 spinner.setVisibility(View.VISIBLE);
             }

@@ -17,12 +17,15 @@ import java.util.List;
 public class FilmsterTest {
 
     private Filmster filmster;
+    private IMedia media;
+    private IMedia media1;
+    private IMedia media2;
 
     @Before
     public void beforeTests() {
-        IMedia media = new Movie("Cool Movie", "1", 9.0,  "tomcruise.com", 2021);
-        IMedia media1 = new Movie("Cool Movie1", "2", 9.1,  "tomcruise.com", 2021);
-        IMedia media2 = new Movie("Cool Movie2", "3", 9.1,  "tomcruise.com", 2021);
+         media = new Movie("Cool Movie", "1", 9.0,  "tomcruise.com", 2021);
+         media1 = new Movie("Cool Movie1", "2", 9.1,  "tomcruise.com", 2021);
+         media2 = new Movie("Cool Movie2", "3", 9.1,  "tomcruise.com", 2021);
         IMedia media3 = new Movie("Cool Movie3", "4", 9.1,  "tomcruise.com", 2021);
         IMedia media4 = new Movie("Cool Movie4", "5", 9.1,  "tomcruise.com", 2021);
         List<IMedia> mediaList = new ArrayList<>();
@@ -54,21 +57,27 @@ public class FilmsterTest {
     @Test
     public void addLikedMedia() {
         filmster.addLikedMedia(filmster.getCurrentMedia());
+        filmster.nextMedia();
         assert filmster.getCurrentMedia().getName().equals("Cool Movie1");
     }
 
     @Test
     public void addDisLikedMedia() {
         filmster.addDislikedMedia(filmster.getCurrentMedia());
+        filmster.nextMedia();
         filmster.addDislikedMedia(filmster.getCurrentMedia());
+        filmster.nextMedia();
         assert filmster.getCurrentMedia().getName().equals("Cool Movie2");
     }
 
     @Test
     public void addWatchedMedia() {
         filmster.addWatchedMedia(filmster.getCurrentMedia());
+        filmster.nextMedia();
         filmster.addWatchedMedia(filmster.getCurrentMedia());
+        filmster.nextMedia();
         filmster.addWatchedMedia(filmster.getCurrentMedia());
+        filmster.nextMedia();
         assert filmster.getCurrentMedia().getName().equals("Cool Movie3");
     }
 

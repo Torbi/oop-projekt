@@ -65,7 +65,6 @@ public class MainViewModel extends ViewModel {
      */
     public void addLikedMedia() {
         filmsterRepository.addLikedMedia(getCurrentMedia());
-        nextMedia();
     }
 
     /**
@@ -74,7 +73,6 @@ public class MainViewModel extends ViewModel {
      */
     public void addDislikedMedia() {
         filmsterRepository.addDislikedMedia(getCurrentMedia());
-        nextMedia();
     }
 
     /**
@@ -83,14 +81,6 @@ public class MainViewModel extends ViewModel {
      */
     public void addWatchedMedia(){
         filmsterRepository.addWatchedMedia(getCurrentMedia());
-        nextMedia();
-    }
-
-    /**
-     * Tells the repository to go to the next IMedia object
-     */
-    public void nextMedia() {
-        filmsterRepository.nextMedia();
     }
 
 }

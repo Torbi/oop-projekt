@@ -50,7 +50,6 @@ public class FilmsterRepository implements IApiListener {
     private final MutableLiveData<IMedia> currentMedia;
     private final Filmster filmster;
     private final User user;
-    private int current = 0;
     private final MutableLiveData<List<ICategory>> categories;
     private MutableLiveData<List<IMedia>> searchResults;
     private MutableLiveData<List<IMedia>> castMovies;
@@ -99,6 +98,7 @@ public class FilmsterRepository implements IApiListener {
      * @return A MutableLiveData<IMedia> object
      */
     public MutableLiveData<IMedia> getCurrentMedia() {
+        //System.out.println(this.medias.getValue().get(filmster.getCurrentMediaCounter()) + " detta är current i repo 2");
         this.currentMedia.setValue(this.filmster.getCurrentMedia());
         return this.currentMedia;
     }
@@ -140,6 +140,7 @@ public class FilmsterRepository implements IApiListener {
         }else{
             setSearchResults(medias);
         }
+        filmster.resetMediaCounter();
     }
 
     /**
@@ -150,6 +151,7 @@ public class FilmsterRepository implements IApiListener {
         this.filmster.addLikedMedia(media);
         nextMedia();
     }
+
     /**
      * runs filmster addDisliked to set mediaState to DISLIKED and sets next media.
      * @param media media to disliked
@@ -158,6 +160,7 @@ public class FilmsterRepository implements IApiListener {
         this.filmster.addDislikedMedia(media);
         nextMedia();
     }
+
     /**
      * runs filmster addWatchedMedia to set mediaState to WATCHED and sets next media.
      * @param media media to watched
@@ -173,23 +176,14 @@ public class FilmsterRepository implements IApiListener {
      * of medias and display them.
      * If it is a single mediaobject: fetch media from an api and display
      */
-    public void nextMedia() {
+    private void nextMedia() {
         if(!isSingleMedia){
-            this.currentMedia.setValue(this.medias.getValue().get(this.current));
-            this.current++;
-            if(this.current == this.medias.getValue().size()) {
-                this.current = 0;
-            }
+            this.currentMedia.setValue(this.medias.getValue().get(filmster.getCurrentMediaCounter()));
         }else {
-            if(this.medias.getValue().get(0) == null){
-                current++;
-                loadCurrentSearchedNameMedia(filmster.getCastMovies().get(current).getID());
-            }else{
-                loadCurrentSearchedNameMedia(filmster.getCastMovies().get(current).getID());
-                this.currentMedia.setValue(this.medias.getValue().get(0));
-            }
+            loadCurrentSearchedNameMedia(filmster.getCastMovies().get(filmster.getCurrentMediaCounter()).getID());
+            this.currentMedia.setValue(this.medias.getValue().get(0));
         }
-        current++;
+        filmster.nextMedia();
     }
 
     /**
@@ -199,6 +193,7 @@ public class FilmsterRepository implements IApiListener {
     public List<IMedia> getLikedMedias(){
         return this.user.getLikedMedia();
     }
+
     /**
      * getter for all the disliked medias of an user.
      * @return A list of all disliked medias
@@ -206,6 +201,7 @@ public class FilmsterRepository implements IApiListener {
     public List<IMedia> getDislikedMedias(){
         return this.user.getDislikedMedia();
     }
+
     /**
      * getter for all the watched medias of an user.
      * @return A list of all watched medias
@@ -277,8 +273,7 @@ public class FilmsterRepository implements IApiListener {
     private void setCastMovies(List<IMedia> medias) {
         this.castMovies.setValue(medias);
         filmster.setCastMovieList(medias);
-
-        loadCurrentSearchedNameMedia(filmster.getCastMovies().get(current).getID()); // If movie is "in-production" it return nulls, so must check that
+        loadCurrentSearchedNameMedia(filmster.getCastMovies().get(filmster.getCurrentMediaCounter()).getID());
     }
 
     /**

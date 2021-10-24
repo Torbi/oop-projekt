@@ -20,7 +20,6 @@ public class Filmster{
     private final User user;
     private int currentMediaCounter;
     private final List<ICategory> categoryList;
-    private List<ISortMethod> sortMethods;
     private List<IMedia> resultList;
     private List<IMedia> castMovies;
 
@@ -28,7 +27,6 @@ public class Filmster{
      * Constructor for filmster, initializes some data and receives a user for the program
      * @param user A user
      */
-
     public Filmster(User user) {
         this.user = user;
         this.currentMediaCounter = 0;
@@ -39,7 +37,6 @@ public class Filmster{
 
         //a fake movie is added to give time for imdbapiadapter to get real movies from the api
         this.mediaList.add(new Movie("Inception", "tt1375666", 9.9, "https://imdb-api.com/Images/original/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_Ratio0.6791_AL_.jpg",2010));
-        initSortMethods();
     }
 
     /**
@@ -48,11 +45,8 @@ public class Filmster{
      * @param moviesList A List of IMedia objects
      */
     public void setMediaList(List<IMedia> moviesList) {
+        this.mediaList.clear();
         this.mediaList = moviesList;
-        this.currentMediaCounter = 0;
-    }
-    public List<IMedia> getMediaList(){
-        return mediaList;
     }
 
     /**
@@ -64,10 +58,29 @@ public class Filmster{
    }
 
     /**
+     * Returns the currentMediaCounter
+     * @return - An int
+     */
+    public int getCurrentMediaCounter() {
+        return this.currentMediaCounter;
+    }
+
+    /**
+     * Resets the currentMediaCounter back to 0
+     */
+    public void resetMediaCounter() {
+        this.currentMediaCounter = 0;
+    }
+
+    /**
      * Increases the currentMediaCounter by 1 to signal which IMedia is next in line to be currentMedia
      */
     public void nextMedia() {
-      currentMediaCounter++;
+        if(currentMediaCounter == this.mediaList.size()) {
+            resetMediaCounter();
+        } else {
+            currentMediaCounter++;
+        }
    }
 
     /**
@@ -119,7 +132,6 @@ public class Filmster{
     public void addLikedMedia(IMedia media) {
         media.setState(MediaState.LIKED);
         this.user.addMedia(media);
-        nextMedia();
     }
 
     /**
@@ -130,7 +142,6 @@ public class Filmster{
     public void addDislikedMedia(IMedia media) {
         media.setState(MediaState.DISLIKED);
         this.user.addMedia(media);
-        nextMedia();
     }
 
     /**
@@ -141,7 +152,6 @@ public class Filmster{
     public void addWatchedMedia(IMedia media){
         media.setState(MediaState.SEEN);
         this.user.addMedia(media);
-        nextMedia();
     }
 
     /**
@@ -173,15 +183,7 @@ public class Filmster{
      * @param sortMethod - An ISortMethod
      */
     public void sortWatchlist(String sortMethod) {
-        ISortMethod method = new DefaultSortingStrategy();
-        for(int i = 0; i < this.sortMethods.size(); i++) {
-            if(sortMethod.equals(this.sortMethods.get(i).getName())) {
-                method = this.sortMethods.get(i);
-                break;
-            }
-        }
-        this.user.getWatchList().setSortingStrategy(method);
-        this.user.getWatchList().sort();
+        this.user.getWatchList().sortWatchlist(sortMethod);
     }
 
     /**
@@ -189,17 +191,7 @@ public class Filmster{
      * @return - A list of available sorting methods
      */
     public List<ISortMethod> getSortMethods() {
-        return this.sortMethods;
+        return this.user.getWatchList().getSortMethods();
     }
 
-    /**
-     * All available sorting methods are initiated here, later given to the view to present
-     */
-    private void initSortMethods() {
-        this.sortMethods = new ArrayList<>();
-        this.sortMethods.add(new DefaultSortingStrategy());
-        this.sortMethods.add(new SortByRatingStrategy());
-        this.sortMethods.add(new SortByYearAscendingStrategy());
-        this.sortMethods.add(new SortByYearDescendingStrategy());
-    }
  }

@@ -60,24 +60,21 @@ public class WatchlistTest {
 
     @Test
     public void sortByRatingTest() {
-        watchList.setSortingStrategy(new SortByRatingStrategy());
-        watchList.sort();
+        watchList.sortWatchlist("Sort By Rating");
         List<IMedia> likedlist = watchList.getLikedList();
         assertTrue(((likedlist.get(0).getRating()) > (likedlist.get(1).getRating())));
     }
 
     @Test
     public void sortByYearAscendingTest() {
-        watchList.setSortingStrategy(new SortByYearAscendingStrategy());
-        watchList.sort();
+        watchList.sortWatchlist("Sort by Ascending Years");
         List<IMedia> likedlist = watchList.getLikedList();
         assertTrue(((likedlist.get(0).getYear()) < (likedlist.get(1).getYear())));
     }
 
     @Test
     public void sortByYearDescendingTest() {
-        watchList.setSortingStrategy(new SortByYearDescendingStrategy());
-        watchList.sort();
+        watchList.sortWatchlist("Sort by Descending Years");
         List<IMedia> likedlist = watchList.getLikedList();
         assertTrue(((likedlist.get(0).getYear()) > (likedlist.get(1).getYear())));
     }
