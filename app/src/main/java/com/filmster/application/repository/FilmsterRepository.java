@@ -76,10 +76,7 @@ public class FilmsterRepository implements IApiListener {
         ApiListener listener = new ApiListener();
         listener.addListener(this);
         this.imdbAdapter = new ApiAdapter(ctx, listener);
-
-        loadSelectedCategory("Popular");
         setDataFromFirebase();
-
     }
 
     /**
@@ -100,7 +97,6 @@ public class FilmsterRepository implements IApiListener {
      * @return A MutableLiveData<IMedia> object
      */
     public MutableLiveData<IMedia> getCurrentMedia() {
-        //System.out.println(this.medias.getValue().get(filmster.getCurrentMediaCounter()) + " detta är current i repo 2");
         this.currentMedia.setValue(this.filmster.getCurrentMedia());
         return this.currentMedia;
     }

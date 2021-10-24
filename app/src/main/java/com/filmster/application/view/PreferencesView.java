@@ -27,11 +27,11 @@ import java.util.List;
  * The PreferencesView is a fragment and is the UI for the preferences page
  * @author Albin Sundström
  */
-
 public class PreferencesView extends Fragment {
     private View view;
     private PreferencesViewModel viewModel;
     private SearchResultsView searchResults;
+    private int check;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,6 +91,7 @@ public class PreferencesView extends Fragment {
 
         initSearchViewListener(actorSearchView, fcv);
     }
+
     private void initSearchViewListener(SearchView actorSearchView, FragmentContainerView fcv) {
         actorSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -114,7 +115,6 @@ public class PreferencesView extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String name) {
-                // This method gets query after every change
                 return false;
             }
         });
@@ -128,12 +128,14 @@ public class PreferencesView extends Fragment {
 
     private void initSpinnerListener() {
         Spinner spinner = view.findViewById(R.id.genreSpinner);
-
+        check = 0;
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String genre = spinner.getSelectedItem().toString();
-                viewModel.loadSelectedCategory(genre);
+                if(++check > 1) {
+                    String genre = spinner.getSelectedItem().toString();
+                    viewModel.loadSelectedCategory(genre);
+                }
             }
 
             @Override
