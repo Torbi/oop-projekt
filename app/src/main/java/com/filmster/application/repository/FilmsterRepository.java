@@ -6,7 +6,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
-import com.filmster.application.model.MovieStatusItem;
+
 import com.filmster.application.api.CastMovieFactory;
 import com.filmster.application.api.IApiListener;
 import com.filmster.application.api.MovieFactory;
@@ -31,6 +31,7 @@ import com.filmster.application.model.sortingstrategies.ISortMethod;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
@@ -142,13 +143,16 @@ public class FilmsterRepository implements IApiListener {
         }
         filmster.resetMediaCounter();
     }
-
     /**
      * runs filmster addLikedMedia to set mediaState to LIKED and sets next media.
      * @param media media to like
      */
     public void addLikedMedia(IMedia media) {
-        this.filmster.addLikedMedia(media);
+        filmster.addLikedMedia(media);
+        DatabaseReference myRef = database.getReference("moviesandusers");
+        MovieStatusItem item = new MovieStatusItem(media.getID(),mauth.getCurrentUser().getUid(),"Liked");
+        myRef.push().setValue(item);
+
         nextMedia();
     }
 
@@ -157,16 +161,23 @@ public class FilmsterRepository implements IApiListener {
      * @param media media to disliked
      */
     public void addDislikedMedia(IMedia media) {
-        this.filmster.addDislikedMedia(media);
+        filmster.addDislikedMedia(media);
+
+        DatabaseReference myRef = database.getReference("moviesandusers");
+        MovieStatusItem item = new MovieStatusItem(media.getID(),mauth.getCurrentUser().getUid(),"Disliked");
+        myRef.push().setValue(item);
         nextMedia();
     }
-
     /**
      * runs filmster addWatchedMedia to set mediaState to WATCHED and sets next media.
      * @param media media to watched
      */
     public void addWatchedMedia(IMedia media){
-        this.filmster.addWatchedMedia(media);
+        filmster.addWatchedMedia(media);
+
+        DatabaseReference myRef = database.getReference("moviesandusers");
+        MovieStatusItem item = new MovieStatusItem(media.getID(), mauth.getCurrentUser().getUid(),"Watched");
+        myRef.push().setValue(item);
         nextMedia();
     }
 
