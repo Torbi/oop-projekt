@@ -25,14 +25,8 @@ import java.util.List;
 
 public class SearchResultsView extends Fragment {
 
-
-    public SearchResultsView() {
-        // Required empty public constructor
-    }
-
     private View view;
     private PreferencesViewModel viewModel;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

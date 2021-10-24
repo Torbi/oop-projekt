@@ -181,8 +181,13 @@ public class FilmsterRepository implements IApiListener {
                 this.current = 0;
             }
         }else {
-            loadCurrentSearchedNameMedia(filmster.getCastMovies().get(current).getID());
-            this.currentMedia.setValue(this.medias.getValue().get(0));
+            if(this.medias.getValue().get(0) == null){
+                current++;
+                loadCurrentSearchedNameMedia(filmster.getCastMovies().get(current).getID());
+            }else{
+                loadCurrentSearchedNameMedia(filmster.getCastMovies().get(current).getID());
+                this.currentMedia.setValue(this.medias.getValue().get(0));
+            }
         }
         current++;
     }
@@ -267,7 +272,7 @@ public class FilmsterRepository implements IApiListener {
     private void setCastMovies(List<IMedia> medias) {
         this.castMovies.setValue(medias);
         filmster.setCastMovieList(medias);
-        current = current+10;
+        //current = current+10;
         loadCurrentSearchedNameMedia(filmster.getCastMovies().get(current).getID()); // If movie is "in-production" it return nulls, so must check that
     }
 
