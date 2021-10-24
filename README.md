@@ -13,7 +13,7 @@ It’s tedious to look for movies on Netflix and other similar streaming service
 </p>
  
 ## Running the program
-1. Download [Android Studios](https://developer.android.com/studio?gclid=Cj0KCQjwiNSLBhCPARIsAKNS4_fu01jUQ3hp_HuQX2DLo_WKVRkFxXBcmHBo8HOnO_61_di7xMR4OboaAkqLEALw_wcB&gclsrc=aw.ds).
+1. Download [Android Studio](https://developer.android.com/studio?gclid=Cj0KCQjwiNSLBhCPARIsAKNS4_fu01jUQ3hp_HuQX2DLo_WKVRkFxXBcmHBo8HOnO_61_di7xMR4OboaAkqLEALw_wcB&gclsrc=aw.ds).
 2. Open the project in Android Studios.
 3. Go into "Tools" > "AVD Manager".
 4. Press "Create Virtual Device...".
