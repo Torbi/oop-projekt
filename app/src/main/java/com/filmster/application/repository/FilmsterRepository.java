@@ -24,6 +24,7 @@ import com.filmster.application.api.parse_buildrequest_strategies.DefaultBuildRe
 import com.filmster.application.api.parse_buildrequest_strategies.IMDbListBuildRequestStrategy;
 import com.filmster.application.model.Filmster;
 import com.filmster.application.model.IMedia;
+import com.filmster.application.model.MovieStatusItem;
 import com.filmster.application.model.Preferences;
 import com.filmster.application.model.User;
 import com.filmster.application.model.WatchList;

@@ -1,5 +1,12 @@
 package com.filmster.application.model;
 
+
+/**
+
+ * This class is used for pushing data to firebase Realtime Database
+ */
+
+
 public class MovieStatusItem {
     private String movieId, userId, status;
 

@@ -9,10 +9,22 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+     /**
+     * This class communicates with Firebase Realtime database.
+     */
+
 public class SignupFirebaseHandler {
 
     public static void signup(String name, String email, String password){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        /**
+
+         * @param name - The name of the user
+         * @param email- The users email
+         * @param password - The users password
+         * Method that creates a user with the help of the firebase instance, User with Email and password.
+         */
 
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
