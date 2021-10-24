@@ -158,11 +158,11 @@ public class FilmsterRepository implements IApiListener {
                         MovieStatusItem msi = new MovieStatusItem(ds.child("movieId").getValue(String.class),ds.child("userId").getValue(String.class),ds.child("status").getValue(String.class));
 
                         if(msi.getStatus().equals("Liked")){
-                            Log.i("Roro",msi.getMovieId());
+                            Log.i("test",msi.getMovieId());
                         }else if(msi.getStatus().equals("Disliked")){
-                            Log.i("Roro",msi.getMovieId());
+                            Log.i("test",msi.getMovieId());
                         }else{
-                            Log.i("Roro",msi.getMovieId());
+                            Log.i("test",msi.getMovieId());
                         }
                     }
                 }
