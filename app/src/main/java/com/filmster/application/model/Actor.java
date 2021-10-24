@@ -44,12 +44,10 @@ public class Actor implements IMedia {
     public Double getRating() {
         return null;
     }
-
     @Override
     public MediaState getState() {
         return null;
     }
-
     @Override
     public void setState(MediaState state) {
 

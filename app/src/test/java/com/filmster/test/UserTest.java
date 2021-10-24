@@ -9,24 +9,31 @@ import com.filmster.application.model.WatchList;
 
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
+
 
 public class UserTest {
 
     private User user;
-    IMedia media;
-    IMedia media1;
-    IMedia media2;
+    private IMedia media;
 
     @Before
     public void createUserAndMedia() {
 
         media =new Movie("Cool Movie", "1", 9.1,  "tomcruise.com", 2021);
-        media1 = new Movie("Cool Movie1", "2", 9.1,  "tomcruise.com", 2021);
-        media2 = new Movie("Cool Movie2", "3", 9.1, "tomcruise.com", 2021);
-
         user = new User("Guest", "qwerty", new WatchList(), new Preferences());
     }
 
+    @Test
+    public void getPreferencesTest(){
+        System.out.println(user.getPreferences().getMovieGenres().get(0).getName());
+        assert (user.getPreferences().getMovieGenres().get(0).getName().equals("Popular"));
+    }
+    @Test
+    public void genreIdTest(){
+        System.out.println(user.getPreferences().getMovieGenres().get(0).getID());
+        assert (user.getPreferences().getMovieGenres().get(0).getID().equals("Top250Movies"));
+    }
     @Test
     public void addLikedMediaTest() {
         user.addMedia(media);

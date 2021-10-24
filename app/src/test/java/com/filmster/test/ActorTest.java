@@ -7,6 +7,7 @@ import static org.junit.Assert.assertNull;
 
 
 import com.filmster.application.model.Actor;
+import com.filmster.application.model.MediaState;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,17 +21,29 @@ public class ActorTest {
         actor = new Actor("1337", "Bruce", null);
     }
     @Test
-    public void getID() {
+    public void getIDTest() {
         assertEquals("1337", actor.getID());
     }
 
     @Test
-    public void getImage() {
+    public void getImageTest() {
         assertNull(actor.getImage());
     }
     @Test
-    public void getName() {
+    public void getNameTest() {
         assertEquals("Bruce", actor.getName());
+    }
+    @Test
+    public void getYearTest() {
+        assertEquals(0, actor.getYear() );
+    }
+    @Test
+    public void getRatingTest() {
+        assertNull(actor.getRating());
+    }
+    @Test
+    public void getStateTest() {
+        assertNull(actor.getState());
     }
 }
 
