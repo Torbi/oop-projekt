@@ -43,7 +43,7 @@ import java.util.List;
  * A repository that handles all communication between the viewmodels and the api/model data
  * Follows the mvvm architecture
  * Is a Singleton
- * @author Albin Sundström, Torbjörn, Magnus
+ * @author Albin Sundström, Torbjörn, Magnus, Aliasgar Shereef
  */
 public class FilmsterRepository implements IApiListener {
     private static FilmsterRepository instance;

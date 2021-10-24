@@ -12,6 +12,10 @@ import android.widget.Toast;
 import com.filmster.application.model.LoginFirebaseHandler;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * @author Aliasgar Shereef
+ */
+
 public class LoginActivity2 extends AppCompatActivity {
 
     /*EditText login_edtEmail=findViewById(R.id.edt_loginEmail);

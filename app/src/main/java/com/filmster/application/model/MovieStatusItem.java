@@ -3,6 +3,8 @@ package com.filmster.application.model;
 
 /**
 
+
+ * @author Aliasgar Shereef
  * This class is used for pushing data to firebase Realtime Database
  */
 

@@ -13,7 +13,8 @@ import com.filmster.application.model.SignupFirebaseHandler;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
- * Gui for signing in, not finished yet
+ * @author Aliasgar Shereef
+ * Gui for signing in.
  */
 public class SignupActivity extends AppCompatActivity {
 

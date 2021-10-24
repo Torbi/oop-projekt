@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
      /**
+      * @author Aliasgar Shereef
      * This class communicates with Firebase Realtime database.
      */
 

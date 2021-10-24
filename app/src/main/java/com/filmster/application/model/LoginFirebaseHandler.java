@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class LoginFirebaseHandler {
 
         /**
+         * @author Aliasgar Shereef
          * This is a class that communicates with the firebaseAuthentication
          * @param email - The email of the user
          * @param password - The users password

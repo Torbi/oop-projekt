@@ -9,6 +9,7 @@ public class User {
     private final Preferences Preferences;
 
     /**
+     * @author Aliasgar Shereef
      * A movie object that contains information about a movie
      * @param name - The name of the user
      * @param password - the users password
