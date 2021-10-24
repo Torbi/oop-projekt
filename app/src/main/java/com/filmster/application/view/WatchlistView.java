@@ -24,6 +24,7 @@ import java.util.List;
 /**
  * The WatchlistView is a fragment and is the UI for the users watchlist.
  * It has 3 tabs liked, disliked, and watched medias.
+ * @author Magnus & Torbjörn
  */
 public class WatchlistView extends Fragment {
     private TabLayout tabLayout;

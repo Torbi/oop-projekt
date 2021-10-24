@@ -20,7 +20,6 @@ public class WatchList {
 
     public WatchList (){
         this.watchList = new ArrayList<>();
-
     }
 
     /**
@@ -81,7 +80,6 @@ public class WatchList {
             this.watchList.sort(currentSortingStrategy);
         }
     }
-
 }
 
 

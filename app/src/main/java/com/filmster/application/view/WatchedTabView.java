@@ -6,6 +6,7 @@ import com.filmster.application.R;
 
 /**
  * WatchedTabView a part of the watchlist responsible to show all watched movies
+ * @author Magnus
  */
 
 public class WatchedTabView extends WatchlistTabView {

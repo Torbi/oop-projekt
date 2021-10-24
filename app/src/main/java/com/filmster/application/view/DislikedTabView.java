@@ -6,6 +6,7 @@ import com.filmster.application.R;
 
 /**
  * DislikedTabView a part of the watchlist responsible to show all disliked movies
+ * @author Magnus
  */
 public class DislikedTabView extends WatchlistTabView {
 

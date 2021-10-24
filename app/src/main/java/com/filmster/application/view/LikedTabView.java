@@ -7,6 +7,7 @@ import com.filmster.application.R;
 
 /**
  * LikedTabView a part of the watchlist responsible to show all liked movies
+ * @author Magnus
  */
 public class LikedTabView extends WatchlistTabView {
 

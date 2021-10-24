@@ -18,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 /**
  * This is the activity for the app, it sets the appActivity view to activity_main
  * it also sets the "main" fragment of the app to mainView.
+ * @author Magnus
  */
 public class MainActivity extends AppCompatActivity {
 

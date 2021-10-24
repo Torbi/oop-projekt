@@ -16,6 +16,7 @@ import com.filmster.application.viewmodel.WatchlistViewModel;
 
 /**
  * Abstract super class to Disliked, liked and Watched media
+ * @author Magnus, Torbjörn
  */
 public abstract class WatchlistTabView extends Fragment {
 

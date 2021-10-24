@@ -25,7 +25,7 @@ import com.filmster.application.viewmodel.MainViewModel;
  * This is the start_page view and displays the movies has
  * It has a button to preferences and watchlist.
  * And a like, dislike and watched button.
- * It also sets a onTouchListener to the MediaCard framgnet to handle swipes and clicks.
+ * It also sets a onTouchListener to the MediaCard fragment to handle swipes and clicks.
  */
 
 public class MainView extends Fragment {

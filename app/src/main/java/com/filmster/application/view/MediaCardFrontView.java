@@ -16,6 +16,7 @@ import com.filmster.application.api.SingletonRequestQueue;
 /**
  * This is the front of the media card on the start page.
  * It only contains a NetworkImage and has a update method to set that image.
+ * @author Magnus
  */
 
 public class MediaCardFrontView extends Fragment {

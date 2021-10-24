@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * ViewModel for the watchlist part of the application, exposes relevant data to the view
  * with the help of livedata objects
- * @author Torbjörn
+ * @author Torbjörn, Magnus
  */
 public class WatchlistViewModel extends ViewModel {
     private MutableLiveData<IMedia> media;

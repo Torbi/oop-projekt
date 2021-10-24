@@ -16,6 +16,7 @@ import com.filmster.application.R;
  * The backside of the card that displays the mediaobject
  * Gets its data from bundle because the fragment keeps getting destroyed
  * when it's hidden
+ * @author Magnus
  */
 
 public class MediaCardBackView extends Fragment {

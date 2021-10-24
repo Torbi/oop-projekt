@@ -7,6 +7,7 @@ import android.view.View;
 
 /**
  * StackOverFlow onTouchListener wrapper for the mediaCard in MainView.
+ * @author Magnus
  */
 public class GestureHelper implements View.OnTouchListener {
 

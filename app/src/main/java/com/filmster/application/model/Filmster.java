@@ -13,10 +13,9 @@ import java.util.List;
 
 /**
  * Filmster keeps track of all movies, users and currentMovies displayed on the screen
- * @author Torbjörn, Albin Sundström
+ * @author Torbjörn, Albin Sundström, Magnus
  */
 public class Filmster{
-
     private List<IMedia> mediaList;
     private final User user;
     private int currentMediaCounter;
