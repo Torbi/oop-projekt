@@ -224,6 +224,11 @@ public class FilmsterRepository implements IApiListener {
         } else {
             this.imdbAdapter.setBuildRequestStrategy(new DefaultBuildRequestStrategy());
         }
+        isCastMovies = false;
+        isSingleMedia = false;
+        isSearchResults = false;
+        this.imdbAdapter.setMediaFactory(new MovieFactory());
+        this.imdbAdapter.setParseStrategy(new DefaultParseStrategy());
         this.imdbAdapter.loadResponse(getSelectedCategory(categoryName));
     }
 
@@ -249,9 +254,9 @@ public class FilmsterRepository implements IApiListener {
         imdbAdapter.setBuildRequestStrategy(new IMDbSearchNameBuildRequestStrategy());
         imdbAdapter.setParseStrategy(new DefaultParseStrategy("results"));
         imdbAdapter.setMediaFactory(new SearchResultFactory());
-        isSearchResults = true;
         isCastMovies = false;
         isSingleMedia = false;
+        isSearchResults = true;
         imdbAdapter.loadResponse(name);
     }
 
@@ -272,7 +277,7 @@ public class FilmsterRepository implements IApiListener {
     private void setCastMovies(List<IMedia> medias) {
         this.castMovies.setValue(medias);
         filmster.setCastMovieList(medias);
-        //current = current+10;
+
         loadCurrentSearchedNameMedia(filmster.getCastMovies().get(current).getID()); // If movie is "in-production" it return nulls, so must check that
     }
 
@@ -291,7 +296,7 @@ public class FilmsterRepository implements IApiListener {
         imdbAdapter.setMediaFactory(new CastMovieFactory());
         isSearchResults = false;
         isCastMovies = true;
-        isSingleMedia = true;
+        isSingleMedia = false;
         imdbAdapter.loadResponse(id);
     }
 
